@@ -1,0 +1,75 @@
+name: Scrape UniFi API Docs
+
+on:
+  schedule:
+    # Runs daily at 06:00 UTC
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      force_all:
+        description: "Rescrape all versions (not just new ones)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Discover available versions
+        id: discover
+        run: |
+          python api-scraper.py --discover > discovered.json
+          echo "Discovered versions:"
+          cat discovered.json
+
+      - name: Install vacuum
+        run: |
+          curl -sL https://github.com/daveshanley/vacuum/releases/latest/download/vacuum_linux_amd64.tar.gz \
+            | tar -xz -C /usr/local/bin vacuum
+
+      - name: Scrape new specs
+        run: |
+          if [ "${{ github.event.inputs.force_all }}" = "true" ]; then
+            echo "Force mode: scraping all versions"
+            python api-scraper.py --validate
+          else
+            python api-scraper.py --check-new --validate
+          fi
+
+      - name: Check for new files
+        id: check_changes
+        run: |
+          git add -A
+          if git diff --staged --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "New or updated specs:"
+            git diff --staged --name-only
+          fi
+
+      - name: Commit and push new specs
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: add new UniFi API specs [skip ci]
+
+          $(git diff HEAD~1 --name-only | sed 's/^/- /')"
+          git push

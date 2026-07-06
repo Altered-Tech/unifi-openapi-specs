@@ -1,0 +1,3886 @@
+openapi: 3.1.0
+info:
+  title: UniFi Network API
+  description: The API provides powerful tools to manage Sites, Devices, and Clients,
+    offering access to detailed configuration, real-time status, and live statistics.
+    It supports insights for WiFi, Wired, and VPN clients, including connection details.
+  license: {}
+  version: 9.2.87
+servers:
+- url: /integration
+tags:
+- name: Generic information
+  description: $1b
+paths:
+  /v1/sites/{siteId}/hotspot/vouchers:
+    get:
+      tags:
+      - Hotspot Vouchers
+      summary: List Vouchers
+      description: 'Retrieve a paginated list of Hotspot vouchers.
+
+
+        <details>
+
+        <summary>Filterable properties (click to expand)</summary>
+
+
+        |Name|Type|Allowed functions|
+
+        |-|-|-|
+
+        |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+        |`createdAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`name`|`STRING`|`eq` `ne` `in` `notIn` `like`|
+
+        |`code`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        |`authorizedGuestLimit`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+        `lt` `le`|
+
+        |`authorizedGuestCount`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`activatedAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`expiresAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`expired`|`BOOLEAN`|`eq` `ne`|
+
+        |`timeLimitMinutes`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`dataUsageLimitMBytes`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+        `lt` `le`|
+
+        |`rxRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+        `le`|
+
+        |`txRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+        `le`|
+
+        </details>'
+      operationId: getVouchers
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 100
+          maximum: 1000
+          minimum: 0
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  offset:
+                    type: integer
+                    format: int64
+                    example: 0
+                  limit:
+                    type: integer
+                    format: int32
+                    example: 25
+                  count:
+                    type: integer
+                    format: int32
+                    example: 10
+                  totalCount:
+                    type: integer
+                    format: int64
+                    example: 1000
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        name:
+                          type: string
+                          description: Voucher note, may contain duplicate values
+                            across multiple vouchers
+                          example: hotel-guest
+                        code:
+                          type: string
+                          description: Secret code to active the voucher using the
+                            Hotspot portal
+                          example: 4861409510
+                        authorizedGuestLimit:
+                          type: integer
+                          format: int64
+                          description: (Optional) limit for how many different guests
+                            can use the same voucher to authorize network access
+                          example: 1
+                        authorizedGuestCount:
+                          type: integer
+                          format: int64
+                          description: For how many guests the voucher has been used
+                            to authorize network access
+                          example: 0
+                        activatedAt:
+                          type: string
+                          format: date-time
+                          description: (Optional) timestamp when the voucher has been
+                            activated (authorization time of the first guest)
+                        expiresAt:
+                          type: string
+                          format: date-time
+                          description: (Optional) timestamp when the voucher will
+                            become expired. All guests using the voucher will be unauthorized
+                            from network access
+                        expired:
+                          type: boolean
+                          description: Whether the voucher has been expired and can
+                            no longer be used to authorize network access
+                        timeLimitMinutes:
+                          type: integer
+                          format: int64
+                          description: 'How long (in minutes) the voucher will provide
+                            access to the network since authorization of the first
+                            guest.
+
+                            Subsequently connected guests, if allowed, will share
+                            the same expiration time.'
+                          example: 1440
+                        dataUsageLimitMBytes:
+                          type: integer
+                          format: int64
+                          description: (Optional) data usage limit in megabytes
+                          example: 1024
+                        rxRateLimitKbps:
+                          type: integer
+                          format: int64
+                          description: (Optional) download rate limit in kilobits
+                            per second
+                          example: 1000
+                        txRateLimitKbps:
+                          type: integer
+                          format: int64
+                          description: (Optional) upload rate limit in kilobits per
+                            second
+                          example: 1000
+                      required:
+                      - authorizedGuestCount
+                      - code
+                      - createdAt
+                      - expired
+                      - id
+                      - name
+                      - timeLimitMinutes
+                      title: Hotspot voucher details
+                required:
+                - count
+                - data
+                - limit
+                - offset
+                - totalCount
+                title: Hotspot voucher detail page
+    post:
+      tags:
+      - Hotspot Vouchers
+      summary: Generate Vouchers
+      description: Create one or more Hotspot vouchers.
+      operationId: createVouchers
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                count:
+                  type: integer
+                  format: int32
+                  default: '1'
+                  description: Number of vouchers to generate
+                  maximum: 1000
+                  minimum: 1
+                name:
+                  type: string
+                  description: Voucher note, duplicated across all generated vouchers
+                authorizedGuestLimit:
+                  type: integer
+                  format: int64
+                  description: (Optional) limit for how many different guests can
+                    use the same voucher to authorize network access
+                  example: 1
+                  minimum: 1
+                timeLimitMinutes:
+                  type: integer
+                  format: int64
+                  description: 'How long (in minutes) the voucher will provide access
+                    to the network since authorization of the first guest.
+
+                    Subsequently connected guests, if allowed, will share the same
+                    expiration time.'
+                  maximum: 1000000
+                  minimum: 1
+                dataUsageLimitMBytes:
+                  type: integer
+                  format: int64
+                  description: (Optional) data usage limit in megabytes
+                  maximum: 1048576
+                  minimum: 1
+                rxRateLimitKbps:
+                  type: integer
+                  format: int64
+                  description: (Optional) download rate limit in kilobits per second
+                  maximum: 100000
+                  minimum: 2
+                txRateLimitKbps:
+                  type: integer
+                  format: int64
+                  description: (Optional) upload rate limit in kilobits per second
+                  maximum: 100000
+                  minimum: 2
+              required:
+              - name
+              - timeLimitMinutes
+              title: Hotspot voucher creation request
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                properties:
+                  vouchers:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        createdAt:
+                          type: string
+                          format: date-time
+                        name:
+                          type: string
+                          description: Voucher note, may contain duplicate values
+                            across multiple vouchers
+                          example: hotel-guest
+                        code:
+                          type: string
+                          description: Secret code to active the voucher using the
+                            Hotspot portal
+                          example: 4861409510
+                        authorizedGuestLimit:
+                          type: integer
+                          format: int64
+                          description: (Optional) limit for how many different guests
+                            can use the same voucher to authorize network access
+                          example: 1
+                        authorizedGuestCount:
+                          type: integer
+                          format: int64
+                          description: For how many guests the voucher has been used
+                            to authorize network access
+                          example: 0
+                        activatedAt:
+                          type: string
+                          format: date-time
+                          description: (Optional) timestamp when the voucher has been
+                            activated (authorization time of the first guest)
+                        expiresAt:
+                          type: string
+                          format: date-time
+                          description: (Optional) timestamp when the voucher will
+                            become expired. All guests using the voucher will be unauthorized
+                            from network access
+                        expired:
+                          type: boolean
+                          description: Whether the voucher has been expired and can
+                            no longer be used to authorize network access
+                        timeLimitMinutes:
+                          type: integer
+                          format: int64
+                          description: 'How long (in minutes) the voucher will provide
+                            access to the network since authorization of the first
+                            guest.
+
+                            Subsequently connected guests, if allowed, will share
+                            the same expiration time.'
+                          example: 1440
+                        dataUsageLimitMBytes:
+                          type: integer
+                          format: int64
+                          description: (Optional) data usage limit in megabytes
+                          example: 1024
+                        rxRateLimitKbps:
+                          type: integer
+                          format: int64
+                          description: (Optional) download rate limit in kilobits
+                            per second
+                          example: 1000
+                        txRateLimitKbps:
+                          type: integer
+                          format: int64
+                          description: (Optional) upload rate limit in kilobits per
+                            second
+                          example: 1000
+                      required:
+                      - authorizedGuestCount
+                      - code
+                      - createdAt
+                      - expired
+                      - id
+                      - name
+                      - timeLimitMinutes
+                      title: Hotspot voucher details
+                title: IntegrationVoucherCreationResultDto
+    delete:
+      tags:
+      - Hotspot Vouchers
+      summary: Delete Vouchers
+      description: 'Remove Hotspot vouchers based on the specified filter criteria.
+
+
+        <details>
+
+        <summary>Filterable properties (click to expand)</summary>
+
+
+        |Name|Type|Allowed functions|
+
+        |-|-|-|
+
+        |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+        |`createdAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`name`|`STRING`|`eq` `ne` `in` `notIn` `like`|
+
+        |`code`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        |`authorizedGuestLimit`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+        `lt` `le`|
+
+        |`authorizedGuestCount`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`activatedAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`expiresAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`expired`|`BOOLEAN`|`eq` `ne`|
+
+        |`timeLimitMinutes`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`dataUsageLimitMBytes`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+        `lt` `le`|
+
+        |`rxRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+        `le`|
+
+        |`txRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+        `le`|
+
+        </details>'
+      operationId: deleteVouchers
+      parameters:
+      - name: filter
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  vouchersDeleted:
+                    type: integer
+                    format: int64
+                title: Voucher deletion results
+  /v1/sites/{siteId}/devices/{deviceId}/interfaces/ports/{portIdx}/actions:
+    post:
+      tags:
+      - UniFi Devices
+      summary: Execute Port Action
+      description: Perform an action on a specific device port. The request body must
+        include the action name and any applicable input arguments.
+      operationId: executePortAction
+      parameters:
+      - name: portIdx
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: deviceId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              discriminator:
+                propertyName: action
+                mapping:
+                  POWER_CYCLE: '#/components/schemas/PortPoEPowerCycleRequest'
+              properties:
+                action:
+                  type: string
+              required:
+              - action
+              title: Port action request
+        required: true
+      responses:
+        '200':
+          description: OK
+  /v1/sites/{siteId}/devices/{deviceId}/actions:
+    post:
+      tags:
+      - UniFi Devices
+      summary: Execute Device Action
+      description: Perform an action on an specific adopted device. The request body
+        must include the action name and any applicable input arguments.
+      operationId: executeDeviceAction
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: deviceId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              discriminator:
+                propertyName: action
+                mapping:
+                  RESTART: '#/components/schemas/DeviceRestartRequest'
+              properties:
+                action:
+                  type: string
+              required:
+              - action
+              title: Device action request
+        required: true
+      responses:
+        '200':
+          description: OK
+  /v1/sites/{siteId}/clients/{clientId}/actions:
+    post:
+      tags:
+      - Clients
+      summary: Execute Client Action
+      description: Perform an action on a specific connected client. The request body
+        must include the action name and any applicable input arguments.
+      operationId: executeConnectedClientAction
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              discriminator:
+                propertyName: action
+                mapping:
+                  AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationRequest'
+                  UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationRequest'
+              properties:
+                action:
+                  type: string
+              required:
+              - action
+              title: Client action request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                discriminator:
+                  propertyName: action
+                  mapping:
+                    AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationResponse'
+                    UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationResponse'
+                properties:
+                  action:
+                    type: string
+                required:
+                - action
+                title: Client action response
+  /v1/sites:
+    get:
+      tags:
+      - Sites
+      summary: List Local Sites
+      description: 'Retrieve a paginated list of local sites managed by this Network
+        application.
+
+        Site ID is required for other UniFi Network API calls.
+
+
+        <details>
+
+        <summary>Filterable properties (click to expand)</summary>
+
+
+        |Name|Type|Allowed functions|
+
+        |-|-|-|
+
+        |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+        |`internalReference`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        |`name`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        </details>'
+      operationId: getSiteOverviewPage
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 25
+          maximum: 200
+          minimum: 0
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  offset:
+                    type: integer
+                    format: int64
+                    example: 0
+                  limit:
+                    type: integer
+                    format: int32
+                    example: 25
+                  count:
+                    type: integer
+                    format: int32
+                    example: 10
+                  totalCount:
+                    type: integer
+                    format: int64
+                    example: 1000
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        internalReference:
+                          type: string
+                          description: Internal unique name of the site used in older
+                            APIs
+                        name:
+                          type: string
+                      required:
+                      - id
+                      - internalReference
+                      - name
+                      title: Site overview
+                required:
+                - count
+                - data
+                - limit
+                - offset
+                - totalCount
+                title: Site overview page
+  /v1/sites/{siteId}/hotspot/vouchers/{voucherId}:
+    get:
+      tags:
+      - Hotspot Vouchers
+      summary: Get Voucher Details
+      description: Retrieve details of a specific Hotspot voucher.
+      operationId: getVoucher
+      parameters:
+      - name: voucherId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  createdAt:
+                    type: string
+                    format: date-time
+                  name:
+                    type: string
+                    description: Voucher note, may contain duplicate values across
+                      multiple vouchers
+                    example: hotel-guest
+                  code:
+                    type: string
+                    description: Secret code to active the voucher using the Hotspot
+                      portal
+                    example: 4861409510
+                  authorizedGuestLimit:
+                    type: integer
+                    format: int64
+                    description: (Optional) limit for how many different guests can
+                      use the same voucher to authorize network access
+                    example: 1
+                  authorizedGuestCount:
+                    type: integer
+                    format: int64
+                    description: For how many guests the voucher has been used to
+                      authorize network access
+                    example: 0
+                  activatedAt:
+                    type: string
+                    format: date-time
+                    description: (Optional) timestamp when the voucher has been activated
+                      (authorization time of the first guest)
+                  expiresAt:
+                    type: string
+                    format: date-time
+                    description: (Optional) timestamp when the voucher will become
+                      expired. All guests using the voucher will be unauthorized from
+                      network access
+                  expired:
+                    type: boolean
+                    description: Whether the voucher has been expired and can no longer
+                      be used to authorize network access
+                  timeLimitMinutes:
+                    type: integer
+                    format: int64
+                    description: 'How long (in minutes) the voucher will provide access
+                      to the network since authorization of the first guest.
+
+                      Subsequently connected guests, if allowed, will share the same
+                      expiration time.'
+                    example: 1440
+                  dataUsageLimitMBytes:
+                    type: integer
+                    format: int64
+                    description: (Optional) data usage limit in megabytes
+                    example: 1024
+                  rxRateLimitKbps:
+                    type: integer
+                    format: int64
+                    description: (Optional) download rate limit in kilobits per second
+                    example: 1000
+                  txRateLimitKbps:
+                    type: integer
+                    format: int64
+                    description: (Optional) upload rate limit in kilobits per second
+                    example: 1000
+                required:
+                - authorizedGuestCount
+                - code
+                - createdAt
+                - expired
+                - id
+                - name
+                - timeLimitMinutes
+                title: Hotspot voucher details
+    delete:
+      tags:
+      - Hotspot Vouchers
+      summary: Delete Voucher
+      description: Remove a specific Hotspot voucher.
+      operationId: deleteVoucher
+      parameters:
+      - name: voucherId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  vouchersDeleted:
+                    type: integer
+                    format: int64
+                title: Voucher deletion results
+  /v1/sites/{siteId}/devices:
+    get:
+      tags:
+      - UniFi Devices
+      summary: List Devices
+      description: Retrieve a paginated list of all adopted devices on a site, including
+        basic device information.
+      operationId: getDeviceOverviewPage
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 25
+          maximum: 200
+          minimum: 0
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  offset:
+                    type: integer
+                    format: int64
+                    example: 0
+                  limit:
+                    type: integer
+                    format: int32
+                    example: 25
+                  count:
+                    type: integer
+                    format: int32
+                    example: 10
+                  totalCount:
+                    type: integer
+                    format: int64
+                    example: 1000
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                          example: IW HD
+                        model:
+                          type: string
+                          example: UHDIW
+                        macAddress:
+                          type: string
+                          example: 94:2a:6f:26:c6:ca
+                        ipAddress:
+                          type: string
+                          example: 192.168.1.55
+                        state:
+                          type: string
+                          enum:
+                          - ONLINE
+                          - OFFLINE
+                          - PENDING_ADOPTION
+                          - UPDATING
+                          - GETTING_READY
+                          - ADOPTING
+                          - DELETING
+                          - CONNECTION_INTERRUPTED
+                          - ISOLATED
+                        features:
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                            - switching
+                            - accessPoint
+                            - gateway
+                          uniqueItems: true
+                        interfaces:
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                            - ports
+                            - radios
+                          uniqueItems: true
+                      required:
+                      - features
+                      - id
+                      - interfaces
+                      - ipAddress
+                      - macAddress
+                      - model
+                      - name
+                      - state
+                      title: Device overview
+                required:
+                - count
+                - data
+                - limit
+                - offset
+                - totalCount
+                title: Device overview page
+  /v1/sites/{siteId}/devices/{deviceId}:
+    get:
+      tags:
+      - UniFi Devices
+      summary: Get Device Details
+      description: Retrieve detailed information about a specific adopted device,
+        including firmware versioning, uplink state, details about device features
+        and interfaces (ports, radios) and other key attributes.
+      operationId: getDeviceDetails
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: deviceId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                    example: IW HD
+                  model:
+                    type: string
+                    example: UHDIW
+                  supported:
+                    type: boolean
+                  macAddress:
+                    type: string
+                    example: 94:2a:6f:26:c6:ca
+                  ipAddress:
+                    type: string
+                    example: 192.168.1.55
+                  state:
+                    type: string
+                    enum:
+                    - ONLINE
+                    - OFFLINE
+                    - PENDING_ADOPTION
+                    - UPDATING
+                    - GETTING_READY
+                    - ADOPTING
+                    - DELETING
+                    - CONNECTION_INTERRUPTED
+                    - ISOLATED
+                  firmwareVersion:
+                    type: string
+                    example: 6.6.55
+                  firmwareUpdatable:
+                    type: boolean
+                  adoptedAt:
+                    type: string
+                    format: date-time
+                  provisionedAt:
+                    type: string
+                    format: date-time
+                  configurationId:
+                    type: string
+                    example: 7596498d2f367dc2
+                  uplink:
+                    description: Uplink interface is device's connection to the parent
+                      device in the network topology
+                    properties:
+                      deviceId:
+                        type: string
+                        format: uuid
+                    required:
+                    - deviceId
+                    title: Device uplink interface overview
+                  features:
+                    properties:
+                      switching:
+                        example: {}
+                        title: Switch feature overview
+                      accessPoint:
+                        example: {}
+                        title: Access point feature overview
+                    title: Device features
+                  interfaces:
+                    properties:
+                      ports:
+                        type: array
+                        items:
+                          properties:
+                            idx:
+                              type: integer
+                              format: int32
+                              example: 1
+                              minimum: 1
+                            state:
+                              type: string
+                              enum:
+                              - UP
+                              - DOWN
+                              - UNKNOWN
+                            connector:
+                              type: string
+                              enum:
+                              - RJ45
+                              - SFP
+                              - SFPPLUS
+                              - SFP28
+                              - QSFP28
+                            maxSpeedMbps:
+                              type: integer
+                              format: int32
+                              example: 10000
+                            speedMbps:
+                              type: integer
+                              format: int32
+                              example: 1000
+                            poe:
+                              properties:
+                                standard:
+                                  type: string
+                                  enum:
+                                  - 802.3af
+                                  - 802.3at
+                                  - 802.3bt
+                                  example: 802.3bt
+                                type:
+                                  type: integer
+                                  format: int32
+                                  enum:
+                                  - '1'
+                                  - '2'
+                                  - '3'
+                                  - '4'
+                                  example: 3
+                                enabled:
+                                  type: boolean
+                                  description: Whether the PoE feature is enabled
+                                    on the port
+                                state:
+                                  type: string
+                                  description: Whether the port currently supplies
+                                    power to the (connected) device.
+                                  enum:
+                                  - UP
+                                  - DOWN
+                                  - LIMITED
+                                  - UNKNOWN
+                              required:
+                              - enabled
+                              - standard
+                              - state
+                              - type
+                              title: Port PoE overview
+                          required:
+                          - connector
+                          - idx
+                          - maxSpeedMbps
+                          - state
+                          title: Port overview
+                      radios:
+                        type: array
+                        items:
+                          properties:
+                            wlanStandard:
+                              type: string
+                              enum:
+                              - 802.11a
+                              - 802.11b
+                              - 802.11g
+                              - 802.11n
+                              - 802.11ac
+                              - 802.11ax
+                              - 802.11be
+                            frequencyGHz:
+                              type: string
+                              enum:
+                              - '2.4'
+                              - '5'
+                              - '6'
+                              - '60'
+                            channelWidthMHz:
+                              type: integer
+                              format: int32
+                              example: 40
+                            channel:
+                              type: integer
+                              format: int32
+                              example: 36
+                          required:
+                          - channelWidthMHz
+                          - frequencyGHz
+                          - wlanStandard
+                          title: Wireless radio overview
+                    title: Device physical interfaces
+                required:
+                - configurationId
+                - features
+                - firmwareUpdatable
+                - id
+                - interfaces
+                - ipAddress
+                - macAddress
+                - model
+                - name
+                - state
+                - supported
+                title: Device details
+  /v1/sites/{siteId}/devices/{deviceId}/statistics/latest:
+    get:
+      tags:
+      - UniFi Devices
+      summary: Get Latest Device Statistics
+      description: Retrieve the latest real-time statistics of a specific adopted
+        device, such as uptime, data transmission rates, CPU and memory utilization.
+      operationId: getDeviceLatestStatistics
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: deviceId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  uptimeSec:
+                    type: integer
+                    format: int64
+                  lastHeartbeatAt:
+                    type: string
+                    format: date-time
+                  nextHeartbeatAt:
+                    type: string
+                    format: date-time
+                  loadAverage1Min:
+                    type: number
+                    format: double
+                  loadAverage5Min:
+                    type: number
+                    format: double
+                  loadAverage15Min:
+                    type: number
+                    format: double
+                  cpuUtilizationPct:
+                    type: number
+                    format: double
+                  memoryUtilizationPct:
+                    type: number
+                    format: double
+                  uplink:
+                    properties:
+                      txRateBps:
+                        type: integer
+                        format: int64
+                      rxRateBps:
+                        type: integer
+                        format: int64
+                    title: Latest statistics for a device uplink interface
+                  interfaces:
+                    properties:
+                      radios:
+                        type: array
+                        items:
+                          properties:
+                            frequencyGHz:
+                              type: string
+                              enum:
+                              - '2.4'
+                              - '5'
+                              - '6'
+                              - '60'
+                            txRetriesPct:
+                              type: number
+                              format: double
+                          required:
+                          - frequencyGHz
+                          title: Latest statistics for wireless radio
+                    title: Latest statistics for device interfaces
+                required:
+                - interfaces
+                title: Latest statistics for a device
+  /v1/sites/{siteId}/clients:
+    get:
+      tags:
+      - Clients
+      summary: List Connected Clients
+      description: 'Retrieve a paginated list of all connected clients on a site,
+        including physical devices (computers, smartphones) and active VPN connections.
+
+
+        <details>
+
+        <summary>Filterable properties (click to expand)</summary>
+
+
+        |Name|Type|Allowed functions|
+
+        |-|-|-|
+
+        |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+        |`type`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        |`macAddress`|`STRING`|`isNull` `isNotNull` `eq` `ne` `in` `notIn`|
+
+        |`ipAddress`|`STRING`|`isNull` `isNotNull` `eq` `ne` `in` `notIn`|
+
+        |`connectedAt`|`TIMESTAMP`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`access.type`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        |`access.authorized`|`BOOLEAN`|`isNull` `isNotNull` `eq` `ne`|
+
+        </details>'
+      operationId: getConnectedClientOverviewPage
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 25
+          maximum: 200
+          minimum: 0
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  offset:
+                    type: integer
+                    format: int64
+                    example: 0
+                  limit:
+                    type: integer
+                    format: int32
+                    example: 25
+                  count:
+                    type: integer
+                    format: int32
+                    example: 10
+                  totalCount:
+                    type: integer
+                    format: int64
+                    example: 1000
+                  data:
+                    type: array
+                    items:
+                      discriminator:
+                        propertyName: type
+                        mapping:
+                          WIRED: '#/components/schemas/WiredClientOverview'
+                          WIRELESS: '#/components/schemas/WirelessClientOverview'
+                          VPN: '#/components/schemas/VPNClientConnectionOverview'
+                          TELEPORT: '#/components/schemas/TeleportClientConnectionOverview'
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        connectedAt:
+                          type: string
+                          format: date-time
+                        ipAddress:
+                          type: string
+                        access:
+                          example:
+                            type: DEFAULT
+                          title: Client access overview
+                        type:
+                          type: string
+                      required:
+                      - access
+                      - id
+                      - name
+                      - type
+                      title: Client overview
+                required:
+                - count
+                - data
+                - limit
+                - offset
+                - totalCount
+                title: Client overview page
+  /v1/sites/{siteId}/clients/{clientId}:
+    get:
+      tags:
+      - Clients
+      summary: Get Connected Client Details
+      description: Retrieve detailed information about a specific connected client,
+        including name, IP address, MAC address, connection type and access information.
+      operationId: getConnectedClientDetails
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    WIRED: '#/components/schemas/WiredClientDetails'
+                    WIRELESS: '#/components/schemas/WirelessClientDetails'
+                    VPN: '#/components/schemas/VPNClientConnectionDetails'
+                    TELEPORT: '#/components/schemas/TeleportClientConnectionDetails'
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                  connectedAt:
+                    type: string
+                    format: date-time
+                  ipAddress:
+                    type: string
+                  access: {}
+                  type:
+                    type: string
+                required:
+                - access
+                - id
+                - name
+                - type
+                title: Client details
+  /v1/info:
+    get:
+      tags:
+      - About application
+      summary: Get Application Info
+      description: Retrieve general information about the UniFi Network application.
+      operationId: getInfo
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  applicationVersion:
+                    type: string
+                    example: 9.1.0
+                required:
+                - applicationVersion
+                title: Application info
+components:
+  schemas:
+    ErrorResponse:
+      description: This generic error message format is used across all endpoints.
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          example: 400
+        statusName:
+          type: string
+          example: UNAUTHORIZED
+        message:
+          type: string
+          example: Missing credentials
+        timestamp:
+          type: string
+          format: date-time
+          example: '2024-11-27T08:13:46.966Z'
+        requestPath:
+          type: string
+          example: /integration/v1/sites/123
+        requestId:
+          type: string
+          format: uuid
+          description: In case of Internal Server Error (core = 500), request ID can
+            be used to track down the error in the server log
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      x-tags: Generic information
+    HotspotVoucherCreationRequest:
+      properties:
+        count:
+          type: integer
+          format: int32
+          default: '1'
+          description: Number of vouchers to generate
+          maximum: 1000
+          minimum: 1
+        name:
+          type: string
+          description: Voucher note, duplicated across all generated vouchers
+        authorizedGuestLimit:
+          type: integer
+          format: int64
+          description: (Optional) limit for how many different guests can use the
+            same voucher to authorize network access
+          example: 1
+          minimum: 1
+        timeLimitMinutes:
+          type: integer
+          format: int64
+          description: 'How long (in minutes) the voucher will provide access to the
+            network since authorization of the first guest.
+
+            Subsequently connected guests, if allowed, will share the same expiration
+            time.'
+          maximum: 1000000
+          minimum: 1
+        dataUsageLimitMBytes:
+          type: integer
+          format: int64
+          description: (Optional) data usage limit in megabytes
+          maximum: 1048576
+          minimum: 1
+        rxRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) download rate limit in kilobits per second
+          maximum: 100000
+          minimum: 2
+        txRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) upload rate limit in kilobits per second
+          maximum: 100000
+          minimum: 2
+      required:
+      - name
+      - timeLimitMinutes
+    HotspotVoucherDetails:
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: Voucher note, may contain duplicate values across multiple
+            vouchers
+          example: hotel-guest
+        code:
+          type: string
+          description: Secret code to active the voucher using the Hotspot portal
+          example: 4861409510
+        authorizedGuestLimit:
+          type: integer
+          format: int64
+          description: (Optional) limit for how many different guests can use the
+            same voucher to authorize network access
+          example: 1
+        authorizedGuestCount:
+          type: integer
+          format: int64
+          description: For how many guests the voucher has been used to authorize
+            network access
+          example: 0
+        activatedAt:
+          type: string
+          format: date-time
+          description: (Optional) timestamp when the voucher has been activated (authorization
+            time of the first guest)
+        expiresAt:
+          type: string
+          format: date-time
+          description: (Optional) timestamp when the voucher will become expired.
+            All guests using the voucher will be unauthorized from network access
+        expired:
+          type: boolean
+          description: Whether the voucher has been expired and can no longer be used
+            to authorize network access
+        timeLimitMinutes:
+          type: integer
+          format: int64
+          description: 'How long (in minutes) the voucher will provide access to the
+            network since authorization of the first guest.
+
+            Subsequently connected guests, if allowed, will share the same expiration
+            time.'
+          example: 1440
+        dataUsageLimitMBytes:
+          type: integer
+          format: int64
+          description: (Optional) data usage limit in megabytes
+          example: 1024
+        rxRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) download rate limit in kilobits per second
+          example: 1000
+        txRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) upload rate limit in kilobits per second
+          example: 1000
+      required:
+      - authorizedGuestCount
+      - code
+      - createdAt
+      - expired
+      - id
+      - name
+      - timeLimitMinutes
+    IntegrationVoucherCreationResultDto:
+      properties:
+        vouchers:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+                format: uuid
+              createdAt:
+                type: string
+                format: date-time
+              name:
+                type: string
+                description: Voucher note, may contain duplicate values across multiple
+                  vouchers
+                example: hotel-guest
+              code:
+                type: string
+                description: Secret code to active the voucher using the Hotspot portal
+                example: 4861409510
+              authorizedGuestLimit:
+                type: integer
+                format: int64
+                description: (Optional) limit for how many different guests can use
+                  the same voucher to authorize network access
+                example: 1
+              authorizedGuestCount:
+                type: integer
+                format: int64
+                description: For how many guests the voucher has been used to authorize
+                  network access
+                example: 0
+              activatedAt:
+                type: string
+                format: date-time
+                description: (Optional) timestamp when the voucher has been activated
+                  (authorization time of the first guest)
+              expiresAt:
+                type: string
+                format: date-time
+                description: (Optional) timestamp when the voucher will become expired.
+                  All guests using the voucher will be unauthorized from network access
+              expired:
+                type: boolean
+                description: Whether the voucher has been expired and can no longer
+                  be used to authorize network access
+              timeLimitMinutes:
+                type: integer
+                format: int64
+                description: 'How long (in minutes) the voucher will provide access
+                  to the network since authorization of the first guest.
+
+                  Subsequently connected guests, if allowed, will share the same expiration
+                  time.'
+                example: 1440
+              dataUsageLimitMBytes:
+                type: integer
+                format: int64
+                description: (Optional) data usage limit in megabytes
+                example: 1024
+              rxRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) download rate limit in kilobits per second
+                example: 1000
+              txRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) upload rate limit in kilobits per second
+                example: 1000
+            required:
+            - authorizedGuestCount
+            - code
+            - createdAt
+            - expired
+            - id
+            - name
+            - timeLimitMinutes
+            title: Hotspot voucher details
+    PortPoEPowerCycleRequest:
+      allOf:
+      - discriminator:
+          propertyName: action
+          mapping:
+            POWER_CYCLE: '#/components/schemas/PortPoEPowerCycleRequest'
+        properties:
+          action:
+            type: string
+        required:
+        - action
+        title: Port action request
+    PortActionRequest:
+      discriminator:
+        propertyName: action
+        mapping:
+          POWER_CYCLE: '#/components/schemas/PortPoEPowerCycleRequest'
+      properties:
+        action:
+          type: string
+      required:
+      - action
+    DeviceActionRequest:
+      discriminator:
+        propertyName: action
+        mapping:
+          RESTART: '#/components/schemas/DeviceRestartRequest'
+      properties:
+        action:
+          type: string
+      required:
+      - action
+    DeviceRestartRequest:
+      allOf:
+      - discriminator:
+          propertyName: action
+          mapping:
+            RESTART: '#/components/schemas/DeviceRestartRequest'
+        properties:
+          action:
+            type: string
+        required:
+        - action
+        title: Device action request
+    ClientActionRequest:
+      discriminator:
+        propertyName: action
+        mapping:
+          AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationRequest'
+          UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationRequest'
+      properties:
+        action:
+          type: string
+      required:
+      - action
+    GuestAccessAuthorizationRequest:
+      allOf:
+      - discriminator:
+          propertyName: action
+          mapping:
+            AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationRequest'
+            UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationRequest'
+        properties:
+          action:
+            type: string
+        required:
+        - action
+        title: Client action request
+      - type: object
+        properties:
+          timeLimitMinutes:
+            type: integer
+            format: int64
+            description: '(Optional) how long (in minutes) the guest will be authorized
+              to access the network.
+
+              If not specified, the default limit is used from the site settings'
+            maximum: 1000000
+            minimum: 1
+          dataUsageLimitMBytes:
+            type: integer
+            format: int64
+            description: (Optional) data usage limit in megabytes
+            maximum: 1048576
+            minimum: 1
+          rxRateLimitKbps:
+            type: integer
+            format: int64
+            description: (Optional) download rate limit in kilobits per second
+            maximum: 100000
+            minimum: 2
+          txRateLimitKbps:
+            type: integer
+            format: int64
+            description: (Optional) upload rate limit in kilobits per second
+            maximum: 100000
+            minimum: 2
+      description: 'Authorizes network access to a guest client. Client must be a
+        guest.
+
+        This action cancels existing active authorization (if exists), creates a new
+        one with new limits
+
+        and resets guest traffic counters.'
+    GuestAccessUnauthorizationRequest:
+      allOf:
+      - discriminator:
+          propertyName: action
+          mapping:
+            AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationRequest'
+            UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationRequest'
+        properties:
+          action:
+            type: string
+        required:
+        - action
+        title: Client action request
+      description: Unauthorizes network access and disconnects a guest client.
+    ClientActionResponse:
+      discriminator:
+        propertyName: action
+        mapping:
+          AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationResponse'
+          UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationResponse'
+      properties:
+        action:
+          type: string
+      required:
+      - action
+    GuestAccessAuthorizationResponse:
+      allOf:
+      - discriminator:
+          propertyName: action
+          mapping:
+            AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationResponse'
+            UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationResponse'
+        properties:
+          action:
+            type: string
+        required:
+        - action
+        title: Client action response
+      - type: object
+        properties:
+          revokedAuthorization:
+            description: (Optional) Revoked authorization in case the guest was already
+              authorized at the time of this request
+            properties:
+              authorizedAt:
+                type: string
+                format: date-time
+                description: Timestamp when the guest has been authorized
+              authorizationMethod:
+                type: string
+                description: Guest authorization method (API, Voucher etc)
+                enum:
+                - VOUCHER
+                - API
+                - OTHER
+              expiresAt:
+                type: string
+                format: date-time
+                description: Timestamp when the guest will get automatically unauthorized
+              dataUsageLimitMBytes:
+                type: integer
+                format: int64
+                description: (Optional) data usage limit in megabytes
+                example: 1024
+              rxRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) download rate limit in kilobits per second
+                example: 1000
+              txRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) upload rate limit in kilobits per second
+                example: 1000
+              usage:
+                properties:
+                  durationSec:
+                    type: integer
+                    format: int64
+                  rxBytes:
+                    type: integer
+                    format: int64
+                  txBytes:
+                    type: integer
+                    format: int64
+                  bytes:
+                    type: integer
+                    format: int64
+                required:
+                - bytes
+                - durationSec
+                - rxBytes
+                - txBytes
+                title: Guest authorization usage details
+            required:
+            - authorizationMethod
+            - authorizedAt
+            - expiresAt
+            title: Guest authorization details
+          grantedAuthorization:
+            description: Granted guest authorization
+            properties:
+              authorizedAt:
+                type: string
+                format: date-time
+                description: Timestamp when the guest has been authorized
+              authorizationMethod:
+                type: string
+                description: Guest authorization method (API, Voucher etc)
+                enum:
+                - VOUCHER
+                - API
+                - OTHER
+              expiresAt:
+                type: string
+                format: date-time
+                description: Timestamp when the guest will get automatically unauthorized
+              dataUsageLimitMBytes:
+                type: integer
+                format: int64
+                description: (Optional) data usage limit in megabytes
+                example: 1024
+              rxRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) download rate limit in kilobits per second
+                example: 1000
+              txRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) upload rate limit in kilobits per second
+                example: 1000
+              usage:
+                properties:
+                  durationSec:
+                    type: integer
+                    format: int64
+                  rxBytes:
+                    type: integer
+                    format: int64
+                  txBytes:
+                    type: integer
+                    format: int64
+                  bytes:
+                    type: integer
+                    format: int64
+                required:
+                - bytes
+                - durationSec
+                - rxBytes
+                - txBytes
+                title: Guest authorization usage details
+            required:
+            - authorizationMethod
+            - authorizedAt
+            - expiresAt
+            title: Guest authorization details
+      required:
+      - grantedAuthorization
+    GuestAccessUnauthorizationResponse:
+      allOf:
+      - discriminator:
+          propertyName: action
+          mapping:
+            AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationResponse'
+            UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationResponse'
+        properties:
+          action:
+            type: string
+        required:
+        - action
+        title: Client action response
+      - type: object
+        properties:
+          revokedAuthorization:
+            description: Revoked guest authorization
+            properties:
+              authorizedAt:
+                type: string
+                format: date-time
+                description: Timestamp when the guest has been authorized
+              authorizationMethod:
+                type: string
+                description: Guest authorization method (API, Voucher etc)
+                enum:
+                - VOUCHER
+                - API
+                - OTHER
+              expiresAt:
+                type: string
+                format: date-time
+                description: Timestamp when the guest will get automatically unauthorized
+              dataUsageLimitMBytes:
+                type: integer
+                format: int64
+                description: (Optional) data usage limit in megabytes
+                example: 1024
+              rxRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) download rate limit in kilobits per second
+                example: 1000
+              txRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) upload rate limit in kilobits per second
+                example: 1000
+              usage:
+                properties:
+                  durationSec:
+                    type: integer
+                    format: int64
+                  rxBytes:
+                    type: integer
+                    format: int64
+                  txBytes:
+                    type: integer
+                    format: int64
+                  bytes:
+                    type: integer
+                    format: int64
+                required:
+                - bytes
+                - durationSec
+                - rxBytes
+                - txBytes
+                title: Guest authorization usage details
+            required:
+            - authorizationMethod
+            - authorizedAt
+            - expiresAt
+            title: Guest authorization details
+      required:
+      - revokedAuthorization
+    GuestAuthorizationDetails:
+      properties:
+        authorizedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the guest has been authorized
+        authorizationMethod:
+          type: string
+          description: Guest authorization method (API, Voucher etc)
+          enum:
+          - VOUCHER
+          - API
+          - OTHER
+        expiresAt:
+          type: string
+          format: date-time
+          description: Timestamp when the guest will get automatically unauthorized
+        dataUsageLimitMBytes:
+          type: integer
+          format: int64
+          description: (Optional) data usage limit in megabytes
+          example: 1024
+        rxRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) download rate limit in kilobits per second
+          example: 1000
+        txRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) upload rate limit in kilobits per second
+          example: 1000
+        usage:
+          properties:
+            durationSec:
+              type: integer
+              format: int64
+            rxBytes:
+              type: integer
+              format: int64
+            txBytes:
+              type: integer
+              format: int64
+            bytes:
+              type: integer
+              format: int64
+          required:
+          - bytes
+          - durationSec
+          - rxBytes
+          - txBytes
+          title: Guest authorization usage details
+      required:
+      - authorizationMethod
+      - authorizedAt
+      - expiresAt
+    GuestAuthorizationUsageDetails:
+      properties:
+        durationSec:
+          type: integer
+          format: int64
+        rxBytes:
+          type: integer
+          format: int64
+        txBytes:
+          type: integer
+          format: int64
+        bytes:
+          type: integer
+          format: int64
+      required:
+      - bytes
+      - durationSec
+      - rxBytes
+      - txBytes
+    SiteOverview:
+      properties:
+        id:
+          type: string
+          format: uuid
+        internalReference:
+          type: string
+          description: Internal unique name of the site used in older APIs
+        name:
+          type: string
+      required:
+      - id
+      - internalReference
+      - name
+    SiteOverviewPage:
+      properties:
+        offset:
+          type: integer
+          format: int64
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          example: 25
+        count:
+          type: integer
+          format: int32
+          example: 10
+        totalCount:
+          type: integer
+          format: int64
+          example: 1000
+        data:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+                format: uuid
+              internalReference:
+                type: string
+                description: Internal unique name of the site used in older APIs
+              name:
+                type: string
+            required:
+            - id
+            - internalReference
+            - name
+            title: Site overview
+      required:
+      - count
+      - data
+      - limit
+      - offset
+      - totalCount
+    HotspotVoucherDetailPage:
+      properties:
+        offset:
+          type: integer
+          format: int64
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          example: 25
+        count:
+          type: integer
+          format: int32
+          example: 10
+        totalCount:
+          type: integer
+          format: int64
+          example: 1000
+        data:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+                format: uuid
+              createdAt:
+                type: string
+                format: date-time
+              name:
+                type: string
+                description: Voucher note, may contain duplicate values across multiple
+                  vouchers
+                example: hotel-guest
+              code:
+                type: string
+                description: Secret code to active the voucher using the Hotspot portal
+                example: 4861409510
+              authorizedGuestLimit:
+                type: integer
+                format: int64
+                description: (Optional) limit for how many different guests can use
+                  the same voucher to authorize network access
+                example: 1
+              authorizedGuestCount:
+                type: integer
+                format: int64
+                description: For how many guests the voucher has been used to authorize
+                  network access
+                example: 0
+              activatedAt:
+                type: string
+                format: date-time
+                description: (Optional) timestamp when the voucher has been activated
+                  (authorization time of the first guest)
+              expiresAt:
+                type: string
+                format: date-time
+                description: (Optional) timestamp when the voucher will become expired.
+                  All guests using the voucher will be unauthorized from network access
+              expired:
+                type: boolean
+                description: Whether the voucher has been expired and can no longer
+                  be used to authorize network access
+              timeLimitMinutes:
+                type: integer
+                format: int64
+                description: 'How long (in minutes) the voucher will provide access
+                  to the network since authorization of the first guest.
+
+                  Subsequently connected guests, if allowed, will share the same expiration
+                  time.'
+                example: 1440
+              dataUsageLimitMBytes:
+                type: integer
+                format: int64
+                description: (Optional) data usage limit in megabytes
+                example: 1024
+              rxRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) download rate limit in kilobits per second
+                example: 1000
+              txRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) upload rate limit in kilobits per second
+                example: 1000
+            required:
+            - authorizedGuestCount
+            - code
+            - createdAt
+            - expired
+            - id
+            - name
+            - timeLimitMinutes
+            title: Hotspot voucher details
+      required:
+      - count
+      - data
+      - limit
+      - offset
+      - totalCount
+    DeviceOverview:
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: IW HD
+        model:
+          type: string
+          example: UHDIW
+        macAddress:
+          type: string
+          example: 94:2a:6f:26:c6:ca
+        ipAddress:
+          type: string
+          example: 192.168.1.55
+        state:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - PENDING_ADOPTION
+          - UPDATING
+          - GETTING_READY
+          - ADOPTING
+          - DELETING
+          - CONNECTION_INTERRUPTED
+          - ISOLATED
+        features:
+          type: array
+          items:
+            type: string
+            enum:
+            - switching
+            - accessPoint
+            - gateway
+          uniqueItems: true
+        interfaces:
+          type: array
+          items:
+            type: string
+            enum:
+            - ports
+            - radios
+          uniqueItems: true
+      required:
+      - features
+      - id
+      - interfaces
+      - ipAddress
+      - macAddress
+      - model
+      - name
+      - state
+    DeviceOverviewPage:
+      properties:
+        offset:
+          type: integer
+          format: int64
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          example: 25
+        count:
+          type: integer
+          format: int32
+          example: 10
+        totalCount:
+          type: integer
+          format: int64
+          example: 1000
+        data:
+          type: array
+          items:
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+                example: IW HD
+              model:
+                type: string
+                example: UHDIW
+              macAddress:
+                type: string
+                example: 94:2a:6f:26:c6:ca
+              ipAddress:
+                type: string
+                example: 192.168.1.55
+              state:
+                type: string
+                enum:
+                - ONLINE
+                - OFFLINE
+                - PENDING_ADOPTION
+                - UPDATING
+                - GETTING_READY
+                - ADOPTING
+                - DELETING
+                - CONNECTION_INTERRUPTED
+                - ISOLATED
+              features:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - switching
+                  - accessPoint
+                  - gateway
+                uniqueItems: true
+              interfaces:
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - ports
+                  - radios
+                uniqueItems: true
+            required:
+            - features
+            - id
+            - interfaces
+            - ipAddress
+            - macAddress
+            - model
+            - name
+            - state
+            title: Device overview
+      required:
+      - count
+      - data
+      - limit
+      - offset
+      - totalCount
+    AccessPointFeatureOverview: {}
+    DeviceDetails:
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: IW HD
+        model:
+          type: string
+          example: UHDIW
+        supported:
+          type: boolean
+        macAddress:
+          type: string
+          example: 94:2a:6f:26:c6:ca
+        ipAddress:
+          type: string
+          example: 192.168.1.55
+        state:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - PENDING_ADOPTION
+          - UPDATING
+          - GETTING_READY
+          - ADOPTING
+          - DELETING
+          - CONNECTION_INTERRUPTED
+          - ISOLATED
+        firmwareVersion:
+          type: string
+          example: 6.6.55
+        firmwareUpdatable:
+          type: boolean
+        adoptedAt:
+          type: string
+          format: date-time
+        provisionedAt:
+          type: string
+          format: date-time
+        configurationId:
+          type: string
+          example: 7596498d2f367dc2
+        uplink:
+          description: Uplink interface is device's connection to the parent device
+            in the network topology
+          properties:
+            deviceId:
+              type: string
+              format: uuid
+          required:
+          - deviceId
+          title: Device uplink interface overview
+        features:
+          properties:
+            switching:
+              example: {}
+              title: Switch feature overview
+            accessPoint:
+              example: {}
+              title: Access point feature overview
+          title: Device features
+        interfaces:
+          properties:
+            ports:
+              type: array
+              items:
+                properties:
+                  idx:
+                    type: integer
+                    format: int32
+                    example: 1
+                    minimum: 1
+                  state:
+                    type: string
+                    enum:
+                    - UP
+                    - DOWN
+                    - UNKNOWN
+                  connector:
+                    type: string
+                    enum:
+                    - RJ45
+                    - SFP
+                    - SFPPLUS
+                    - SFP28
+                    - QSFP28
+                  maxSpeedMbps:
+                    type: integer
+                    format: int32
+                    example: 10000
+                  speedMbps:
+                    type: integer
+                    format: int32
+                    example: 1000
+                  poe:
+                    properties:
+                      standard:
+                        type: string
+                        enum:
+                        - 802.3af
+                        - 802.3at
+                        - 802.3bt
+                        example: 802.3bt
+                      type:
+                        type: integer
+                        format: int32
+                        enum:
+                        - '1'
+                        - '2'
+                        - '3'
+                        - '4'
+                        example: 3
+                      enabled:
+                        type: boolean
+                        description: Whether the PoE feature is enabled on the port
+                      state:
+                        type: string
+                        description: Whether the port currently supplies power to
+                          the (connected) device.
+                        enum:
+                        - UP
+                        - DOWN
+                        - LIMITED
+                        - UNKNOWN
+                    required:
+                    - enabled
+                    - standard
+                    - state
+                    - type
+                    title: Port PoE overview
+                required:
+                - connector
+                - idx
+                - maxSpeedMbps
+                - state
+                title: Port overview
+            radios:
+              type: array
+              items:
+                properties:
+                  wlanStandard:
+                    type: string
+                    enum:
+                    - 802.11a
+                    - 802.11b
+                    - 802.11g
+                    - 802.11n
+                    - 802.11ac
+                    - 802.11ax
+                    - 802.11be
+                  frequencyGHz:
+                    type: string
+                    enum:
+                    - '2.4'
+                    - '5'
+                    - '6'
+                    - '60'
+                  channelWidthMHz:
+                    type: integer
+                    format: int32
+                    example: 40
+                  channel:
+                    type: integer
+                    format: int32
+                    example: 36
+                required:
+                - channelWidthMHz
+                - frequencyGHz
+                - wlanStandard
+                title: Wireless radio overview
+          title: Device physical interfaces
+      required:
+      - configurationId
+      - features
+      - firmwareUpdatable
+      - id
+      - interfaces
+      - ipAddress
+      - macAddress
+      - model
+      - name
+      - state
+      - supported
+    DeviceFeatures:
+      properties:
+        switching:
+          example: {}
+          title: Switch feature overview
+        accessPoint:
+          example: {}
+          title: Access point feature overview
+    DevicePhysicalInterfaces:
+      properties:
+        ports:
+          type: array
+          items:
+            properties:
+              idx:
+                type: integer
+                format: int32
+                example: 1
+                minimum: 1
+              state:
+                type: string
+                enum:
+                - UP
+                - DOWN
+                - UNKNOWN
+              connector:
+                type: string
+                enum:
+                - RJ45
+                - SFP
+                - SFPPLUS
+                - SFP28
+                - QSFP28
+              maxSpeedMbps:
+                type: integer
+                format: int32
+                example: 10000
+              speedMbps:
+                type: integer
+                format: int32
+                example: 1000
+              poe:
+                properties:
+                  standard:
+                    type: string
+                    enum:
+                    - 802.3af
+                    - 802.3at
+                    - 802.3bt
+                    example: 802.3bt
+                  type:
+                    type: integer
+                    format: int32
+                    enum:
+                    - '1'
+                    - '2'
+                    - '3'
+                    - '4'
+                    example: 3
+                  enabled:
+                    type: boolean
+                    description: Whether the PoE feature is enabled on the port
+                  state:
+                    type: string
+                    description: Whether the port currently supplies power to the
+                      (connected) device.
+                    enum:
+                    - UP
+                    - DOWN
+                    - LIMITED
+                    - UNKNOWN
+                required:
+                - enabled
+                - standard
+                - state
+                - type
+                title: Port PoE overview
+            required:
+            - connector
+            - idx
+            - maxSpeedMbps
+            - state
+            title: Port overview
+        radios:
+          type: array
+          items:
+            properties:
+              wlanStandard:
+                type: string
+                enum:
+                - 802.11a
+                - 802.11b
+                - 802.11g
+                - 802.11n
+                - 802.11ac
+                - 802.11ax
+                - 802.11be
+              frequencyGHz:
+                type: string
+                enum:
+                - '2.4'
+                - '5'
+                - '6'
+                - '60'
+              channelWidthMHz:
+                type: integer
+                format: int32
+                example: 40
+              channel:
+                type: integer
+                format: int32
+                example: 36
+            required:
+            - channelWidthMHz
+            - frequencyGHz
+            - wlanStandard
+            title: Wireless radio overview
+    DeviceUplinkInterfaceOverview:
+      description: Uplink interface is device's connection to the parent device in
+        the network topology
+      properties:
+        deviceId:
+          type: string
+          format: uuid
+      required:
+      - deviceId
+    PortPoEOverview:
+      properties:
+        standard:
+          type: string
+          enum:
+          - 802.3af
+          - 802.3at
+          - 802.3bt
+          example: 802.3bt
+        type:
+          type: integer
+          format: int32
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          example: 3
+        enabled:
+          type: boolean
+          description: Whether the PoE feature is enabled on the port
+        state:
+          type: string
+          description: Whether the port currently supplies power to the (connected)
+            device.
+          enum:
+          - UP
+          - DOWN
+          - LIMITED
+          - UNKNOWN
+      required:
+      - enabled
+      - standard
+      - state
+      - type
+    PortOverview:
+      properties:
+        idx:
+          type: integer
+          format: int32
+          example: 1
+          minimum: 1
+        state:
+          type: string
+          enum:
+          - UP
+          - DOWN
+          - UNKNOWN
+        connector:
+          type: string
+          enum:
+          - RJ45
+          - SFP
+          - SFPPLUS
+          - SFP28
+          - QSFP28
+        maxSpeedMbps:
+          type: integer
+          format: int32
+          example: 10000
+        speedMbps:
+          type: integer
+          format: int32
+          example: 1000
+        poe:
+          properties:
+            standard:
+              type: string
+              enum:
+              - 802.3af
+              - 802.3at
+              - 802.3bt
+              example: 802.3bt
+            type:
+              type: integer
+              format: int32
+              enum:
+              - '1'
+              - '2'
+              - '3'
+              - '4'
+              example: 3
+            enabled:
+              type: boolean
+              description: Whether the PoE feature is enabled on the port
+            state:
+              type: string
+              description: Whether the port currently supplies power to the (connected)
+                device.
+              enum:
+              - UP
+              - DOWN
+              - LIMITED
+              - UNKNOWN
+          required:
+          - enabled
+          - standard
+          - state
+          - type
+          title: Port PoE overview
+      required:
+      - connector
+      - idx
+      - maxSpeedMbps
+      - state
+    SwitchFeatureOverview: {}
+    WirelessRadioOverview:
+      properties:
+        wlanStandard:
+          type: string
+          enum:
+          - 802.11a
+          - 802.11b
+          - 802.11g
+          - 802.11n
+          - 802.11ac
+          - 802.11ax
+          - 802.11be
+        frequencyGHz:
+          type: string
+          enum:
+          - '2.4'
+          - '5'
+          - '6'
+          - '60'
+        channelWidthMHz:
+          type: integer
+          format: int32
+          example: 40
+        channel:
+          type: integer
+          format: int32
+          example: 36
+      required:
+      - channelWidthMHz
+      - frequencyGHz
+      - wlanStandard
+    LatestStatisticsForADevice:
+      properties:
+        uptimeSec:
+          type: integer
+          format: int64
+        lastHeartbeatAt:
+          type: string
+          format: date-time
+        nextHeartbeatAt:
+          type: string
+          format: date-time
+        loadAverage1Min:
+          type: number
+          format: double
+        loadAverage5Min:
+          type: number
+          format: double
+        loadAverage15Min:
+          type: number
+          format: double
+        cpuUtilizationPct:
+          type: number
+          format: double
+        memoryUtilizationPct:
+          type: number
+          format: double
+        uplink:
+          properties:
+            txRateBps:
+              type: integer
+              format: int64
+            rxRateBps:
+              type: integer
+              format: int64
+          title: Latest statistics for a device uplink interface
+        interfaces:
+          properties:
+            radios:
+              type: array
+              items:
+                properties:
+                  frequencyGHz:
+                    type: string
+                    enum:
+                    - '2.4'
+                    - '5'
+                    - '6'
+                    - '60'
+                  txRetriesPct:
+                    type: number
+                    format: double
+                required:
+                - frequencyGHz
+                title: Latest statistics for wireless radio
+          title: Latest statistics for device interfaces
+      required:
+      - interfaces
+    LatestStatisticsForADeviceUplinkInterface:
+      properties:
+        txRateBps:
+          type: integer
+          format: int64
+        rxRateBps:
+          type: integer
+          format: int64
+    LatestStatisticsForDeviceInterfaces:
+      properties:
+        radios:
+          type: array
+          items:
+            properties:
+              frequencyGHz:
+                type: string
+                enum:
+                - '2.4'
+                - '5'
+                - '6'
+                - '60'
+              txRetriesPct:
+                type: number
+                format: double
+            required:
+            - frequencyGHz
+            title: Latest statistics for wireless radio
+    LatestStatisticsForWirelessRadio:
+      properties:
+        frequencyGHz:
+          type: string
+          enum:
+          - '2.4'
+          - '5'
+          - '6'
+          - '60'
+        txRetriesPct:
+          type: number
+          format: double
+      required:
+      - frequencyGHz
+    ClientAccessOverview:
+      example:
+        type: DEFAULT
+    ClientOverview:
+      discriminator:
+        propertyName: type
+        mapping:
+          WIRED: '#/components/schemas/WiredClientOverview'
+          WIRELESS: '#/components/schemas/WirelessClientOverview'
+          VPN: '#/components/schemas/VPNClientConnectionOverview'
+          TELEPORT: '#/components/schemas/TeleportClientConnectionOverview'
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        connectedAt:
+          type: string
+          format: date-time
+        ipAddress:
+          type: string
+        access:
+          example:
+            type: DEFAULT
+          title: Client access overview
+        type:
+          type: string
+      required:
+      - access
+      - id
+      - name
+      - type
+    ClientOverviewPage:
+      properties:
+        offset:
+          type: integer
+          format: int64
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          example: 25
+        count:
+          type: integer
+          format: int32
+          example: 10
+        totalCount:
+          type: integer
+          format: int64
+          example: 1000
+        data:
+          type: array
+          items:
+            discriminator:
+              propertyName: type
+              mapping:
+                WIRED: '#/components/schemas/WiredClientOverview'
+                WIRELESS: '#/components/schemas/WirelessClientOverview'
+                VPN: '#/components/schemas/VPNClientConnectionOverview'
+                TELEPORT: '#/components/schemas/TeleportClientConnectionOverview'
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+              connectedAt:
+                type: string
+                format: date-time
+              ipAddress:
+                type: string
+              access:
+                example:
+                  type: DEFAULT
+                title: Client access overview
+              type:
+                type: string
+            required:
+            - access
+            - id
+            - name
+            - type
+            title: Client overview
+      required:
+      - count
+      - data
+      - limit
+      - offset
+      - totalCount
+    DefaultClientAccessOverview:
+      allOf:
+      - description: "Represents the type of network access and/or any applicable\
+          \ authorization status the client is using.\n\n- **Wired clients** may have\
+          \ direct access without additional authorization.\n- **Wireless clients**\
+          \ can be connected via a protected network or an open network\n  that may\
+          \ require additional authorization (e.g., a guest portal).\n- **VPN clients**\
+          \ may have different authorization mechanisms.\n\nCurrently, the only two\
+          \ supported access types are `GUEST` (used for wired and wireless guest\
+          \ clients)\nand `DEFAULT` (a placeholder, which might be refined in the\
+          \ future releases, used for all other clients).\n\nFiltering is possible\
+          \ by `access.type`, for example `access.type.eq('GUEST')` to list guest\
+          \ clients."
+        discriminator:
+          propertyName: type
+          mapping:
+            DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+            GUEST: '#/components/schemas/GuestAccessOverview'
+        properties:
+          type:
+            type: string
+        required:
+        - type
+        title: Local client access overview
+      - description: "Represents the type of network access and/or any applicable\
+          \ authorization status the client is using.\n\n- **Wired clients** may have\
+          \ direct access without additional authorization.\n- **Wireless clients**\
+          \ can be connected via a protected network or an open network\n  that may\
+          \ require additional authorization (e.g., a guest portal).\n- **VPN clients**\
+          \ may have different authorization mechanisms.\n\nCurrently, the only two\
+          \ supported access types are `GUEST` (used for wired and wireless guest\
+          \ clients)\nand `DEFAULT` (a placeholder, which might be refined in the\
+          \ future releases, used for all other clients).\n\nFiltering is possible\
+          \ by `access.type`, for example `access.type.eq('GUEST')` to list guest\
+          \ clients."
+        discriminator:
+          propertyName: type
+          mapping:
+            DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+        properties:
+          type:
+            type: string
+        required:
+        - type
+        title: VPN client access overview
+      - description: "Represents the type of network access and/or any applicable\
+          \ authorization status the client is using.\n\n- **Wired clients** may have\
+          \ direct access without additional authorization.\n- **Wireless clients**\
+          \ can be connected via a protected network or an open network\n  that may\
+          \ require additional authorization (e.g., a guest portal).\n- **VPN clients**\
+          \ may have different authorization mechanisms.\n\nCurrently, the only two\
+          \ supported access types are `GUEST` (used for wired and wireless guest\
+          \ clients)\nand `DEFAULT` (a placeholder, which might be refined in the\
+          \ future releases, used for all other clients).\n\nFiltering is possible\
+          \ by `access.type`, for example `access.type.eq('GUEST')` to list guest\
+          \ clients."
+        discriminator:
+          propertyName: type
+          mapping:
+            DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+        properties:
+          type:
+            type: string
+        required:
+        - type
+        title: Teleport client access overview
+    GuestAccessOverview:
+      allOf:
+      - description: "Represents the type of network access and/or any applicable\
+          \ authorization status the client is using.\n\n- **Wired clients** may have\
+          \ direct access without additional authorization.\n- **Wireless clients**\
+          \ can be connected via a protected network or an open network\n  that may\
+          \ require additional authorization (e.g., a guest portal).\n- **VPN clients**\
+          \ may have different authorization mechanisms.\n\nCurrently, the only two\
+          \ supported access types are `GUEST` (used for wired and wireless guest\
+          \ clients)\nand `DEFAULT` (a placeholder, which might be refined in the\
+          \ future releases, used for all other clients).\n\nFiltering is possible\
+          \ by `access.type`, for example `access.type.eq('GUEST')` to list guest\
+          \ clients."
+        discriminator:
+          propertyName: type
+          mapping:
+            DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+            GUEST: '#/components/schemas/GuestAccessOverview'
+        properties:
+          type:
+            type: string
+        required:
+        - type
+        title: Local client access overview
+      - type: object
+        properties:
+          authorized:
+            type: boolean
+      required:
+      - authorized
+    LocalClientAccessOverview:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+          GUEST: '#/components/schemas/GuestAccessOverview'
+      properties:
+        type:
+          type: string
+      required:
+      - type
+    TeleportClientConnectionOverview:
+      allOf:
+      - discriminator:
+          propertyName: type
+          mapping:
+            WIRED: '#/components/schemas/WiredClientOverview'
+            WIRELESS: '#/components/schemas/WirelessClientOverview'
+            VPN: '#/components/schemas/VPNClientConnectionOverview'
+            TELEPORT: '#/components/schemas/TeleportClientConnectionOverview'
+        properties:
+          id:
+            type: string
+            format: uuid
+          name:
+            type: string
+          connectedAt:
+            type: string
+            format: date-time
+          ipAddress:
+            type: string
+          access:
+            example:
+              type: DEFAULT
+            title: Client access overview
+          type:
+            type: string
+        required:
+        - access
+        - id
+        - name
+        - type
+        title: Client overview
+      - type: object
+        properties:
+          access:
+            description: "Represents the type of network access and/or any applicable\
+              \ authorization status the client is using.\n\n- **Wired clients** may\
+              \ have direct access without additional authorization.\n- **Wireless\
+              \ clients** can be connected via a protected network or an open network\n\
+              \  that may require additional authorization (e.g., a guest portal).\n\
+              - **VPN clients** may have different authorization mechanisms.\n\nCurrently,\
+              \ the only two supported access types are `GUEST` (used for wired and\
+              \ wireless guest clients)\nand `DEFAULT` (a placeholder, which might\
+              \ be refined in the future releases, used for all other clients).\n\n\
+              Filtering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+              \ to list guest clients."
+            discriminator:
+              propertyName: type
+              mapping:
+                DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+            properties:
+              type:
+                type: string
+            required:
+            - type
+            title: Teleport client access overview
+      required:
+      - access
+      - id
+      - name
+    TeleportClientAccessOverview:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+      properties:
+        type:
+          type: string
+      required:
+      - type
+    VPNClientConnectionOverview:
+      allOf:
+      - discriminator:
+          propertyName: type
+          mapping:
+            WIRED: '#/components/schemas/WiredClientOverview'
+            WIRELESS: '#/components/schemas/WirelessClientOverview'
+            VPN: '#/components/schemas/VPNClientConnectionOverview'
+            TELEPORT: '#/components/schemas/TeleportClientConnectionOverview'
+        properties:
+          id:
+            type: string
+            format: uuid
+          name:
+            type: string
+          connectedAt:
+            type: string
+            format: date-time
+          ipAddress:
+            type: string
+          access:
+            example:
+              type: DEFAULT
+            title: Client access overview
+          type:
+            type: string
+        required:
+        - access
+        - id
+        - name
+        - type
+        title: Client overview
+      - type: object
+        properties:
+          access:
+            description: "Represents the type of network access and/or any applicable\
+              \ authorization status the client is using.\n\n- **Wired clients** may\
+              \ have direct access without additional authorization.\n- **Wireless\
+              \ clients** can be connected via a protected network or an open network\n\
+              \  that may require additional authorization (e.g., a guest portal).\n\
+              - **VPN clients** may have different authorization mechanisms.\n\nCurrently,\
+              \ the only two supported access types are `GUEST` (used for wired and\
+              \ wireless guest clients)\nand `DEFAULT` (a placeholder, which might\
+              \ be refined in the future releases, used for all other clients).\n\n\
+              Filtering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+              \ to list guest clients."
+            discriminator:
+              propertyName: type
+              mapping:
+                DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+            properties:
+              type:
+                type: string
+            required:
+            - type
+            title: VPN client access overview
+      required:
+      - access
+      - id
+      - name
+    VPNClientAccessOverview:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+      properties:
+        type:
+          type: string
+      required:
+      - type
+    WiredClientOverview:
+      allOf:
+      - discriminator:
+          propertyName: type
+          mapping:
+            WIRED: '#/components/schemas/WiredClientOverview'
+            WIRELESS: '#/components/schemas/WirelessClientOverview'
+            VPN: '#/components/schemas/VPNClientConnectionOverview'
+            TELEPORT: '#/components/schemas/TeleportClientConnectionOverview'
+        properties:
+          id:
+            type: string
+            format: uuid
+          name:
+            type: string
+          connectedAt:
+            type: string
+            format: date-time
+          ipAddress:
+            type: string
+          access:
+            example:
+              type: DEFAULT
+            title: Client access overview
+          type:
+            type: string
+        required:
+        - access
+        - id
+        - name
+        - type
+        title: Client overview
+      - type: object
+        properties:
+          macAddress:
+            type: string
+          uplinkDeviceId:
+            type: string
+            format: uuid
+          access:
+            description: "Represents the type of network access and/or any applicable\
+              \ authorization status the client is using.\n\n- **Wired clients** may\
+              \ have direct access without additional authorization.\n- **Wireless\
+              \ clients** can be connected via a protected network or an open network\n\
+              \  that may require additional authorization (e.g., a guest portal).\n\
+              - **VPN clients** may have different authorization mechanisms.\n\nCurrently,\
+              \ the only two supported access types are `GUEST` (used for wired and\
+              \ wireless guest clients)\nand `DEFAULT` (a placeholder, which might\
+              \ be refined in the future releases, used for all other clients).\n\n\
+              Filtering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+              \ to list guest clients."
+            discriminator:
+              propertyName: type
+              mapping:
+                DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+                GUEST: '#/components/schemas/GuestAccessOverview'
+            properties:
+              type:
+                type: string
+            required:
+            - type
+            title: Local client access overview
+      required:
+      - access
+      - id
+      - macAddress
+      - name
+      - uplinkDeviceId
+    WirelessClientOverview:
+      allOf:
+      - discriminator:
+          propertyName: type
+          mapping:
+            WIRED: '#/components/schemas/WiredClientOverview'
+            WIRELESS: '#/components/schemas/WirelessClientOverview'
+            VPN: '#/components/schemas/VPNClientConnectionOverview'
+            TELEPORT: '#/components/schemas/TeleportClientConnectionOverview'
+        properties:
+          id:
+            type: string
+            format: uuid
+          name:
+            type: string
+          connectedAt:
+            type: string
+            format: date-time
+          ipAddress:
+            type: string
+          access:
+            example:
+              type: DEFAULT
+            title: Client access overview
+          type:
+            type: string
+        required:
+        - access
+        - id
+        - name
+        - type
+        title: Client overview
+      - type: object
+        properties:
+          macAddress:
+            type: string
+          uplinkDeviceId:
+            type: string
+            format: uuid
+          access:
+            description: "Represents the type of network access and/or any applicable\
+              \ authorization status the client is using.\n\n- **Wired clients** may\
+              \ have direct access without additional authorization.\n- **Wireless\
+              \ clients** can be connected via a protected network or an open network\n\
+              \  that may require additional authorization (e.g., a guest portal).\n\
+              - **VPN clients** may have different authorization mechanisms.\n\nCurrently,\
+              \ the only two supported access types are `GUEST` (used for wired and\
+              \ wireless guest clients)\nand `DEFAULT` (a placeholder, which might\
+              \ be refined in the future releases, used for all other clients).\n\n\
+              Filtering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+              \ to list guest clients."
+            discriminator:
+              propertyName: type
+              mapping:
+                DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+                GUEST: '#/components/schemas/GuestAccessOverview'
+            properties:
+              type:
+                type: string
+            required:
+            - type
+            title: Local client access overview
+      required:
+      - access
+      - id
+      - macAddress
+      - name
+      - uplinkDeviceId
+    ClientDetails:
+      discriminator:
+        propertyName: type
+        mapping:
+          WIRED: '#/components/schemas/WiredClientDetails'
+          WIRELESS: '#/components/schemas/WirelessClientDetails'
+          VPN: '#/components/schemas/VPNClientConnectionDetails'
+          TELEPORT: '#/components/schemas/TeleportClientConnectionDetails'
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        connectedAt:
+          type: string
+          format: date-time
+        ipAddress:
+          type: string
+        access: {}
+        type:
+          type: string
+      required:
+      - access
+      - id
+      - name
+      - type
+    DefaultClientAccessDetails:
+      allOf:
+      - description: "Represents the type of network access and/or any applicable\
+          \ authorization status the client is using.\n\n- **Wired clients** may have\
+          \ direct access without additional authorization.\n- **Wireless clients**\
+          \ can be connected via a protected network or an open network\n  that may\
+          \ require additional authorization (e.g., a guest portal).\n- **VPN clients**\
+          \ may have different authorization mechanisms.\n\nCurrently, the only two\
+          \ supported access types are `GUEST` (used for wired and wireless guest\
+          \ clients)\nand `DEFAULT` (a placeholder, which might be refined in the\
+          \ future releases, used for all other clients).\n\nFiltering is possible\
+          \ by `access.type`, for example `access.type.eq('GUEST')` to list guest\
+          \ clients."
+        discriminator:
+          propertyName: type
+          mapping:
+            DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+            GUEST: '#/components/schemas/GuestAccessDetails'
+        properties:
+          type:
+            type: string
+        required:
+        - type
+        title: Local client access details
+      - description: "Represents the type of network access and/or any applicable\
+          \ authorization status the client is using.\n\n- **Wired clients** may have\
+          \ direct access without additional authorization.\n- **Wireless clients**\
+          \ can be connected via a protected network or an open network\n  that may\
+          \ require additional authorization (e.g., a guest portal).\n- **VPN clients**\
+          \ may have different authorization mechanisms.\n\nCurrently, the only two\
+          \ supported access types are `GUEST` (used for wired and wireless guest\
+          \ clients)\nand `DEFAULT` (a placeholder, which might be refined in the\
+          \ future releases, used for all other clients).\n\nFiltering is possible\
+          \ by `access.type`, for example `access.type.eq('GUEST')` to list guest\
+          \ clients."
+        discriminator:
+          propertyName: type
+          mapping:
+            DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+        properties:
+          type:
+            type: string
+        required:
+        - type
+        title: VPN client access details
+      - description: "Represents the type of network access and/or any applicable\
+          \ authorization status the client is using.\n\n- **Wired clients** may have\
+          \ direct access without additional authorization.\n- **Wireless clients**\
+          \ can be connected via a protected network or an open network\n  that may\
+          \ require additional authorization (e.g., a guest portal).\n- **VPN clients**\
+          \ may have different authorization mechanisms.\n\nCurrently, the only two\
+          \ supported access types are `GUEST` (used for wired and wireless guest\
+          \ clients)\nand `DEFAULT` (a placeholder, which might be refined in the\
+          \ future releases, used for all other clients).\n\nFiltering is possible\
+          \ by `access.type`, for example `access.type.eq('GUEST')` to list guest\
+          \ clients."
+        discriminator:
+          propertyName: type
+          mapping:
+            DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+        properties:
+          type:
+            type: string
+        required:
+        - type
+        title: Teleport client access details
+    GuestAccessDetails:
+      allOf:
+      - description: "Represents the type of network access and/or any applicable\
+          \ authorization status the client is using.\n\n- **Wired clients** may have\
+          \ direct access without additional authorization.\n- **Wireless clients**\
+          \ can be connected via a protected network or an open network\n  that may\
+          \ require additional authorization (e.g., a guest portal).\n- **VPN clients**\
+          \ may have different authorization mechanisms.\n\nCurrently, the only two\
+          \ supported access types are `GUEST` (used for wired and wireless guest\
+          \ clients)\nand `DEFAULT` (a placeholder, which might be refined in the\
+          \ future releases, used for all other clients).\n\nFiltering is possible\
+          \ by `access.type`, for example `access.type.eq('GUEST')` to list guest\
+          \ clients."
+        discriminator:
+          propertyName: type
+          mapping:
+            DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+            GUEST: '#/components/schemas/GuestAccessDetails'
+        properties:
+          type:
+            type: string
+        required:
+        - type
+        title: Local client access details
+      - type: object
+        properties:
+          authorized:
+            type: boolean
+          authorization:
+            properties:
+              authorizedAt:
+                type: string
+                format: date-time
+                description: Timestamp when the guest has been authorized
+              authorizationMethod:
+                type: string
+                description: Guest authorization method (API, Voucher etc)
+                enum:
+                - VOUCHER
+                - API
+                - OTHER
+              expiresAt:
+                type: string
+                format: date-time
+                description: Timestamp when the guest will get automatically unauthorized
+              dataUsageLimitMBytes:
+                type: integer
+                format: int64
+                description: (Optional) data usage limit in megabytes
+                example: 1024
+              rxRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) download rate limit in kilobits per second
+                example: 1000
+              txRateLimitKbps:
+                type: integer
+                format: int64
+                description: (Optional) upload rate limit in kilobits per second
+                example: 1000
+              usage:
+                properties:
+                  durationSec:
+                    type: integer
+                    format: int64
+                  rxBytes:
+                    type: integer
+                    format: int64
+                  txBytes:
+                    type: integer
+                    format: int64
+                  bytes:
+                    type: integer
+                    format: int64
+                required:
+                - bytes
+                - durationSec
+                - rxBytes
+                - txBytes
+                title: Guest authorization usage details
+            required:
+            - authorizationMethod
+            - authorizedAt
+            - expiresAt
+            title: Guest authorization details
+      required:
+      - authorized
+    LocalClientAccessDetails:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+          GUEST: '#/components/schemas/GuestAccessDetails'
+      properties:
+        type:
+          type: string
+      required:
+      - type
+    TeleportClientConnectionDetails:
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        connectedAt:
+          type: string
+          format: date-time
+        ipAddress:
+          type: string
+        access:
+          description: "Represents the type of network access and/or any applicable\
+            \ authorization status the client is using.\n\n- **Wired clients** may\
+            \ have direct access without additional authorization.\n- **Wireless clients**\
+            \ can be connected via a protected network or an open network\n  that\
+            \ may require additional authorization (e.g., a guest portal).\n- **VPN\
+            \ clients** may have different authorization mechanisms.\n\nCurrently,\
+            \ the only two supported access types are `GUEST` (used for wired and\
+            \ wireless guest clients)\nand `DEFAULT` (a placeholder, which might be\
+            \ refined in the future releases, used for all other clients).\n\nFiltering\
+            \ is possible by `access.type`, for example `access.type.eq('GUEST')`\
+            \ to list guest clients."
+          discriminator:
+            propertyName: type
+            mapping:
+              DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+          properties:
+            type:
+              type: string
+          required:
+          - type
+          title: Teleport client access details
+      required:
+      - access
+      - id
+      - name
+    TeleportClientAccessDetails:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+      properties:
+        type:
+          type: string
+      required:
+      - type
+    VPNClientConnectionDetails:
+      allOf:
+      - discriminator:
+          propertyName: type
+          mapping:
+            WIRED: '#/components/schemas/WiredClientDetails'
+            WIRELESS: '#/components/schemas/WirelessClientDetails'
+            VPN: '#/components/schemas/VPNClientConnectionDetails'
+            TELEPORT: '#/components/schemas/TeleportClientConnectionDetails'
+        properties:
+          id:
+            type: string
+            format: uuid
+          name:
+            type: string
+          connectedAt:
+            type: string
+            format: date-time
+          ipAddress:
+            type: string
+          access: {}
+          type:
+            type: string
+        required:
+        - access
+        - id
+        - name
+        - type
+        title: Client details
+      - type: object
+        properties:
+          access:
+            description: "Represents the type of network access and/or any applicable\
+              \ authorization status the client is using.\n\n- **Wired clients** may\
+              \ have direct access without additional authorization.\n- **Wireless\
+              \ clients** can be connected via a protected network or an open network\n\
+              \  that may require additional authorization (e.g., a guest portal).\n\
+              - **VPN clients** may have different authorization mechanisms.\n\nCurrently,\
+              \ the only two supported access types are `GUEST` (used for wired and\
+              \ wireless guest clients)\nand `DEFAULT` (a placeholder, which might\
+              \ be refined in the future releases, used for all other clients).\n\n\
+              Filtering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+              \ to list guest clients."
+            discriminator:
+              propertyName: type
+              mapping:
+                DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+            properties:
+              type:
+                type: string
+            required:
+            - type
+            title: VPN client access details
+      required:
+      - access
+      - id
+      - name
+    VPNClientAccessDetails:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+      properties:
+        type:
+          type: string
+      required:
+      - type
+    WiredClientDetails:
+      allOf:
+      - discriminator:
+          propertyName: type
+          mapping:
+            WIRED: '#/components/schemas/WiredClientDetails'
+            WIRELESS: '#/components/schemas/WirelessClientDetails'
+            VPN: '#/components/schemas/VPNClientConnectionDetails'
+            TELEPORT: '#/components/schemas/TeleportClientConnectionDetails'
+        properties:
+          id:
+            type: string
+            format: uuid
+          name:
+            type: string
+          connectedAt:
+            type: string
+            format: date-time
+          ipAddress:
+            type: string
+          access: {}
+          type:
+            type: string
+        required:
+        - access
+        - id
+        - name
+        - type
+        title: Client details
+      - type: object
+        properties:
+          macAddress:
+            type: string
+          uplinkDeviceId:
+            type: string
+            format: uuid
+          access:
+            description: "Represents the type of network access and/or any applicable\
+              \ authorization status the client is using.\n\n- **Wired clients** may\
+              \ have direct access without additional authorization.\n- **Wireless\
+              \ clients** can be connected via a protected network or an open network\n\
+              \  that may require additional authorization (e.g., a guest portal).\n\
+              - **VPN clients** may have different authorization mechanisms.\n\nCurrently,\
+              \ the only two supported access types are `GUEST` (used for wired and\
+              \ wireless guest clients)\nand `DEFAULT` (a placeholder, which might\
+              \ be refined in the future releases, used for all other clients).\n\n\
+              Filtering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+              \ to list guest clients."
+            discriminator:
+              propertyName: type
+              mapping:
+                DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+                GUEST: '#/components/schemas/GuestAccessDetails'
+            properties:
+              type:
+                type: string
+            required:
+            - type
+            title: Local client access details
+      required:
+      - access
+      - id
+      - macAddress
+      - name
+      - uplinkDeviceId
+    WirelessClientDetails:
+      allOf:
+      - discriminator:
+          propertyName: type
+          mapping:
+            WIRED: '#/components/schemas/WiredClientDetails'
+            WIRELESS: '#/components/schemas/WirelessClientDetails'
+            VPN: '#/components/schemas/VPNClientConnectionDetails'
+            TELEPORT: '#/components/schemas/TeleportClientConnectionDetails'
+        properties:
+          id:
+            type: string
+            format: uuid
+          name:
+            type: string
+          connectedAt:
+            type: string
+            format: date-time
+          ipAddress:
+            type: string
+          access: {}
+          type:
+            type: string
+        required:
+        - access
+        - id
+        - name
+        - type
+        title: Client details
+      - type: object
+        properties:
+          macAddress:
+            type: string
+          uplinkDeviceId:
+            type: string
+            format: uuid
+          access:
+            description: "Represents the type of network access and/or any applicable\
+              \ authorization status the client is using.\n\n- **Wired clients** may\
+              \ have direct access without additional authorization.\n- **Wireless\
+              \ clients** can be connected via a protected network or an open network\n\
+              \  that may require additional authorization (e.g., a guest portal).\n\
+              - **VPN clients** may have different authorization mechanisms.\n\nCurrently,\
+              \ the only two supported access types are `GUEST` (used for wired and\
+              \ wireless guest clients)\nand `DEFAULT` (a placeholder, which might\
+              \ be refined in the future releases, used for all other clients).\n\n\
+              Filtering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+              \ to list guest clients."
+            discriminator:
+              propertyName: type
+              mapping:
+                DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+                GUEST: '#/components/schemas/GuestAccessDetails'
+            properties:
+              type:
+                type: string
+            required:
+            - type
+            title: Local client access details
+      required:
+      - access
+      - id
+      - macAddress
+      - name
+      - uplinkDeviceId
+    ApplicationInfo:
+      properties:
+        applicationVersion:
+          type: string
+          example: 9.1.0
+      required:
+      - applicationVersion
+    VoucherDeletionResults:
+      properties:
+        vouchersDeleted:
+          type: integer
+          format: int64
