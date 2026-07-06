@@ -39,9 +39,9 @@ jobs:
           cat discovered.json
 
       - name: Install vacuum
-        run: |
-          curl -sL https://github.com/daveshanley/vacuum/releases/latest/download/vacuum_linux_amd64.tar.gz \
-            | tar -xz -C /usr/local/bin vacuum
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: curl -fsSL https://quobix.com/scripts/install_vacuum.sh | sh
 
       - name: Scrape new specs
         run: |
