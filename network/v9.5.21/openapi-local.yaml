@@ -1,23 +1,54 @@
 openapi: 3.1.0
 info:
   title: UniFi Network API
-  description: The API provides powerful tools to manage Sites, Devices, and Clients,
-    offering access to detailed configuration, real-time status, and live statistics.
-    It supports insights for WiFi, Wired, and VPN clients, including connection details.
+  description: ''
   license: {}
-  version: 9.1.120
+  version: 9.5.21
 servers:
-- url: /integration
+- url: https://{host}/proxy/network/integration
+  description: Local (direct access)
+  variables:
+    host:
+      default: 192.168.1.1
+      description: IP address or hostname of the UniFi console
 tags:
-- name: Generic information
+- name: Getting Started
+  description: '### Introduction
+
+
+    Each UniFi Application has its own API endpoints running locally on each site,
+
+    offering detailed analytics and control related to that specific application.
+
+    For a single endpoint with high-level insights across all your UniFi sites,
+
+    refer to the [UniFi Site Manager API](https://developer.ui.com).
+
+
+    ### Authentication and Request Format
+
+
+    An API Key is a unique identifier used to authenticate API requests.
+
+    To generate API Keys and view an example of the API Request Format,
+
+    visit the Integrations section of your UniFi application.'
+- name: Filtering
   description: $1b
+- name: Errors
+  description: 'All endpoints use the same generic error message format:'
+- name: About Application
+- name: Sites
+- name: UniFi Devices
+- name: Clients
+- name: Hotspot Vouchers
 paths:
   /v1/sites/{siteId}/hotspot/vouchers:
     get:
       tags:
       - Hotspot Vouchers
       summary: List Vouchers
-      description: 'List Hotspot vouchers (paginated)
+      description: 'Retrieve a paginated list of Hotspot vouchers.
 
 
         <details>
@@ -205,7 +236,7 @@ paths:
       tags:
       - Hotspot Vouchers
       summary: Generate Vouchers
-      description: Generate one or more Hotspot vouchers
+      description: Create one or more Hotspot vouchers.
       operationId: createVouchers
       parameters:
       - name: siteId
@@ -364,7 +395,7 @@ paths:
       tags:
       - Hotspot Vouchers
       summary: Delete Vouchers
-      description: 'Delete Hotspot vouchers by filter
+      description: 'Remove Hotspot vouchers based on the specified filter criteria.
 
 
         <details>
@@ -434,10 +465,10 @@ paths:
   /v1/sites/{siteId}/devices/{deviceId}/interfaces/ports/{portIdx}/actions:
     post:
       tags:
-      - Devices
+      - UniFi Devices
       summary: Execute Port Action
-      description: Execute an action on a specific port. Request body should contain
-        action name and input arguments, if apply.
+      description: Perform an action on a specific device port. The request body must
+        include the action name and any applicable input arguments.
       operationId: executePortAction
       parameters:
       - name: portIdx
@@ -479,10 +510,10 @@ paths:
   /v1/sites/{siteId}/devices/{deviceId}/actions:
     post:
       tags:
-      - Devices
+      - UniFi Devices
       summary: Execute Device Action
-      description: Execute an action on a specific adopted device. Request body should
-        contain action name and input arguments, if apply.
+      description: Perform an action on an specific adopted device. The request body
+        must include the action name and any applicable input arguments.
       operationId: executeDeviceAction
       parameters:
       - name: siteId
@@ -520,8 +551,8 @@ paths:
       tags:
       - Clients
       summary: Execute Client Action
-      description: Execute an action on a specific connected client. Request body
-        should contain action name and input arguments, if apply.
+      description: Perform an action on a specific connected client. The request body
+        must include the action name and any applicable input arguments.
       operationId: executeConnectedClientAction
       parameters:
       - name: clientId
@@ -574,11 +605,10 @@ paths:
       tags:
       - Sites
       summary: List Local Sites
-      description: 'List local sites managed by this Network application (paginated).
+      description: 'Retrieve a paginated list of local sites managed by this Network
+        application.
 
-        Setups using Multi-Site option enabled will return all created sites
-
-        while if option is disabled it will return just the default site.
+        Site ID is required for other UniFi Network API calls.
 
 
         <details>
@@ -672,7 +702,7 @@ paths:
       tags:
       - Hotspot Vouchers
       summary: Get Voucher Details
-      description: Get details of a specific Hotspot voucher
+      description: Retrieve details of a specific Hotspot voucher.
       operationId: getVoucher
       parameters:
       - name: voucherId
@@ -774,7 +804,7 @@ paths:
       tags:
       - Hotspot Vouchers
       summary: Delete Voucher
-      description: Delete a specific Hotspot voucher
+      description: Remove a specific Hotspot voucher.
       operationId: deleteVoucher
       parameters:
       - name: voucherId
@@ -803,10 +833,10 @@ paths:
   /v1/sites/{siteId}/devices:
     get:
       tags:
-      - Devices
+      - UniFi Devices
       summary: List Devices
-      description: List adopted devices of a site (paginated). Response contains basic
-        information about site's adopted devices.
+      description: Retrieve a paginated list of all adopted devices on a site, including
+        basic device information.
       operationId: getDeviceOverviewPage
       parameters:
       - name: offset
@@ -921,12 +951,11 @@ paths:
   /v1/sites/{siteId}/devices/{deviceId}:
     get:
       tags:
-      - Devices
+      - UniFi Devices
       summary: Get Device Details
-      description: Get detailed information about a specific adopted device. Response
-        includes more information about a single device, as well as more detailed
-        information about device features, such as switch ports and/or access point
-        radios
+      description: Retrieve detailed information about a specific adopted device,
+        including firmware versioning, uplink state, details about device features
+        and interfaces (ports, radios) and other key attributes.
       operationId: getDeviceDetails
       parameters:
       - name: siteId
@@ -1137,11 +1166,10 @@ paths:
   /v1/sites/{siteId}/devices/{deviceId}/statistics/latest:
     get:
       tags:
-      - Devices
+      - UniFi Devices
       summary: Get Latest Device Statistics
-      description: Get latest (live) statistics of a specific adopted device. Response
-        contains latest readings from a single device, such as CPU and memory utilization,
-        uptime, uplink tx/rx rates etc
+      description: Retrieve the latest real-time statistics of a specific adopted
+        device, such as uptime, data transmission rates, CPU and memory utilization.
       operationId: getDeviceLatestStatistics
       parameters:
       - name: siteId
@@ -1224,9 +1252,8 @@ paths:
       tags:
       - Clients
       summary: List Connected Clients
-      description: 'List connected clients of a site (paginated). Clients are either
-        physical devices (computers, smartphones, connected by wire or wirelessly),
-        or active VPN connections.
+      description: 'Retrieve a paginated list of all connected clients on a site,
+        including physical devices (computers, smartphones) and active VPN connections.
 
 
         <details>
@@ -1349,6 +1376,8 @@ paths:
       tags:
       - Clients
       summary: Get Connected Client Details
+      description: Retrieve detailed information about a specific connected client,
+        including name, IP address, MAC address, connection type and access information.
       operationId: getConnectedClientDetails
       parameters:
       - name: clientId
@@ -1399,9 +1428,9 @@ paths:
   /v1/info:
     get:
       tags:
-      - About application
+      - About Application
       summary: Get Application Info
-      description: Get generic information about the Network application
+      description: Retrieve general information about the UniFi Network application.
       operationId: getInfo
       responses:
         '200':
@@ -1418,8 +1447,7 @@ paths:
                 title: Application info
 components:
   schemas:
-    ErrorResponse:
-      description: This generic error message format is used across all endpoints.
+    ErrorMessage:
       properties:
         statusCode:
           type: integer
@@ -1444,7 +1472,7 @@ components:
           description: In case of Internal Server Error (core = 500), request ID can
             be used to track down the error in the server log
           example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-      x-tags: Generic information
+      x-tags: Errors
     HotspotVoucherCreationRequest:
       properties:
         count:

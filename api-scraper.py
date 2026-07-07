@@ -526,6 +526,11 @@ def save_spec(data: dict, output_dir: str, validate: bool = False):
         cloud_spec = copy.deepcopy(full_spec)
         cloud_spec["servers"] = _build_cloud_servers(proxy_path)
         _write_spec(cloud_spec, os.path.join(base_dir, "openapi-cloud.yaml"), validate)
+
+        legacy = os.path.join(base_dir, "openapi.yaml")
+        if os.path.exists(legacy):
+            os.remove(legacy)
+            print(f"  Removed: {legacy}")
     else:
         _write_spec(full_spec, os.path.join(base_dir, "openapi.yaml"), validate)
 

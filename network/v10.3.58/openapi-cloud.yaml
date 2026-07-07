@@ -3,9 +3,14 @@ info:
   title: UniFi Network API
   description: ''
   license: {}
-  version: 10.1.84
+  version: 10.3.58
 servers:
-- url: /integration
+- url: https://api.ui.com/v1/connector/consoles/{consoleId}/proxy/network/integration
+  description: Cloud connector
+  variables:
+    consoleId:
+      default: ''
+      description: Console Host ID
 tags:
 - name: Getting Started
   description: "Provides an overview of the UniFi Network API, including authentication\
@@ -67,6 +72,9 @@ tags:
     List) rule
 
     that enforce traffic filtering across devices and networks.'
+- name: Switching
+  description: Endpoints for managing switching features like Switch Stacking and
+    LAG.
 - name: DNS Policies
   description: Endpoints for managing DNS Policies within a site.
 - name: Traffic Matching Lists
@@ -5778,8 +5786,116 @@ paths:
                     type: object
                     properties:
                       switching:
-                        example: {}
-                        title: Switch feature overview
+                        type: object
+                        properties:
+                          lags:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  format: uuid
+                                portIdxs:
+                                  type: array
+                                  items:
+                                    type: integer
+                                    format: int32
+                                  minItems: 1
+                                metadata:
+                                  allOf:
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                        DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                        ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: Entity metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: User or system defined entity metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: User defined or derived entity metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                        ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: User or system defined or orchestrated
+                                      entity metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: User or orchestrated entity metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                        ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: User or derived or orchestrated entity
+                                      metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: Site-to-site VPN tunnel metadata
+                                  title: User defined entity metadata
+                              required:
+                              - id
+                              - metadata
+                              - portIdxs
+                              title: IntegrationLocalLagLocalDto
+                        required:
+                        - lags
+                        title: Switching feature overview
                       accessPoint:
                         example: {}
                         title: Access point feature overview
@@ -6785,6 +6901,1526 @@ paths:
                 - offset
                 - totalCount
                 title: IntegrationVpnServerOverviewPageDto
+  /v1/sites/{siteId}/switching/switch-stacks:
+    get:
+      tags:
+      - Switching
+      summary: List Switch Stacks
+      description: 'Retrieve a paginated list of all Switch Stacks on a site.
+
+
+        <details>
+
+        <summary>Filterable properties (click to expand)</summary>
+
+
+        |Name|Type|Allowed functions|
+
+        |-|-|-|
+
+        |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+        |`name`|`STRING`|`eq` `ne` `in` `notIn` `like`|
+
+        |`members.deviceId`|`SET(UUID)`|`contains` `containsAny` `containsAll` `containsExactly`|
+
+        |`metadata.origin`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        </details>'
+      operationId: getSwitchStackPage
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+          maximum: 200
+          minimum: 0
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offset:
+                    type: integer
+                    format: int64
+                    example: 0
+                  limit:
+                    type: integer
+                    format: int32
+                    example: 25
+                  count:
+                    type: integer
+                    format: int32
+                    example: 10
+                  totalCount:
+                    type: integer
+                    format: int64
+                    example: 1000
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        members:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              deviceId:
+                                type: string
+                                format: uuid
+                            required:
+                            - deviceId
+                            title: IntegrationSwitchStackMemberDto
+                          minItems: 2
+                        lags:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                format: uuid
+                              members:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    deviceId:
+                                      type: string
+                                      format: uuid
+                                    portIdxs:
+                                      type: array
+                                      items:
+                                        type: integer
+                                        format: int32
+                                  required:
+                                  - deviceId
+                                  - portIdxs
+                                  title: IntegrationLagMemberDto
+                                minItems: 1
+                              metadata:
+                                allOf:
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: Entity metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: User or system defined entity metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: User defined or derived entity metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: User or system defined or orchestrated entity
+                                    metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: User or orchestrated entity metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: User or derived or orchestrated entity metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: Site-to-site VPN tunnel metadata
+                                title: User defined entity metadata
+                            required:
+                            - id
+                            - members
+                            - metadata
+                            title: IntegrationSwitchStackLagLocalDto
+                        metadata:
+                          allOf:
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: Entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or system defined entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User defined or derived entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or system defined or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or derived or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: Site-to-site VPN tunnel metadata
+                          title: User defined entity metadata
+                      required:
+                      - id
+                      - lags
+                      - members
+                      - metadata
+                      - name
+                      title: IntegrationSwitchStackDto
+                required:
+                - count
+                - data
+                - limit
+                - offset
+                - totalCount
+                title: IntegrationSwitchStackDtoPageDto
+  /v1/sites/{siteId}/switching/switch-stacks/{switchStackId}:
+    get:
+      tags:
+      - Switching
+      summary: Get Switch Stack
+      description: Retrieve Switch Stack details.
+      operationId: getSwitchStack
+      parameters:
+      - name: switchStackId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        deviceId:
+                          type: string
+                          format: uuid
+                      required:
+                      - deviceId
+                      title: IntegrationSwitchStackMemberDto
+                    minItems: 2
+                  lags:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        members:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              deviceId:
+                                type: string
+                                format: uuid
+                              portIdxs:
+                                type: array
+                                items:
+                                  type: integer
+                                  format: int32
+                            required:
+                            - deviceId
+                            - portIdxs
+                            title: IntegrationLagMemberDto
+                          minItems: 1
+                        metadata:
+                          allOf:
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: Entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or system defined entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User defined or derived entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or system defined or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or derived or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: Site-to-site VPN tunnel metadata
+                          title: User defined entity metadata
+                      required:
+                      - id
+                      - members
+                      - metadata
+                      title: IntegrationSwitchStackLagLocalDto
+                  metadata:
+                    allOf:
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: Entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or system defined entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User defined or derived entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or system defined or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or derived or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: Site-to-site VPN tunnel metadata
+                    title: User defined entity metadata
+                required:
+                - id
+                - lags
+                - members
+                - metadata
+                - name
+                title: IntegrationSwitchStackDto
+  /v1/sites/{siteId}/switching/mc-lag-domains:
+    get:
+      tags:
+      - Switching
+      summary: List MC-LAG Domains
+      description: 'Retrieve a paginated list of all MC-LAG Domains on a site.
+
+
+        <details>
+
+        <summary>Filterable properties (click to expand)</summary>
+
+
+        |Name|Type|Allowed functions|
+
+        |-|-|-|
+
+        |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+        |`name`|`STRING`|`eq` `ne` `in` `notIn` `like`|
+
+        |`peers.deviceId`|`SET(UUID)`|`contains` `containsAny` `containsAll` `containsExactly`|
+
+        |`metadata.origin`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        </details>'
+      operationId: getMcLagDomainPage
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+          maximum: 200
+          minimum: 0
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offset:
+                    type: integer
+                    format: int64
+                    example: 0
+                  limit:
+                    type: integer
+                    format: int32
+                    example: 25
+                  count:
+                    type: integer
+                    format: int32
+                    example: 10
+                  totalCount:
+                    type: integer
+                    format: int64
+                    example: 1000
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        name:
+                          type: string
+                        peers:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              role:
+                                type: string
+                                enum:
+                                - TOP
+                                - BOTTOM
+                              deviceId:
+                                type: string
+                                format: uuid
+                              linkPortIdxs:
+                                type: array
+                                items:
+                                  type: integer
+                                  format: int32
+                                minItems: 1
+                            required:
+                            - deviceId
+                            - linkPortIdxs
+                            - role
+                            title: IntegrationMcLagPeerDto
+                        lags:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                format: uuid
+                              members:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    deviceId:
+                                      type: string
+                                      format: uuid
+                                    portIdxs:
+                                      type: array
+                                      items:
+                                        type: integer
+                                        format: int32
+                                  required:
+                                  - deviceId
+                                  - portIdxs
+                                  title: IntegrationLagMemberDto
+                              metadata:
+                                allOf:
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: Entity metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: User or system defined entity metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: User defined or derived entity metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: User or system defined or orchestrated entity
+                                    metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: User or orchestrated entity metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: User or derived or orchestrated entity metadata
+                                - discriminator:
+                                    propertyName: origin
+                                    mapping:
+                                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                      DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                                  properties:
+                                    origin:
+                                      type: string
+                                  required:
+                                  - origin
+                                  title: Site-to-site VPN tunnel metadata
+                                title: User defined entity metadata
+                            required:
+                            - id
+                            - members
+                            - metadata
+                            title: IntegrationMcLagLocalDto
+                        metadata:
+                          allOf:
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: Entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or system defined entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User defined or derived entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or system defined or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or derived or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: Site-to-site VPN tunnel metadata
+                          title: User defined entity metadata
+                      required:
+                      - id
+                      - lags
+                      - metadata
+                      - name
+                      - peers
+                      title: IntegrationMcLagDomainDto
+                required:
+                - count
+                - data
+                - limit
+                - offset
+                - totalCount
+                title: IntegrationMcLagDomainDtoPageDto
+  /v1/sites/{siteId}/switching/mc-lag-domains/{mcLagDomainId}:
+    get:
+      tags:
+      - Switching
+      summary: Get MC-LAG Domain
+      description: Retrieve MC-LAG Domain details.
+      operationId: getMcLagDomain
+      parameters:
+      - name: mcLagDomainId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                  peers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        role:
+                          type: string
+                          enum:
+                          - TOP
+                          - BOTTOM
+                        deviceId:
+                          type: string
+                          format: uuid
+                        linkPortIdxs:
+                          type: array
+                          items:
+                            type: integer
+                            format: int32
+                          minItems: 1
+                      required:
+                      - deviceId
+                      - linkPortIdxs
+                      - role
+                      title: IntegrationMcLagPeerDto
+                  lags:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        members:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              deviceId:
+                                type: string
+                                format: uuid
+                              portIdxs:
+                                type: array
+                                items:
+                                  type: integer
+                                  format: int32
+                            required:
+                            - deviceId
+                            - portIdxs
+                            title: IntegrationLagMemberDto
+                        metadata:
+                          allOf:
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: Entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or system defined entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User defined or derived entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or system defined or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or derived or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: Site-to-site VPN tunnel metadata
+                          title: User defined entity metadata
+                      required:
+                      - id
+                      - members
+                      - metadata
+                      title: IntegrationMcLagLocalDto
+                  metadata:
+                    allOf:
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: Entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or system defined entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User defined or derived entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or system defined or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or derived or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: Site-to-site VPN tunnel metadata
+                    title: User defined entity metadata
+                required:
+                - id
+                - lags
+                - metadata
+                - name
+                - peers
+                title: IntegrationMcLagDomainDto
+  /v1/sites/{siteId}/switching/lags:
+    get:
+      tags:
+      - Switching
+      summary: List LAGs
+      description: 'Retrieve a paginated list of all LAGs (Link Aggregation Groups)
+        on a site.
+
+
+        <details>
+
+        <summary>Filterable properties (click to expand)</summary>
+
+
+        |Name|Type|Allowed functions|
+
+        |-|-|-|
+
+        |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+        |`type`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        |`switchStackId`|`UUID`|`eq` `ne` `in` `notIn` `isNull` `isNotNull`|
+
+        |`mcLagDomainId`|`UUID`|`eq` `ne` `in` `notIn` `isNull` `isNotNull`|
+
+        |`members.deviceId`|`SET(UUID)`|`contains` `containsAny` `containsAll` `containsExactly`|
+
+        |`members.portIdxs`|`SET(INTEGER)`|`contains` `containsAny` `containsAll`
+        `containsExactly`|
+
+        |`metadata.origin`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        </details>'
+      operationId: getLagPage
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+          maximum: 200
+          minimum: 0
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offset:
+                    type: integer
+                    format: int64
+                    example: 0
+                  limit:
+                    type: integer
+                    format: int32
+                    example: 25
+                  count:
+                    type: integer
+                    format: int32
+                    example: 10
+                  totalCount:
+                    type: integer
+                    format: int64
+                    example: 1000
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      discriminator:
+                        propertyName: type
+                        mapping:
+                          LOCAL: '#/components/schemas/IntegrationLocalLagGlobalDto'
+                          SWITCH_STACK: '#/components/schemas/IntegrationSwitchStackLagGlobalDto'
+                          MULTI_CHASSIS: '#/components/schemas/IntegrationMcLagGlobalDto'
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: string
+                          format: uuid
+                        members:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              deviceId:
+                                type: string
+                                format: uuid
+                              portIdxs:
+                                type: array
+                                items:
+                                  type: integer
+                                  format: int32
+                            required:
+                            - deviceId
+                            - portIdxs
+                            title: IntegrationLagMemberDto
+                        metadata:
+                          allOf:
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: Entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or system defined entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User defined or derived entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or system defined or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: User or derived or orchestrated entity metadata
+                          - discriminator:
+                              propertyName: origin
+                              mapping:
+                                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                            properties:
+                              origin:
+                                type: string
+                            required:
+                            - origin
+                            title: Site-to-site VPN tunnel metadata
+                          title: User defined entity metadata
+                      required:
+                      - id
+                      - members
+                      - metadata
+                      - type
+                      title: LAG details
+                required:
+                - count
+                - data
+                - limit
+                - offset
+                - totalCount
+                title: IntegrationLagPageDto
+  /v1/sites/{siteId}/switching/lags/{lagId}:
+    get:
+      tags:
+      - Switching
+      summary: Get LAG Details
+      description: Retrieve LAG details.
+      operationId: getLag
+      parameters:
+      - name: lagId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    LOCAL: '#/components/schemas/IntegrationLocalLagGlobalDto'
+                    SWITCH_STACK: '#/components/schemas/IntegrationSwitchStackLagGlobalDto'
+                    MULTI_CHASSIS: '#/components/schemas/IntegrationMcLagGlobalDto'
+                properties:
+                  type:
+                    type: string
+                  id:
+                    type: string
+                    format: uuid
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        deviceId:
+                          type: string
+                          format: uuid
+                        portIdxs:
+                          type: array
+                          items:
+                            type: integer
+                            format: int32
+                      required:
+                      - deviceId
+                      - portIdxs
+                      title: IntegrationLagMemberDto
+                  metadata:
+                    allOf:
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: Entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or system defined entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User defined or derived entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or system defined or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or derived or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: Site-to-site VPN tunnel metadata
+                    title: User defined entity metadata
+                required:
+                - id
+                - members
+                - metadata
+                - type
+                title: LAG details
   /v1/sites/{siteId}/radius/profiles:
     get:
       tags:
@@ -7194,8 +8830,116 @@ paths:
                     type: object
                     properties:
                       switching:
-                        example: {}
-                        title: Switch feature overview
+                        type: object
+                        properties:
+                          lags:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  format: uuid
+                                portIdxs:
+                                  type: array
+                                  items:
+                                    type: integer
+                                    format: int32
+                                  minItems: 1
+                                metadata:
+                                  allOf:
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                        DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                        ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: Entity metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: User or system defined entity metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: User defined or derived entity metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                                        ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: User or system defined or orchestrated
+                                      entity metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: User or orchestrated entity metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                                        ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: User or derived or orchestrated entity
+                                      metadata
+                                  - discriminator:
+                                      propertyName: origin
+                                      mapping:
+                                        USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                                        DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                                    properties:
+                                      origin:
+                                        type: string
+                                    required:
+                                    - origin
+                                    title: Site-to-site VPN tunnel metadata
+                                  title: User defined entity metadata
+                              required:
+                              - id
+                              - metadata
+                              - portIdxs
+                              title: IntegrationLocalLagLocalDto
+                        required:
+                        - lags
+                        title: Switching feature overview
                       accessPoint:
                         example: {}
                         title: Access point feature overview
@@ -8265,6 +10009,17 @@ components:
           type: string
       required:
       - type
+    DNSAssistanceConfiguration:
+      discriminator:
+        propertyName: mode
+        mapping:
+          AUTO: '#/components/schemas/IntegrationWifiDnsAssistanceAutoConfigurationDto'
+          MANUAL: '#/components/schemas/IntegrationWifiDnsAssistanceManualConfigurationDto'
+      properties:
+        mode:
+          type: string
+      required:
+      - mode
     IntegrationBlackoutScheduleConfiguration:
       type: object
       properties:
@@ -8744,6 +10499,18 @@ components:
             - '5'
             - '6'
             title: IntegrationWifiDtimPeriodConfigurationDto
+          dnsAssistanceConfiguration:
+            discriminator:
+              propertyName: mode
+              mapping:
+                AUTO: '#/components/schemas/IntegrationWifiDnsAssistanceAutoConfigurationDto'
+                MANUAL: '#/components/schemas/IntegrationWifiDnsAssistanceManualConfigurationDto'
+            properties:
+              mode:
+                type: string
+            required:
+            - mode
+            title: DNS assistance configuration
       required:
       - advertiseDeviceName
       - arpProxyEnabled
@@ -8974,6 +10741,43 @@ components:
             uniqueItems: true
       required:
       - deviceIds
+    IntegrationWifiDnsAssistanceAutoConfigurationDto:
+      allOf:
+      - discriminator:
+          propertyName: mode
+          mapping:
+            AUTO: '#/components/schemas/IntegrationWifiDnsAssistanceAutoConfigurationDto'
+            MANUAL: '#/components/schemas/IntegrationWifiDnsAssistanceManualConfigurationDto'
+        properties:
+          mode:
+            type: string
+        required:
+        - mode
+        title: DNS assistance configuration
+    IntegrationWifiDnsAssistanceManualConfigurationDto:
+      allOf:
+      - discriminator:
+          propertyName: mode
+          mapping:
+            AUTO: '#/components/schemas/IntegrationWifiDnsAssistanceAutoConfigurationDto'
+            MANUAL: '#/components/schemas/IntegrationWifiDnsAssistanceManualConfigurationDto'
+        properties:
+          mode:
+            type: string
+        required:
+        - mode
+        title: DNS assistance configuration
+      - type: object
+        properties:
+          servers:
+            type: array
+            items:
+              type: string
+              description: Failover DNS servers
+            maxItems: 2
+            minItems: 0
+      required:
+      - servers
     IntegrationWifiDtimPeriodConfigurationDto:
       type: object
       properties:
@@ -9394,6 +11198,13 @@ components:
             - nasId
             - profileId
             title: IntegrationWifiNonEnterpriseRadiusConfigurationDto
+          encryption:
+            type: string
+            description: Encryption mode for open security. If null, plain open with
+              no encryption.
+            enum:
+            - ENHANCED_OPEN
+            - ENHANCED_OPEN_WITH_TRANSITION
     IntegrationWifiPasspointConfigurationDetailDto:
       allOf:
       - discriminator:
@@ -10899,6 +12710,18 @@ components:
             - '5'
             - '6'
             title: IntegrationWifiDtimPeriodConfigurationDto
+          dnsAssistanceConfiguration:
+            discriminator:
+              propertyName: mode
+              mapping:
+                AUTO: '#/components/schemas/IntegrationWifiDnsAssistanceAutoConfigurationDto'
+                MANUAL: '#/components/schemas/IntegrationWifiDnsAssistanceManualConfigurationDto'
+            properties:
+              mode:
+                type: string
+            required:
+            - mode
+            title: DNS assistance configuration
       required:
       - advertiseDeviceName
       - arpProxyEnabled
@@ -12372,6 +14195,7 @@ components:
           mdnsForwardingEnabled:
             type: boolean
             description: Whether this network should participate in mDNS traffic forwarding.
+              If null, the default from the site mDNS setting is used.
           ipv4Configuration:
             description: Details about IPv4 configuration for this Network.
             type: object
@@ -12534,7 +14358,6 @@ components:
       - internetAccessEnabled
       - ipv4Configuration
       - isolationEnabled
-      - mdnsForwardingEnabled
       - name
       - vlanId
     IntegrationIpv6AddressSuffixRangeSelectorDto:
@@ -20823,8 +22646,114 @@ components:
           type: object
           properties:
             switching:
-              example: {}
-              title: Switch feature overview
+              type: object
+              properties:
+                lags:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      portIdxs:
+                        type: array
+                        items:
+                          type: integer
+                          format: int32
+                        minItems: 1
+                      metadata:
+                        allOf:
+                        - discriminator:
+                            propertyName: origin
+                            mapping:
+                              USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                              SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                              DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                              ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                          properties:
+                            origin:
+                              type: string
+                          required:
+                          - origin
+                          title: Entity metadata
+                        - discriminator:
+                            propertyName: origin
+                            mapping:
+                              USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                              SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                          properties:
+                            origin:
+                              type: string
+                          required:
+                          - origin
+                          title: User or system defined entity metadata
+                        - discriminator:
+                            propertyName: origin
+                            mapping:
+                              USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                              DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                          properties:
+                            origin:
+                              type: string
+                          required:
+                          - origin
+                          title: User defined or derived entity metadata
+                        - discriminator:
+                            propertyName: origin
+                            mapping:
+                              USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                              SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                              ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                          properties:
+                            origin:
+                              type: string
+                          required:
+                          - origin
+                          title: User or system defined or orchestrated entity metadata
+                        - discriminator:
+                            propertyName: origin
+                            mapping:
+                              USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                              ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                          properties:
+                            origin:
+                              type: string
+                          required:
+                          - origin
+                          title: User or orchestrated entity metadata
+                        - discriminator:
+                            propertyName: origin
+                            mapping:
+                              USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                              DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                              ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                          properties:
+                            origin:
+                              type: string
+                          required:
+                          - origin
+                          title: User or derived or orchestrated entity metadata
+                        - discriminator:
+                            propertyName: origin
+                            mapping:
+                              USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                              DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                          properties:
+                            origin:
+                              type: string
+                          required:
+                          - origin
+                          title: Site-to-site VPN tunnel metadata
+                        title: User defined entity metadata
+                    required:
+                    - id
+                    - metadata
+                    - portIdxs
+                    title: IntegrationLocalLagLocalDto
+              required:
+              - lags
+              title: Switching feature overview
             accessPoint:
               example: {}
               title: Access point feature overview
@@ -20959,8 +22888,114 @@ components:
       type: object
       properties:
         switching:
-          example: {}
-          title: Switch feature overview
+          type: object
+          properties:
+            lags:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  portIdxs:
+                    type: array
+                    items:
+                      type: integer
+                      format: int32
+                    minItems: 1
+                  metadata:
+                    allOf:
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: Entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or system defined entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User defined or derived entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or system defined or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                          ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: User or derived or orchestrated entity metadata
+                    - discriminator:
+                        propertyName: origin
+                        mapping:
+                          USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                          DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                      properties:
+                        origin:
+                          type: string
+                      required:
+                      - origin
+                      title: Site-to-site VPN tunnel metadata
+                    title: User defined entity metadata
+                required:
+                - id
+                - metadata
+                - portIdxs
+                title: IntegrationLocalLagLocalDto
+          required:
+          - lags
+          title: Switching feature overview
         accessPoint:
           example: {}
           title: Access point feature overview
@@ -21087,6 +23122,106 @@ components:
           format: uuid
       required:
       - deviceId
+    IntegrationLocalLagLocalDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        portIdxs:
+          type: array
+          items:
+            type: integer
+            format: int32
+          minItems: 1
+        metadata:
+          allOf:
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User defined or derived entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or derived or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Site-to-site VPN tunnel metadata
+          title: User defined entity metadata
+      required:
+      - id
+      - metadata
+      - portIdxs
     PortPoEOverview:
       type: object
       properties:
@@ -21195,7 +23330,114 @@ components:
       - idx
       - maxSpeedMbps
       - state
-    SwitchFeatureOverview: {}
+    SwitchingFeatureOverview:
+      type: object
+      properties:
+        lags:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              portIdxs:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+                minItems: 1
+              metadata:
+                allOf:
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User defined or derived entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or derived or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Site-to-site VPN tunnel metadata
+                title: User defined entity metadata
+            required:
+            - id
+            - metadata
+            - portIdxs
+            title: IntegrationLocalLagLocalDto
+      required:
+      - lags
     WirelessRadioOverview:
       type: object
       properties:
@@ -22917,6 +25159,1908 @@ components:
       - limit
       - offset
       - totalCount
+    IntegrationLagMemberDto:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          format: uuid
+        portIdxs:
+          type: array
+          items:
+            type: integer
+            format: int32
+      required:
+      - deviceId
+      - portIdxs
+    IntegrationSwitchStackDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        members:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceId:
+                type: string
+                format: uuid
+            required:
+            - deviceId
+            title: IntegrationSwitchStackMemberDto
+          minItems: 2
+        lags:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              members:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    deviceId:
+                      type: string
+                      format: uuid
+                    portIdxs:
+                      type: array
+                      items:
+                        type: integer
+                        format: int32
+                  required:
+                  - deviceId
+                  - portIdxs
+                  title: IntegrationLagMemberDto
+                minItems: 1
+              metadata:
+                allOf:
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User defined or derived entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or derived or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Site-to-site VPN tunnel metadata
+                title: User defined entity metadata
+            required:
+            - id
+            - members
+            - metadata
+            title: IntegrationSwitchStackLagLocalDto
+        metadata:
+          allOf:
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User defined or derived entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or derived or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Site-to-site VPN tunnel metadata
+          title: User defined entity metadata
+      required:
+      - id
+      - lags
+      - members
+      - metadata
+      - name
+    IntegrationSwitchStackDtoPageDto:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          example: 25
+        count:
+          type: integer
+          format: int32
+          example: 10
+        totalCount:
+          type: integer
+          format: int64
+          example: 1000
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+              members:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    deviceId:
+                      type: string
+                      format: uuid
+                  required:
+                  - deviceId
+                  title: IntegrationSwitchStackMemberDto
+                minItems: 2
+              lags:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    members:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          deviceId:
+                            type: string
+                            format: uuid
+                          portIdxs:
+                            type: array
+                            items:
+                              type: integer
+                              format: int32
+                        required:
+                        - deviceId
+                        - portIdxs
+                        title: IntegrationLagMemberDto
+                      minItems: 1
+                    metadata:
+                      allOf:
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                            DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                            ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: Entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: User or system defined entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: User defined or derived entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                            ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: User or system defined or orchestrated entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: User or orchestrated entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                            ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: User or derived or orchestrated entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: Site-to-site VPN tunnel metadata
+                      title: User defined entity metadata
+                  required:
+                  - id
+                  - members
+                  - metadata
+                  title: IntegrationSwitchStackLagLocalDto
+              metadata:
+                allOf:
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User defined or derived entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or derived or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Site-to-site VPN tunnel metadata
+                title: User defined entity metadata
+            required:
+            - id
+            - lags
+            - members
+            - metadata
+            - name
+            title: IntegrationSwitchStackDto
+      required:
+      - count
+      - data
+      - limit
+      - offset
+      - totalCount
+    IntegrationSwitchStackLagLocalDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        members:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceId:
+                type: string
+                format: uuid
+              portIdxs:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+            required:
+            - deviceId
+            - portIdxs
+            title: IntegrationLagMemberDto
+          minItems: 1
+        metadata:
+          allOf:
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User defined or derived entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or derived or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Site-to-site VPN tunnel metadata
+          title: User defined entity metadata
+      required:
+      - id
+      - members
+      - metadata
+    IntegrationSwitchStackMemberDto:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          format: uuid
+      required:
+      - deviceId
+    IntegrationMcLagDomainDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        peers:
+          type: array
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+                enum:
+                - TOP
+                - BOTTOM
+              deviceId:
+                type: string
+                format: uuid
+              linkPortIdxs:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+                minItems: 1
+            required:
+            - deviceId
+            - linkPortIdxs
+            - role
+            title: IntegrationMcLagPeerDto
+        lags:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              members:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    deviceId:
+                      type: string
+                      format: uuid
+                    portIdxs:
+                      type: array
+                      items:
+                        type: integer
+                        format: int32
+                  required:
+                  - deviceId
+                  - portIdxs
+                  title: IntegrationLagMemberDto
+              metadata:
+                allOf:
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User defined or derived entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or derived or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Site-to-site VPN tunnel metadata
+                title: User defined entity metadata
+            required:
+            - id
+            - members
+            - metadata
+            title: IntegrationMcLagLocalDto
+        metadata:
+          allOf:
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User defined or derived entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or derived or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Site-to-site VPN tunnel metadata
+          title: User defined entity metadata
+      required:
+      - id
+      - lags
+      - metadata
+      - name
+      - peers
+    IntegrationMcLagDomainDtoPageDto:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          example: 25
+        count:
+          type: integer
+          format: int32
+          example: 10
+        totalCount:
+          type: integer
+          format: int64
+          example: 1000
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+              peers:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    role:
+                      type: string
+                      enum:
+                      - TOP
+                      - BOTTOM
+                    deviceId:
+                      type: string
+                      format: uuid
+                    linkPortIdxs:
+                      type: array
+                      items:
+                        type: integer
+                        format: int32
+                      minItems: 1
+                  required:
+                  - deviceId
+                  - linkPortIdxs
+                  - role
+                  title: IntegrationMcLagPeerDto
+              lags:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    members:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          deviceId:
+                            type: string
+                            format: uuid
+                          portIdxs:
+                            type: array
+                            items:
+                              type: integer
+                              format: int32
+                        required:
+                        - deviceId
+                        - portIdxs
+                        title: IntegrationLagMemberDto
+                    metadata:
+                      allOf:
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                            DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                            ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: Entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: User or system defined entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: User defined or derived entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                            ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: User or system defined or orchestrated entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: User or orchestrated entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                            ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: User or derived or orchestrated entity metadata
+                      - discriminator:
+                          propertyName: origin
+                          mapping:
+                            USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                            DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                        properties:
+                          origin:
+                            type: string
+                        required:
+                        - origin
+                        title: Site-to-site VPN tunnel metadata
+                      title: User defined entity metadata
+                  required:
+                  - id
+                  - members
+                  - metadata
+                  title: IntegrationMcLagLocalDto
+              metadata:
+                allOf:
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User defined or derived entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or derived or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Site-to-site VPN tunnel metadata
+                title: User defined entity metadata
+            required:
+            - id
+            - lags
+            - metadata
+            - name
+            - peers
+            title: IntegrationMcLagDomainDto
+      required:
+      - count
+      - data
+      - limit
+      - offset
+      - totalCount
+    IntegrationMcLagLocalDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        members:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceId:
+                type: string
+                format: uuid
+              portIdxs:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+            required:
+            - deviceId
+            - portIdxs
+            title: IntegrationLagMemberDto
+        metadata:
+          allOf:
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User defined or derived entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or derived or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Site-to-site VPN tunnel metadata
+          title: User defined entity metadata
+      required:
+      - id
+      - members
+      - metadata
+    IntegrationMcLagPeerDto:
+      type: object
+      properties:
+        role:
+          type: string
+          enum:
+          - TOP
+          - BOTTOM
+        deviceId:
+          type: string
+          format: uuid
+        linkPortIdxs:
+          type: array
+          items:
+            type: integer
+            format: int32
+          minItems: 1
+      required:
+      - deviceId
+      - linkPortIdxs
+      - role
+    IntegrationLagPageDto:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          example: 25
+        count:
+          type: integer
+          format: int32
+          example: 10
+        totalCount:
+          type: integer
+          format: int64
+          example: 1000
+        data:
+          type: array
+          items:
+            type: object
+            discriminator:
+              propertyName: type
+              mapping:
+                LOCAL: '#/components/schemas/IntegrationLocalLagGlobalDto'
+                SWITCH_STACK: '#/components/schemas/IntegrationSwitchStackLagGlobalDto'
+                MULTI_CHASSIS: '#/components/schemas/IntegrationMcLagGlobalDto'
+            properties:
+              type:
+                type: string
+              id:
+                type: string
+                format: uuid
+              members:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    deviceId:
+                      type: string
+                      format: uuid
+                    portIdxs:
+                      type: array
+                      items:
+                        type: integer
+                        format: int32
+                  required:
+                  - deviceId
+                  - portIdxs
+                  title: IntegrationLagMemberDto
+              metadata:
+                allOf:
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User defined or derived entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or system defined or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                      ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: User or derived or orchestrated entity metadata
+                - discriminator:
+                    propertyName: origin
+                    mapping:
+                      USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                      DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+                  properties:
+                    origin:
+                      type: string
+                  required:
+                  - origin
+                  title: Site-to-site VPN tunnel metadata
+                title: User defined entity metadata
+            required:
+            - id
+            - members
+            - metadata
+            - type
+            title: LAG details
+      required:
+      - count
+      - data
+      - limit
+      - offset
+      - totalCount
+    IntegrationLocalLagGlobalDto:
+      allOf:
+      - type: object
+        discriminator:
+          propertyName: type
+          mapping:
+            LOCAL: '#/components/schemas/IntegrationLocalLagGlobalDto'
+            SWITCH_STACK: '#/components/schemas/IntegrationSwitchStackLagGlobalDto'
+            MULTI_CHASSIS: '#/components/schemas/IntegrationMcLagGlobalDto'
+        properties:
+          type:
+            type: string
+          id:
+            type: string
+            format: uuid
+          members:
+            type: array
+            items:
+              type: object
+              properties:
+                deviceId:
+                  type: string
+                  format: uuid
+                portIdxs:
+                  type: array
+                  items:
+                    type: integer
+                    format: int32
+              required:
+              - deviceId
+              - portIdxs
+              title: IntegrationLagMemberDto
+          metadata:
+            allOf:
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: Entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or system defined entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/DerivedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User defined or derived entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or system defined or orchestrated entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or orchestrated entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or derived or orchestrated entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: Site-to-site VPN tunnel metadata
+            title: User defined entity metadata
+        required:
+        - id
+        - members
+        - metadata
+        - type
+        title: LAG details
+      required:
+      - id
+      - members
+      - metadata
+    IntegrationMcLagGlobalDto:
+      allOf:
+      - type: object
+        discriminator:
+          propertyName: type
+          mapping:
+            LOCAL: '#/components/schemas/IntegrationLocalLagGlobalDto'
+            SWITCH_STACK: '#/components/schemas/IntegrationSwitchStackLagGlobalDto'
+            MULTI_CHASSIS: '#/components/schemas/IntegrationMcLagGlobalDto'
+        properties:
+          type:
+            type: string
+          id:
+            type: string
+            format: uuid
+          members:
+            type: array
+            items:
+              type: object
+              properties:
+                deviceId:
+                  type: string
+                  format: uuid
+                portIdxs:
+                  type: array
+                  items:
+                    type: integer
+                    format: int32
+              required:
+              - deviceId
+              - portIdxs
+              title: IntegrationLagMemberDto
+          metadata:
+            allOf:
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: Entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or system defined entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/DerivedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User defined or derived entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or system defined or orchestrated entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or orchestrated entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or derived or orchestrated entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: Site-to-site VPN tunnel metadata
+            title: User defined entity metadata
+        required:
+        - id
+        - members
+        - metadata
+        - type
+        title: LAG details
+      - type: object
+        properties:
+          mcLagDomainId:
+            type: string
+            format: uuid
+      required:
+      - id
+      - mcLagDomainId
+      - members
+      - metadata
+    IntegrationSwitchStackLagGlobalDto:
+      allOf:
+      - type: object
+        discriminator:
+          propertyName: type
+          mapping:
+            LOCAL: '#/components/schemas/IntegrationLocalLagGlobalDto'
+            SWITCH_STACK: '#/components/schemas/IntegrationSwitchStackLagGlobalDto'
+            MULTI_CHASSIS: '#/components/schemas/IntegrationMcLagGlobalDto'
+        properties:
+          type:
+            type: string
+          id:
+            type: string
+            format: uuid
+          members:
+            type: array
+            items:
+              type: object
+              properties:
+                deviceId:
+                  type: string
+                  format: uuid
+                portIdxs:
+                  type: array
+                  items:
+                    type: integer
+                    format: int32
+              required:
+              - deviceId
+              - portIdxs
+              title: IntegrationLagMemberDto
+          metadata:
+            allOf:
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: Entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or system defined entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/DerivedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User defined or derived entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or system defined or orchestrated entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or orchestrated entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                  ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: User or derived or orchestrated entity metadata
+            - discriminator:
+                propertyName: origin
+                mapping:
+                  USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                  DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+              properties:
+                origin:
+                  type: string
+              required:
+              - origin
+              title: Site-to-site VPN tunnel metadata
+            title: User defined entity metadata
+        required:
+        - id
+        - members
+        - metadata
+        - type
+        title: LAG details
+      - type: object
+        properties:
+          switchStackId:
+            type: string
+            format: uuid
+      required:
+      - id
+      - members
+      - metadata
+      - switchStackId
+    LAGDetails:
+      type: object
+      discriminator:
+        propertyName: type
+        mapping:
+          LOCAL: '#/components/schemas/IntegrationLocalLagGlobalDto'
+          SWITCH_STACK: '#/components/schemas/IntegrationSwitchStackLagGlobalDto'
+          MULTI_CHASSIS: '#/components/schemas/IntegrationMcLagGlobalDto'
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+          format: uuid
+        members:
+          type: array
+          items:
+            type: object
+            properties:
+              deviceId:
+                type: string
+                format: uuid
+              portIdxs:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+            required:
+            - deviceId
+            - portIdxs
+            title: IntegrationLagMemberDto
+        metadata:
+          allOf:
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User defined or derived entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or system defined or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/DerivedEntityMetadata'
+                ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: User or derived or orchestrated entity metadata
+          - discriminator:
+              propertyName: origin
+              mapping:
+                USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
+                DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
+            properties:
+              origin:
+                type: string
+            required:
+            - origin
+            title: Site-to-site VPN tunnel metadata
+          title: User defined entity metadata
+      required:
+      - id
+      - members
+      - metadata
+      - type
     RadiusProfileOverview:
       type: object
       properties:
@@ -24202,15 +28346,6 @@ components:
                 - CONTAINS_ALL
                 - CONTAINS_EXACTLY
               uniqueItems: true
-            valueType:
-              type: string
-              enum:
-              - STRING
-              - INTEGER
-              - DECIMAL
-              - UUID
-              - TIMESTAMP
-              - BOOLEAN
             supportedFunctions:
               type: array
               items:
@@ -24233,6 +28368,15 @@ components:
                 - CONTAINS_ALL
                 - CONTAINS_EXACTLY
               uniqueItems: true
+            valueType:
+              type: string
+              enum:
+              - STRING
+              - INTEGER
+              - DECIMAL
+              - UUID
+              - TIMESTAMP
+              - BOOLEAN
           title: FilterablePropertyType
         title: ScalarType
     CompoundFilterExpression:
@@ -24276,15 +28420,6 @@ components:
                 - CONTAINS_ALL
                 - CONTAINS_EXACTLY
               uniqueItems: true
-            valueType:
-              type: string
-              enum:
-              - STRING
-              - INTEGER
-              - DECIMAL
-              - UUID
-              - TIMESTAMP
-              - BOOLEAN
             supportedFunctions:
               type: array
               items:
@@ -24307,6 +28442,15 @@ components:
                 - CONTAINS_ALL
                 - CONTAINS_EXACTLY
               uniqueItems: true
+            valueType:
+              type: string
+              enum:
+              - STRING
+              - INTEGER
+              - DECIMAL
+              - UUID
+              - TIMESTAMP
+              - BOOLEAN
           title: FilterablePropertyType
         title: ScalarType
     FilterExpression: {}
@@ -24384,15 +28528,6 @@ components:
                       - CONTAINS_ALL
                       - CONTAINS_EXACTLY
                     uniqueItems: true
-                  valueType:
-                    type: string
-                    enum:
-                    - STRING
-                    - INTEGER
-                    - DECIMAL
-                    - UUID
-                    - TIMESTAMP
-                    - BOOLEAN
                   supportedFunctions:
                     type: array
                     items:
@@ -24415,6 +28550,15 @@ components:
                       - CONTAINS_ALL
                       - CONTAINS_EXACTLY
                     uniqueItems: true
+                  valueType:
+                    type: string
+                    enum:
+                    - STRING
+                    - INTEGER
+                    - DECIMAL
+                    - UUID
+                    - TIMESTAMP
+                    - BOOLEAN
                 title: FilterablePropertyType
               name:
                 type: string
@@ -24466,15 +28610,6 @@ components:
                 - CONTAINS_ALL
                 - CONTAINS_EXACTLY
               uniqueItems: true
-            valueType:
-              type: string
-              enum:
-              - STRING
-              - INTEGER
-              - DECIMAL
-              - UUID
-              - TIMESTAMP
-              - BOOLEAN
             supportedFunctions:
               type: array
               items:
@@ -24497,6 +28632,15 @@ components:
                 - CONTAINS_ALL
                 - CONTAINS_EXACTLY
               uniqueItems: true
+            valueType:
+              type: string
+              enum:
+              - STRING
+              - INTEGER
+              - DECIMAL
+              - UUID
+              - TIMESTAMP
+              - BOOLEAN
           title: FilterablePropertyType
         name:
           type: string
@@ -24504,6 +28648,28 @@ components:
       type: object
       properties:
         allowedFunctions:
+          type: array
+          items:
+            type: string
+            enum:
+            - IS_NULL
+            - IS_NOT_NULL
+            - EQ
+            - NE
+            - GT
+            - GE
+            - LT
+            - LE
+            - LIKE
+            - IN
+            - NOT_IN
+            - IS_EMPTY
+            - CONTAINS
+            - CONTAINS_ANY
+            - CONTAINS_ALL
+            - CONTAINS_EXACTLY
+          uniqueItems: true
+        supportedFunctions:
           type: array
           items:
             type: string
@@ -24534,34 +28700,34 @@ components:
           - UUID
           - TIMESTAMP
           - BOOLEAN
-        supportedFunctions:
-          type: array
-          items:
-            type: string
-            enum:
-            - IS_NULL
-            - IS_NOT_NULL
-            - EQ
-            - NE
-            - GT
-            - GE
-            - LT
-            - LE
-            - LIKE
-            - IN
-            - NOT_IN
-            - IS_EMPTY
-            - CONTAINS
-            - CONTAINS_ANY
-            - CONTAINS_ALL
-            - CONTAINS_EXACTLY
-          uniqueItems: true
     IntegerType:
       allOf:
       - allOf:
         - type: object
           properties:
             allowedFunctions:
+              type: array
+              items:
+                type: string
+                enum:
+                - IS_NULL
+                - IS_NOT_NULL
+                - EQ
+                - NE
+                - GT
+                - GE
+                - LT
+                - LE
+                - LIKE
+                - IN
+                - NOT_IN
+                - IS_EMPTY
+                - CONTAINS
+                - CONTAINS_ANY
+                - CONTAINS_ALL
+                - CONTAINS_EXACTLY
+              uniqueItems: true
+            supportedFunctions:
               type: array
               items:
                 type: string
@@ -24592,28 +28758,6 @@ components:
               - UUID
               - TIMESTAMP
               - BOOLEAN
-            supportedFunctions:
-              type: array
-              items:
-                type: string
-                enum:
-                - IS_NULL
-                - IS_NOT_NULL
-                - EQ
-                - NE
-                - GT
-                - GE
-                - LT
-                - LE
-                - LIKE
-                - IN
-                - NOT_IN
-                - IS_EMPTY
-                - CONTAINS
-                - CONTAINS_ANY
-                - CONTAINS_ALL
-                - CONTAINS_EXACTLY
-              uniqueItems: true
           title: FilterablePropertyType
         title: ScalarType
     NotFilterExpression:
@@ -24688,15 +28832,6 @@ components:
                             - CONTAINS_ALL
                             - CONTAINS_EXACTLY
                           uniqueItems: true
-                        valueType:
-                          type: string
-                          enum:
-                          - STRING
-                          - INTEGER
-                          - DECIMAL
-                          - UUID
-                          - TIMESTAMP
-                          - BOOLEAN
                         supportedFunctions:
                           type: array
                           items:
@@ -24719,6 +28854,15 @@ components:
                             - CONTAINS_ALL
                             - CONTAINS_EXACTLY
                           uniqueItems: true
+                        valueType:
+                          type: string
+                          enum:
+                          - STRING
+                          - INTEGER
+                          - DECIMAL
+                          - UUID
+                          - TIMESTAMP
+                          - BOOLEAN
                       title: FilterablePropertyType
                     name:
                       type: string
@@ -24771,15 +28915,6 @@ components:
                       - CONTAINS_ALL
                       - CONTAINS_EXACTLY
                     uniqueItems: true
-                  valueType:
-                    type: string
-                    enum:
-                    - STRING
-                    - INTEGER
-                    - DECIMAL
-                    - UUID
-                    - TIMESTAMP
-                    - BOOLEAN
                   supportedFunctions:
                     type: array
                     items:
@@ -24802,6 +28937,15 @@ components:
                       - CONTAINS_ALL
                       - CONTAINS_EXACTLY
                     uniqueItems: true
+                  valueType:
+                    type: string
+                    enum:
+                    - STRING
+                    - INTEGER
+                    - DECIMAL
+                    - UUID
+                    - TIMESTAMP
+                    - BOOLEAN
                 title: FilterablePropertyType
               name:
                 type: string
@@ -24854,15 +28998,6 @@ components:
               - CONTAINS_ALL
               - CONTAINS_EXACTLY
             uniqueItems: true
-          valueType:
-            type: string
-            enum:
-            - STRING
-            - INTEGER
-            - DECIMAL
-            - UUID
-            - TIMESTAMP
-            - BOOLEAN
           supportedFunctions:
             type: array
             items:
@@ -24885,6 +29020,15 @@ components:
               - CONTAINS_ALL
               - CONTAINS_EXACTLY
             uniqueItems: true
+          valueType:
+            type: string
+            enum:
+            - STRING
+            - INTEGER
+            - DECIMAL
+            - UUID
+            - TIMESTAMP
+            - BOOLEAN
         title: FilterablePropertyType
     SetType:
       allOf:
@@ -24912,15 +29056,6 @@ components:
               - CONTAINS_ALL
               - CONTAINS_EXACTLY
             uniqueItems: true
-          valueType:
-            type: string
-            enum:
-            - STRING
-            - INTEGER
-            - DECIMAL
-            - UUID
-            - TIMESTAMP
-            - BOOLEAN
           supportedFunctions:
             type: array
             items:
@@ -24943,6 +29078,15 @@ components:
               - CONTAINS_ALL
               - CONTAINS_EXACTLY
             uniqueItems: true
+          valueType:
+            type: string
+            enum:
+            - STRING
+            - INTEGER
+            - DECIMAL
+            - UUID
+            - TIMESTAMP
+            - BOOLEAN
         title: FilterablePropertyType
     StringType:
       allOf:
@@ -24950,6 +29094,28 @@ components:
         - type: object
           properties:
             allowedFunctions:
+              type: array
+              items:
+                type: string
+                enum:
+                - IS_NULL
+                - IS_NOT_NULL
+                - EQ
+                - NE
+                - GT
+                - GE
+                - LT
+                - LE
+                - LIKE
+                - IN
+                - NOT_IN
+                - IS_EMPTY
+                - CONTAINS
+                - CONTAINS_ANY
+                - CONTAINS_ALL
+                - CONTAINS_EXACTLY
+              uniqueItems: true
+            supportedFunctions:
               type: array
               items:
                 type: string
@@ -24980,28 +29146,6 @@ components:
               - UUID
               - TIMESTAMP
               - BOOLEAN
-            supportedFunctions:
-              type: array
-              items:
-                type: string
-                enum:
-                - IS_NULL
-                - IS_NOT_NULL
-                - EQ
-                - NE
-                - GT
-                - GE
-                - LT
-                - LE
-                - LIKE
-                - IN
-                - NOT_IN
-                - IS_EMPTY
-                - CONTAINS
-                - CONTAINS_ANY
-                - CONTAINS_ALL
-                - CONTAINS_EXACTLY
-              uniqueItems: true
           title: FilterablePropertyType
         title: ScalarType
     TimestampType:
@@ -25031,15 +29175,6 @@ components:
                 - CONTAINS_ALL
                 - CONTAINS_EXACTLY
               uniqueItems: true
-            valueType:
-              type: string
-              enum:
-              - STRING
-              - INTEGER
-              - DECIMAL
-              - UUID
-              - TIMESTAMP
-              - BOOLEAN
             supportedFunctions:
               type: array
               items:
@@ -25062,6 +29197,15 @@ components:
                 - CONTAINS_ALL
                 - CONTAINS_EXACTLY
               uniqueItems: true
+            valueType:
+              type: string
+              enum:
+              - STRING
+              - INTEGER
+              - DECIMAL
+              - UUID
+              - TIMESTAMP
+              - BOOLEAN
           title: FilterablePropertyType
         title: ScalarType
     UUIDType:
@@ -25091,15 +29235,6 @@ components:
                 - CONTAINS_ALL
                 - CONTAINS_EXACTLY
               uniqueItems: true
-            valueType:
-              type: string
-              enum:
-              - STRING
-              - INTEGER
-              - DECIMAL
-              - UUID
-              - TIMESTAMP
-              - BOOLEAN
             supportedFunctions:
               type: array
               items:
@@ -25122,6 +29257,15 @@ components:
                 - CONTAINS_ALL
                 - CONTAINS_EXACTLY
               uniqueItems: true
+            valueType:
+              type: string
+              enum:
+              - STRING
+              - INTEGER
+              - DECIMAL
+              - UUID
+              - TIMESTAMP
+              - BOOLEAN
           title: FilterablePropertyType
         title: ScalarType
     DeviceTag:

@@ -3,9 +3,14 @@ info:
   title: UniFi Network API
   description: ''
   license: {}
-  version: 9.4.17
+  version: 9.3.45
 servers:
-- url: /integration
+- url: https://{host}/proxy/network/integration
+  description: Local (direct access)
+  variables:
+    host:
+      default: 192.168.1.1
+      description: IP address or hostname of the UniFi console
 tags:
 - name: Getting Started
   description: '### Introduction

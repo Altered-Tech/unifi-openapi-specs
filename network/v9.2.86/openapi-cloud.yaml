@@ -7,7 +7,12 @@ info:
   license: {}
   version: 9.2.86
 servers:
-- url: /integration
+- url: https://api.ui.com/v1/connector/consoles/{consoleId}/proxy/network/integration
+  description: Cloud connector
+  variables:
+    consoleId:
+      default: ''
+      description: Console Host ID
 tags:
 - name: Generic information
   description: $1b

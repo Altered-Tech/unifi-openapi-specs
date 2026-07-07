@@ -3,9 +3,14 @@ info:
   title: UniFi Network API
   description: ''
   license: {}
-  version: 9.4.19
+  version: 9.4.17
 servers:
-- url: /integration
+- url: https://api.ui.com/v1/connector/consoles/{consoleId}/proxy/network/integration
+  description: Cloud connector
+  variables:
+    consoleId:
+      default: ''
+      description: Console Host ID
 tags:
 - name: Getting Started
   description: '### Introduction

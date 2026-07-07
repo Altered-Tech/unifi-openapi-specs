@@ -5,7 +5,12 @@ info:
   license: {}
   version: 10.0.162
 servers:
-- url: /integration
+- url: https://api.ui.com/v1/connector/consoles/{consoleId}/proxy/network/integration
+  description: Cloud connector
+  variables:
+    consoleId:
+      default: ''
+      description: Console Host ID
 tags:
 - name: Getting Started
   description: "Provides an overview of the UniFi Network API, including authentication\

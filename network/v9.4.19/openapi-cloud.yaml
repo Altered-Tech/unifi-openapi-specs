@@ -1,16 +1,47 @@
 openapi: 3.1.0
 info:
   title: UniFi Network API
-  description: The API provides powerful tools to manage Sites, Devices, and Clients,
-    offering access to detailed configuration, real-time status, and live statistics.
-    It supports insights for WiFi, Wired, and VPN clients, including connection details.
+  description: ''
   license: {}
-  version: 9.2.87
+  version: 9.4.19
 servers:
-- url: /integration
+- url: https://api.ui.com/v1/connector/consoles/{consoleId}/proxy/network/integration
+  description: Cloud connector
+  variables:
+    consoleId:
+      default: ''
+      description: Console Host ID
 tags:
-- name: Generic information
+- name: Getting Started
+  description: '### Introduction
+
+
+    Each UniFi Application has its own API endpoints running locally on each site,
+
+    offering detailed analytics and control related to that specific application.
+
+    For a single endpoint with high-level insights across all your UniFi sites,
+
+    refer to the [UniFi Site Manager API](https://developer.ui.com).
+
+
+    ### Authentication and Request Format
+
+
+    An API Key is a unique identifier used to authenticate API requests.
+
+    To generate API Keys and view an example of the API Request Format,
+
+    visit the Integrations section of your UniFi application.'
+- name: Filtering
   description: $1b
+- name: Errors
+  description: 'All endpoints use the same generic error message format:'
+- name: About Application
+- name: Sites
+- name: UniFi Devices
+- name: Clients
+- name: Hotspot Vouchers
 paths:
   /v1/sites/{siteId}/hotspot/vouchers:
     get:
@@ -1397,7 +1428,7 @@ paths:
   /v1/info:
     get:
       tags:
-      - About application
+      - About Application
       summary: Get Application Info
       description: Retrieve general information about the UniFi Network application.
       operationId: getInfo
@@ -1416,8 +1447,7 @@ paths:
                 title: Application info
 components:
   schemas:
-    ErrorResponse:
-      description: This generic error message format is used across all endpoints.
+    ErrorMessage:
       properties:
         statusCode:
           type: integer
@@ -1442,7 +1472,7 @@ components:
           description: In case of Internal Server Error (core = 500), request ID can
             be used to track down the error in the server log
           example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-      x-tags: Generic information
+      x-tags: Errors
     HotspotVoucherCreationRequest:
       properties:
         count:
