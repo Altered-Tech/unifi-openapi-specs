@@ -4,6 +4,8 @@ Community-maintained OpenAPI specs for UniFi APIs (Site Manager, Network, Protec
 
 [![Scrape UniFi API Docs](https://github.com/Altered-Tech/unifi-openapi-specs/actions/workflows/scrape.yml/badge.svg)](https://github.com/Altered-Tech/unifi-openapi-specs/actions/workflows/scrape.yml)
 
+**[Browse interactive API docs →](https://altered-tech.github.io/unifi-openapi-specs/)**
+
 ---
 
 ## Available Specs
