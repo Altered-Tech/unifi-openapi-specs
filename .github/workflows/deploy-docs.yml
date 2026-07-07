@@ -73,9 +73,13 @@ jobs:
           ordered_products = [p for p in product_order if p in products] + \
                              [p for p in sorted(products) if p not in product_order]
 
+          def version_key(v):
+              import re
+              return tuple(int(x) for x in re.findall(r'\d+', v))
+
           cards_html = ""
           for product in ordered_products:
-              versions = sorted(products[product].keys(), reverse=True)
+              versions = sorted(products[product].keys(), key=version_key, reverse=True)
               version_rows = ""
               for version in versions:
                   specs = products[product][version]
