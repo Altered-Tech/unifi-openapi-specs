@@ -497,12 +497,9 @@ paths:
                 propertyName: action
                 mapping:
                   POWER_CYCLE: '#/components/schemas/PortPoEPowerCycleRequest'
-              properties:
-                action:
-                  type: string
-              required:
-              - action
               title: Port action request
+              oneOf:
+              - $ref: '#/components/schemas/PortPoEPowerCycleRequest'
         required: true
       responses:
         '200':
@@ -536,12 +533,9 @@ paths:
                 propertyName: action
                 mapping:
                   RESTART: '#/components/schemas/DeviceRestartRequest'
-              properties:
-                action:
-                  type: string
-              required:
-              - action
               title: Device action request
+              oneOf:
+              - $ref: '#/components/schemas/DeviceRestartRequest'
         required: true
       responses:
         '200':
@@ -576,12 +570,10 @@ paths:
                 mapping:
                   AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationRequest'
                   UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationRequest'
-              properties:
-                action:
-                  type: string
-              required:
-              - action
               title: Client action request
+              oneOf:
+              - $ref: '#/components/schemas/GuestAccessAuthorizationRequest'
+              - $ref: '#/components/schemas/GuestAccessUnauthorizationRequest'
         required: true
       responses:
         '200':
@@ -594,12 +586,10 @@ paths:
                   mapping:
                     AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationResponse'
                     UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationResponse'
-                properties:
-                  action:
-                    type: string
-                required:
-                - action
                 title: Client action response
+                oneOf:
+                - $ref: '#/components/schemas/GuestAccessAuthorizationResponse'
+                - $ref: '#/components/schemas/GuestAccessUnauthorizationResponse'
   /v1/sites:
     get:
       tags:
@@ -1695,21 +1685,15 @@ components:
         propertyName: action
         mapping:
           POWER_CYCLE: '#/components/schemas/PortPoEPowerCycleRequest'
-      properties:
-        action:
-          type: string
-      required:
-      - action
+      oneOf:
+      - $ref: '#/components/schemas/PortPoEPowerCycleRequest'
     DeviceActionRequest:
       discriminator:
         propertyName: action
         mapping:
           RESTART: '#/components/schemas/DeviceRestartRequest'
-      properties:
-        action:
-          type: string
-      required:
-      - action
+      oneOf:
+      - $ref: '#/components/schemas/DeviceRestartRequest'
     DeviceRestartRequest:
       allOf:
       - discriminator:
@@ -1728,11 +1712,9 @@ components:
         mapping:
           AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationRequest'
           UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationRequest'
-      properties:
-        action:
-          type: string
-      required:
-      - action
+      oneOf:
+      - $ref: '#/components/schemas/GuestAccessAuthorizationRequest'
+      - $ref: '#/components/schemas/GuestAccessUnauthorizationRequest'
     GuestAccessAuthorizationRequest:
       allOf:
       - discriminator:
@@ -1802,11 +1784,9 @@ components:
         mapping:
           AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationResponse'
           UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationResponse'
-      properties:
-        action:
-          type: string
-      required:
-      - action
+      oneOf:
+      - $ref: '#/components/schemas/GuestAccessAuthorizationResponse'
+      - $ref: '#/components/schemas/GuestAccessUnauthorizationResponse'
     GuestAccessAuthorizationResponse:
       allOf:
       - discriminator:
@@ -3135,11 +3115,9 @@ components:
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
           GUEST: '#/components/schemas/GuestAccessOverview'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessOverview'
+      - $ref: '#/components/schemas/GuestAccessOverview'
     TeleportClientConnectionOverview:
       allOf:
       - discriminator:
@@ -3190,12 +3168,9 @@ components:
               propertyName: type
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Teleport client access overview
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessOverview'
       required:
       - access
       - id
@@ -3215,11 +3190,8 @@ components:
         propertyName: type
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessOverview'
     VPNClientConnectionOverview:
       allOf:
       - discriminator:
@@ -3270,12 +3242,9 @@ components:
               propertyName: type
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: VPN client access overview
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessOverview'
       required:
       - access
       - id
@@ -3295,11 +3264,8 @@ components:
         propertyName: type
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessOverview'
     WiredClientOverview:
       allOf:
       - discriminator:
@@ -3356,12 +3322,10 @@ components:
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
                 GUEST: '#/components/schemas/GuestAccessOverview'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Local client access overview
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessOverview'
+            - $ref: '#/components/schemas/GuestAccessOverview'
       required:
       - access
       - id
@@ -3424,12 +3388,10 @@ components:
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
                 GUEST: '#/components/schemas/GuestAccessOverview'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Local client access overview
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessOverview'
+            - $ref: '#/components/schemas/GuestAccessOverview'
       required:
       - access
       - id
@@ -3632,11 +3594,9 @@ components:
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
           GUEST: '#/components/schemas/GuestAccessDetails'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessDetails'
+      - $ref: '#/components/schemas/GuestAccessDetails'
     TeleportClientConnectionDetails:
       properties:
         id:
@@ -3665,12 +3625,9 @@ components:
             propertyName: type
             mapping:
               DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Teleport client access details
+          oneOf:
+          - $ref: '#/components/schemas/DefaultClientAccessDetails'
       required:
       - access
       - id
@@ -3690,11 +3647,8 @@ components:
         propertyName: type
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessDetails'
     VPNClientConnectionDetails:
       allOf:
       - discriminator:
@@ -3742,12 +3696,9 @@ components:
               propertyName: type
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: VPN client access details
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessDetails'
       required:
       - access
       - id
@@ -3767,11 +3718,8 @@ components:
         propertyName: type
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessDetails'
     WiredClientDetails:
       allOf:
       - discriminator:
@@ -3825,12 +3773,10 @@ components:
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
                 GUEST: '#/components/schemas/GuestAccessDetails'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Local client access details
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessDetails'
+            - $ref: '#/components/schemas/GuestAccessDetails'
       required:
       - access
       - id
@@ -3890,12 +3836,10 @@ components:
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
                 GUEST: '#/components/schemas/GuestAccessDetails'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Local client access details
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessDetails'
+            - $ref: '#/components/schemas/GuestAccessDetails'
       required:
       - access
       - id

@@ -128,12 +128,11 @@ paths:
                         USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                         DERIVED: '#/components/schemas/DerivedEntityMetadata'
                         ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: User or derived or orchestrated entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/DerivedEntityMetadata'
+                    - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                   enabled:
                     type: boolean
                   network:
@@ -142,12 +141,10 @@ paths:
                       mapping:
                         NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                         SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-                    properties:
-                      type:
-                        type: string
-                    required:
-                    - type
                     title: Wifi network reference
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+                    - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
                   securityConfiguration:
                     discriminator:
                       propertyName: type
@@ -175,36 +172,30 @@ paths:
                       mapping:
                         DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                         DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-                    properties:
-                      type:
-                        type: string
-                    required:
-                    - type
                     title: Broadcasting device filter
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+                    - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
                   mdnsProxyConfiguration:
                     discriminator:
                       propertyName: mode
                       mapping:
                         AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
                         CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-                    properties:
-                      mode:
-                        type: string
-                    required:
-                    - mode
                     title: mDNS filtering configuration
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+                    - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
                   multicastFilteringPolicy:
                     discriminator:
                       propertyName: action
                       mapping:
                         ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
                         BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-                    properties:
-                      action:
-                        type: string
-                    required:
-                    - action
                     title: Multicast filtering policy
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+                    - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
                   multicastToUnicastConversionEnabled:
                     type: boolean
                   clientIsolationEnabled:
@@ -345,12 +336,10 @@ paths:
                     mapping:
                       NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                       SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-                  properties:
-                    type:
-                      type: string
-                  required:
-                  - type
                   title: Wifi network reference
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+                  - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
                 enabled:
                   type: boolean
                 securityConfiguration:
@@ -380,36 +369,30 @@ paths:
                     mapping:
                       DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                       DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-                  properties:
-                    type:
-                      type: string
-                  required:
-                  - type
                   title: Broadcasting device filter
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+                  - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
                 mdnsProxyConfiguration:
                   discriminator:
                     propertyName: mode
                     mapping:
                       AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
                       CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-                  properties:
-                    mode:
-                      type: string
-                  required:
-                  - mode
                   title: mDNS filtering configuration
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+                  - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
                 multicastFilteringPolicy:
                   discriminator:
                     propertyName: action
                     mapping:
                       ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
                       BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-                  properties:
-                    action:
-                      type: string
-                  required:
-                  - action
                   title: Multicast filtering policy
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+                  - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
                 multicastToUnicastConversionEnabled:
                   type: boolean
                 clientIsolationEnabled:
@@ -536,12 +519,11 @@ paths:
                         USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                         DERIVED: '#/components/schemas/DerivedEntityMetadata'
                         ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: User or derived or orchestrated entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/DerivedEntityMetadata'
+                    - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                   enabled:
                     type: boolean
                   network:
@@ -550,12 +532,10 @@ paths:
                       mapping:
                         NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                         SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-                    properties:
-                      type:
-                        type: string
-                    required:
-                    - type
                     title: Wifi network reference
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+                    - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
                   securityConfiguration:
                     discriminator:
                       propertyName: type
@@ -583,36 +563,30 @@ paths:
                       mapping:
                         DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                         DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-                    properties:
-                      type:
-                        type: string
-                    required:
-                    - type
                     title: Broadcasting device filter
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+                    - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
                   mdnsProxyConfiguration:
                     discriminator:
                       propertyName: mode
                       mapping:
                         AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
                         CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-                    properties:
-                      mode:
-                        type: string
-                    required:
-                    - mode
                     title: mDNS filtering configuration
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+                    - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
                   multicastFilteringPolicy:
                     discriminator:
                       propertyName: action
                       mapping:
                         ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
                         BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-                    properties:
-                      action:
-                        type: string
-                    required:
-                    - action
                     title: Multicast filtering policy
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+                    - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
                   multicastToUnicastConversionEnabled:
                     type: boolean
                   clientIsolationEnabled:
@@ -934,12 +908,11 @@ paths:
                         USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                         SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                         ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: User or system defined or orchestrated entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                   dhcpGuarding:
                     description: DHCP Guarding settings for this Network. If this
                       field is omitted or null, the feature is disabled
@@ -1059,12 +1032,11 @@ paths:
                         USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                         SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                         ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: User or system defined or orchestrated entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                   dhcpGuarding:
                     description: DHCP Guarding settings for this Network. If this
                       field is omitted or null, the feature is disabled
@@ -1169,12 +1141,10 @@ paths:
                       mapping:
                         USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                         SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: User or system defined entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
                 required:
                 - id
                 - metadata
@@ -1249,12 +1219,10 @@ paths:
                       mapping:
                         USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                         SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: User or system defined entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
                 required:
                 - id
                 - metadata
@@ -1343,12 +1311,9 @@ paths:
                       propertyName: type
                       mapping:
                         DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-                    properties:
-                      type:
-                        type: string
-                    required:
-                    - type
                     title: ACL rule device filter
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
                   index:
                     type: integer
                     format: int32
@@ -1367,12 +1332,12 @@ paths:
                         SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                         DERIVED: '#/components/schemas/DerivedEntityMetadata'
                         ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: Entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/DerivedEntityMetadata'
+                    - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                 required:
                 - action
                 - enabled
@@ -1437,12 +1402,9 @@ paths:
                     propertyName: type
                     mapping:
                       DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-                  properties:
-                    type:
-                      type: string
-                  required:
-                  - type
                   title: ACL rule device filter
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
                 index:
                   type: integer
                   format: int32
@@ -1501,12 +1463,9 @@ paths:
                       propertyName: type
                       mapping:
                         DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-                    properties:
-                      type:
-                        type: string
-                    required:
-                    - type
                     title: ACL rule device filter
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
                   index:
                     type: integer
                     format: int32
@@ -1525,12 +1484,12 @@ paths:
                         SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                         DERIVED: '#/components/schemas/DerivedEntityMetadata'
                         ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: Entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/DerivedEntityMetadata'
+                    - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                 required:
                 - action
                 - enabled
@@ -1644,24 +1603,21 @@ paths:
                               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                               DERIVED: '#/components/schemas/DerivedEntityMetadata'
                               ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                          properties:
-                            origin:
-                              type: string
-                          required:
-                          - origin
                           title: User or derived or orchestrated entity metadata
+                          oneOf:
+                          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                          - $ref: '#/components/schemas/DerivedEntityMetadata'
+                          - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                         network:
                           discriminator:
                             propertyName: type
                             mapping:
                               NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                               SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-                          properties:
-                            type:
-                              type: string
-                          required:
-                          - type
                           title: Wifi network reference
+                          oneOf:
+                          - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+                          - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
                         securityConfiguration:
                           discriminator:
                             propertyName: type
@@ -1673,12 +1629,15 @@ paths:
                               WPA2_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
                               WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
                               WPA2_WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
-                          properties:
-                            type:
-                              type: string
-                          required:
-                          - type
                           title: Wifi security configuration overview
+                          oneOf:
+                          - $ref: '#/components/schemas/IntegrationWifiOpenSecurityConfigurationOverviewDto'
+                          - $ref: '#/components/schemas/IntegrationWifiWpa2PersonalSecurityConfigurationOverviewDto'
+                          - $ref: '#/components/schemas/IntegrationWifiWpa3PersonalSecurityConfigurationOverviewDto'
+                          - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3PersonalSecurityConfigurationOverviewDto'
+                          - $ref: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
+                          - $ref: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
+                          - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
                         broadcastingDeviceFilter:
                           description: Defines the custom scope of devices that will
                             broadcast this WiFi network. If null, the WiFi network
@@ -1688,12 +1647,10 @@ paths:
                             mapping:
                               DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                               DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-                          properties:
-                            type:
-                              type: string
-                          required:
-                          - type
                           title: Broadcasting device filter
+                          oneOf:
+                          - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+                          - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
                       required:
                       - enabled
                       - id
@@ -1742,12 +1699,10 @@ paths:
                     mapping:
                       NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                       SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-                  properties:
-                    type:
-                      type: string
-                  required:
-                  - type
                   title: Wifi network reference
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+                  - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
                 enabled:
                   type: boolean
                 securityConfiguration:
@@ -1777,36 +1732,30 @@ paths:
                     mapping:
                       DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                       DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-                  properties:
-                    type:
-                      type: string
-                  required:
-                  - type
                   title: Broadcasting device filter
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+                  - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
                 mdnsProxyConfiguration:
                   discriminator:
                     propertyName: mode
                     mapping:
                       AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
                       CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-                  properties:
-                    mode:
-                      type: string
-                  required:
-                  - mode
                   title: mDNS filtering configuration
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+                  - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
                 multicastFilteringPolicy:
                   discriminator:
                     propertyName: action
                     mapping:
                       ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
                       BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-                  properties:
-                    action:
-                      type: string
-                  required:
-                  - action
                   title: Multicast filtering policy
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+                  - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
                 multicastToUnicastConversionEnabled:
                   type: boolean
                 clientIsolationEnabled:
@@ -1933,12 +1882,11 @@ paths:
                         USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                         DERIVED: '#/components/schemas/DerivedEntityMetadata'
                         ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: User or derived or orchestrated entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/DerivedEntityMetadata'
+                    - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                   enabled:
                     type: boolean
                   network:
@@ -1947,12 +1895,10 @@ paths:
                       mapping:
                         NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                         SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-                    properties:
-                      type:
-                        type: string
-                    required:
-                    - type
                     title: Wifi network reference
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+                    - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
                   securityConfiguration:
                     discriminator:
                       propertyName: type
@@ -1980,36 +1926,30 @@ paths:
                       mapping:
                         DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                         DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-                    properties:
-                      type:
-                        type: string
-                    required:
-                    - type
                     title: Broadcasting device filter
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+                    - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
                   mdnsProxyConfiguration:
                     discriminator:
                       propertyName: mode
                       mapping:
                         AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
                         CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-                    properties:
-                      mode:
-                        type: string
-                    required:
-                    - mode
                     title: mDNS filtering configuration
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+                    - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
                   multicastFilteringPolicy:
                     discriminator:
                       propertyName: action
                       mapping:
                         ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
                         BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-                    properties:
-                      action:
-                        type: string
-                    required:
-                    - action
                     title: Multicast filtering policy
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+                    - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
                   multicastToUnicastConversionEnabled:
                     type: boolean
                   clientIsolationEnabled:
@@ -2392,12 +2332,11 @@ paths:
                               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                               SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                               ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                          properties:
-                            origin:
-                              type: string
-                          required:
-                          - origin
                           title: User or system defined or orchestrated entity metadata
+                          oneOf:
+                          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                          - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                          - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                       required:
                       - enabled
                       - id
@@ -2505,12 +2444,11 @@ paths:
                         USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                         SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                         ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: User or system defined or orchestrated entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                   dhcpGuarding:
                     description: DHCP Guarding settings for this Network. If this
                       field is omitted or null, the feature is disabled
@@ -3054,12 +2992,10 @@ paths:
                             mapping:
                               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                               SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
-                          properties:
-                            origin:
-                              type: string
-                          required:
-                          - origin
                           title: User or system defined entity metadata
+                          oneOf:
+                          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                          - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
                       required:
                       - id
                       - metadata
@@ -3135,12 +3071,10 @@ paths:
                       mapping:
                         USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                         SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: User or system defined entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
                 required:
                 - id
                 - metadata
@@ -3182,12 +3116,9 @@ paths:
                 propertyName: action
                 mapping:
                   POWER_CYCLE: '#/components/schemas/PortPoEPowerCycleRequest'
-              properties:
-                action:
-                  type: string
-              required:
-              - action
               title: Port action request
+              oneOf:
+              - $ref: '#/components/schemas/PortPoEPowerCycleRequest'
         required: true
       responses:
         '200':
@@ -3221,12 +3152,9 @@ paths:
                 propertyName: action
                 mapping:
                   RESTART: '#/components/schemas/DeviceRestartRequest'
-              properties:
-                action:
-                  type: string
-              required:
-              - action
               title: Device action request
+              oneOf:
+              - $ref: '#/components/schemas/DeviceRestartRequest'
         required: true
       responses:
         '200':
@@ -3261,12 +3189,10 @@ paths:
                 mapping:
                   AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationRequest'
                   UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationRequest'
-              properties:
-                action:
-                  type: string
-              required:
-              - action
               title: Client action request
+              oneOf:
+              - $ref: '#/components/schemas/GuestAccessAuthorizationRequest'
+              - $ref: '#/components/schemas/GuestAccessUnauthorizationRequest'
         required: true
       responses:
         '200':
@@ -3279,12 +3205,10 @@ paths:
                   mapping:
                     AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationResponse'
                     UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationResponse'
-                properties:
-                  action:
-                    type: string
-                required:
-                - action
                 title: Client action response
+                oneOf:
+                - $ref: '#/components/schemas/GuestAccessAuthorizationResponse'
+                - $ref: '#/components/schemas/GuestAccessUnauthorizationResponse'
   /v1/sites/{siteId}/acl-rules:
     get:
       tags:
@@ -3380,12 +3304,9 @@ paths:
                             propertyName: type
                             mapping:
                               DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-                          properties:
-                            type:
-                              type: string
-                          required:
-                          - type
                           title: ACL rule device filter
+                          oneOf:
+                          - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
                         index:
                           type: integer
                           format: int32
@@ -3404,12 +3325,12 @@ paths:
                               SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                               DERIVED: '#/components/schemas/DerivedEntityMetadata'
                               ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                          properties:
-                            origin:
-                              type: string
-                          required:
-                          - origin
                           title: Entity metadata
+                          oneOf:
+                          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                          - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                          - $ref: '#/components/schemas/DerivedEntityMetadata'
+                          - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                       required:
                       - action
                       - enabled
@@ -3475,12 +3396,9 @@ paths:
                     propertyName: type
                     mapping:
                       DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-                  properties:
-                    type:
-                      type: string
-                  required:
-                  - type
                   title: ACL rule device filter
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
                 index:
                   type: integer
                   format: int32
@@ -3539,12 +3457,9 @@ paths:
                       propertyName: type
                       mapping:
                         DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-                    properties:
-                      type:
-                        type: string
-                    required:
-                    - type
                     title: ACL rule device filter
+                    oneOf:
+                    - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
                   index:
                     type: integer
                     format: int32
@@ -3563,12 +3478,12 @@ paths:
                         SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                         DERIVED: '#/components/schemas/DerivedEntityMetadata'
                         ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                    properties:
-                      origin:
-                        type: string
-                    required:
-                    - origin
                     title: Entity metadata
+                    oneOf:
+                    - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                    - $ref: '#/components/schemas/DerivedEntityMetadata'
+                    - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                 required:
                 - action
                 - enabled
@@ -3853,12 +3768,10 @@ paths:
                             mapping:
                               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                               DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
-                          properties:
-                            origin:
-                              type: string
-                          required:
-                          - origin
                           title: Site-to-site VPN tunnel metadata
+                          oneOf:
+                          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                          - $ref: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
                       required:
                       - id
                       - metadata
@@ -3978,12 +3891,10 @@ paths:
                             mapping:
                               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                               DERIVED: '#/components/schemas/DerivedEntityMetadata'
-                          properties:
-                            origin:
-                              type: string
-                          required:
-                          - origin
                           title: User defined or derived entity metadata
+                          oneOf:
+                          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                          - $ref: '#/components/schemas/DerivedEntityMetadata'
                       required:
                       - enabled
                       - id
@@ -4090,12 +4001,11 @@ paths:
                               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                               SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                               DERIVED: '#/components/schemas/DerivedEntityMetadata'
-                          properties:
-                            origin:
-                              type: string
-                          required:
-                          - origin
                           title: User or system defined or derived entity metadata
+                          oneOf:
+                          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                          - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                          - $ref: '#/components/schemas/DerivedEntityMetadata'
                       required:
                       - id
                       - metadata
@@ -4875,12 +4785,10 @@ paths:
                             mapping:
                               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                               ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                          properties:
-                            origin:
-                              type: string
-                          required:
-                          - origin
                           title: User or orchestrated entity metadata
+                          oneOf:
+                          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                          - $ref: '#/components/schemas/OrchestratedEntityMetadata'
                       required:
                       - deviceIds
                       - id
@@ -5564,11 +5472,9 @@ components:
         mapping:
           DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
           DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+      - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
     IntegrationBlackoutScheduleConfiguration:
       properties:
         days:
@@ -5617,12 +5523,10 @@ components:
               mapping:
                 NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                 SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Wifi network reference
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+            - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
           enabled:
             type: boolean
           securityConfiguration:
@@ -5652,36 +5556,30 @@ components:
               mapping:
                 DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                 DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Broadcasting device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+            - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
           mdnsProxyConfiguration:
             discriminator:
               propertyName: mode
               mapping:
                 AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
                 CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-            properties:
-              mode:
-                type: string
-            required:
-            - mode
             title: mDNS filtering configuration
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+            - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
           multicastFilteringPolicy:
             discriminator:
               propertyName: action
               mapping:
                 ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
                 BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-            properties:
-              action:
-                type: string
-            required:
-            - action
             title: Multicast filtering policy
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+            - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
           multicastToUnicastConversionEnabled:
             type: boolean
           clientIsolationEnabled:
@@ -5807,12 +5705,10 @@ components:
               mapping:
                 NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                 SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Wifi network reference
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+            - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
           enabled:
             type: boolean
           securityConfiguration:
@@ -5842,36 +5738,30 @@ components:
               mapping:
                 DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                 DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Broadcasting device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+            - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
           mdnsProxyConfiguration:
             discriminator:
               propertyName: mode
               mapping:
                 AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
                 CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-            properties:
-              mode:
-                type: string
-            required:
-            - mode
             title: mDNS filtering configuration
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+            - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
           multicastFilteringPolicy:
             discriminator:
               propertyName: action
               mapping:
                 ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
                 BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-            properties:
-              action:
-                type: string
-            required:
-            - action
             title: Multicast filtering policy
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+            - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
           multicastToUnicastConversionEnabled:
             type: boolean
           clientIsolationEnabled:
@@ -5992,12 +5882,10 @@ components:
               mapping:
                 CAPTIVE_PORTAL: '#/components/schemas/IntegrationWifiCaptivePortalConfigurationDetailDto'
                 PASSPOINT: '#/components/schemas/IntegrationWifiPasspointConfigurationDetailDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Wifi hotspot configuration
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiCaptivePortalConfigurationDetailDto'
+            - $ref: '#/components/schemas/IntegrationWifiPasspointConfigurationDetailDto'
           mloEnabled:
             type: boolean
           bandSteeringEnabled:
@@ -6287,12 +6175,10 @@ components:
             mapping:
               DERIVED: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
               USER_DEFINED: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Wifi Radius NAS ID configuration
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
+          - $ref: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
         macAuthenticationConfiguration:
           properties:
             macAddressFormat:
@@ -6329,12 +6215,10 @@ components:
               mapping:
                 DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                 DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Broadcasting device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+            - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
         required:
         - action
         title: mDNS proxy policy
@@ -6348,12 +6232,10 @@ components:
                 mapping:
                   PREDEFINED: '#/components/schemas/IntegrationWifiMdnsProxyPredefinedServiceDto'
                   CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomServiceDto'
-              properties:
-                type:
-                  type: string
-              required:
-              - type
               title: mDNS service
+              oneOf:
+              - $ref: '#/components/schemas/IntegrationWifiMdnsProxyPredefinedServiceDto'
+              - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomServiceDto'
             minItems: 1
           bridgingNetworkIds:
             type: array
@@ -6394,12 +6276,10 @@ components:
               mapping:
                 DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                 DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Broadcasting device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+            - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
         required:
         - action
         title: mDNS proxy policy
@@ -6438,12 +6318,10 @@ components:
                     mapping:
                       DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                       DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-                  properties:
-                    type:
-                      type: string
-                  required:
-                  - type
                   title: Broadcasting device filter
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+                  - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
               required:
               - action
               title: mDNS proxy policy
@@ -6579,12 +6457,10 @@ components:
             mapping:
               DERIVED: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
               USER_DEFINED: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Wifi Radius NAS ID configuration
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
+          - $ref: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
         macAuthenticationConfiguration:
           properties:
             macAddressFormat:
@@ -6635,12 +6511,10 @@ components:
                   mapping:
                     DERIVED: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
                     USER_DEFINED: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
-                properties:
-                  type:
-                    type: string
-                required:
-                - type
                 title: Wifi Radius NAS ID configuration
+                oneOf:
+                - $ref: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
+                - $ref: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
               macAuthenticationConfiguration:
                 properties:
                   macAddressFormat:
@@ -6681,12 +6555,10 @@ components:
             mapping:
               NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
               SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Wifi network reference
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+          - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
         passphrase:
           type: string
       required:
@@ -6803,12 +6675,10 @@ components:
                   mapping:
                     DERIVED: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
                     USER_DEFINED: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
-                properties:
-                  type:
-                    type: string
-                required:
-                - type
                 title: Wifi Radius NAS ID configuration
+                oneOf:
+                - $ref: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
+                - $ref: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
               macAuthenticationConfiguration:
                 properties:
                   macAddressFormat:
@@ -6884,12 +6754,10 @@ components:
                   mapping:
                     DERIVED: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
                     USER_DEFINED: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
-                properties:
-                  type:
-                    type: string
-                required:
-                - type
                 title: Wifi Radius NAS ID configuration
+                oneOf:
+                - $ref: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
+                - $ref: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
               macAuthenticationConfiguration:
                 properties:
                   macAddressFormat:
@@ -6923,12 +6791,10 @@ components:
                     mapping:
                       NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                       SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-                  properties:
-                    type:
-                      type: string
-                  required:
-                  - type
                   title: Wifi network reference
+                  oneOf:
+                  - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+                  - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
                 passphrase:
                   type: string
               required:
@@ -6987,12 +6853,10 @@ components:
                   mapping:
                     DERIVED: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
                     USER_DEFINED: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
-                properties:
-                  type:
-                    type: string
-                required:
-                - type
                 title: Wifi Radius NAS ID configuration
+                oneOf:
+                - $ref: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
+                - $ref: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
               macAuthenticationConfiguration:
                 properties:
                   macAddressFormat:
@@ -7074,12 +6938,10 @@ components:
                   mapping:
                     DERIVED: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
                     USER_DEFINED: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
-                properties:
-                  type:
-                    type: string
-                required:
-                - type
                 title: Wifi Radius NAS ID configuration
+                oneOf:
+                - $ref: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
+                - $ref: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
               macAuthenticationConfiguration:
                 properties:
                   macAddressFormat:
@@ -7180,12 +7042,10 @@ components:
                   mapping:
                     DERIVED: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
                     USER_DEFINED: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
-                properties:
-                  type:
-                    type: string
-                required:
-                - type
                 title: Wifi Radius NAS ID configuration
+                oneOf:
+                - $ref: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
+                - $ref: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
               macAuthenticationConfiguration:
                 properties:
                   macAddressFormat:
@@ -7260,12 +7120,10 @@ components:
                   mapping:
                     DERIVED: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
                     USER_DEFINED: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
-                properties:
-                  type:
-                    type: string
-                required:
-                - type
                 title: Wifi Radius NAS ID configuration
+                oneOf:
+                - $ref: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
+                - $ref: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
               macAuthenticationConfiguration:
                 properties:
                   macAddressFormat:
@@ -7315,22 +7173,18 @@ components:
         mapping:
           ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
           BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-      properties:
-        action:
-          type: string
-      required:
-      - action
+      oneOf:
+      - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+      - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
     WifiRadiusNASIDConfiguration:
       discriminator:
         propertyName: type
         mapping:
           DERIVED: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
           USER_DEFINED: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/IntegrationWifiDerivedNasIdDto'
+      - $ref: '#/components/schemas/IntegrationWifiUserDefinedNasIdDto'
     WifiBroadcastCreateOrUpdate:
       discriminator:
         propertyName: type
@@ -7348,12 +7202,10 @@ components:
             mapping:
               NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
               SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Wifi network reference
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+          - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
         enabled:
           type: boolean
         securityConfiguration:
@@ -7383,36 +7235,30 @@ components:
             mapping:
               DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
               DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Broadcasting device filter
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+          - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
         mdnsProxyConfiguration:
           discriminator:
             propertyName: mode
             mapping:
               AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
               CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-          properties:
-            mode:
-              type: string
-          required:
-          - mode
           title: mDNS filtering configuration
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+          - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
         multicastFilteringPolicy:
           discriminator:
             propertyName: action
             mapping:
               ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
               BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-          properties:
-            action:
-              type: string
-          required:
-          - action
           title: Multicast filtering policy
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+          - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
         multicastToUnicastConversionEnabled:
           type: boolean
         clientIsolationEnabled:
@@ -7517,22 +7363,18 @@ components:
         mapping:
           CAPTIVE_PORTAL: '#/components/schemas/IntegrationWifiCaptivePortalConfigurationDetailDto'
           PASSPOINT: '#/components/schemas/IntegrationWifiPasspointConfigurationDetailDto'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/IntegrationWifiCaptivePortalConfigurationDetailDto'
+      - $ref: '#/components/schemas/IntegrationWifiPasspointConfigurationDetailDto'
     WifiNetworkReference:
       discriminator:
         propertyName: type
         mapping:
           NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
           SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+      - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
     WifiSecurityConfigurationDetailObject:
       discriminator:
         propertyName: type
@@ -7556,11 +7398,9 @@ components:
         mapping:
           AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
           CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-      properties:
-        mode:
-          type: string
-      required:
-      - mode
+      oneOf:
+      - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+      - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
     MDNSProxyPolicy:
       discriminator:
         propertyName: action
@@ -7579,12 +7419,10 @@ components:
             mapping:
               DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
               DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Broadcasting device filter
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+          - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
       required:
       - action
     MDNSService:
@@ -7593,11 +7431,9 @@ components:
         mapping:
           PREDEFINED: '#/components/schemas/IntegrationWifiMdnsProxyPredefinedServiceDto'
           CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomServiceDto'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/IntegrationWifiMdnsProxyPredefinedServiceDto'
+      - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomServiceDto'
     DerivedEntityMetadata:
       allOf:
       - discriminator:
@@ -7644,11 +7480,11 @@ components:
           SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
           DERIVED: '#/components/schemas/DerivedEntityMetadata'
           ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-      properties:
-        origin:
-          type: string
-      required:
-      - origin
+      oneOf:
+      - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+      - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+      - $ref: '#/components/schemas/DerivedEntityMetadata'
+      - $ref: '#/components/schemas/OrchestratedEntityMetadata'
     IntegrationDerivedSiteToSiteTunnelMetadata:
       allOf:
       - discriminator:
@@ -7692,12 +7528,11 @@ components:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User or derived or orchestrated entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
           enabled:
             type: boolean
           network:
@@ -7706,12 +7541,10 @@ components:
               mapping:
                 NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                 SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Wifi network reference
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+            - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
           securityConfiguration:
             discriminator:
               propertyName: type
@@ -7739,36 +7572,30 @@ components:
               mapping:
                 DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                 DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Broadcasting device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+            - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
           mdnsProxyConfiguration:
             discriminator:
               propertyName: mode
               mapping:
                 AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
                 CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-            properties:
-              mode:
-                type: string
-            required:
-            - mode
             title: mDNS filtering configuration
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+            - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
           multicastFilteringPolicy:
             discriminator:
               propertyName: action
               mapping:
                 ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
                 BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-            properties:
-              action:
-                type: string
-            required:
-            - action
             title: Multicast filtering policy
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+            - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
           multicastToUnicastConversionEnabled:
             type: boolean
           clientIsolationEnabled:
@@ -7902,12 +7729,11 @@ components:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User or derived or orchestrated entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
           enabled:
             type: boolean
           network:
@@ -7916,12 +7742,10 @@ components:
               mapping:
                 NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                 SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Wifi network reference
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+            - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
           securityConfiguration:
             discriminator:
               propertyName: type
@@ -7949,36 +7773,30 @@ components:
               mapping:
                 DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                 DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Broadcasting device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+            - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
           mdnsProxyConfiguration:
             discriminator:
               propertyName: mode
               mapping:
                 AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
                 CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-            properties:
-              mode:
-                type: string
-            required:
-            - mode
             title: mDNS filtering configuration
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+            - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
           multicastFilteringPolicy:
             discriminator:
               propertyName: action
               mapping:
                 ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
                 BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-            properties:
-              action:
-                type: string
-            required:
-            - action
             title: Multicast filtering policy
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+            - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
           multicastToUnicastConversionEnabled:
             type: boolean
           clientIsolationEnabled:
@@ -8101,12 +7919,10 @@ components:
               mapping:
                 CAPTIVE_PORTAL: '#/components/schemas/IntegrationWifiCaptivePortalConfigurationDetailDto'
                 PASSPOINT: '#/components/schemas/IntegrationWifiPasspointConfigurationDetailDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Wifi hotspot configuration
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiCaptivePortalConfigurationDetailDto'
+            - $ref: '#/components/schemas/IntegrationWifiPasspointConfigurationDetailDto'
           mloEnabled:
             type: boolean
           bandSteeringEnabled:
@@ -8206,11 +8022,9 @@ components:
         mapping:
           USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
           DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
-      properties:
-        origin:
-          type: string
-      required:
-      - origin
+      oneOf:
+      - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+      - $ref: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
     SystemDefinedEntityMetadata:
       allOf:
       - discriminator:
@@ -8342,11 +8156,9 @@ components:
         mapping:
           USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
           DERIVED: '#/components/schemas/DerivedEntityMetadata'
-      properties:
-        origin:
-          type: string
-      required:
-      - origin
+      oneOf:
+      - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+      - $ref: '#/components/schemas/DerivedEntityMetadata'
     UserOrDerivedOrOrchestratedEntityMetadata:
       discriminator:
         propertyName: origin
@@ -8354,33 +8166,28 @@ components:
           USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
           DERIVED: '#/components/schemas/DerivedEntityMetadata'
           ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-      properties:
-        origin:
-          type: string
-      required:
-      - origin
+      oneOf:
+      - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+      - $ref: '#/components/schemas/DerivedEntityMetadata'
+      - $ref: '#/components/schemas/OrchestratedEntityMetadata'
     UserOrOrchestratedEntityMetadata:
       discriminator:
         propertyName: origin
         mapping:
           USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
           ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-      properties:
-        origin:
-          type: string
-      required:
-      - origin
+      oneOf:
+      - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+      - $ref: '#/components/schemas/OrchestratedEntityMetadata'
     UserOrSystemDefinedEntityMetadata:
       discriminator:
         propertyName: origin
         mapping:
           USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
           SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
-      properties:
-        origin:
-          type: string
-      required:
-      - origin
+      oneOf:
+      - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+      - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
     UserOrSystemDefinedOrOrchestratedEntityMetadata:
       discriminator:
         propertyName: origin
@@ -8388,11 +8195,10 @@ components:
           USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
           SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
           ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-      properties:
-        origin:
-          type: string
-      required:
-      - origin
+      oneOf:
+      - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+      - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+      - $ref: '#/components/schemas/OrchestratedEntityMetadata'
     WifiBroadcastDetails:
       discriminator:
         propertyName: type
@@ -8414,12 +8220,11 @@ components:
               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
               DERIVED: '#/components/schemas/DerivedEntityMetadata'
               ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-          properties:
-            origin:
-              type: string
-          required:
-          - origin
           title: User or derived or orchestrated entity metadata
+          oneOf:
+          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+          - $ref: '#/components/schemas/DerivedEntityMetadata'
+          - $ref: '#/components/schemas/OrchestratedEntityMetadata'
         enabled:
           type: boolean
         network:
@@ -8428,12 +8233,10 @@ components:
             mapping:
               NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
               SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Wifi network reference
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+          - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
         securityConfiguration:
           discriminator:
             propertyName: type
@@ -8461,36 +8264,30 @@ components:
             mapping:
               DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
               DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Broadcasting device filter
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+          - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
         mdnsProxyConfiguration:
           discriminator:
             propertyName: mode
             mapping:
               AUTO: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
               CUSTOM: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
-          properties:
-            mode:
-              type: string
-          required:
-          - mode
           title: mDNS filtering configuration
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiMdnsProxyAutoConfigurationDto'
+          - $ref: '#/components/schemas/IntegrationWifiMdnsProxyCustomConfigurationDto'
         multicastFilteringPolicy:
           discriminator:
             propertyName: action
             mapping:
               ALLOW: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
               BLOCK: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
-          properties:
-            action:
-              type: string
-          required:
-          - action
           title: Multicast filtering policy
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringAllowPolicyDto'
+          - $ref: '#/components/schemas/IntegrationWifiMulticastFilteringBlockPolicyDto'
         multicastToUnicastConversionEnabled:
           type: boolean
         clientIsolationEnabled:
@@ -8684,22 +8481,19 @@ components:
           IP_ADDRESS: '#/components/schemas/AddressIPv4Matching'
           SUBNET: '#/components/schemas/SubnetIPv4Matching'
           IP_ADDRESS_RANGE: '#/components/schemas/AddressRangeIPv4Matching'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/AddressIPv4Matching'
+      - $ref: '#/components/schemas/SubnetIPv4Matching'
+      - $ref: '#/components/schemas/AddressRangeIPv4Matching'
     IPv6Matching:
       discriminator:
         propertyName: type
         mapping:
           IP_ADDRESS: '#/components/schemas/AddressIPv6Matching'
           SUBNET: '#/components/schemas/SubnetIPv6Matching'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/AddressIPv6Matching'
+      - $ref: '#/components/schemas/SubnetIPv6Matching'
     IntegrationIpV4TrafficMatchingListCreateUpdateDto:
       allOf:
       - discriminator:
@@ -8729,12 +8523,11 @@ components:
                   IP_ADDRESS: '#/components/schemas/AddressIPv4Matching'
                   SUBNET: '#/components/schemas/SubnetIPv4Matching'
                   IP_ADDRESS_RANGE: '#/components/schemas/AddressRangeIPv4Matching'
-              properties:
-                type:
-                  type: string
-              required:
-              - type
               title: IPv4 matching
+              oneOf:
+              - $ref: '#/components/schemas/AddressIPv4Matching'
+              - $ref: '#/components/schemas/SubnetIPv4Matching'
+              - $ref: '#/components/schemas/AddressRangeIPv4Matching'
             minItems: 1
       required:
       - items
@@ -8767,12 +8560,10 @@ components:
                 mapping:
                   IP_ADDRESS: '#/components/schemas/AddressIPv6Matching'
                   SUBNET: '#/components/schemas/SubnetIPv6Matching'
-              properties:
-                type:
-                  type: string
-              required:
-              - type
               title: IPv6 matching
+              oneOf:
+              - $ref: '#/components/schemas/AddressIPv6Matching'
+              - $ref: '#/components/schemas/SubnetIPv6Matching'
             minItems: 1
       required:
       - items
@@ -8805,12 +8596,10 @@ components:
                 mapping:
                   PORT_NUMBER: '#/components/schemas/NumberPortMatching'
                   PORT_NUMBER_RANGE: '#/components/schemas/NumberRangePortMatching'
-              properties:
-                type:
-                  type: string
-              required:
-              - type
               title: Port matching
+              oneOf:
+              - $ref: '#/components/schemas/NumberPortMatching'
+              - $ref: '#/components/schemas/NumberRangePortMatching'
             minItems: 1
       required:
       - items
@@ -8877,11 +8666,9 @@ components:
         mapping:
           PORT_NUMBER: '#/components/schemas/NumberPortMatching'
           PORT_NUMBER_RANGE: '#/components/schemas/NumberRangePortMatching'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/NumberPortMatching'
+      - $ref: '#/components/schemas/NumberRangePortMatching'
     SubnetIPv4Matching:
       allOf:
       - discriminator:
@@ -8959,12 +8746,11 @@ components:
                   IP_ADDRESS: '#/components/schemas/AddressIPv4Matching'
                   SUBNET: '#/components/schemas/SubnetIPv4Matching'
                   IP_ADDRESS_RANGE: '#/components/schemas/AddressRangeIPv4Matching'
-              properties:
-                type:
-                  type: string
-              required:
-              - type
               title: IPv4 matching
+              oneOf:
+              - $ref: '#/components/schemas/AddressIPv4Matching'
+              - $ref: '#/components/schemas/SubnetIPv4Matching'
+              - $ref: '#/components/schemas/AddressRangeIPv4Matching'
             minItems: 1
       required:
       - id
@@ -9003,12 +8789,10 @@ components:
                 mapping:
                   IP_ADDRESS: '#/components/schemas/AddressIPv6Matching'
                   SUBNET: '#/components/schemas/SubnetIPv6Matching'
-              properties:
-                type:
-                  type: string
-              required:
-              - type
               title: IPv6 matching
+              oneOf:
+              - $ref: '#/components/schemas/AddressIPv6Matching'
+              - $ref: '#/components/schemas/SubnetIPv6Matching'
             minItems: 1
       required:
       - id
@@ -9047,12 +8831,10 @@ components:
                 mapping:
                   PORT_NUMBER: '#/components/schemas/NumberPortMatching'
                   PORT_NUMBER_RANGE: '#/components/schemas/NumberRangePortMatching'
-              properties:
-                type:
-                  type: string
-              required:
-              - type
               title: Port matching
+              oneOf:
+              - $ref: '#/components/schemas/NumberPortMatching'
+              - $ref: '#/components/schemas/NumberRangePortMatching'
             minItems: 1
       required:
       - id
@@ -9169,12 +8951,10 @@ components:
             mapping:
               SERVER: '#/components/schemas/GatewayManagedIPv4DHCPServerConfiguration'
               RELAY: '#/components/schemas/IPv4DHCPRelayConfiguration'
-          properties:
-            mode:
-              type: string
-          required:
-          - mode
           title: Gateway Managed IPv4 DHCP Configuration
+          oneOf:
+          - $ref: '#/components/schemas/GatewayManagedIPv4DHCPServerConfiguration'
+          - $ref: '#/components/schemas/IPv4DHCPRelayConfiguration'
         natOutboundIpAddressConfiguration:
           type: array
           description: List of NAT Outbound Configurations defining which IP addresses
@@ -9207,11 +8987,9 @@ components:
         mapping:
           SERVER: '#/components/schemas/GatewayManagedIPv4DHCPServerConfiguration'
           RELAY: '#/components/schemas/IPv4DHCPRelayConfiguration'
-      properties:
-        mode:
-          type: string
-      required:
-      - mode
+      oneOf:
+      - $ref: '#/components/schemas/GatewayManagedIPv4DHCPServerConfiguration'
+      - $ref: '#/components/schemas/IPv4DHCPRelayConfiguration'
     GatewayManagedIPv4DHCPServerConfiguration:
       allOf:
       - discriminator:
@@ -9312,11 +9090,9 @@ components:
         mapping:
           IP_ADDRESS: '#/components/schemas/IPAddressSelector'
           IP_ADDRESS_RANGE: '#/components/schemas/IPAddressRangeSelector'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/IPAddressSelector'
+      - $ref: '#/components/schemas/IPAddressRangeSelector'
     IPAddressRange:
       properties:
         start:
@@ -9653,12 +9429,10 @@ components:
                   mapping:
                     SERVER: '#/components/schemas/GatewayManagedIPv4DHCPServerConfiguration'
                     RELAY: '#/components/schemas/IPv4DHCPRelayConfiguration'
-                properties:
-                  mode:
-                    type: string
-                required:
-                - mode
                 title: Gateway Managed IPv4 DHCP Configuration
+                oneOf:
+                - $ref: '#/components/schemas/GatewayManagedIPv4DHCPServerConfiguration'
+                - $ref: '#/components/schemas/IPv4DHCPRelayConfiguration'
               natOutboundIpAddressConfiguration:
                 type: array
                 description: List of NAT Outbound Configurations defining which IP
@@ -9875,12 +9649,10 @@ components:
                   mapping:
                     SERVER: '#/components/schemas/IPv4DHCPServerConfiguration'
                     RELAY: '#/components/schemas/IPv4DHCPRelayConfiguration'
-                properties:
-                  mode:
-                    type: string
-                required:
-                - mode
                 title: Switch Managed IPv4 DHCP Configuration
+                oneOf:
+                - $ref: '#/components/schemas/IPv4DHCPServerConfiguration'
+                - $ref: '#/components/schemas/IPv4DHCPRelayConfiguration'
             required:
             - autoScaleEnabled
             - hostIpAddress
@@ -9998,12 +9770,10 @@ components:
                 mapping:
                   IP_ADDRESS: '#/components/schemas/IPAddressSelector'
                   IP_ADDRESS_RANGE: '#/components/schemas/IPAddressRangeSelector'
-              properties:
-                type:
-                  type: string
-              required:
-              - type
               title: IP address selector
+              oneOf:
+              - $ref: '#/components/schemas/IPAddressSelector'
+              - $ref: '#/components/schemas/IPAddressRangeSelector'
             minItems: 1
       required:
       - ipAddressSelectors
@@ -10239,12 +10009,10 @@ components:
             mapping:
               SERVER: '#/components/schemas/IPv4DHCPServerConfiguration'
               RELAY: '#/components/schemas/IPv4DHCPRelayConfiguration'
-          properties:
-            mode:
-              type: string
-          required:
-          - mode
           title: Switch Managed IPv4 DHCP Configuration
+          oneOf:
+          - $ref: '#/components/schemas/IPv4DHCPServerConfiguration'
+          - $ref: '#/components/schemas/IPv4DHCPRelayConfiguration'
       required:
       - autoScaleEnabled
       - hostIpAddress
@@ -10255,11 +10023,9 @@ components:
         mapping:
           SERVER: '#/components/schemas/IPv4DHCPServerConfiguration'
           RELAY: '#/components/schemas/IPv4DHCPRelayConfiguration'
-      properties:
-        mode:
-          type: string
-      required:
-      - mode
+      oneOf:
+      - $ref: '#/components/schemas/IPv4DHCPServerConfiguration'
+      - $ref: '#/components/schemas/IPv4DHCPRelayConfiguration'
     WANNATOutboundConfiguration:
       discriminator:
         propertyName: type
@@ -10306,12 +10072,11 @@ components:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User or system defined or orchestrated entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
           dhcpGuarding:
             description: DHCP Guarding settings for this Network. If this field is
               omitted or null, the feature is disabled
@@ -10383,12 +10148,10 @@ components:
                   mapping:
                     SERVER: '#/components/schemas/GatewayManagedIPv4DHCPServerConfiguration'
                     RELAY: '#/components/schemas/IPv4DHCPRelayConfiguration'
-                properties:
-                  mode:
-                    type: string
-                required:
-                - mode
                 title: Gateway Managed IPv4 DHCP Configuration
+                oneOf:
+                - $ref: '#/components/schemas/GatewayManagedIPv4DHCPServerConfiguration'
+                - $ref: '#/components/schemas/IPv4DHCPRelayConfiguration'
               natOutboundIpAddressConfiguration:
                 type: array
                 description: List of NAT Outbound Configurations defining which IP
@@ -10543,12 +10306,11 @@ components:
               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
               SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
               ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-          properties:
-            origin:
-              type: string
-          required:
-          - origin
           title: User or system defined or orchestrated entity metadata
+          oneOf:
+          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+          - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+          - $ref: '#/components/schemas/OrchestratedEntityMetadata'
         dhcpGuarding:
           description: DHCP Guarding settings for this Network. If this field is omitted
             or null, the feature is disabled
@@ -10600,12 +10362,11 @@ components:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User or system defined or orchestrated entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
           dhcpGuarding:
             description: DHCP Guarding settings for this Network. If this field is
               omitted or null, the feature is disabled
@@ -10670,12 +10431,10 @@ components:
                   mapping:
                     SERVER: '#/components/schemas/IPv4DHCPServerConfiguration'
                     RELAY: '#/components/schemas/IPv4DHCPRelayConfiguration'
-                properties:
-                  mode:
-                    type: string
-                required:
-                - mode
                 title: Switch Managed IPv4 DHCP Configuration
+                oneOf:
+                - $ref: '#/components/schemas/IPv4DHCPServerConfiguration'
+                - $ref: '#/components/schemas/IPv4DHCPRelayConfiguration'
             required:
             - autoScaleEnabled
             - hostIpAddress
@@ -10722,12 +10481,11 @@ components:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User or system defined or orchestrated entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
           dhcpGuarding:
             description: DHCP Guarding settings for this Network. If this field is
               omitted or null, the feature is disabled
@@ -10794,12 +10552,10 @@ components:
             mapping:
               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
               SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
-          properties:
-            origin:
-              type: string
-          required:
-          - origin
           title: User or system defined entity metadata
+          oneOf:
+          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+          - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
       required:
       - id
       - metadata
@@ -10810,11 +10566,8 @@ components:
         propertyName: type
         mapping:
           DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
     ACLRuleUpdate:
       discriminator:
         propertyName: type
@@ -10847,12 +10600,9 @@ components:
             propertyName: type
             mapping:
               DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: ACL rule device filter
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
         index:
           type: integer
           format: int32
@@ -10874,11 +10624,9 @@ components:
         mapping:
           IP_ADDRESSES_OR_SUBNETS: '#/components/schemas/IntegrationIpAclRuleSubnetEndpointFilterDto'
           NETWORKS: '#/components/schemas/IntegrationIpAclRuleNetworkEndpointFilterDto'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/IntegrationIpAclRuleSubnetEndpointFilterDto'
+      - $ref: '#/components/schemas/IntegrationIpAclRuleNetworkEndpointFilterDto'
     IntegrationAclRuleDevicesFilterDto:
       allOf:
       - discriminator:
@@ -10938,12 +10686,9 @@ components:
               propertyName: type
               mapping:
                 DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: ACL rule device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
           index:
             type: integer
             format: int32
@@ -10969,12 +10714,10 @@ components:
               mapping:
                 IP_ADDRESSES_OR_SUBNETS: '#/components/schemas/IntegrationIpAclRuleSubnetEndpointFilterDto'
                 NETWORKS: '#/components/schemas/IntegrationIpAclRuleNetworkEndpointFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: IP ACL rule endpoint
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationIpAclRuleSubnetEndpointFilterDto'
+            - $ref: '#/components/schemas/IntegrationIpAclRuleNetworkEndpointFilterDto'
           destinationFilter:
             description: Traffic destination filter
             discriminator:
@@ -10982,12 +10725,10 @@ components:
               mapping:
                 IP_ADDRESSES_OR_SUBNETS: '#/components/schemas/IntegrationIpAclRuleSubnetEndpointFilterDto'
                 NETWORKS: '#/components/schemas/IntegrationIpAclRuleNetworkEndpointFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: IP ACL rule endpoint
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationIpAclRuleSubnetEndpointFilterDto'
+            - $ref: '#/components/schemas/IntegrationIpAclRuleNetworkEndpointFilterDto'
           protocolFilter:
             type: array
             description: Protocols this ACL rule will be applied to. When null, the
@@ -11095,12 +10836,9 @@ components:
               propertyName: type
               mapping:
                 DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: ACL rule device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
           index:
             type: integer
             format: int32
@@ -11125,24 +10863,18 @@ components:
               propertyName: type
               mapping:
                 MAC_ADDRESSES: '#/components/schemas/IntegrationMacAclRuleMacAddressEndpointFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: MAC ACL rule endpoint
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationMacAclRuleMacAddressEndpointFilterDto'
           destinationFilter:
             description: Traffic destination filter
             discriminator:
               propertyName: type
               mapping:
                 MAC_ADDRESSES: '#/components/schemas/IntegrationMacAclRuleMacAddressEndpointFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: MAC ACL rule endpoint
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationMacAclRuleMacAddressEndpointFilterDto'
           networkIdFilter:
             type: string
             format: uuid
@@ -11188,11 +10920,8 @@ components:
         propertyName: type
         mapping:
           MAC_ADDRESSES: '#/components/schemas/IntegrationMacAclRuleMacAddressEndpointFilterDto'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/IntegrationMacAclRuleMacAddressEndpointFilterDto'
     ACLRule:
       discriminator:
         propertyName: type
@@ -11228,12 +10957,9 @@ components:
             propertyName: type
             mapping:
               DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: ACL rule device filter
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
         index:
           type: integer
           format: int32
@@ -11252,12 +10978,12 @@ components:
               SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
               DERIVED: '#/components/schemas/DerivedEntityMetadata'
               ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-          properties:
-            origin:
-              type: string
-          required:
-          - origin
           title: Entity metadata
+          oneOf:
+          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+          - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+          - $ref: '#/components/schemas/DerivedEntityMetadata'
+          - $ref: '#/components/schemas/OrchestratedEntityMetadata'
       required:
       - action
       - enabled
@@ -11303,12 +11029,9 @@ components:
               propertyName: type
               mapping:
                 DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: ACL rule device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
           index:
             type: integer
             format: int32
@@ -11327,12 +11050,12 @@ components:
                 SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: Entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
         required:
         - action
         - enabled
@@ -11351,12 +11074,10 @@ components:
               mapping:
                 IP_ADDRESSES_OR_SUBNETS: '#/components/schemas/IntegrationIpAclRuleSubnetEndpointFilterDto'
                 NETWORKS: '#/components/schemas/IntegrationIpAclRuleNetworkEndpointFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: IP ACL rule endpoint
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationIpAclRuleSubnetEndpointFilterDto'
+            - $ref: '#/components/schemas/IntegrationIpAclRuleNetworkEndpointFilterDto'
           destinationFilter:
             description: Traffic destination filter
             discriminator:
@@ -11364,12 +11085,10 @@ components:
               mapping:
                 IP_ADDRESSES_OR_SUBNETS: '#/components/schemas/IntegrationIpAclRuleSubnetEndpointFilterDto'
                 NETWORKS: '#/components/schemas/IntegrationIpAclRuleNetworkEndpointFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: IP ACL rule endpoint
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationIpAclRuleSubnetEndpointFilterDto'
+            - $ref: '#/components/schemas/IntegrationIpAclRuleNetworkEndpointFilterDto'
           protocolFilter:
             type: array
             description: Protocols this ACL rule will be applied to. When null, the
@@ -11416,12 +11135,9 @@ components:
               propertyName: type
               mapping:
                 DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: ACL rule device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
           index:
             type: integer
             format: int32
@@ -11440,12 +11156,12 @@ components:
                 SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: Entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
         required:
         - action
         - enabled
@@ -11499,12 +11215,9 @@ components:
               propertyName: type
               mapping:
                 DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: ACL rule device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
           index:
             type: integer
             format: int32
@@ -11523,12 +11236,12 @@ components:
                 SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: Entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
         required:
         - action
         - enabled
@@ -11546,24 +11259,18 @@ components:
               propertyName: type
               mapping:
                 MAC_ADDRESSES: '#/components/schemas/IntegrationMacAclRuleMacAddressEndpointFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: MAC ACL rule endpoint
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationMacAclRuleMacAddressEndpointFilterDto'
           destinationFilter:
             description: Traffic destination filter
             discriminator:
               propertyName: type
               mapping:
                 MAC_ADDRESSES: '#/components/schemas/IntegrationMacAclRuleMacAddressEndpointFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: MAC ACL rule endpoint
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationMacAclRuleMacAddressEndpointFilterDto'
           networkIdFilter:
             type: string
             format: uuid
@@ -11603,12 +11310,9 @@ components:
               propertyName: type
               mapping:
                 DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: ACL rule device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
           index:
             type: integer
             format: int32
@@ -11627,12 +11331,12 @@ components:
                 SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: Entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
         required:
         - action
         - enabled
@@ -11872,21 +11576,15 @@ components:
         propertyName: action
         mapping:
           POWER_CYCLE: '#/components/schemas/PortPoEPowerCycleRequest'
-      properties:
-        action:
-          type: string
-      required:
-      - action
+      oneOf:
+      - $ref: '#/components/schemas/PortPoEPowerCycleRequest'
     DeviceActionRequest:
       discriminator:
         propertyName: action
         mapping:
           RESTART: '#/components/schemas/DeviceRestartRequest'
-      properties:
-        action:
-          type: string
-      required:
-      - action
+      oneOf:
+      - $ref: '#/components/schemas/DeviceRestartRequest'
     DeviceRestartRequest:
       allOf:
       - discriminator:
@@ -11905,11 +11603,9 @@ components:
         mapping:
           AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationRequest'
           UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationRequest'
-      properties:
-        action:
-          type: string
-      required:
-      - action
+      oneOf:
+      - $ref: '#/components/schemas/GuestAccessAuthorizationRequest'
+      - $ref: '#/components/schemas/GuestAccessUnauthorizationRequest'
     GuestAccessAuthorizationRequest:
       allOf:
       - discriminator:
@@ -11979,11 +11675,9 @@ components:
         mapping:
           AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationResponse'
           UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationResponse'
-      properties:
-        action:
-          type: string
-      required:
-      - action
+      oneOf:
+      - $ref: '#/components/schemas/GuestAccessAuthorizationResponse'
+      - $ref: '#/components/schemas/GuestAccessUnauthorizationResponse'
     GuestAccessAuthorizationResponse:
       allOf:
       - discriminator:
@@ -12347,24 +12041,21 @@ components:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User or derived or orchestrated entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
           network:
             discriminator:
               propertyName: type
               mapping:
                 NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                 SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Wifi network reference
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+            - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
           securityConfiguration:
             discriminator:
               propertyName: type
@@ -12376,12 +12067,15 @@ components:
                 WPA2_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
                 WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
                 WPA2_WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Wifi security configuration overview
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiOpenSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa2PersonalSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa3PersonalSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3PersonalSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
           broadcastingDeviceFilter:
             description: Defines the custom scope of devices that will broadcast this
               WiFi network. If null, the WiFi network will be broadcast by all Access
@@ -12391,12 +12085,10 @@ components:
               mapping:
                 DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                 DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Broadcasting device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+            - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
         required:
         - enabled
         - id
@@ -12435,24 +12127,21 @@ components:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User or derived or orchestrated entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
           network:
             discriminator:
               propertyName: type
               mapping:
                 NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                 SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Wifi network reference
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+            - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
           securityConfiguration:
             discriminator:
               propertyName: type
@@ -12464,12 +12153,15 @@ components:
                 WPA2_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
                 WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
                 WPA2_WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Wifi security configuration overview
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiOpenSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa2PersonalSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa3PersonalSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3PersonalSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
+            - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
           broadcastingDeviceFilter:
             description: Defines the custom scope of devices that will broadcast this
               WiFi network. If null, the WiFi network will be broadcast by all Access
@@ -12479,12 +12171,10 @@ components:
               mapping:
                 DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                 DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Broadcasting device filter
+            oneOf:
+            - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+            - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
         required:
         - enabled
         - id
@@ -12565,24 +12255,21 @@ components:
                     USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                     DERIVED: '#/components/schemas/DerivedEntityMetadata'
                     ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                properties:
-                  origin:
-                    type: string
-                required:
-                - origin
                 title: User or derived or orchestrated entity metadata
+                oneOf:
+                - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                - $ref: '#/components/schemas/DerivedEntityMetadata'
+                - $ref: '#/components/schemas/OrchestratedEntityMetadata'
               network:
                 discriminator:
                   propertyName: type
                   mapping:
                     NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                     SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-                properties:
-                  type:
-                    type: string
-                required:
-                - type
                 title: Wifi network reference
+                oneOf:
+                - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+                - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
               securityConfiguration:
                 discriminator:
                   propertyName: type
@@ -12594,12 +12281,15 @@ components:
                     WPA2_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
                     WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
                     WPA2_WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
-                properties:
-                  type:
-                    type: string
-                required:
-                - type
                 title: Wifi security configuration overview
+                oneOf:
+                - $ref: '#/components/schemas/IntegrationWifiOpenSecurityConfigurationOverviewDto'
+                - $ref: '#/components/schemas/IntegrationWifiWpa2PersonalSecurityConfigurationOverviewDto'
+                - $ref: '#/components/schemas/IntegrationWifiWpa3PersonalSecurityConfigurationOverviewDto'
+                - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3PersonalSecurityConfigurationOverviewDto'
+                - $ref: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
+                - $ref: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
+                - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
               broadcastingDeviceFilter:
                 description: Defines the custom scope of devices that will broadcast
                   this WiFi network. If null, the WiFi network will be broadcast by
@@ -12609,12 +12299,10 @@ components:
                   mapping:
                     DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
                     DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-                properties:
-                  type:
-                    type: string
-                required:
-                - type
                 title: Broadcasting device filter
+                oneOf:
+                - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+                - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
             required:
             - enabled
             - id
@@ -12702,12 +12390,10 @@ components:
                 mapping:
                   NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
                   SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-              properties:
-                type:
-                  type: string
-              required:
-              - type
               title: Wifi network reference
+              oneOf:
+              - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+              - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
     IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto:
       allOf:
       - discriminator:
@@ -12803,24 +12489,21 @@ components:
               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
               DERIVED: '#/components/schemas/DerivedEntityMetadata'
               ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-          properties:
-            origin:
-              type: string
-          required:
-          - origin
           title: User or derived or orchestrated entity metadata
+          oneOf:
+          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+          - $ref: '#/components/schemas/DerivedEntityMetadata'
+          - $ref: '#/components/schemas/OrchestratedEntityMetadata'
         network:
           discriminator:
             propertyName: type
             mapping:
               NATIVE: '#/components/schemas/IntegrationWifiNativeNetworkDto'
               SPECIFIC: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Wifi network reference
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiNativeNetworkDto'
+          - $ref: '#/components/schemas/IntegrationWifiSpecificNetworkDto'
         securityConfiguration:
           discriminator:
             propertyName: type
@@ -12832,12 +12515,15 @@ components:
               WPA2_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
               WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
               WPA2_WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Wifi security configuration overview
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiOpenSecurityConfigurationOverviewDto'
+          - $ref: '#/components/schemas/IntegrationWifiWpa2PersonalSecurityConfigurationOverviewDto'
+          - $ref: '#/components/schemas/IntegrationWifiWpa3PersonalSecurityConfigurationOverviewDto'
+          - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3PersonalSecurityConfigurationOverviewDto'
+          - $ref: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
+          - $ref: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
+          - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
         broadcastingDeviceFilter:
           description: Defines the custom scope of devices that will broadcast this
             WiFi network. If null, the WiFi network will be broadcast by all Access
@@ -12847,12 +12533,10 @@ components:
             mapping:
               DEVICES: '#/components/schemas/IntegrationWifiDevicesFilterDto'
               DEVICE_TAGS: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Broadcasting device filter
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationWifiDevicesFilterDto'
+          - $ref: '#/components/schemas/IntegrationWifiDeviceTagsFilterDto'
       required:
       - enabled
       - id
@@ -12871,11 +12555,14 @@ components:
           WPA2_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
           WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
           WPA2_WPA3_ENTERPRISE: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/IntegrationWifiOpenSecurityConfigurationOverviewDto'
+      - $ref: '#/components/schemas/IntegrationWifiWpa2PersonalSecurityConfigurationOverviewDto'
+      - $ref: '#/components/schemas/IntegrationWifiWpa3PersonalSecurityConfigurationOverviewDto'
+      - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3PersonalSecurityConfigurationOverviewDto'
+      - $ref: '#/components/schemas/IntegrationWifiWpa2EnterpriseSecurityConfigurationOverviewDto'
+      - $ref: '#/components/schemas/IntegrationWifiWpa3EnterpriseSecurityConfigurationOverviewDto'
+      - $ref: '#/components/schemas/IntegrationWifiWpa2Wpa3EnterpriseSecurityConfigurationOverviewDto'
     WANOverview:
       properties:
         id:
@@ -12947,12 +12634,10 @@ components:
               mapping:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: Site-to-site VPN tunnel metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
         required:
         - id
         - metadata
@@ -12985,12 +12670,10 @@ components:
               mapping:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: Site-to-site VPN tunnel metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
         required:
         - id
         - metadata
@@ -13042,12 +12725,10 @@ components:
                   mapping:
                     USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                     DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
-                properties:
-                  origin:
-                    type: string
-                required:
-                - origin
                 title: Site-to-site VPN tunnel metadata
+                oneOf:
+                - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                - $ref: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
             required:
             - id
             - metadata
@@ -13082,12 +12763,10 @@ components:
               mapping:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: Site-to-site VPN tunnel metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
         required:
         - id
         - metadata
@@ -13119,12 +12798,10 @@ components:
             mapping:
               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
               DERIVED: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
-          properties:
-            origin:
-              type: string
-          required:
-          - origin
           title: Site-to-site VPN tunnel metadata
+          oneOf:
+          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+          - $ref: '#/components/schemas/IntegrationDerivedSiteToSiteTunnelMetadata'
       required:
       - id
       - metadata
@@ -13156,12 +12833,10 @@ components:
               mapping:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User defined or derived entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
         required:
         - enabled
         - id
@@ -13200,12 +12875,10 @@ components:
               mapping:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User defined or derived entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
         required:
         - enabled
         - id
@@ -13244,12 +12917,10 @@ components:
               mapping:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User defined or derived entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
         required:
         - enabled
         - id
@@ -13288,12 +12959,10 @@ components:
               mapping:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User defined or derived entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
         required:
         - enabled
         - id
@@ -13351,12 +13020,10 @@ components:
                   mapping:
                     USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                     DERIVED: '#/components/schemas/DerivedEntityMetadata'
-                properties:
-                  origin:
-                    type: string
-                required:
-                - origin
                 title: User defined or derived entity metadata
+                oneOf:
+                - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                - $ref: '#/components/schemas/DerivedEntityMetadata'
             required:
             - enabled
             - id
@@ -13396,12 +13063,10 @@ components:
               mapping:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 DERIVED: '#/components/schemas/DerivedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User defined or derived entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/DerivedEntityMetadata'
         required:
         - enabled
         - id
@@ -13439,12 +13104,10 @@ components:
             mapping:
               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
               DERIVED: '#/components/schemas/DerivedEntityMetadata'
-          properties:
-            origin:
-              type: string
-          required:
-          - origin
           title: User defined or derived entity metadata
+          oneOf:
+          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+          - $ref: '#/components/schemas/DerivedEntityMetadata'
       required:
       - enabled
       - id
@@ -13513,12 +13176,11 @@ components:
               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
               SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
               DERIVED: '#/components/schemas/DerivedEntityMetadata'
-          properties:
-            origin:
-              type: string
-          required:
-          - origin
           title: User or system defined or derived entity metadata
+          oneOf:
+          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+          - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+          - $ref: '#/components/schemas/DerivedEntityMetadata'
       required:
       - id
       - metadata
@@ -13557,12 +13219,11 @@ components:
                     USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                     SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                     DERIVED: '#/components/schemas/DerivedEntityMetadata'
-                properties:
-                  origin:
-                    type: string
-                required:
-                - origin
                 title: User or system defined or derived entity metadata
+                oneOf:
+                - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                - $ref: '#/components/schemas/DerivedEntityMetadata'
             required:
             - id
             - metadata
@@ -13581,11 +13242,10 @@ components:
           USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
           SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
           DERIVED: '#/components/schemas/DerivedEntityMetadata'
-      properties:
-        origin:
-          type: string
-      required:
-      - origin
+      oneOf:
+      - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+      - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+      - $ref: '#/components/schemas/DerivedEntityMetadata'
     GatewayManagedNetworkOverview:
       allOf:
       - discriminator:
@@ -13617,12 +13277,11 @@ components:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User or system defined or orchestrated entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
         required:
         - enabled
         - id
@@ -13667,12 +13326,11 @@ components:
               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
               SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
               ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-          properties:
-            origin:
-              type: string
-          required:
-          - origin
           title: User or system defined or orchestrated entity metadata
+          oneOf:
+          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+          - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+          - $ref: '#/components/schemas/OrchestratedEntityMetadata'
       required:
       - enabled
       - id
@@ -13730,12 +13388,11 @@ components:
                     USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                     SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                     ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                properties:
-                  origin:
-                    type: string
-                required:
-                - origin
                 title: User or system defined or orchestrated entity metadata
+                oneOf:
+                - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                - $ref: '#/components/schemas/OrchestratedEntityMetadata'
             required:
             - enabled
             - id
@@ -13781,12 +13438,11 @@ components:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User or system defined or orchestrated entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
         required:
         - enabled
         - id
@@ -13840,12 +13496,11 @@ components:
                 USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                 SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                 ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-            properties:
-              origin:
-                type: string
-            required:
-            - origin
             title: User or system defined or orchestrated entity metadata
+            oneOf:
+            - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+            - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+            - $ref: '#/components/schemas/OrchestratedEntityMetadata'
         required:
         - enabled
         - id
@@ -14087,12 +13742,10 @@ components:
                   mapping:
                     USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                     SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
-                properties:
-                  origin:
-                    type: string
-                required:
-                - origin
                 title: User or system defined entity metadata
+                oneOf:
+                - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
             required:
             - id
             - metadata
@@ -14831,12 +14484,10 @@ components:
             mapping:
               USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
               ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-          properties:
-            origin:
-              type: string
-          required:
-          - origin
           title: User or orchestrated entity metadata
+          oneOf:
+          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+          - $ref: '#/components/schemas/OrchestratedEntityMetadata'
       required:
       - deviceIds
       - id
@@ -14881,12 +14532,10 @@ components:
                   mapping:
                     USER_DEFINED: '#/components/schemas/UserDefinedEntityMetadata'
                     ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                properties:
-                  origin:
-                    type: string
-                required:
-                - origin
                 title: User or orchestrated entity metadata
+                oneOf:
+                - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                - $ref: '#/components/schemas/OrchestratedEntityMetadata'
             required:
             - deviceIds
             - id
@@ -15101,11 +14750,9 @@ components:
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
           GUEST: '#/components/schemas/GuestAccessOverview'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessOverview'
+      - $ref: '#/components/schemas/GuestAccessOverview'
     TeleportClientConnectionOverview:
       allOf:
       - discriminator:
@@ -15156,12 +14803,9 @@ components:
               propertyName: type
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Teleport client access overview
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessOverview'
       required:
       - access
       - id
@@ -15181,11 +14825,8 @@ components:
         propertyName: type
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessOverview'
     VPNClientConnectionOverview:
       allOf:
       - discriminator:
@@ -15236,12 +14877,9 @@ components:
               propertyName: type
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: VPN client access overview
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessOverview'
       required:
       - access
       - id
@@ -15261,11 +14899,8 @@ components:
         propertyName: type
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessOverview'
     WiredClientOverview:
       allOf:
       - discriminator:
@@ -15322,12 +14957,10 @@ components:
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
                 GUEST: '#/components/schemas/GuestAccessOverview'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Local client access overview
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessOverview'
+            - $ref: '#/components/schemas/GuestAccessOverview'
       required:
       - access
       - id
@@ -15390,12 +15023,10 @@ components:
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
                 GUEST: '#/components/schemas/GuestAccessOverview'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Local client access overview
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessOverview'
+            - $ref: '#/components/schemas/GuestAccessOverview'
       required:
       - access
       - id
@@ -15598,11 +15229,9 @@ components:
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
           GUEST: '#/components/schemas/GuestAccessDetails'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessDetails'
+      - $ref: '#/components/schemas/GuestAccessDetails'
     TeleportClientConnectionDetails:
       properties:
         id:
@@ -15631,12 +15260,9 @@ components:
             propertyName: type
             mapping:
               DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: Teleport client access details
+          oneOf:
+          - $ref: '#/components/schemas/DefaultClientAccessDetails'
       required:
       - access
       - id
@@ -15656,11 +15282,8 @@ components:
         propertyName: type
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessDetails'
     VPNClientConnectionDetails:
       allOf:
       - discriminator:
@@ -15708,12 +15331,9 @@ components:
               propertyName: type
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: VPN client access details
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessDetails'
       required:
       - access
       - id
@@ -15733,11 +15353,8 @@ components:
         propertyName: type
         mapping:
           DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
-      properties:
-        type:
-          type: string
-      required:
-      - type
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessDetails'
     WiredClientDetails:
       allOf:
       - discriminator:
@@ -15791,12 +15408,10 @@ components:
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
                 GUEST: '#/components/schemas/GuestAccessDetails'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Local client access details
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessDetails'
+            - $ref: '#/components/schemas/GuestAccessDetails'
       required:
       - access
       - id
@@ -15856,12 +15471,10 @@ components:
               mapping:
                 DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
                 GUEST: '#/components/schemas/GuestAccessDetails'
-            properties:
-              type:
-                type: string
-            required:
-            - type
             title: Local client access details
+            oneOf:
+            - $ref: '#/components/schemas/DefaultClientAccessDetails'
+            - $ref: '#/components/schemas/GuestAccessDetails'
       required:
       - access
       - id
@@ -15903,12 +15516,9 @@ components:
             propertyName: type
             mapping:
               DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-          properties:
-            type:
-              type: string
-          required:
-          - type
           title: ACL rule device filter
+          oneOf:
+          - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
         index:
           type: integer
           format: int32
@@ -15927,12 +15537,12 @@ components:
               SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
               DERIVED: '#/components/schemas/DerivedEntityMetadata'
               ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-          properties:
-            origin:
-              type: string
-          required:
-          - origin
           title: Entity metadata
+          oneOf:
+          - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+          - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+          - $ref: '#/components/schemas/DerivedEntityMetadata'
+          - $ref: '#/components/schemas/OrchestratedEntityMetadata'
       required:
       - action
       - enabled
@@ -15997,12 +15607,9 @@ components:
                   propertyName: type
                   mapping:
                     DEVICES: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
-                properties:
-                  type:
-                    type: string
-                required:
-                - type
                 title: ACL rule device filter
+                oneOf:
+                - $ref: '#/components/schemas/IntegrationAclRuleDevicesFilterDto'
               index:
                 type: integer
                 format: int32
@@ -16021,12 +15628,12 @@ components:
                     SYSTEM_DEFINED: '#/components/schemas/SystemDefinedEntityMetadata'
                     DERIVED: '#/components/schemas/DerivedEntityMetadata'
                     ORCHESTRATED: '#/components/schemas/OrchestratedEntityMetadata'
-                properties:
-                  origin:
-                    type: string
-                required:
-                - origin
                 title: Entity metadata
+                oneOf:
+                - $ref: '#/components/schemas/UserDefinedEntityMetadata'
+                - $ref: '#/components/schemas/SystemDefinedEntityMetadata'
+                - $ref: '#/components/schemas/DerivedEntityMetadata'
+                - $ref: '#/components/schemas/OrchestratedEntityMetadata'
             required:
             - action
             - enabled
