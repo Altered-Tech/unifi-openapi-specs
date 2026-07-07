@@ -35,6 +35,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 import threading
 from urllib.parse import urljoin
 
@@ -276,14 +277,14 @@ def discover_versions(service_id: str, session: requests.Session) -> list:
     """
     resp = session.get(f"{BASE_URL}/{service_id}", allow_redirects=False, timeout=15)
     if resp.status_code not in (301, 302, 307, 308):
-        print(f"  [{service_id}] No redirect (status {resp.status_code}), skipping")
+        print(f"  [{service_id}] No redirect (status {resp.status_code}), skipping", file=sys.stderr)
         return []
 
     location = resp.headers.get("location", "").lstrip("/")
     parts = location.split("/")
     # parts: [service_id, version, seed_slug]
     if len(parts) < 3:
-        print(f"  [{service_id}] Unexpected redirect location: {location}")
+        print(f"  [{service_id}] Unexpected redirect location: {location}", file=sys.stderr)
         return []
 
     current_version = parts[1]
@@ -293,7 +294,7 @@ def discover_versions(service_id: str, session: requests.Session) -> list:
     try:
         page_data = scrape_page(seed_url, session)
     except Exception as e:
-        print(f"  [{service_id}] Failed to fetch seed page: {e}")
+        print(f"  [{service_id}] Failed to fetch seed page: {e}", file=sys.stderr)
         return [{"version": current_version, "seed": seed_slug}]
 
     raw_versions = page_data.get("versions", [])
@@ -309,7 +310,7 @@ def discover_all_versions(service_ids: list) -> list:
     lock = threading.Lock()
 
     def _discover_one(service_id: str) -> None:
-        print(f"Discovering versions for {service_id}...")
+        print(f"Discovering versions for {service_id}...", file=sys.stderr)
         versions = discover_versions(service_id, _get_session())
         with lock:
             for v in versions:
@@ -331,12 +332,12 @@ def scrape_service(service_id: str, version: str, seed_slug: str, session: reque
     Discovers the full sidebar from the seed page, then fetches all pages concurrently.
     """
     seed_url = f"{BASE_URL}/{service_id}/{version}/{seed_slug}"
-    print(f"\n[{service_id} {version}] Seed: {seed_url}")
+    print(f"\n[{service_id} {version}] Seed: {seed_url}", file=sys.stderr)
 
     seed_data = scrape_page(seed_url, session)
     sidebar = seed_data.get("sidebarData", [])
     pages_to_visit = collect_sidebar_urls(sidebar)
-    print(f"  {len(pages_to_visit)} pages in sidebar")
+    print(f"  {len(pages_to_visit)} pages in sidebar", file=sys.stderr)
 
     full_spec = seed_data.get("fullSpec")
     spec_lock = threading.Lock()
@@ -348,14 +349,14 @@ def scrape_service(service_id: str, version: str, seed_slug: str, session: reque
         url = page_info["url"]
         label = page_info["label"]
         method = page_info.get("method") or "DOC"
-        print(f"  [{method}] {label}")
+        print(f"  [{method}] {label}", file=sys.stderr)
         try:
             page_data = scrape_page(url, _get_session())
         except requests.HTTPError as e:
-            print(f"    HTTP {e.response.status_code}, skipping")
+            print(f"    HTTP {e.response.status_code}, skipping", file=sys.stderr)
             return
         except Exception as e:
-            print(f"    Error: {e}, skipping")
+            print(f"    Error: {e}, skipping", file=sys.stderr)
             return
         new_spec = page_data.get("fullSpec")
         if new_spec:
@@ -500,7 +501,7 @@ def run_vacuum(path: str) -> bool:
     """Run 'vacuum lint' on the YAML file. Returns True if no errors."""
     vacuum_bin = _find_vacuum()
     if not vacuum_bin:
-        print("  [vacuum] not found on PATH, skipping validation")
+        print("  [vacuum] not found on PATH, skipping validation", file=sys.stderr)
         return True
 
     result = subprocess.run(
@@ -513,7 +514,7 @@ def run_vacuum(path: str) -> bool:
     # Print only the summary lines (category table + totals)
     summary = [l for l in lines if any(kw in l for kw in ("total", "errors", "warnings", "Score", "✗", "▲", "●"))]
     for line in summary:
-        print(f"  [vacuum] {line.strip()}")
+        print(f"  [vacuum] {line.strip()}", file=sys.stderr)
     return result.returncode == 0
 
 
@@ -568,7 +569,7 @@ def _write_spec(spec: dict, path: str, validate: bool) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         yaml.dump(spec, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
-    print(f"  Saved: {path}")
+    print(f"  Saved: {path}", file=sys.stderr)
     if validate:
         run_vacuum(path)
 
@@ -579,7 +580,7 @@ def save_spec(data: dict, output_dir: str, validate: bool = False):
     full_spec = data.get("fullSpec")
 
     if not full_spec:
-        print(f"  No OpenAPI spec found for {service_id} {version}, skipping")
+        print(f"  No OpenAPI spec found for {service_id} {version}, skipping", file=sys.stderr)
         return
 
     full_spec = sanitize_spec(full_spec)
@@ -599,7 +600,7 @@ def save_spec(data: dict, output_dir: str, validate: bool = False):
         legacy = os.path.join(base_dir, "openapi.yaml")
         if os.path.exists(legacy):
             os.remove(legacy)
-            print(f"  Removed: {legacy}")
+            print(f"  Removed: {legacy}", file=sys.stderr)
     else:
         _write_spec(full_spec, os.path.join(base_dir, "openapi.yaml"), validate)
 
@@ -679,16 +680,16 @@ def main():
             if not os.path.exists(spec_output_path(args.output, c["serviceId"], c["version"]))
         ]
         if not missing:
-            print("All specs are up to date.")
+            print("All specs are up to date.", file=sys.stderr)
             return
-        print(f"Found {len(missing)} new service/version combos to scrape.")
+        print(f"Found {len(missing)} new service/version combos to scrape.", file=sys.stderr)
         combos = missing
 
     for combo in combos:
         data = scrape_service(combo["serviceId"], combo["version"], combo["seed"], session, workers=args.workers)
         save_spec(data, args.output, validate=args.validate)
 
-    print("\nDone.")
+    print("\nDone.", file=sys.stderr)
 
 
 if __name__ == "__main__":
