@@ -7,7 +7,9 @@ embedded in each page's HTML. Each page embeds the full OpenAPI spec, sidebar
 navigation, and per-endpoint details.
 
 Output structure:
-    {output_dir}/{service_id}/{version}/openapi.yaml
+    {output_dir}/{service_id}/{version}/openapi.yaml         (site-manager, mobility)
+    {output_dir}/{service_id}/{version}/openapi-local.yaml   (network, protect — local access)
+    {output_dir}/{service_id}/{version}/openapi-cloud.yaml   (network, protect — cloud connector)
 
 Usage:
     # Scrape all services, skip versions already on disk
@@ -27,6 +29,7 @@ Usage:
 """
 
 import argparse
+import copy
 import json
 import os
 import re
@@ -40,6 +43,13 @@ import yaml
 BASE_URL = "https://developer.ui.com"
 KNOWN_SERVICES = ["site-manager", "network", "protect", "mobility"]
 REQUEST_DELAY = 0.5  # seconds between requests
+
+# Services that run on the console and are accessible both locally and via
+# the cloud connector. Value is the proxy path segment used in both URLs.
+SERVICE_PROXY_PATHS = {
+    "network": "proxy/network/integration",
+    "protect": "proxy/protect/integration",
+}
 
 
 # ---------------------------------------------------------------------------
@@ -450,7 +460,49 @@ def _find_vacuum() -> str:
 # ---------------------------------------------------------------------------
 
 def spec_output_path(output_dir: str, service_id: str, version: str) -> str:
+    """Primary path used for --check-new existence checks."""
+    if service_id in SERVICE_PROXY_PATHS:
+        return os.path.join(output_dir, service_id, version, "openapi-local.yaml")
     return os.path.join(output_dir, service_id, version, "openapi.yaml")
+
+
+def _build_local_servers(proxy_path: str) -> list:
+    return [
+        {
+            "url": f"https://{{host}}/{proxy_path}",
+            "description": "Local (direct access)",
+            "variables": {
+                "host": {
+                    "default": "192.168.1.1",
+                    "description": "IP address or hostname of the UniFi console",
+                }
+            },
+        }
+    ]
+
+
+def _build_cloud_servers(proxy_path: str) -> list:
+    return [
+        {
+            "url": f"https://api.ui.com/v1/connector/consoles/{{consoleId}}/{proxy_path}",
+            "description": "Cloud connector",
+            "variables": {
+                "consoleId": {
+                    "default": "",
+                    "description": "Console Host ID",
+                }
+            },
+        }
+    ]
+
+
+def _write_spec(spec: dict, path: str, validate: bool) -> None:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        yaml.dump(spec, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
+    print(f"  Saved: {path}")
+    if validate:
+        run_vacuum(path)
 
 
 def save_spec(data: dict, output_dir: str, validate: bool = False):
@@ -463,17 +515,19 @@ def save_spec(data: dict, output_dir: str, validate: bool = False):
         return
 
     full_spec = sanitize_spec(full_spec)
+    base_dir = os.path.join(output_dir, service_id, version)
 
-    out_path = spec_output_path(output_dir, service_id, version)
-    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    proxy_path = SERVICE_PROXY_PATHS.get(service_id)
+    if proxy_path:
+        local_spec = copy.deepcopy(full_spec)
+        local_spec["servers"] = _build_local_servers(proxy_path)
+        _write_spec(local_spec, os.path.join(base_dir, "openapi-local.yaml"), validate)
 
-    with open(out_path, "w", encoding="utf-8") as f:
-        yaml.dump(full_spec, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
-
-    print(f"  Saved: {out_path}")
-
-    if validate:
-        run_vacuum(out_path)
+        cloud_spec = copy.deepcopy(full_spec)
+        cloud_spec["servers"] = _build_cloud_servers(proxy_path)
+        _write_spec(cloud_spec, os.path.join(base_dir, "openapi-cloud.yaml"), validate)
+    else:
+        _write_spec(full_spec, os.path.join(base_dir, "openapi.yaml"), validate)
 
 
 # ---------------------------------------------------------------------------
