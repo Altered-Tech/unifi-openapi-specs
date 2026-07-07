@@ -29,12 +29,13 @@ Usage:
 """
 
 import argparse
+import concurrent.futures
 import copy
 import json
 import os
 import re
 import subprocess
-import time
+import threading
 from urllib.parse import urljoin
 
 import requests
@@ -42,7 +43,9 @@ import yaml
 
 BASE_URL = "https://developer.ui.com"
 KNOWN_SERVICES = ["site-manager", "network", "protect", "mobility"]
-REQUEST_DELAY = 0.5  # seconds between requests
+MAX_WORKERS = 4  # concurrent page fetches per service
+
+_thread_local = threading.local()
 
 # Services that run on the console and are accessible both locally and via
 # the cloud connector. Value is the proxy path segment used in both URLs.
@@ -65,6 +68,13 @@ def make_session() -> requests.Session:
         }
     )
     return session
+
+
+def _get_session() -> requests.Session:
+    """Return a per-thread requests.Session, creating one if needed."""
+    if not hasattr(_thread_local, "session"):
+        _thread_local.session = make_session()
+    return _thread_local.session
 
 
 def fetch_page(url: str, session: requests.Session) -> str:
@@ -293,15 +303,21 @@ def discover_versions(service_id: str, session: requests.Session) -> list:
     return [{"version": current_version, "seed": seed_slug}]
 
 
-def discover_all_versions(service_ids: list, session: requests.Session) -> list:
-    """Return list of {"serviceId", "version", "seed"} for all services."""
-    results = []
-    for service_id in service_ids:
+def discover_all_versions(service_ids: list) -> list:
+    """Return list of {"serviceId", "version", "seed"} for all services, fetched concurrently."""
+    results: list = []
+    lock = threading.Lock()
+
+    def _discover_one(service_id: str) -> None:
         print(f"Discovering versions for {service_id}...")
-        versions = discover_versions(service_id, session)
-        for v in versions:
-            results.append({"serviceId": service_id, **v})
-        time.sleep(REQUEST_DELAY)
+        versions = discover_versions(service_id, _get_session())
+        with lock:
+            for v in versions:
+                results.append({"serviceId": service_id, **v})
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=len(service_ids)) as executor:
+        list(executor.map(_discover_one, service_ids))
+
     return results
 
 
@@ -309,10 +325,10 @@ def discover_all_versions(service_ids: list, session: requests.Session) -> list:
 # Scraping a full service/version
 # ---------------------------------------------------------------------------
 
-def scrape_service(service_id: str, version: str, seed_slug: str, session: requests.Session) -> dict:
+def scrape_service(service_id: str, version: str, seed_slug: str, session: requests.Session, workers: int = MAX_WORKERS) -> dict:
     """
     Scrape all pages for one service version.
-    Discovers the full sidebar from the seed page, then visits each page.
+    Discovers the full sidebar from the seed page, then fetches all pages concurrently.
     """
     seed_url = f"{BASE_URL}/{service_id}/{version}/{seed_slug}"
     print(f"\n[{service_id} {version}] Seed: {seed_url}")
@@ -323,33 +339,33 @@ def scrape_service(service_id: str, version: str, seed_slug: str, session: reque
     print(f"  {len(pages_to_visit)} pages in sidebar")
 
     full_spec = seed_data.get("fullSpec")
+    spec_lock = threading.Lock()
     visited = {seed_url}
+    unvisited = [p for p in pages_to_visit if p["url"] not in visited]
 
-    for page_info in pages_to_visit:
+    def _fetch_one(page_info: dict) -> None:
+        nonlocal full_spec
         url = page_info["url"]
-        if url in visited:
-            continue
-        visited.add(url)
-
         label = page_info["label"]
         method = page_info.get("method") or "DOC"
         print(f"  [{method}] {label}")
-        time.sleep(REQUEST_DELAY)
-
         try:
-            page_data = scrape_page(url, session)
+            page_data = scrape_page(url, _get_session())
         except requests.HTTPError as e:
             print(f"    HTTP {e.response.status_code}, skipping")
-            continue
+            return
         except Exception as e:
             print(f"    Error: {e}, skipping")
-            continue
-
+            return
         new_spec = page_data.get("fullSpec")
         if new_spec:
-            current_count = len(full_spec.get("paths", {})) if full_spec else 0
-            if len(new_spec.get("paths", {})) > current_count:
-                full_spec = new_spec
+            with spec_lock:
+                current_count = len(full_spec.get("paths", {})) if full_spec else 0
+                if len(new_spec.get("paths", {})) > current_count:
+                    full_spec = new_spec
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
+        list(executor.map(_fetch_one, unvisited))
 
     return {
         "serviceId": service_id,
@@ -432,8 +448,10 @@ def fix_discriminators(spec: dict) -> dict:
     """
     Add ``oneOf`` to schemas that are union selectors: they have a
     ``discriminator.mapping`` but their ``properties`` contains only the
-    discriminator property and at most one shared property (e.g. ``type`` and
-    ``matchOpposite``).  Schemas with two or more additional properties are
+    discriminator property plus at most the allowed shared properties
+    (currently ``matchOpposite``).
+
+    Schemas with other additional properties alongside the discriminator are
     concrete types — they use discriminator as a hint, not to define a union —
     and are left unchanged.
 
@@ -444,6 +462,10 @@ def fix_discriminators(spec: dict) -> dict:
     the bare discriminator property and discards all variant-specific fields
     from the decoded model.
     """
+    # Properties that are shared across all variants of a union and should not
+    # prevent oneOf from being added when they appear in the base schema.
+    ALLOWED_SHARED_PROPS = {"matchOpposite"}
+
     def _walk(obj: object, inside_allof: bool = False) -> None:
         if isinstance(obj, dict):
             mapping = obj.get("discriminator", {}).get("mapping")
@@ -451,7 +473,7 @@ def fix_discriminators(spec: dict) -> dict:
                 props = obj.get("properties", {})
                 discriminator_prop = obj["discriminator"]["propertyName"]
                 non_discriminator_props = {k for k in props if k != discriminator_prop}
-                if len(non_discriminator_props) <= 1:
+                if non_discriminator_props.issubset(ALLOWED_SHARED_PROPS):
                     unique_refs = list(dict.fromkeys(mapping.values()))
                     obj["oneOf"] = [{"$ref": ref} for ref in unique_refs]
                     obj.pop("properties", None)
@@ -621,6 +643,12 @@ def main():
         action="store_true",
         help="Run 'vacuum lint' on each saved spec and print the summary.",
     )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=MAX_WORKERS,
+        help=f"Number of concurrent page fetches per service version (default: {MAX_WORKERS}).",
+    )
     args = parser.parse_args()
 
     session = make_session()
@@ -638,7 +666,7 @@ def main():
     )
 
     # Discover mode
-    combos = discover_all_versions(service_ids, session)
+    combos = discover_all_versions(service_ids)
 
     if args.discover:
         print(json.dumps(combos, indent=2))
@@ -657,7 +685,7 @@ def main():
         combos = missing
 
     for combo in combos:
-        data = scrape_service(combo["serviceId"], combo["version"], combo["seed"], session)
+        data = scrape_service(combo["serviceId"], combo["version"], combo["seed"], session, workers=args.workers)
         save_spec(data, args.output, validate=args.validate)
 
     print("\nDone.")

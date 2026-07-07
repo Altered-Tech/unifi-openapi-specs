@@ -15,9 +15,10 @@ permissions:
   contents: write
 
 jobs:
-  scrape:
+  discover:
     runs-on: ubuntu-latest
-
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
@@ -31,26 +32,82 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Discover available versions
-        id: discover
+      - name: Discover available versions and build matrix
+        id: set-matrix
         run: |
           python api-scraper.py --discover > discovered.json
           echo "Discovered versions:"
           cat discovered.json
+          MATRIX=$(python3 -c "
+          import json, sys
+          data = json.load(open('discovered.json'))
+          services = list(dict.fromkeys(d['serviceId'] for d in data))
+          print(json.dumps({'service': services}))
+          ")
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
+  scrape:
+    needs: discover
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.discover.outputs.matrix) }}
+      fail-fast: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
       - name: Install vacuum
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: curl -fsSL https://quobix.com/scripts/install_vacuum.sh | sh
 
-      - name: Scrape new specs
+      - name: Scrape ${{ matrix.service }}
         run: |
           if [ "${{ github.event.inputs.force_all }}" = "true" ]; then
-            echo "Force mode: scraping all versions"
-            python api-scraper.py --validate
+            echo "Force mode: scraping all versions for ${{ matrix.service }}"
+            python api-scraper.py --services ${{ matrix.service }} --validate
           else
-            python api-scraper.py --check-new --validate
+            python api-scraper.py --services ${{ matrix.service }} --check-new --validate
           fi
+
+      - name: Stage specs for upload
+        run: |
+          mkdir -p _stage
+          if [ -d "${{ matrix.service }}" ]; then
+            cp -r "${{ matrix.service }}" _stage/
+          fi
+
+      - name: Upload specs artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: specs-${{ matrix.service }}
+          path: _stage/
+          if-no-files-found: ignore
+
+  commit:
+    needs: scrape
+    runs-on: ubuntu-latest
+    if: ${{ !cancelled() }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+
+      - name: Download all scraped specs
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: specs-*
+          merge-multiple: true
+          path: .
 
       - name: Check for new files
         id: check_changes
