@@ -425,6 +425,52 @@ def sanitize_spec(spec: dict) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Discriminator fixup
+# ---------------------------------------------------------------------------
+
+def fix_discriminators(spec: dict) -> dict:
+    """
+    Add ``oneOf`` to schemas that are union selectors: they have a
+    ``discriminator.mapping`` but their ``properties`` contains only the
+    discriminator property and at most one shared property (e.g. ``type`` and
+    ``matchOpposite``).  Schemas with two or more additional properties are
+    concrete types — they use discriminator as a hint, not to define a union —
+    and are left unchanged.
+
+    Also skips schemas that are direct members of an ``allOf`` array, where
+    the discriminator marks inheritance rather than a union.
+
+    Without ``oneOf`` on union selectors, swift-openapi-generator emits only
+    the bare discriminator property and discards all variant-specific fields
+    from the decoded model.
+    """
+    def _walk(obj: object, inside_allof: bool = False) -> None:
+        if isinstance(obj, dict):
+            mapping = obj.get("discriminator", {}).get("mapping")
+            if mapping and not inside_allof and "oneOf" not in obj and "anyOf" not in obj:
+                props = obj.get("properties", {})
+                discriminator_prop = obj["discriminator"]["propertyName"]
+                non_discriminator_props = {k for k in props if k != discriminator_prop}
+                if len(non_discriminator_props) <= 1:
+                    unique_refs = list(dict.fromkeys(mapping.values()))
+                    obj["oneOf"] = [{"$ref": ref} for ref in unique_refs]
+                    obj.pop("properties", None)
+                    obj.pop("required", None)
+            for key, val in obj.items():
+                if key == "allOf" and isinstance(val, list):
+                    for item in val:
+                        _walk(item, inside_allof=True)
+                else:
+                    _walk(val, inside_allof=False)
+        elif isinstance(obj, list):
+            for item in obj:
+                _walk(item, inside_allof=False)
+
+    _walk(spec)
+    return spec
+
+
+# ---------------------------------------------------------------------------
 # Vacuum validation
 # ---------------------------------------------------------------------------
 
@@ -515,6 +561,7 @@ def save_spec(data: dict, output_dir: str, validate: bool = False):
         return
 
     full_spec = sanitize_spec(full_spec)
+    full_spec = fix_discriminators(full_spec)
     base_dir = os.path.join(output_dir, service_id, version)
 
     proxy_path = SERVICE_PROXY_PATHS.get(service_id)
