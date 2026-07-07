@@ -1,0 +1,229 @@
+name: Deploy API Docs to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/openapi*.yaml"
+      - ".github/workflows/deploy-docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Redocly CLI
+        run: npm install -g @redocly/cli@latest
+
+      - name: Build documentation
+        run: |
+          mkdir -p _site
+          while IFS= read -r spec_file; do
+            rel_path="${spec_file#./}"
+            dir_path=$(dirname "$rel_path")
+            spec_name=$(basename "$spec_file" .yaml)
+            mkdir -p "_site/$dir_path"
+            echo "Building: $spec_file"
+            redocly build-docs "$spec_file" --output "_site/$dir_path/$spec_name.html" || echo "WARNING: failed to build $spec_file"
+          done < <(find . -name "openapi*.yaml" -not -path "./.git/*" | sort)
+
+      - name: Generate landing page
+        run: |
+          python3 << 'PYEOF'
+          import os
+          from pathlib import Path
+          from collections import defaultdict
+
+          site_dir = Path("_site")
+          products = defaultdict(lambda: defaultdict(list))
+
+          for html_file in sorted(site_dir.rglob("*.html")):
+              rel = html_file.relative_to(site_dir)
+              parts = rel.parts
+              if len(parts) >= 3:
+                  product, version, filename = parts[0], parts[1], parts[2]
+                  spec_label = filename.replace(".html", "").replace("openapi", "").replace("-", " ").strip() or "default"
+                  products[product][version].append((spec_label, str(rel)))
+
+          product_display = {
+              "network": "UniFi Network",
+              "protect": "UniFi Protect",
+              "mobility": "UniFi Mobility",
+              "site-manager": "UniFi Site Manager",
+          }
+
+          product_order = ["network", "protect", "mobility", "site-manager"]
+          ordered_products = [p for p in product_order if p in products] + \
+                             [p for p in sorted(products) if p not in product_order]
+
+          cards_html = ""
+          for product in ordered_products:
+              versions = sorted(products[product].keys(), reverse=True)
+              version_rows = ""
+              for version in versions:
+                  specs = products[product][version]
+                  spec_links = " &nbsp;·&nbsp; ".join(
+                      f'<a href="{path}">{label if label else "docs"}</a>'
+                      for label, path in sorted(specs)
+                  )
+                  version_rows += f"""
+                        <tr>
+                          <td class="version">{version}</td>
+                          <td class="links">{spec_links}</td>
+                        </tr>"""
+
+              cards_html += f"""
+                <div class="card">
+                  <h2>{product_display.get(product, product.replace("-", " ").title())}</h2>
+                  <table>
+                    <thead><tr><th>Version</th><th>Spec</th></tr></thead>
+                    <tbody>{version_rows}
+                    </tbody>
+                  </table>
+                </div>"""
+
+          html = f"""<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>UniFi API Docs</title>
+            <style>
+              *, *::before, *::after {{ box-sizing: border-box; }}
+              body {{
+                margin: 0;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                background: #0f172a;
+                color: #e2e8f0;
+                min-height: 100vh;
+              }}
+              header {{
+                background: #1e293b;
+                border-bottom: 1px solid #334155;
+                padding: 1.5rem 2rem;
+              }}
+              header h1 {{
+                margin: 0;
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #f1f5f9;
+              }}
+              header p {{
+                margin: 0.25rem 0 0;
+                font-size: 0.875rem;
+                color: #94a3b8;
+              }}
+              main {{
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 2rem 1.5rem;
+              }}
+              .grid {{
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+                gap: 1.5rem;
+              }}
+              .card {{
+                background: #1e293b;
+                border: 1px solid #334155;
+                border-radius: 0.75rem;
+                padding: 1.25rem 1.5rem;
+              }}
+              .card h2 {{
+                margin: 0 0 1rem;
+                font-size: 1rem;
+                font-weight: 600;
+                color: #f1f5f9;
+              }}
+              table {{
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 0.875rem;
+              }}
+              thead th {{
+                text-align: left;
+                padding: 0.375rem 0.5rem;
+                color: #64748b;
+                font-weight: 500;
+                border-bottom: 1px solid #334155;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+              }}
+              tbody tr:hover td {{ background: #263348; }}
+              td {{
+                padding: 0.375rem 0.5rem;
+                border-bottom: 1px solid #1e293b;
+              }}
+              td.version {{
+                color: #94a3b8;
+                white-space: nowrap;
+                font-family: ui-monospace, monospace;
+                font-size: 0.8125rem;
+                width: 30%;
+              }}
+              td.links a {{
+                color: #60a5fa;
+                text-decoration: none;
+                font-weight: 500;
+              }}
+              td.links a:hover {{ text-decoration: underline; color: #93c5fd; }}
+              footer {{
+                text-align: center;
+                padding: 2rem;
+                color: #475569;
+                font-size: 0.8125rem;
+              }}
+            </style>
+          </head>
+          <body>
+            <header>
+              <h1>UniFi API Documentation</h1>
+              <p>Auto-generated OpenAPI specs for UniFi products</p>
+            </header>
+            <main>
+              <div class="grid">{cards_html}
+              </div>
+            </main>
+            <footer>
+              Generated from <a href="https://github.com/{os.environ.get('GITHUB_REPOSITORY', '')}" style="color:#475569">{os.environ.get('GITHUB_REPOSITORY', 'GitHub')}</a>
+            </footer>
+          </body>
+          </html>"""
+
+          (site_dir / "index.html").write_text(html)
+          print("Landing page written to _site/index.html")
+          PYEOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
