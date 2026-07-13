@@ -1,0 +1,4352 @@
+item:
+- id: f82c07c0-9aa3-417a-8691-8e3d9411cb9d
+  name: Information about application
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: 4a8c984c-2594-4bc5-a1f8-28ec5db602bc
+    name: Get application information
+    request:
+      name: Get application information
+      description:
+        content: Get generic information about the Protect application
+        type: text/plain
+      url:
+        path:
+        - v1
+        - meta
+        - info
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 1fa3fe08-5ab6-4730-ac9a-6690f7266f89
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - meta
+          - info
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"applicationVersion\": \"1.0.0\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: e343c55a-0d98-4765-aa59-86404d48fc8d
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - meta
+          - info
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: fe1bc033-afaa-4634-980b-718a1cc38ae7
+  name: Viewer information & management
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: 7330d0da-82e4-4940-bf42-ff592cce8415
+    name: Get viewer details
+    request:
+      name: Get viewer details
+      description:
+        content: Get detailed information about a specific viewer
+        type: text/plain
+      url:
+        path:
+        - v1
+        - viewers
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of viewer
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: a2315a9f-a722-4b14-a589-8c8873ff1672
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - viewers
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of viewer
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
+        ,\n  \"liveview\": \"66d025b301ebc903e80003ea\",\n  \"streamLimit\": 1712.8291070430391\n\
+        }"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 6440d63e-ed19-4f8f-b592-4c4b310ae4d7
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - viewers
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of viewer
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 20f35d69-af66-42cb-b0e9-62410a215d32
+    name: Patch viewer settings
+    request:
+      name: Patch viewer settings
+      description:
+        content: Patch the settings for a specific viewer
+        type: text/plain
+      url:
+        path:
+        - v1
+        - viewers
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of viewer
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: PATCH
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"name\": \"<string>\",\n  \"liveview\": \"<string>\"\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: 05c48681-94e8-4c01-acc1-4ecaf1218c1a
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - viewers
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of viewer
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"string\",\n  \"liveview\": \"66d025b301ebc903e80003ea\"\
+            \n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
+        ,\n  \"liveview\": \"66d025b301ebc903e80003ea\",\n  \"streamLimit\": 1712.8291070430391\n\
+        }"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: d3b2c0aa-ae57-4679-b465-6457f9effa3c
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - viewers
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of viewer
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"string\",\n  \"liveview\": \"66d025b301ebc903e80003ea\"\
+            \n}"
+          options:
+            raw:
+              language: json
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: cc036954-1cd7-407c-91f4-813c0eaaa423
+    name: Get all viewers
+    request:
+      name: Get all viewers
+      description:
+        content: Get detailed information about all viewers
+        type: text/plain
+      url:
+        path:
+        - v1
+        - viewers
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: c7a76cd8-7032-4512-8241-20718e14eb7b
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - viewers
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "[\n  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\":\
+        \ \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n\
+        \    \"mac\": \"string\",\n    \"liveview\": \"66d025b301ebc903e80003ea\"\
+        ,\n    \"streamLimit\": 1746.8961646626412\n  },\n  {\n    \"id\": \"66d025b301ebc903e80003ea\"\
+        ,\n    \"modelKey\": \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\"\
+        : \"string\",\n    \"mac\": \"string\",\n    \"liveview\": \"66d025b301ebc903e80003ea\"\
+        ,\n    \"streamLimit\": 1673.1624898732678\n  }\n]"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: a3a3a8c5-e72d-416f-b148-4a2447540ddf
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - viewers
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: 57628757-680b-41f8-b03a-5179155afc8b
+  name: Live view management
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: a270b0e2-21bb-4466-a507-21288a89088d
+    name: Get live view details
+    request:
+      name: Get live view details
+      description:
+        content: Get detailed information about a specific live view
+        type: text/plain
+      url:
+        path:
+        - v1
+        - liveviews
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of liveview
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 50814337-d93a-4d16-9dc6-e496a505d0bf
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - liveviews
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of liveview
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"name\": \"string\",\n  \"isDefault\": true,\n  \"isGlobal\": true,\n\
+        \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 3.3507516355137037,\n\
+        \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
+        ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
+        time\",\n      \"cycleInterval\": 7130.058261149426\n    },\n    {\n     \
+        \ \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n        \"66d025b301ebc903e80003ea\"\
+        \n      ],\n      \"cycleMode\": \"motion\",\n      \"cycleInterval\": 3107.8209405159796\n\
+        \    }\n  ]\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 4e77f9c7-f7f8-4467-80cf-65d285f450fd
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - liveviews
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of liveview
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: ddc010f9-5f8f-410c-8ab0-ccb2c71d6397
+    name: Patch live view configuration
+    request:
+      name: Patch live view configuration
+      description:
+        content: Patch the configuration about a specific live view
+        type: text/plain
+      url:
+        path:
+        - v1
+        - liveviews
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of liveview
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: PATCH
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"id\": \"<string>\",\n  \"modelKey\": \"<string>\",\n  \"name\"\
+          : \"<string>\",\n  \"isDefault\": \"<boolean>\",\n  \"isGlobal\": \"<boolean>\"\
+          ,\n  \"owner\": \"<string>\",\n  \"layout\": \"<number>\",\n  \"slots\"\
+          : [\n    {\n      \"cameras\": [\n        \"<string>\",\n        \"<string>\"\
+          \n      ],\n      \"cycleMode\": \"<string>\",\n      \"cycleInterval\"\
+          : \"<number>\"\n    },\n    {\n      \"cameras\": [\n        \"<string>\"\
+          ,\n        \"<string>\"\n      ],\n      \"cycleMode\": \"<string>\",\n\
+          \      \"cycleInterval\": \"<number>\"\n    }\n  ]\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: 0c673197-9905-4e8c-8eb5-22ba061d4080
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - liveviews
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of liveview
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+            ,\n  \"name\": \"string\",\n  \"isDefault\": false,\n  \"isGlobal\": true,\n\
+            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 18.086536344219926,\n\
+            \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
+            ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\"\
+            : \"motion\",\n      \"cycleInterval\": 4040.9431194183567\n    },\n \
+            \   {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n \
+            \       \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
+            time\",\n      \"cycleInterval\": 4389.475286338314\n    }\n  ]\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"name\": \"string\",\n  \"isDefault\": true,\n  \"isGlobal\": true,\n\
+        \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 3.3507516355137037,\n\
+        \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
+        ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
+        time\",\n      \"cycleInterval\": 7130.058261149426\n    },\n    {\n     \
+        \ \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n        \"66d025b301ebc903e80003ea\"\
+        \n      ],\n      \"cycleMode\": \"motion\",\n      \"cycleInterval\": 3107.8209405159796\n\
+        \    }\n  ]\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: c88e5349-600f-46a1-bf0d-551dae4ef3b2
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - liveviews
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of liveview
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+            ,\n  \"name\": \"string\",\n  \"isDefault\": false,\n  \"isGlobal\": true,\n\
+            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 18.086536344219926,\n\
+            \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
+            ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\"\
+            : \"motion\",\n      \"cycleInterval\": 4040.9431194183567\n    },\n \
+            \   {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n \
+            \       \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
+            time\",\n      \"cycleInterval\": 4389.475286338314\n    }\n  ]\n}"
+          options:
+            raw:
+              language: json
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 256b59c8-714b-4a7c-890a-d37afe657773
+    name: Get all live views
+    request:
+      name: Get all live views
+      description:
+        content: Get detailed information about all live views
+        type: text/plain
+      url:
+        path:
+        - v1
+        - liveviews
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: d5853120-01e0-453b-ac01-296fb4e66743
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - liveviews
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "[\n  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\":\
+        \ \"string\",\n    \"name\": \"string\",\n    \"isDefault\": false,\n    \"\
+        isGlobal\": true,\n    \"owner\": \"66d025b301ebc903e80003ea\",\n    \"layout\"\
+        : 19.402673247694796,\n    \"slots\": [\n      {\n        \"cameras\": [\n\
+        \          \"66d025b301ebc903e80003ea\",\n          \"66d025b301ebc903e80003ea\"\
+        \n        ],\n        \"cycleMode\": \"time\",\n        \"cycleInterval\"\
+        : 7218.9571140748885\n      },\n      {\n        \"cameras\": [\n        \
+        \  \"66d025b301ebc903e80003ea\",\n          \"66d025b301ebc903e80003ea\"\n\
+        \        ],\n        \"cycleMode\": \"time\",\n        \"cycleInterval\":\
+        \ 7656.648522476111\n      }\n    ]\n  },\n  {\n    \"id\": \"66d025b301ebc903e80003ea\"\
+        ,\n    \"modelKey\": \"string\",\n    \"name\": \"string\",\n    \"isDefault\"\
+        : true,\n    \"isGlobal\": true,\n    \"owner\": \"66d025b301ebc903e80003ea\"\
+        ,\n    \"layout\": 9.12789416847669,\n    \"slots\": [\n      {\n        \"\
+        cameras\": [\n          \"66d025b301ebc903e80003ea\",\n          \"66d025b301ebc903e80003ea\"\
+        \n        ],\n        \"cycleMode\": \"motion\",\n        \"cycleInterval\"\
+        : 8982.555127969988\n      },\n      {\n        \"cameras\": [\n         \
+        \ \"66d025b301ebc903e80003ea\",\n          \"66d025b301ebc903e80003ea\"\n\
+        \        ],\n        \"cycleMode\": \"time\",\n        \"cycleInterval\":\
+        \ 2706.080342653514\n      }\n    ]\n  }\n]"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: c64223a8-34d1-4c11-ae6f-ed0c586d3014
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - liveviews
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 302e7aed-ff9a-4e06-a025-b05fb5fb02a2
+    name: Create live view
+    request:
+      name: Create live view
+      description:
+        content: Create a new live view
+        type: text/plain
+      url:
+        path:
+        - v1
+        - liveviews
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"id\": \"<string>\",\n  \"modelKey\": \"<string>\",\n  \"name\"\
+          : \"<string>\",\n  \"isDefault\": \"<boolean>\",\n  \"isGlobal\": \"<boolean>\"\
+          ,\n  \"owner\": \"<string>\",\n  \"layout\": \"<number>\",\n  \"slots\"\
+          : [\n    {\n      \"cameras\": [\n        \"<string>\",\n        \"<string>\"\
+          \n      ],\n      \"cycleMode\": \"<string>\",\n      \"cycleInterval\"\
+          : \"<number>\"\n    },\n    {\n      \"cameras\": [\n        \"<string>\"\
+          ,\n        \"<string>\"\n      ],\n      \"cycleMode\": \"<string>\",\n\
+          \      \"cycleInterval\": \"<number>\"\n    }\n  ]\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: c04712cd-3d56-4239-a870-99b886c06f65
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - liveviews
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+            ,\n  \"name\": \"string\",\n  \"isDefault\": false,\n  \"isGlobal\": true,\n\
+            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 18.086536344219926,\n\
+            \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
+            ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\"\
+            : \"motion\",\n      \"cycleInterval\": 4040.9431194183567\n    },\n \
+            \   {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n \
+            \       \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
+            time\",\n      \"cycleInterval\": 4389.475286338314\n    }\n  ]\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"name\": \"string\",\n  \"isDefault\": true,\n  \"isGlobal\": true,\n\
+        \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 3.3507516355137037,\n\
+        \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
+        ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
+        time\",\n      \"cycleInterval\": 7130.058261149426\n    },\n    {\n     \
+        \ \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n        \"66d025b301ebc903e80003ea\"\
+        \n      ],\n      \"cycleMode\": \"motion\",\n      \"cycleInterval\": 3107.8209405159796\n\
+        \    }\n  ]\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: bbbaafcb-952c-4fce-9175-9f3b8f65805d
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - liveviews
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+            ,\n  \"name\": \"string\",\n  \"isDefault\": false,\n  \"isGlobal\": true,\n\
+            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 18.086536344219926,\n\
+            \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
+            ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\"\
+            : \"motion\",\n      \"cycleInterval\": 4040.9431194183567\n    },\n \
+            \   {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n \
+            \       \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
+            time\",\n      \"cycleInterval\": 4389.475286338314\n    }\n  ]\n}"
+          options:
+            raw:
+              language: json
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: d8dc0000-68a3-4dbb-9cf8-002f350c348d
+  name: WebSocket updates
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: 505bcb6f-5e2b-471b-9678-d0519ef50cee
+    name: Get update messages about devices
+    request:
+      name: Get update messages about devices
+      description:
+        content: A WebSocket subscription which broadcasts all changes happening to
+          Protect-managed hardware devices
+        type: text/plain
+      url:
+        path:
+        - v1
+        - subscribe
+        - devices
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 112e9273-0464-4ba0-a85a-2da5d06d9c5a
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - subscribe
+          - devices
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"type\": \"string\",\n  \"item\": {\n    \"id\": \"66d025b301ebc903e80003ea\"\
+        ,\n    \"modelKey\": \"string\",\n    \"name\": \"string\",\n    \"doorbellSettings\"\
+        : {\n      \"defaultMessageText\": \"string\",\n      \"defaultMessageResetTimeoutMs\"\
+        : 1575.2195424506453,\n      \"customMessages\": [\n        {\n          \"\
+        value\": \"<Error: Too many levels of nesting to fake this schema>\"\n   \
+        \     },\n        {\n          \"value\": \"<Error: Too many levels of nesting\
+        \ to fake this schema>\"\n        }\n      ],\n      \"customImages\": [\n\
+        \        {\n          \"value\": \"<Error: Too many levels of nesting to fake\
+        \ this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too\
+        \ many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n\
+        \  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 1fe7de21-2b95-4ff0-8eba-b43a7dab5497
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - subscribe
+          - devices
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 62af8df5-bcf8-407a-bbbc-d878d6d963dd
+    name: Get Protect event messages
+    request:
+      name: Get Protect event messages
+      description:
+        content: A WebSocket subscription that broadcasts Protect events
+        type: text/plain
+      url:
+        path:
+        - v1
+        - subscribe
+        - events
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 30da6150-02e5-4948-81d6-ab66ec2fd83d
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - subscribe
+          - events
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"type\": \"string\",\n  \"item\": {\n    \"id\": \"66d025b301ebc903e80003ea\"\
+        ,\n    \"modelKey\": \"string\",\n    \"type\": \"string\",\n    \"start\"\
+        : 1445408038748,\n    \"device\": \"66d025b301ebc903e80003ea\",\n    \"end\"\
+        : 1445408048748\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 83088af7-60e2-4765-8f52-2734379ee8a9
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - subscribe
+          - events
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: 1249019e-9d65-4181-b803-aa6b60dcf300
+  name: Camera PTZ control & management
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: a47f56f4-aa41-4a40-b111-49f376c10c6c
+    name: Start a camera PTZ patrol
+    request:
+      name: Start a camera PTZ patrol
+      description:
+        content: Start a camera PTZ patrol
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        - :id
+        - ptz
+        - patrol
+        - start
+        - :slot
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of camera
+        - disabled: false
+          type: any
+          value: <string>
+          key: slot
+          description: (Required) The slot number (0-4) of the patrol that is currently
+            running, or null if no patrol is running
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+    response:
+    - id: 5868f105-a20e-4b9b-bcdf-dcfb3229e415
+      name: The camera PTZ patrol was started successfully.
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - ptz
+          - patrol
+          - start
+          - :slot
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - disabled: false
+            type: any
+            value: <string>
+            key: slot
+            description: (Required) The slot number (0-4) of the patrol that is currently
+              running, or null if no patrol is running
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        method: POST
+        body: {}
+      status: No Content
+      code: 204
+      header:
+      - key: Content-Type
+        value: text/plain
+      body: ''
+      cookie: []
+      _postman_previewlanguage: text
+    - id: c2eb37ae-0d9e-4466-a1e7-d483e631ec36
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - ptz
+          - patrol
+          - start
+          - :slot
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - disabled: false
+            type: any
+            value: <string>
+            key: slot
+            description: (Required) The slot number (0-4) of the patrol that is currently
+              running, or null if no patrol is running
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: e22e4e22-9594-4d9d-9762-382c4ca1c91b
+    name: Stop active camera PTZ patrol
+    request:
+      name: Stop active camera PTZ patrol
+      description:
+        content: Stop active camera PTZ patrol
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        - :id
+        - ptz
+        - patrol
+        - stop
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of camera
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+    response:
+    - id: 36665d7b-7a1a-4330-8f38-bb5dc569f2e9
+      name: The camera PTZ patrol was stopped successfully.
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - ptz
+          - patrol
+          - stop
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        method: POST
+        body: {}
+      status: No Content
+      code: 204
+      header:
+      - key: Content-Type
+        value: text/plain
+      body: ''
+      cookie: []
+      _postman_previewlanguage: text
+    - id: ae9a5d4e-2278-4dea-ad88-8cb06be69c8e
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - ptz
+          - patrol
+          - stop
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 5c83c4e8-fc32-4ef1-9685-e14dd5d43463
+    name: Move PTZ camera to preset
+    request:
+      name: Move PTZ camera to preset
+      description:
+        content: Adjust the PTZ camera position to a specified preset
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        - :id
+        - ptz
+        - goto
+        - :slot
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of camera
+        - disabled: false
+          type: any
+          value: <string>
+          key: slot
+          description: (Required) The slot number (0-4) of the preset to move the
+            camera to
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+    response:
+    - id: 1b76dfe5-1cb8-47ac-bf09-8e94695bf359
+      name: The PTZ camera was moved to the given preset successfully.
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - ptz
+          - goto
+          - :slot
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - disabled: false
+            type: any
+            value: <string>
+            key: slot
+            description: (Required) The slot number (0-4) of the preset to move the
+              camera to
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        method: POST
+        body: {}
+      status: No Content
+      code: 204
+      header:
+      - key: Content-Type
+        value: text/plain
+      body: ''
+      cookie: []
+      _postman_previewlanguage: text
+    - id: 87174f38-50d5-4974-a651-47012524637f
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - ptz
+          - goto
+          - :slot
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - disabled: false
+            type: any
+            value: <string>
+            key: slot
+            description: (Required) The slot number (0-4) of the preset to move the
+              camera to
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: e726486a-f401-4931-ba32-319788180ff0
+  name: Alarm manager integration
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: 113d7580-a80e-4b45-a6e3-b2080fc97f74
+    name: Send a webhook to the alarm manager
+    request:
+      name: Send a webhook to the alarm manager
+      description:
+        content: Send a webhook to the alarm manager to trigger configured alarms
+        type: text/plain
+      url:
+        path:
+        - v1
+        - alarm-manager
+        - webhook
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) User defined string used to trigger only specific
+            alarms. Alarm should be configured with the same ID to be triggered.
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+    response:
+    - id: e78879ad-a050-48d4-8277-5b093aaaa7b3
+      name: Webhook was sent to alarm manager successfully
+      originalRequest:
+        url:
+          path:
+          - v1
+          - alarm-manager
+          - webhook
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) User defined string used to trigger only specific
+              alarms. Alarm should be configured with the same ID to be triggered.
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        method: POST
+        body: {}
+      status: No Content
+      code: 204
+      header:
+      - key: Content-Type
+        value: text/plain
+      body: ''
+      cookie: []
+      _postman_previewlanguage: text
+    - id: 387e9631-0d21-4550-835e-200f972e341e
+      name: Bad request response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - alarm-manager
+          - webhook
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) User defined string used to trigger only specific
+              alarms. Alarm should be configured with the same ID to be triggered.
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body: {}
+      status: Bad Request
+      code: 400
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"'id' is required\",\n  \"name\": \"BAD_REQUEST\",\n\
+        \  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: 67786935-0eaf-4d80-9303-4837dec01df7
+  name: Light information & management
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: d00b5518-b904-4f37-8fee-e95d72592c1d
+    name: Get light details
+    request:
+      name: Get light details
+      description:
+        content: Get detailed information about a specific light
+        type: text/plain
+      url:
+        path:
+        - v1
+        - lights
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of light
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 1475c42e-ee7e-4ef3-bc14-bb344b820824
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - lights
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of light
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
+        ,\n  \"lightModeSettings\": {\n    \"mode\": \"string\",\n    \"enableAt\"\
+        : \"string\"\n  },\n  \"lightDeviceSettings\": {\n    \"isIndicatorEnabled\"\
+        : true,\n    \"pirDuration\": 6943.868775968575,\n    \"pirSensitivity\":\
+        \ 0.4149870506888087,\n    \"ledLevel\": 2.7053936375100642\n  },\n  \"isDark\"\
+        : true,\n  \"isLightOn\": true,\n  \"isLightForceEnabled\": true,\n  \"lastMotion\"\
+        : 6645.572914868591,\n  \"isPirMotionDetected\": true,\n  \"camera\": \"66d025b301ebc903e80003ea\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: e5a8a7d8-6d78-436d-9ffc-be61e5acf0db
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - lights
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of light
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 9a7dd80c-e1f4-49f0-a606-e7307d08f32f
+    name: Patch light settings
+    request:
+      name: Patch light settings
+      description:
+        content: Patch the settings for a specific light
+        type: text/plain
+      url:
+        path:
+        - v1
+        - lights
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of light
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: PATCH
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"name\": \"<string>\",\n  \"isLightForceEnabled\": \"<boolean>\"\
+          ,\n  \"lightModeSettings\": {\n    \"mode\": \"<string>\",\n    \"enableAt\"\
+          : \"<string>\"\n  },\n  \"lightDeviceSettings\": {\n    \"isIndicatorEnabled\"\
+          : \"<boolean>\",\n    \"pirDuration\": \"<number>\",\n    \"pirSensitivity\"\
+          : \"<number>\",\n    \"ledLevel\": \"<number>\"\n  }\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: 0b794d77-d04e-4546-bd17-cbbe203d944d
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - lights
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of light
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"string\",\n  \"isLightForceEnabled\": false,\n  \"\
+            lightModeSettings\": {\n    \"mode\": \"string\",\n    \"enableAt\": \"\
+            string\"\n  },\n  \"lightDeviceSettings\": {\n    \"isIndicatorEnabled\"\
+            : true,\n    \"pirDuration\": 6385.491458728389,\n    \"pirSensitivity\"\
+            : 52.03133688848776,\n    \"ledLevel\": 3.0550047131793914\n  }\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
+        ,\n  \"lightModeSettings\": {\n    \"mode\": \"string\",\n    \"enableAt\"\
+        : \"string\"\n  },\n  \"lightDeviceSettings\": {\n    \"isIndicatorEnabled\"\
+        : true,\n    \"pirDuration\": 6943.868775968575,\n    \"pirSensitivity\":\
+        \ 0.4149870506888087,\n    \"ledLevel\": 2.7053936375100642\n  },\n  \"isDark\"\
+        : true,\n  \"isLightOn\": true,\n  \"isLightForceEnabled\": true,\n  \"lastMotion\"\
+        : 6645.572914868591,\n  \"isPirMotionDetected\": true,\n  \"camera\": \"66d025b301ebc903e80003ea\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 627983b1-3498-43a4-b44e-c02121d977de
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - lights
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of light
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"string\",\n  \"isLightForceEnabled\": false,\n  \"\
+            lightModeSettings\": {\n    \"mode\": \"string\",\n    \"enableAt\": \"\
+            string\"\n  },\n  \"lightDeviceSettings\": {\n    \"isIndicatorEnabled\"\
+            : true,\n    \"pirDuration\": 6385.491458728389,\n    \"pirSensitivity\"\
+            : 52.03133688848776,\n    \"ledLevel\": 3.0550047131793914\n  }\n}"
+          options:
+            raw:
+              language: json
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: fde6ed07-746a-49ce-ac17-e6a5bf9779ba
+    name: Get all lights
+    request:
+      name: Get all lights
+      description:
+        content: Get detailed information about all lights
+        type: text/plain
+      url:
+        path:
+        - v1
+        - lights
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 23f30fd8-ae4c-4cf7-a04b-0333cec6f690
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - lights
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "[\n  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\":\
+        \ \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n\
+        \    \"mac\": \"string\",\n    \"lightModeSettings\": {\n      \"mode\": \"\
+        string\",\n      \"enableAt\": \"string\"\n    },\n    \"lightDeviceSettings\"\
+        : {\n      \"isIndicatorEnabled\": true,\n      \"pirDuration\": 1959.6207927447451,\n\
+        \      \"pirSensitivity\": 5.091121689686018,\n      \"ledLevel\": 2.778709622850112\n\
+        \    },\n    \"isDark\": true,\n    \"isLightOn\": true,\n    \"isLightForceEnabled\"\
+        : true,\n    \"lastMotion\": 8489.635116049565,\n    \"isPirMotionDetected\"\
+        : true,\n    \"camera\": \"66d025b301ebc903e80003ea\"\n  },\n  {\n    \"id\"\
+        : \"66d025b301ebc903e80003ea\",\n    \"modelKey\": \"string\",\n    \"state\"\
+        : \"CONNECTED\",\n    \"name\": \"string\",\n    \"mac\": \"string\",\n  \
+        \  \"lightModeSettings\": {\n      \"mode\": \"string\",\n      \"enableAt\"\
+        : \"string\"\n    },\n    \"lightDeviceSettings\": {\n      \"isIndicatorEnabled\"\
+        : true,\n      \"pirDuration\": 2388.124873095949,\n      \"pirSensitivity\"\
+        : 45.566981212832246,\n      \"ledLevel\": 4.713826257249658\n    },\n   \
+        \ \"isDark\": true,\n    \"isLightOn\": true,\n    \"isLightForceEnabled\"\
+        : true,\n    \"lastMotion\": 2390.249855882076,\n    \"isPirMotionDetected\"\
+        : false,\n    \"camera\": \"66d025b301ebc903e80003ea\"\n  }\n]"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: b6cfac85-268f-4240-8dd0-78a41e401394
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - lights
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: f45ae94f-8389-454d-a2f2-2e16ad6f3823
+  name: Camera information & management
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: 4790f28c-a2a1-40cf-8184-036ebed29b08
+    name: Get camera details
+    request:
+      name: Get camera details
+      description:
+        content: Get detailed information about a specific camera
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of camera
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 4a98af08-d01d-4f03-9e7f-ea4c35aa08db
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
+        ,\n  \"isMicEnabled\": true,\n  \"osdSettings\": {\n    \"isNameEnabled\"\
+        : true,\n    \"isDateEnabled\": false,\n    \"isLogoEnabled\": false,\n  \
+        \  \"isDebugEnabled\": false,\n    \"overlayLocation\": \"topMiddle\"\n  },\n\
+        \  \"ledSettings\": {\n    \"isEnabled\": true,\n    \"welcomeLed\": true,\n\
+        \    \"floodLed\": true\n  },\n  \"lcdMessage\": {\n    \"type\": \"IMAGE\"\
+        ,\n    \"resetAt\": 5693.433373515742,\n    \"text\": \"string\"\n  },\n \
+        \ \"micVolume\": 42.307171888108996,\n  \"activePatrolSlot\": 0,\n  \"videoMode\"\
+        : \"sport\",\n  \"hdrType\": \"on\",\n  \"featureFlags\": {\n    \"supportFullHdSnapshot\"\
+        : true,\n    \"hasHdr\": false,\n    \"smartDetectTypes\": [\n      \"licensePlate\"\
+        ,\n      \"face\"\n    ],\n    \"smartDetectAudioTypes\": [\n      \"alrmBark\"\
+        ,\n      \"alrmSmoke\"\n    ],\n    \"videoModes\": [\n      \"lprReflex\"\
+        ,\n      \"sport\"\n    ],\n    \"hasMic\": false,\n    \"hasLedStatus\":\
+        \ false,\n    \"hasSpeaker\": true\n  },\n  \"smartDetectSettings\": {\n \
+        \   \"objectTypes\": [\n      \"vehicle\",\n      \"licensePlate\"\n    ],\n\
+        \    \"audioTypes\": [\n      \"alrmBabyCry\",\n      \"alrmCarHorn\"\n  \
+        \  ]\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 6d68d059-0233-4991-b1ad-13efc0cd8b4e
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: e839a12b-fc13-45f9-a5a1-edc64e7b6594
+    name: Patch camera settings
+    request:
+      name: Patch camera settings
+      description:
+        content: Patch the settings for a specific camera
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of camera
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: PATCH
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"name\": \"<string>\",\n  \"osdSettings\": {\n    \"isNameEnabled\"\
+          : \"<boolean>\",\n    \"isDateEnabled\": \"<boolean>\",\n    \"isLogoEnabled\"\
+          : \"<boolean>\",\n    \"isDebugEnabled\": \"<boolean>\",\n    \"overlayLocation\"\
+          : \"<string>\"\n  },\n  \"ledSettings\": {\n    \"isEnabled\": \"<boolean>\"\
+          ,\n    \"welcomeLed\": \"<boolean>\",\n    \"floodLed\": \"<boolean>\"\n\
+          \  },\n  \"lcdMessage\": {\n    \"type\": \"<string>\",\n    \"resetAt\"\
+          : \"<number,null>\"\n  },\n  \"micVolume\": \"<number>\",\n  \"videoMode\"\
+          : \"<string>\",\n  \"hdrType\": \"<string>\",\n  \"smartDetectSettings\"\
+          : {\n    \"objectTypes\": [\n      \"<string>\",\n      \"<string>\"\n \
+          \   ],\n    \"audioTypes\": [\n      \"<string>\",\n      \"<string>\"\n\
+          \    ]\n  }\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: 934557a6-cf46-412d-bed9-1754c9d659db
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"<string>\",\n  \"osdSettings\": {\n    \"isNameEnabled\"\
+            : false,\n    \"isDateEnabled\": true,\n    \"isLogoEnabled\": false,\n\
+            \    \"isDebugEnabled\": true,\n    \"overlayLocation\": \"bottomLeft\"\
+            \n  },\n  \"ledSettings\": {\n    \"isEnabled\": false,\n    \"welcomeLed\"\
+            : false,\n    \"floodLed\": false\n  },\n  \"lcdMessage\": {\n    \"type\"\
+            : \"string\",\n    \"resetAt\": 6510.837729372518\n  },\n  \"micVolume\"\
+            : 46.968810385478385,\n  \"videoMode\": \"sport\",\n  \"hdrType\": \"\
+            auto\",\n  \"smartDetectSettings\": {\n    \"objectTypes\": [\n      \"\
+            person\",\n      \"package\"\n    ],\n    \"audioTypes\": [\n      \"\
+            alrmCarHorn\",\n      \"alrmGlassBreak\"\n    ]\n  }\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
+        ,\n  \"isMicEnabled\": true,\n  \"osdSettings\": {\n    \"isNameEnabled\"\
+        : true,\n    \"isDateEnabled\": false,\n    \"isLogoEnabled\": false,\n  \
+        \  \"isDebugEnabled\": false,\n    \"overlayLocation\": \"topMiddle\"\n  },\n\
+        \  \"ledSettings\": {\n    \"isEnabled\": true,\n    \"welcomeLed\": true,\n\
+        \    \"floodLed\": true\n  },\n  \"lcdMessage\": {\n    \"type\": \"IMAGE\"\
+        ,\n    \"resetAt\": 5693.433373515742,\n    \"text\": \"string\"\n  },\n \
+        \ \"micVolume\": 42.307171888108996,\n  \"activePatrolSlot\": 0,\n  \"videoMode\"\
+        : \"sport\",\n  \"hdrType\": \"on\",\n  \"featureFlags\": {\n    \"supportFullHdSnapshot\"\
+        : true,\n    \"hasHdr\": false,\n    \"smartDetectTypes\": [\n      \"licensePlate\"\
+        ,\n      \"face\"\n    ],\n    \"smartDetectAudioTypes\": [\n      \"alrmBark\"\
+        ,\n      \"alrmSmoke\"\n    ],\n    \"videoModes\": [\n      \"lprReflex\"\
+        ,\n      \"sport\"\n    ],\n    \"hasMic\": false,\n    \"hasLedStatus\":\
+        \ false,\n    \"hasSpeaker\": true\n  },\n  \"smartDetectSettings\": {\n \
+        \   \"objectTypes\": [\n      \"vehicle\",\n      \"licensePlate\"\n    ],\n\
+        \    \"audioTypes\": [\n      \"alrmBabyCry\",\n      \"alrmCarHorn\"\n  \
+        \  ]\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 7613802f-5156-4100-8894-28d841db02e1
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"<string>\",\n  \"osdSettings\": {\n    \"isNameEnabled\"\
+            : false,\n    \"isDateEnabled\": true,\n    \"isLogoEnabled\": false,\n\
+            \    \"isDebugEnabled\": true,\n    \"overlayLocation\": \"bottomLeft\"\
+            \n  },\n  \"ledSettings\": {\n    \"isEnabled\": false,\n    \"welcomeLed\"\
+            : false,\n    \"floodLed\": false\n  },\n  \"lcdMessage\": {\n    \"type\"\
+            : \"string\",\n    \"resetAt\": 6510.837729372518\n  },\n  \"micVolume\"\
+            : 46.968810385478385,\n  \"videoMode\": \"sport\",\n  \"hdrType\": \"\
+            auto\",\n  \"smartDetectSettings\": {\n    \"objectTypes\": [\n      \"\
+            person\",\n      \"package\"\n    ],\n    \"audioTypes\": [\n      \"\
+            alrmCarHorn\",\n      \"alrmGlassBreak\"\n    ]\n  }\n}"
+          options:
+            raw:
+              language: json
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 74981d39-d7cf-4af1-96e7-98da39dc55b3
+    name: Get all cameras
+    request:
+      name: Get all cameras
+      description:
+        content: Get detailed information about all cameras
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: ffb3ffe3-b837-40d4-ac54-df2e05a3d6e1
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "[\n  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\":\
+        \ \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n\
+        \    \"mac\": \"string\",\n    \"isMicEnabled\": false,\n    \"osdSettings\"\
+        : {\n      \"isNameEnabled\": true,\n      \"isDateEnabled\": true,\n    \
+        \  \"isLogoEnabled\": true,\n      \"isDebugEnabled\": true,\n      \"overlayLocation\"\
+        : \"topMiddle\"\n    },\n    \"ledSettings\": {\n      \"isEnabled\": false,\n\
+        \      \"welcomeLed\": false,\n      \"floodLed\": false\n    },\n    \"lcdMessage\"\
+        : {\n      \"type\": \"IMAGE\",\n      \"resetAt\": 7817.539164298993,\n \
+        \     \"text\": \"string\"\n    },\n    \"micVolume\": 83.75880218826414,\n\
+        \    \"activePatrolSlot\": 0,\n    \"videoMode\": \"lprNoneReflex\",\n   \
+        \ \"hdrType\": \"on\",\n    \"featureFlags\": {\n      \"supportFullHdSnapshot\"\
+        : false,\n      \"hasHdr\": false,\n      \"smartDetectTypes\": [\n      \
+        \  \"package\",\n        \"person\"\n      ],\n      \"smartDetectAudioTypes\"\
+        : [\n        \"alrmCarHorn\",\n        \"alrmBurglar\"\n      ],\n      \"\
+        videoModes\": [\n        \"slowShutter\",\n        \"homekit\"\n      ],\n\
+        \      \"hasMic\": false,\n      \"hasLedStatus\": false,\n      \"hasSpeaker\"\
+        : false\n    },\n    \"smartDetectSettings\": {\n      \"objectTypes\": [\n\
+        \        \"person\",\n        \"package\"\n      ],\n      \"audioTypes\"\
+        : [\n        \"alrmSpeak\",\n        \"alrmBurglar\"\n      ]\n    }\n  },\n\
+        \  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\": \"string\"\
+        ,\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n    \"mac\":\
+        \ \"string\",\n    \"isMicEnabled\": false,\n    \"osdSettings\": {\n    \
+        \  \"isNameEnabled\": true,\n      \"isDateEnabled\": true,\n      \"isLogoEnabled\"\
+        : true,\n      \"isDebugEnabled\": true,\n      \"overlayLocation\": \"topMiddle\"\
+        \n    },\n    \"ledSettings\": {\n      \"isEnabled\": false,\n      \"welcomeLed\"\
+        : true,\n      \"floodLed\": false\n    },\n    \"lcdMessage\": {\n      \"\
+        type\": \"CUSTOM_MESSAGE\",\n      \"resetAt\": 2076.8165518870705,\n    \
+        \  \"text\": \"string\"\n    },\n    \"micVolume\": 39.306325904939584,\n\
+        \    \"activePatrolSlot\": 0,\n    \"videoMode\": \"highFps\",\n    \"hdrType\"\
+        : \"on\",\n    \"featureFlags\": {\n      \"supportFullHdSnapshot\": false,\n\
+        \      \"hasHdr\": false,\n      \"smartDetectTypes\": [\n        \"animal\"\
+        ,\n        \"vehicle\"\n      ],\n      \"smartDetectAudioTypes\": [\n   \
+        \     \"alrmBurglar\",\n        \"alrmSpeak\"\n      ],\n      \"videoModes\"\
+        : [\n        \"lprNoneReflex\",\n        \"default\"\n      ],\n      \"hasMic\"\
+        : true,\n      \"hasLedStatus\": false,\n      \"hasSpeaker\": false\n   \
+        \ },\n    \"smartDetectSettings\": {\n      \"objectTypes\": [\n        \"\
+        vehicle\",\n        \"package\"\n      ],\n      \"audioTypes\": [\n     \
+        \   \"alrmBark\",\n        \"alrmCmonx\"\n      ]\n    }\n  }\n]"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 7e79313f-97bb-46b9-b7e9-6a334ff6ce61
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 52fbb301-3d0c-4244-ba1c-8c4af1430a61
+    name: Create RTSPS streams for camera
+    request:
+      name: Create RTSPS streams for camera
+      description:
+        content: Returns RTSPS stream URLs for specified quality levels
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        - :id
+        - rtsps-stream
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of camera
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"qualities\": [\n    \"<string>\"\n  ]\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: 3704de60-800c-444b-9790-670d956c17e9
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - rtsps-stream
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"qualities\": [\n    \"high\",\n    \"medium\"\n  ]\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"high\": \"rtsps://192.168.1.1:7441/5nPr7RCmueGTKMP7?enableSrtp\"\
+        ,\n  \"medium\": \"rtsps://192.168.1.1:7441/AbUgnDb5IqIEMidk?enableSrtp\"\n\
+        }"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 540187b6-35d6-4b73-8c6c-e24dadfa9292
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - rtsps-stream
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"qualities\": [\n    \"high\",\n    \"medium\"\n  ]\n}"
+          options:
+            raw:
+              language: json
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: ae76e750-dea0-48cb-b071-1e5cec128498
+    name: Delete camera RTSPS stream
+    request:
+      name: Delete camera RTSPS stream
+      description:
+        content: Remove the RTSPS stream for a specified camera
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        - :id
+        - rtsps-stream
+        host:
+        - '{{baseUrl}}'
+        query:
+        - disabled: false
+          key: qualities
+          value: <string>
+          description: (Required) The array of quality levels for the RTSPS streams
+            to be removed.
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of camera
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: DELETE
+      auth: null
+    response:
+    - id: e4f9c5ac-690d-40d2-8169-e89b83a57904
+      name: RTSPS stream successfully removed
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - rtsps-stream
+          host:
+          - '{{baseUrl}}'
+          query:
+          - key: qualities
+            value: high
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        method: DELETE
+        body: {}
+      status: No Content
+      code: 204
+      header:
+      - key: Content-Type
+        value: text/plain
+      body: ''
+      cookie: []
+      _postman_previewlanguage: text
+    - id: 31063cb9-5d92-4e3e-ba8e-ba7c408c13b1
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - rtsps-stream
+          host:
+          - '{{baseUrl}}'
+          query:
+          - key: qualities
+            value: high
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: DELETE
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: a2d947d9-de0c-430e-a331-7dbc29fa1562
+    name: Get RTSPS streams for camera
+    request:
+      name: Get RTSPS streams for camera
+      description:
+        content: Returns existing RTSPS stream URLs for camera
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        - :id
+        - rtsps-stream
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of camera
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 0793070d-75d8-4714-bed3-ff5066226651
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - rtsps-stream
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"high\": \"https://iDrbKSEptmaEu.zzklPr+qv9bUue5IvGTx.4VPPHbSxF2yBJGmExtTckVhk7u6,VnJ3V8IvS1ful9\"\
+        ,\n  \"medium\": \"http://OsVNsxnxAf.upOUL,yALNei2V3nXe,rfXwLbWopXXLk7d1Kg25wD2B5oEFxTrDEJY26+ZrwA1D\"\
+        ,\n  \"low\": \"https://YaTGo.dkfkgyOL.juwwi,EcFdoOWdqwaqeuC0sXKEPVoDt-RvSw843az-+x+9jnRkCa58CD3WrINCr8N-ahD\"\
+        ,\n  \"package\": \"http://YKHPdEERfWinoUbKAeyocXebRgUvt.qjDGuV5Dw6KRGEm8O8SYdaNu8jU0N0ccjBejhU9Yf87\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: ef1ff671-4045-49af-b634-f00b3a89c199
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - rtsps-stream
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: dd319c84-ebff-4fcc-a6c2-d567c3ed91e4
+    name: Get camera snapshot
+    request:
+      name: Get camera snapshot
+      description:
+        content: Get a snapshot image from a specific camera
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        - :id
+        - snapshot
+        host:
+        - '{{baseUrl}}'
+        query:
+        - disabled: false
+          key: highQuality
+          value: 'false'
+          description: Whether to force 1080P or higher resolution snapshot
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of camera
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: image/jpeg
+      method: GET
+      auth: null
+    response:
+    - id: a628d502-3569-433d-aeb1-903306a9f312
+      name: Camera snapshot
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - snapshot
+          host:
+          - '{{baseUrl}}'
+          query:
+          - key: highQuality
+            value: 'false'
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: image/jpeg
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: image/jpeg
+      body: string
+      cookie: []
+      _postman_previewlanguage: text
+    - id: 6f0cdc8d-6e80-48d0-9931-c6fa7850913a
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - snapshot
+          host:
+          - '{{baseUrl}}'
+          query:
+          - key: highQuality
+            value: 'false'
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: e0f5083b-60d7-409f-bfdb-58c9e7418573
+    name: Permanently disable camera microphone
+    request:
+      name: Permanently disable camera microphone
+      description:
+        content: Disable the microphone for a specific camera. This action cannot
+          be undone unless the camera is reset.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        - :id
+        - disable-mic-permanently
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of camera
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+    response:
+    - id: 6ab1d170-f9ad-4f86-8b6b-535ae4d7a69d
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - disable-mic-permanently
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
+        ,\n  \"isMicEnabled\": true,\n  \"osdSettings\": {\n    \"isNameEnabled\"\
+        : true,\n    \"isDateEnabled\": false,\n    \"isLogoEnabled\": false,\n  \
+        \  \"isDebugEnabled\": false,\n    \"overlayLocation\": \"topMiddle\"\n  },\n\
+        \  \"ledSettings\": {\n    \"isEnabled\": true,\n    \"welcomeLed\": true,\n\
+        \    \"floodLed\": true\n  },\n  \"lcdMessage\": {\n    \"type\": \"IMAGE\"\
+        ,\n    \"resetAt\": 5693.433373515742,\n    \"text\": \"string\"\n  },\n \
+        \ \"micVolume\": 42.307171888108996,\n  \"activePatrolSlot\": 0,\n  \"videoMode\"\
+        : \"sport\",\n  \"hdrType\": \"on\",\n  \"featureFlags\": {\n    \"supportFullHdSnapshot\"\
+        : true,\n    \"hasHdr\": false,\n    \"smartDetectTypes\": [\n      \"licensePlate\"\
+        ,\n      \"face\"\n    ],\n    \"smartDetectAudioTypes\": [\n      \"alrmBark\"\
+        ,\n      \"alrmSmoke\"\n    ],\n    \"videoModes\": [\n      \"lprReflex\"\
+        ,\n      \"sport\"\n    ],\n    \"hasMic\": false,\n    \"hasLedStatus\":\
+        \ false,\n    \"hasSpeaker\": true\n  },\n  \"smartDetectSettings\": {\n \
+        \   \"objectTypes\": [\n      \"vehicle\",\n      \"licensePlate\"\n    ],\n\
+        \    \"audioTypes\": [\n      \"alrmBabyCry\",\n      \"alrmCarHorn\"\n  \
+        \  ]\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: eef2aacb-1626-40ac-a4e3-4c7d489978c1
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - disable-mic-permanently
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 964db544-3099-41c3-95bf-c09af48b195a
+    name: Create talkback session for camera
+    request:
+      name: Create talkback session for camera
+      description:
+        content: Returns the talkback stream URL and audio configuration for a specific
+          camera
+        type: text/plain
+      url:
+        path:
+        - v1
+        - cameras
+        - :id
+        - talkback-session
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of camera
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+    response:
+    - id: c31a5c14-3b15-4e9a-8df8-8af7fb05d810
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - talkback-session
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"url\": \"rtp://192.168.1.123:7004\",\n  \"codec\": \"opus\",\n\
+        \  \"samplingRate\": 24000,\n  \"bitsPerSample\": 16\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 572471ec-ff5f-4f6a-99a3-1503eb7c5c60
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - cameras
+          - :id
+          - talkback-session
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of camera
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: eb576c69-5f97-43ab-b4db-3b98657bb040
+  name: Sensor information & management
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: 3d13e40a-e5e0-4108-a7c1-da0a7823b946
+    name: Get sensor details
+    request:
+      name: Get sensor details
+      description:
+        content: Get detailed information about a specific sensor
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sensors
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of sensor
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: a3d96f59-0b4f-4c56-b266-e56b2468530e
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sensors
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of sensor
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
+        ,\n  \"mountType\": \"garage\",\n  \"batteryStatus\": {\n    \"percentage\"\
+        : 6405.921927118021,\n    \"isLow\": true\n  },\n  \"stats\": {\n    \"light\"\
+        : {\n      \"value\": 7390.684545545503,\n      \"status\": \"high\"\n   \
+        \ },\n    \"humidity\": {\n      \"value\": 9842.999939109153,\n      \"status\"\
+        : \"high\"\n    },\n    \"temperature\": {\n      \"value\": 4421.50419216099,\n\
+        \      \"status\": \"high\"\n    }\n  },\n  \"lightSettings\": {\n    \"isEnabled\"\
+        : false,\n    \"margin\": 9142.040652414538,\n    \"lowThreshold\": 133650.39826657288,\n\
+        \    \"highThreshold\": 5704.172254488033\n  },\n  \"humiditySettings\": {\n\
+        \    \"isEnabled\": true,\n    \"margin\": 8880.314537437574,\n    \"lowThreshold\"\
+        : 48.43502226430024,\n    \"highThreshold\": 8421.669594009874\n  },\n  \"\
+        temperatureSettings\": {\n    \"isEnabled\": false,\n    \"margin\": 7250.379063740715,\n\
+        \    \"lowThreshold\": -30.56479237108444,\n    \"highThreshold\": 9182.980678316957\n\
+        \  },\n  \"isOpened\": true,\n  \"openStatusChangedAt\": 818.415229452878,\n\
+        \  \"isMotionDetected\": false,\n  \"motionDetectedAt\": 6303.98317890925,\n\
+        \  \"motionSettings\": {\n    \"isEnabled\": false,\n    \"sensitivity\":\
+        \ 81.4669703018154\n  },\n  \"alarmTriggeredAt\": 6723.436631053907,\n  \"\
+        alarmSettings\": {\n    \"isEnabled\": false\n  },\n  \"leakDetectedAt\":\
+        \ 5491.473405118967,\n  \"externalLeakDetectedAt\": 9915.975993357906,\n \
+        \ \"leakSettings\": {\n    \"isInternalEnabled\": false,\n    \"isExternalEnabled\"\
+        : true\n  },\n  \"tamperingDetectedAt\": 4477.644017491002\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 5e72818a-5a42-4f11-bdbd-a4ba84830c17
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sensors
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of sensor
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: cdfb2c3c-8047-47f4-aabc-20f3b125dab0
+    name: Patch sensor settings
+    request:
+      name: Patch sensor settings
+      description:
+        content: Patch the settings for a specific sensor
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sensors
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of sensor
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: PATCH
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"name\": \"<string>\",\n  \"lightSettings\": {\n    \"isEnabled\"\
+          : \"<boolean>\",\n    \"margin\": \"<number>\",\n    \"lowThreshold\": \"\
+          <number,null>\",\n    \"highThreshold\": \"<number,null>\"\n  },\n  \"humiditySettings\"\
+          : {\n    \"isEnabled\": \"<boolean>\",\n    \"margin\": \"<number>\",\n\
+          \    \"lowThreshold\": \"<number,null>\",\n    \"highThreshold\": \"<number,null>\"\
+          \n  },\n  \"temperatureSettings\": {\n    \"isEnabled\": \"<boolean>\",\n\
+          \    \"margin\": \"<number>\",\n    \"lowThreshold\": \"<number,null>\"\
+          ,\n    \"highThreshold\": \"<number,null>\"\n  },\n  \"motionSettings\"\
+          : {\n    \"isEnabled\": \"<boolean>\",\n    \"sensitivity\": \"<number>\"\
+          \n  },\n  \"alarmSettings\": {\n    \"isEnabled\": \"<boolean>\"\n  }\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: a5ea9087-4d26-4739-9c39-b8fea8ed86d9
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sensors
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of sensor
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"string\",\n  \"lightSettings\": {\n    \"isEnabled\"\
+            : false,\n    \"margin\": 9876.517765624601,\n    \"lowThreshold\": 154689.99971473156,\n\
+            \    \"highThreshold\": 4684.243814736075\n  },\n  \"humiditySettings\"\
+            : {\n    \"isEnabled\": true,\n    \"margin\": 8652.408629388747,\n  \
+            \  \"lowThreshold\": 24.919464409861448,\n    \"highThreshold\": 4749.380171402114\n\
+            \  },\n  \"temperatureSettings\": {\n    \"isEnabled\": false,\n    \"\
+            margin\": 7324.462334781699,\n    \"lowThreshold\": 13.295388064507058,\n\
+            \    \"highThreshold\": 1898.4428965477318\n  },\n  \"motionSettings\"\
+            : {\n    \"isEnabled\": true,\n    \"sensitivity\": 78.06003787420579\n\
+            \  },\n  \"alarmSettings\": {\n    \"isEnabled\": false\n  }\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
+        ,\n  \"mountType\": \"garage\",\n  \"batteryStatus\": {\n    \"percentage\"\
+        : 6405.921927118021,\n    \"isLow\": true\n  },\n  \"stats\": {\n    \"light\"\
+        : {\n      \"value\": 7390.684545545503,\n      \"status\": \"high\"\n   \
+        \ },\n    \"humidity\": {\n      \"value\": 9842.999939109153,\n      \"status\"\
+        : \"high\"\n    },\n    \"temperature\": {\n      \"value\": 4421.50419216099,\n\
+        \      \"status\": \"high\"\n    }\n  },\n  \"lightSettings\": {\n    \"isEnabled\"\
+        : false,\n    \"margin\": 9142.040652414538,\n    \"lowThreshold\": 133650.39826657288,\n\
+        \    \"highThreshold\": 5704.172254488033\n  },\n  \"humiditySettings\": {\n\
+        \    \"isEnabled\": true,\n    \"margin\": 8880.314537437574,\n    \"lowThreshold\"\
+        : 48.43502226430024,\n    \"highThreshold\": 8421.669594009874\n  },\n  \"\
+        temperatureSettings\": {\n    \"isEnabled\": false,\n    \"margin\": 7250.379063740715,\n\
+        \    \"lowThreshold\": -30.56479237108444,\n    \"highThreshold\": 9182.980678316957\n\
+        \  },\n  \"isOpened\": true,\n  \"openStatusChangedAt\": 818.415229452878,\n\
+        \  \"isMotionDetected\": false,\n  \"motionDetectedAt\": 6303.98317890925,\n\
+        \  \"motionSettings\": {\n    \"isEnabled\": false,\n    \"sensitivity\":\
+        \ 81.4669703018154\n  },\n  \"alarmTriggeredAt\": 6723.436631053907,\n  \"\
+        alarmSettings\": {\n    \"isEnabled\": false\n  },\n  \"leakDetectedAt\":\
+        \ 5491.473405118967,\n  \"externalLeakDetectedAt\": 9915.975993357906,\n \
+        \ \"leakSettings\": {\n    \"isInternalEnabled\": false,\n    \"isExternalEnabled\"\
+        : true\n  },\n  \"tamperingDetectedAt\": 4477.644017491002\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 05301a69-37d5-4ef9-82bb-4166468f9ef4
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sensors
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of sensor
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"string\",\n  \"lightSettings\": {\n    \"isEnabled\"\
+            : false,\n    \"margin\": 9876.517765624601,\n    \"lowThreshold\": 154689.99971473156,\n\
+            \    \"highThreshold\": 4684.243814736075\n  },\n  \"humiditySettings\"\
+            : {\n    \"isEnabled\": true,\n    \"margin\": 8652.408629388747,\n  \
+            \  \"lowThreshold\": 24.919464409861448,\n    \"highThreshold\": 4749.380171402114\n\
+            \  },\n  \"temperatureSettings\": {\n    \"isEnabled\": false,\n    \"\
+            margin\": 7324.462334781699,\n    \"lowThreshold\": 13.295388064507058,\n\
+            \    \"highThreshold\": 1898.4428965477318\n  },\n  \"motionSettings\"\
+            : {\n    \"isEnabled\": true,\n    \"sensitivity\": 78.06003787420579\n\
+            \  },\n  \"alarmSettings\": {\n    \"isEnabled\": false\n  }\n}"
+          options:
+            raw:
+              language: json
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 50e281a1-afeb-46b4-a1d8-9c5fcf85601e
+    name: Get all sensors
+    request:
+      name: Get all sensors
+      description:
+        content: Get detailed information about all sensors
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sensors
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 9f9cb3ff-3d0c-4d6e-9380-b77fc4481b51
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sensors
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "[\n  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\":\
+        \ \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n\
+        \    \"mac\": \"string\",\n    \"mountType\": \"garage\",\n    \"batteryStatus\"\
+        : {\n      \"percentage\": 6395.149593201903,\n      \"isLow\": true\n   \
+        \ },\n    \"stats\": {\n      \"light\": {\n        \"value\": 594.6698481229729,\n\
+        \        \"status\": \"high\"\n      },\n      \"humidity\": {\n        \"\
+        value\": 9695.134594459869,\n        \"status\": \"high\"\n      },\n    \
+        \  \"temperature\": {\n        \"value\": 8435.192643797054,\n        \"status\"\
+        : \"high\"\n      }\n    },\n    \"lightSettings\": {\n      \"isEnabled\"\
+        : false,\n      \"margin\": 2277.203497838367,\n      \"lowThreshold\": 97305.28974700165,\n\
+        \      \"highThreshold\": 1130.011170743177\n    },\n    \"humiditySettings\"\
+        : {\n      \"isEnabled\": true,\n      \"margin\": 2758.418614640681,\n  \
+        \    \"lowThreshold\": 71.86198869134846,\n      \"highThreshold\": 216.3656461363961\n\
+        \    },\n    \"temperatureSettings\": {\n      \"isEnabled\": false,\n   \
+        \   \"margin\": 2741.289839957142,\n      \"lowThreshold\": 48.19830824401923,\n\
+        \      \"highThreshold\": 6917.3854834841795\n    },\n    \"isOpened\": true,\n\
+        \    \"openStatusChangedAt\": 3315.5385624587684,\n    \"isMotionDetected\"\
+        : true,\n    \"motionDetectedAt\": 3340.108820105467,\n    \"motionSettings\"\
+        : {\n      \"isEnabled\": true,\n      \"sensitivity\": 57.293698666392444\n\
+        \    },\n    \"alarmTriggeredAt\": 3102.342926373236,\n    \"alarmSettings\"\
+        : {\n      \"isEnabled\": true\n    },\n    \"leakDetectedAt\": 2354.752287314914,\n\
+        \    \"externalLeakDetectedAt\": 7217.927314080211,\n    \"leakSettings\"\
+        : {\n      \"isInternalEnabled\": true,\n      \"isExternalEnabled\": true\n\
+        \    },\n    \"tamperingDetectedAt\": 2313.18286980557\n  },\n  {\n    \"\
+        id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\": \"string\",\n    \"\
+        state\": \"CONNECTED\",\n    \"name\": \"string\",\n    \"mac\": \"string\"\
+        ,\n    \"mountType\": \"garage\",\n    \"batteryStatus\": {\n      \"percentage\"\
+        : 9527.83999607602,\n      \"isLow\": true\n    },\n    \"stats\": {\n   \
+        \   \"light\": {\n        \"value\": 9213.47613764397,\n        \"status\"\
+        : \"high\"\n      },\n      \"humidity\": {\n        \"value\": 9686.320892494188,\n\
+        \        \"status\": \"high\"\n      },\n      \"temperature\": {\n      \
+        \  \"value\": 7061.754372766626,\n        \"status\": \"high\"\n      }\n\
+        \    },\n    \"lightSettings\": {\n      \"isEnabled\": false,\n      \"margin\"\
+        : 1663.2000601755071,\n      \"lowThreshold\": 304577.6162302101,\n      \"\
+        highThreshold\": 387.31505831066437\n    },\n    \"humiditySettings\": {\n\
+        \      \"isEnabled\": false,\n      \"margin\": 4653.7698984874605,\n    \
+        \  \"lowThreshold\": 94.1841391692474,\n      \"highThreshold\": 6148.867698704897\n\
+        \    },\n    \"temperatureSettings\": {\n      \"isEnabled\": false,\n   \
+        \   \"margin\": 2274.440509712956,\n      \"lowThreshold\": 76.74050550041582,\n\
+        \      \"highThreshold\": 4484.332628375471\n    },\n    \"isOpened\": true,\n\
+        \    \"openStatusChangedAt\": 3915.8171020186483,\n    \"isMotionDetected\"\
+        : true,\n    \"motionDetectedAt\": 9481.52038295635,\n    \"motionSettings\"\
+        : {\n      \"isEnabled\": true,\n      \"sensitivity\": 15.480499881216048\n\
+        \    },\n    \"alarmTriggeredAt\": 6727.737947661272,\n    \"alarmSettings\"\
+        : {\n      \"isEnabled\": false\n    },\n    \"leakDetectedAt\": 7645.335294544057,\n\
+        \    \"externalLeakDetectedAt\": 5168.742351544331,\n    \"leakSettings\"\
+        : {\n      \"isInternalEnabled\": true,\n      \"isExternalEnabled\": false\n\
+        \    },\n    \"tamperingDetectedAt\": 2290.3114175479877\n  }\n]"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: a92d96d1-2a35-4d05-8407-685e4dd84ddd
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sensors
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: 5f70c78e-0753-49d3-9779-2776bd57699d
+  name: NVR information & management
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: aaabf500-f04b-4865-b20f-8bc5a275b187
+    name: Get NVR details
+    request:
+      name: Get NVR details
+      description:
+        content: Get detailed information about the NVR
+        type: text/plain
+      url:
+        path:
+        - v1
+        - nvrs
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 680be1ee-7516-415d-8e50-9af889e8c221
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - nvrs
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"name\": \"string\",\n  \"doorbellSettings\": {\n    \"defaultMessageText\"\
+        : \"string\",\n    \"defaultMessageResetTimeoutMs\": 9423.167132334727,\n\
+        \    \"customMessages\": [\n      \"string\",\n      \"string\"\n    ],\n\
+        \    \"customImages\": [\n      {\n        \"preview\": \"string\",\n    \
+        \    \"sprite\": \"string\"\n      },\n      {\n        \"preview\": \"string\"\
+        ,\n        \"sprite\": \"string\"\n      }\n    ]\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: a19f9fd8-3452-417d-9e33-f3e518ee2c83
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - nvrs
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: 1acfde1b-4966-4cd1-af0e-7bfcd2d6a94a
+  name: Device asset file management
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: 148dc755-7bf4-447d-9017-212e3ac2f6db
+    name: Upload device asset file
+    request:
+      name: Upload device asset file
+      description:
+        content: Upload a new device asset file
+        type: text/plain
+      url:
+        path:
+        - v1
+        - files
+        - :fileType
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: fileType
+          description: (Required) Device asset file type
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: multipart/form-data
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+      body:
+        mode: formdata
+        formdata:
+        - key: '0'
+          value: <
+          type: text
+          description: undefined
+        - key: '1'
+          value: b
+          type: text
+          description: undefined
+        - key: '2'
+          value: i
+          type: text
+          description: undefined
+        - key: '3'
+          value: n
+          type: text
+          description: undefined
+        - key: '4'
+          value: a
+          type: text
+          description: undefined
+        - key: '5'
+          value: r
+          type: text
+          description: undefined
+        - key: '6'
+          value: y
+          type: text
+          description: undefined
+        - key: '7'
+          value: '>'
+          type: text
+          description: undefined
+    response:
+    - id: 552d2435-3b97-47be-96f9-5cfdcdf63020
+      name: Processed and persisted device asset
+      originalRequest:
+        url:
+          path:
+          - v1
+          - files
+          - :fileType
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: fileType
+            description: (Required) Device asset file type
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: formdata
+          formdata:
+          - description:
+              content: undefined
+              type: text/plain
+            key: '0'
+            value: <
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '1'
+            value: b
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '2'
+            value: i
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '3'
+            value: n
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '4'
+            value: a
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '5'
+            value: r
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '6'
+            value: y
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '7'
+            value: '>'
+            type: text
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"name\": \"string\",\n  \"type\": \"animations\",\n  \"path\":\
+        \ \"string\",\n  \"originalName\": \"string\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: fa370c72-5c5e-4055-b5eb-e050f36f8e19
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - files
+          - :fileType
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: fileType
+            description: (Required) Device asset file type
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: formdata
+          formdata:
+          - description:
+              content: undefined
+              type: text/plain
+            key: '0'
+            value: <
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '1'
+            value: b
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '2'
+            value: i
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '3'
+            value: n
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '4'
+            value: a
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '5'
+            value: r
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '6'
+            value: y
+            type: text
+          - description:
+              content: undefined
+              type: text/plain
+            key: '7'
+            value: '>'
+            type: text
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 97956b5e-7bd5-457d-a65e-8fa5b26fd0e0
+    name: Get device asset files
+    request:
+      name: Get device asset files
+      description:
+        content: Get a list of all device asset files
+        type: text/plain
+      url:
+        path:
+        - v1
+        - files
+        - :fileType
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: fileType
+          description: (Required) Device asset file type
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 91d95ba9-aa70-401b-af01-0f3a416f02a6
+      name: Device asset list
+      originalRequest:
+        url:
+          path:
+          - v1
+          - files
+          - :fileType
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: fileType
+            description: (Required) Device asset file type
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "[\n  {\n    \"name\": \"string\",\n    \"type\": \"animations\",\n  \
+        \  \"path\": \"string\",\n    \"originalName\": \"string\"\n  },\n  {\n  \
+        \  \"name\": \"string\",\n    \"type\": \"animations\",\n    \"path\": \"\
+        string\",\n    \"originalName\": \"string\"\n  }\n]"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 0e698e79-b6aa-4ad5-b0e1-b56327d96719
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - files
+          - :fileType
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: fileType
+            description: (Required) Device asset file type
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: 81bdb308-67cb-4034-af55-426171fc7eba
+  name: Chime information & management
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: c82846c9-169f-49aa-a0c4-cdab7e51cc89
+    name: Get chime details
+    request:
+      name: Get chime details
+      description:
+        content: Get detailed information about a specific chime
+        type: text/plain
+      url:
+        path:
+        - v1
+        - chimes
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of chime
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: bce3e3a2-9d30-468e-8fbb-c9e662b288d4
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - chimes
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of chime
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
+        ,\n  \"cameraIds\": [\n    \"66d025b301ebc903e80003ea\",\n    \"66d025b301ebc903e80003ea\"\
+        \n  ],\n  \"ringSettings\": [\n    {\n      \"cameraId\": \"string\",\n  \
+        \    \"repeatTimes\": 7.553287261469116,\n      \"ringtoneId\": \"string\"\
+        ,\n      \"volume\": 82.85569429216196\n    },\n    {\n      \"cameraId\"\
+        : \"string\",\n      \"repeatTimes\": 1.6570212744935824,\n      \"ringtoneId\"\
+        : \"string\",\n      \"volume\": 0.39014338659579817\n    }\n  ]\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 76504bd3-6508-43cd-bbaa-ca0d235dda8d
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - chimes
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of chime
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 007bbe60-bded-4387-aa70-0ed6028157d4
+    name: Patch chime settings
+    request:
+      name: Patch chime settings
+      description:
+        content: Patch the settings for a specific chime
+        type: text/plain
+      url:
+        path:
+        - v1
+        - chimes
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) The primary key of chime
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: PATCH
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"name\": \"<string>\",\n  \"cameraIds\": [\n    \"<string>\",\n\
+          \    \"<string>\"\n  ],\n  \"ringSettings\": [\n    {\n      \"cameraId\"\
+          : \"<string>\",\n      \"repeatTimes\": \"<number>\",\n      \"ringtoneId\"\
+          : \"<string>\",\n      \"volume\": \"<number>\"\n    },\n    {\n      \"\
+          cameraId\": \"<string>\",\n      \"repeatTimes\": \"<number>\",\n      \"\
+          ringtoneId\": \"<string>\",\n      \"volume\": \"<number>\"\n    }\n  ]\n\
+          }"
+        options:
+          raw:
+            language: json
+    response:
+    - id: ca34e95c-ab79-4059-ae48-9b9f3e11cbec
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - chimes
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of chime
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"<string>\",\n  \"cameraIds\": [\n    \"66d025b301ebc903e80003ea\"\
+            ,\n    \"66d025b301ebc903e80003ea\"\n  ],\n  \"ringSettings\": [\n   \
+            \ {\n      \"cameraId\": \"string\",\n      \"repeatTimes\": 2.1088317760689437,\n\
+            \      \"ringtoneId\": \"string\",\n      \"volume\": 75.06769176056925\n\
+            \    },\n    {\n      \"cameraId\": \"string\",\n      \"repeatTimes\"\
+            : 4.414488177419616,\n      \"ringtoneId\": \"string\",\n      \"volume\"\
+            : 14.358520286545652\n    }\n  ]\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
+        ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
+        ,\n  \"cameraIds\": [\n    \"66d025b301ebc903e80003ea\",\n    \"66d025b301ebc903e80003ea\"\
+        \n  ],\n  \"ringSettings\": [\n    {\n      \"cameraId\": \"string\",\n  \
+        \    \"repeatTimes\": 7.553287261469116,\n      \"ringtoneId\": \"string\"\
+        ,\n      \"volume\": 82.85569429216196\n    },\n    {\n      \"cameraId\"\
+        : \"string\",\n      \"repeatTimes\": 1.6570212744935824,\n      \"ringtoneId\"\
+        : \"string\",\n      \"volume\": 0.39014338659579817\n    }\n  ]\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 74863b72-65d8-4c51-b981-f298cc5dc12b
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - chimes
+          - :id
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) The primary key of chime
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"<string>\",\n  \"cameraIds\": [\n    \"66d025b301ebc903e80003ea\"\
+            ,\n    \"66d025b301ebc903e80003ea\"\n  ],\n  \"ringSettings\": [\n   \
+            \ {\n      \"cameraId\": \"string\",\n      \"repeatTimes\": 2.1088317760689437,\n\
+            \      \"ringtoneId\": \"string\",\n      \"volume\": 75.06769176056925\n\
+            \    },\n    {\n      \"cameraId\": \"string\",\n      \"repeatTimes\"\
+            : 4.414488177419616,\n      \"ringtoneId\": \"string\",\n      \"volume\"\
+            : 14.358520286545652\n    }\n  ]\n}"
+          options:
+            raw:
+              language: json
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 8227c925-f4ec-495c-bab7-d7e6452aa3d9
+    name: Get all chimes
+    request:
+      name: Get all chimes
+      description:
+        content: Get detailed information about all chimes
+        type: text/plain
+      url:
+        path:
+        - v1
+        - chimes
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 7e70a5e1-97fb-44ed-ad15-4a2f7407871b
+      name: Success response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - chimes
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "[\n  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\":\
+        \ \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n\
+        \    \"mac\": \"string\",\n    \"cameraIds\": [\n      \"66d025b301ebc903e80003ea\"\
+        ,\n      \"66d025b301ebc903e80003ea\"\n    ],\n    \"ringSettings\": [\n \
+        \     {\n        \"cameraId\": \"string\",\n        \"repeatTimes\": 7.220008618009038,\n\
+        \        \"ringtoneId\": \"string\",\n        \"volume\": 98.01022987249142\n\
+        \      },\n      {\n        \"cameraId\": \"string\",\n        \"repeatTimes\"\
+        : 1.6438831136169119,\n        \"ringtoneId\": \"string\",\n        \"volume\"\
+        : 33.70654677720153\n      }\n    ]\n  },\n  {\n    \"id\": \"66d025b301ebc903e80003ea\"\
+        ,\n    \"modelKey\": \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\"\
+        : \"string\",\n    \"mac\": \"string\",\n    \"cameraIds\": [\n      \"66d025b301ebc903e80003ea\"\
+        ,\n      \"66d025b301ebc903e80003ea\"\n    ],\n    \"ringSettings\": [\n \
+        \     {\n        \"cameraId\": \"string\",\n        \"repeatTimes\": 6.337311627477341,\n\
+        \        \"ringtoneId\": \"string\",\n        \"volume\": 55.67820627123281\n\
+        \      },\n      {\n        \"cameraId\": \"string\",\n        \"repeatTimes\"\
+        : 9.320671291735016,\n        \"ringtoneId\": \"string\",\n        \"volume\"\
+        : 73.28522487218359\n      }\n    ]\n  }\n]"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: cf2daa06-3d30-429f-9e57-293c051b5cd4
+      name: Error response
+      originalRequest:
+        url:
+          path:
+          - v1
+          - chimes
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
+        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+event: []
+variable:
+- description:
+    content: ID of the console to proxy requests to
+    type: text/plain
+  type: any
+  value: 942A6FF664C0000000000964970E0000000009E710560000000068A9873F:9999999999
+  key: consoleId
+- type: string
+  value: https://api.ui.com/v1/connector/consoles/{{consoleId}}/proxy/protect/integration
+  key: baseUrl
+info:
+  _postman_id: 6fbb5b3f-ebec-4d5a-bdee-e4634cab23ef
+  name: UniFi Protect API
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  description:
+    content: ''
+    type: text/plain

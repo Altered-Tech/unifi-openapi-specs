@@ -9,6 +9,1368 @@ info:
   version: 1.0.0
 openapi: 3.0.3
 paths:
+  /v1/connector/consoles/{id}/*path:
+    delete:
+      description: 'Forward DELETE requests to UniFi applications using RESTful HTTP
+        methods. <br/><br/>**Request Flow**: The request is proxied through `api.ui.com`
+        cloud endpoint to the remote console at `http://127.0.0.1/proxy/[path]` with
+        DELETE method. <br/><br/>**Requirements**: <br/>- Console firmware version
+        must >= 5.0.3<br/>- For non-organization API keys: Limited to API key owner''s
+        consoles only (cannot access other admins'' consoles)<br/>- For organization
+        API keys: Can access any console within the organization<br/><br/>**Rate Limit**:
+        <br/>- Each console is limited to 100 requests per minute<br/><br/>**Limits**:
+        <br/>- Request timeout: each proxied request must complete within 25 seconds;
+        otherwise it is terminated and a timeout error is returned<br/>- Response
+        body size: the upstream response body is limited to 10 MB; larger responses
+        are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
+        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+        On success, the upstream API response is passed through directly. On error,
+        a standardized error schema is returned.'
+      operationId: ConnectorDelete
+      parameters:
+      - description: Host ID to proxy the request to
+        example: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: API path to proxy
+        example: /proxy/network/integration/v1/sites/{siteId}/hotspot/vouchers
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                delete vouchers response:
+                  value:
+                    vouchersDeleted: 0
+              schema:
+                additionalProperties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                invalid parameter:
+                  value:
+                    code: parameter_invalid
+                    httpStatusCode: 400
+                    message: path is invalid
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '400'
+        '401':
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  value:
+                    code: unauthorized
+                    httpStatusCode: 401
+                    message: unauthorized
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '401'
+        '403':
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  value:
+                    code: forbidden
+                    httpStatusCode: 403
+                    message: insufficient permissions or not the owner of the host
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '403'
+        '408':
+          content:
+            application/json:
+              examples:
+                device timeout:
+                  value:
+                    code: DeviceTimeout
+                    httpStatusCode: 408
+                    message: Device connection timeout
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '408'
+        '429':
+          content:
+            application/json:
+              examples:
+                rate limit:
+                  value:
+                    code: rate_limit
+                    httpStatusCode: 429
+                    message: rate limit exceeded, retry after 5.372786998s
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '429'
+          headers:
+            Retry-After:
+              example: '5'
+              schema:
+                type: string
+        '500':
+          content:
+            application/json:
+              examples:
+                failed to proxy request:
+                  value:
+                    code: server_error
+                    httpStatusCode: 500
+                    message: failed to proxy request
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '500'
+        '502':
+          content:
+            application/json:
+              examples:
+                bad gateway:
+                  value:
+                    code: bad_gateway
+                    httpStatusCode: 502
+                    message: bad gateway
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '502'
+      summary: Connector - DELETE
+      tags:
+      - cloud-connector
+      x-position: 13
+    get:
+      description: 'Forward GET requests to UniFi applications using RESTful HTTP
+        methods. <br/><br/>**Request Flow**: The request is proxied through `api.ui.com`
+        cloud endpoint to the remote console at `http://127.0.0.1/proxy/[path]` with
+        GET method. <br/><br/>**Requirements**: <br/>- Console firmware version must
+        >= 5.0.3<br/>- For non-organization API keys: Limited to API key owner''s
+        consoles only (cannot access other admins'' consoles)<br/>- For organization
+        API keys: Can access any console within the organization<br/><br/>**Rate Limit**:
+        <br/>- Each console is limited to 100 requests per minute<br/><br/>**Limits**:
+        <br/>- Request timeout: each proxied request must complete within 25 seconds;
+        otherwise it is terminated and a timeout error is returned<br/>- Response
+        body size: the upstream response body is limited to 10 MB; larger responses
+        are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
+        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Examples**:
+        <br/>- Network: `GET /v1/connector/consoles/{id}/network/integration/v1/sites`
+        retrieves network sites<br/>- Protect: `GET /v1/connector/consoles/{id}/protect/integration/v1/meta/info`
+        retrieves protect application info<br/><br/>**Response**: On success, the
+        upstream API response is passed through directly. On error, a standardized
+        error schema is returned.'
+      operationId: ConnectorGet
+      parameters:
+      - description: Host ID to proxy the request to
+        example: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: API path to proxy
+        example: /proxy/network/integration/v1/sites
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                network sites response:
+                  value:
+                    count: 1
+                    data:
+                    - id: 88f7af54-98f8-306a-a1c7-c9349722b1f6
+                      internalReference: default
+                      name: Default
+                    limit: 25
+                    offset: 0
+                    totalCount: 1
+                protect info response:
+                  value:
+                    applicationVersion: 6.1.79
+              schema:
+                additionalProperties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                invalid parameter:
+                  value:
+                    code: parameter_invalid
+                    httpStatusCode: 400
+                    message: path is invalid
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '400'
+        '401':
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  value:
+                    code: unauthorized
+                    httpStatusCode: 401
+                    message: unauthorized
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '401'
+        '403':
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  value:
+                    code: forbidden
+                    httpStatusCode: 403
+                    message: insufficient permissions or not the owner of the host
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '403'
+        '408':
+          content:
+            application/json:
+              examples:
+                device timeout:
+                  value:
+                    code: DeviceTimeout
+                    httpStatusCode: 408
+                    message: Device connection timeout
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '408'
+        '429':
+          content:
+            application/json:
+              examples:
+                rate limit:
+                  value:
+                    code: rate_limit
+                    httpStatusCode: 429
+                    message: rate limit exceeded, retry after 5.372786998s
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '429'
+          headers:
+            Retry-After:
+              example: '5'
+              schema:
+                type: string
+        '500':
+          content:
+            application/json:
+              examples:
+                failed to proxy request:
+                  value:
+                    code: server_error
+                    httpStatusCode: 500
+                    message: failed to proxy request
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '500'
+        '502':
+          content:
+            application/json:
+              examples:
+                bad gateway:
+                  value:
+                    code: bad_gateway
+                    httpStatusCode: 502
+                    message: bad gateway
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '502'
+      summary: Connector - GET
+      tags:
+      - cloud-connector
+      x-position: 11
+    patch:
+      description: 'Forward PATCH requests to UniFi applications using RESTful HTTP
+        methods. <br/><br/>**Request Flow**: The request is proxied through `api.ui.com`
+        cloud endpoint to the remote console at `http://127.0.0.1/proxy/[path]` with
+        PATCH method. <br/><br/>**Requirements**: <br/>- Console firmware version
+        must >= 5.0.3<br/>- For non-organization API keys: Limited to API key owner''s
+        consoles only (cannot access other admins'' consoles)<br/>- For organization
+        API keys: Can access any console within the organization<br/><br/>**Rate Limit**:
+        <br/>- Each console is limited to 100 requests per minute<br/><br/>**Limits**:
+        <br/>- Request timeout: each proxied request must complete within 25 seconds;
+        otherwise it is terminated and a timeout error is returned<br/>- Response
+        body size: the upstream response body is limited to 10 MB; larger responses
+        are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
+        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+        On success, the upstream API response is passed through directly. On error,
+        a standardized error schema is returned.'
+      operationId: ConnectorPatch
+      parameters:
+      - description: Host ID to proxy the request to
+        example: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: API path to proxy
+        example: /proxy/protect/integration/v1/viewers/{id}
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Updated Viewer Name
+            schema:
+              additionalProperties: {}
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                protect viewer response:
+                  value:
+                    id: 507f1f77bcf86cd799439011
+                    liveview: 507f1f77bcf86cd799439012
+                    modelKey: viewer
+                    name: Living Room Viewer
+                    state: CONNECTED
+                    streamLimit: 4
+              schema:
+                additionalProperties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                invalid parameter:
+                  value:
+                    code: parameter_invalid
+                    httpStatusCode: 400
+                    message: path is invalid
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '400'
+        '401':
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  value:
+                    code: unauthorized
+                    httpStatusCode: 401
+                    message: unauthorized
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '401'
+        '403':
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  value:
+                    code: forbidden
+                    httpStatusCode: 403
+                    message: insufficient permissions or not the owner of the host
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '403'
+        '408':
+          content:
+            application/json:
+              examples:
+                device timeout:
+                  value:
+                    code: DeviceTimeout
+                    httpStatusCode: 408
+                    message: Device connection timeout
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '408'
+        '429':
+          content:
+            application/json:
+              examples:
+                rate limit:
+                  value:
+                    code: rate_limit
+                    httpStatusCode: 429
+                    message: rate limit exceeded, retry after 5.372786998s
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '429'
+          headers:
+            Retry-After:
+              example: '5'
+              schema:
+                type: string
+        '500':
+          content:
+            application/json:
+              examples:
+                failed to proxy request:
+                  value:
+                    code: server_error
+                    httpStatusCode: 500
+                    message: failed to proxy request
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '500'
+        '502':
+          content:
+            application/json:
+              examples:
+                bad gateway:
+                  value:
+                    code: bad_gateway
+                    httpStatusCode: 502
+                    message: bad gateway
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '502'
+      summary: Connector - PATCH
+      tags:
+      - cloud-connector
+      x-position: 14
+    post:
+      description: 'Forward POST requests to UniFi applications using RESTful HTTP
+        methods. <br/><br/>**Request Flow**: The request is proxied through `api.ui.com`
+        cloud endpoint to the remote console at `http://127.0.0.1/proxy/[path]` with
+        POST method. <br/><br/>**Requirements**: <br/>- Console firmware version must
+        >= 5.0.3<br/>- For non-organization API keys: Limited to API key owner''s
+        consoles only (cannot access other admins'' consoles)<br/>- For organization
+        API keys: Can access any console within the organization<br/><br/>**Rate Limit**:
+        <br/>- Each console is limited to 100 requests per minute<br/><br/>**Limits**:
+        <br/>- Request timeout: each proxied request must complete within 25 seconds;
+        otherwise it is terminated and a timeout error is returned<br/>- Response
+        body size: the upstream response body is limited to 10 MB; larger responses
+        are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
+        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+        On success, the upstream API response is passed through directly. On error,
+        a standardized error schema is returned.'
+      operationId: ConnectorPost
+      parameters:
+      - description: Host ID to proxy the request to
+        example: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: API path to proxy
+        example: /proxy/network/integration/v1/sites/{siteId}/clients/{clientId}/actions
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              action: AUTHORIZE_GUEST_ACCESS
+            schema:
+              additionalProperties: {}
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    success: true
+              schema:
+                additionalProperties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                invalid parameter:
+                  value:
+                    code: parameter_invalid
+                    httpStatusCode: 400
+                    message: path is invalid
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '400'
+        '401':
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  value:
+                    code: unauthorized
+                    httpStatusCode: 401
+                    message: unauthorized
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '401'
+        '403':
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  value:
+                    code: forbidden
+                    httpStatusCode: 403
+                    message: insufficient permissions or not the owner of the host
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '403'
+        '408':
+          content:
+            application/json:
+              examples:
+                device timeout:
+                  value:
+                    code: DeviceTimeout
+                    httpStatusCode: 408
+                    message: Device connection timeout
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '408'
+        '429':
+          content:
+            application/json:
+              examples:
+                rate limit:
+                  value:
+                    code: rate_limit
+                    httpStatusCode: 429
+                    message: rate limit exceeded, retry after 5.372786998s
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '429'
+          headers:
+            Retry-After:
+              example: '5'
+              schema:
+                type: string
+        '500':
+          content:
+            application/json:
+              examples:
+                failed to proxy request:
+                  value:
+                    code: server_error
+                    httpStatusCode: 500
+                    message: failed to proxy request
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '500'
+        '502':
+          content:
+            application/json:
+              examples:
+                bad gateway:
+                  value:
+                    code: bad_gateway
+                    httpStatusCode: 502
+                    message: bad gateway
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '502'
+      summary: Connector - POST
+      tags:
+      - cloud-connector
+      x-position: 10
+    put:
+      description: 'Forward PUT requests to UniFi applications using RESTful HTTP
+        methods. <br/><br/>**Request Flow**: The request is proxied through `api.ui.com`
+        cloud endpoint to the remote console at `http://127.0.0.1/proxy/[path]` with
+        PUT method. <br/><br/>**Requirements**: <br/>- Console firmware version must
+        >= 5.0.3<br/>- For non-organization API keys: Limited to API key owner''s
+        consoles only (cannot access other admins'' consoles)<br/>- For organization
+        API keys: Can access any console within the organization<br/><br/>**Rate Limit**:
+        <br/>- Each console is limited to 100 requests per minute<br/><br/>**Limits**:
+        <br/>- Request timeout: each proxied request must complete within 25 seconds;
+        otherwise it is terminated and a timeout error is returned<br/>- Response
+        body size: the upstream response body is limited to 10 MB; larger responses
+        are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
+        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+        On success, the upstream API response is passed through directly. On error,
+        a standardized error schema is returned.'
+      operationId: ConnectorPut
+      parameters:
+      - description: Host ID to proxy the request to
+        example: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - description: API path to proxy
+        example: /proxy/network/integration/v1/sites/{siteId}/firewall/zones/{firewallZoneId}
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Updated Firewall Zone
+            schema:
+              additionalProperties: {}
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                firewall zone response:
+                  value:
+                    id: ffcdb32c-6278-4364-8947-df4f77118df8
+                    metadata:
+                      isConfigurable: true
+                      type: system
+                    name: External
+              schema:
+                additionalProperties: {}
+                type: object
+          description: '200'
+        '400':
+          content:
+            application/json:
+              examples:
+                invalid parameter:
+                  value:
+                    code: parameter_invalid
+                    httpStatusCode: 400
+                    message: path is invalid
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '400'
+        '401':
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  value:
+                    code: unauthorized
+                    httpStatusCode: 401
+                    message: unauthorized
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '401'
+        '403':
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  value:
+                    code: forbidden
+                    httpStatusCode: 403
+                    message: insufficient permissions or not the owner of the host
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '403'
+        '408':
+          content:
+            application/json:
+              examples:
+                device timeout:
+                  value:
+                    code: DeviceTimeout
+                    httpStatusCode: 408
+                    message: Device connection timeout
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '408'
+        '429':
+          content:
+            application/json:
+              examples:
+                rate limit:
+                  value:
+                    code: rate_limit
+                    httpStatusCode: 429
+                    message: rate limit exceeded, retry after 5.372786998s
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '429'
+          headers:
+            Retry-After:
+              example: '5'
+              schema:
+                type: string
+        '500':
+          content:
+            application/json:
+              examples:
+                failed to proxy request:
+                  value:
+                    code: server_error
+                    httpStatusCode: 500
+                    message: failed to proxy request
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '500'
+        '502':
+          content:
+            application/json:
+              examples:
+                bad gateway:
+                  value:
+                    code: bad_gateway
+                    httpStatusCode: 502
+                    message: bad gateway
+                    traceId: a7dc15e0eb4527142d7823515b15f87d
+              schema:
+                properties:
+                  code:
+                    description: Error code from upstream
+                  httpStatusCode:
+                    description: HTTP status code
+                    type: integer
+                  message:
+                    description: Error message
+                    type: string
+                  traceId:
+                    description: Request trace identifier
+                    type: string
+                type: object
+                x-properties-order:
+                - code
+                - httpStatusCode
+                - message
+                - traceId
+          description: '502'
+      summary: Connector - PUT
+      tags:
+      - cloud-connector
+      x-position: 12
   /v1/devices:
     get:
       description: 'Retrieves a list of UniFi devices managed by hosts where the UI
@@ -3297,6 +4659,7 @@ security:
 - site-manager-api-key: []
 servers:
 - url: https://api.ui.com
+  description: UniFi API
 tags:
 - name: cloud-connector
   x-displayName: Connector

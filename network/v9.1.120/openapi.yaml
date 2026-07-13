@@ -1,0 +1,1837 @@
+openapi: 3.1.0
+info:
+  title: UniFi Network API
+  description: The API provides powerful tools to manage Sites, Devices, and Clients,
+    offering access to detailed configuration, real-time status, and live statistics.
+    It supports insights for WiFi, Wired, and VPN clients, including connection details.
+  license: {}
+  version: 9.1.120
+servers:
+- url: https://api.ui.com/v1/connector/consoles/{consoleId}/proxy/network/integration
+  description: UniFi API Cloud Connector
+  variables:
+    consoleId:
+      default: 942A6FF664C0000000000964970E0000000009E710560000000068A9873F:9999999999
+      description: ID of the console to proxy requests to
+- url: https://{consoleIP}/proxy/network/integration
+  description: Local Console
+  variables:
+    consoleIP:
+      default: 192.168.0.1
+      description: IP address of the console on the local network
+tags:
+- name: Generic information
+  description: '
+
+    ## Filtering
+
+
+    Some `GET` and `DELETE` endpoints support filtering via request parameter `filter`.
+
+
+    Filtering uses a URL-safe syntax, which includes:
+
+
+    - **Property expressions** using various filtering functions;
+
+    - **Compound expressions**, which combines multiple property, compound and "not"
+    expressions using logical operators like `and` and `or`;
+
+    - **"Not" expressions**, which negate property, compound and "not" expressions.
+
+
+    Property expression syntax is `<property>.<function>(<arguments>)`. Argument values
+    must be separated by comma.
+
+    Examples:
+
+
+    - `id.eq(123)` checks if `id` is equal to `123`;
+
+    - `name.isNotNull()` checks if `name` is null;
+
+    - `createdAt.in(2025-01-01, 2025-01-05)` checks if `createdAt` is one of `2025-01-01`
+    or `2025-01-05`
+
+
+    Compound expression syntax is `<logical-operator>(<expressions>)`.
+
+    Expressions must separated by comma. There must be at least two expressions inside
+    a compound expression.
+
+    Examples:
+
+
+    - `and(name.isNull(), createdAt.gt(2025-01-01))` checks if `name` is null **and**
+    `createdAt` is greater than `2025-01-01`;
+
+    - `or(name.isNull(), expired.isNull(), expiresAt.isNull())` check is either of
+    `name`, `expired` or `expiresAt` is null.
+
+
+    "Not" expression syntax is `not(<expression>)`.
+
+    Example:
+
+
+    - `not(name.like(''guest*''))`
+
+
+    Filterable property type can be one of `STRING`, `NUMBER`, `TIMESTAMP`, `BOOLEAN`
+    and `UUID`.
+
+    Each type has a distinct literal syntax, which should be used in filter expressions:
+
+
+    - `STRING` literal must be wrapped in single-quotes. Single-quote must be escaped
+    with another single-quote. For example: `''Hello, ''''World''''!''`;
+
+    - `NUMBER` literal must start with a digit. Numbers may have optional decimal
+    part, using dot as separator. For example: `123.321`;
+
+    - `TIMESTAMP` literal must be ISO 8601 date or date-time, using standard separators.
+    For example: `2025-01-29`, `2025-01-29T12:39:11Z`;
+
+    - `BOOLEAN` literal is either `true` or `false`;
+
+    - `UUID` literal is a string UUID representation (without any quotes), using the
+    8-4-4-4-12 format. For example: `550e8400-e29b-41d4-a716-446655440000`.
+
+
+    Below is the table of all supported property filtering functions. Not all property
+    types support all functions.
+
+    Different functions have different number of arguments. Argument type required
+    for a particular function reference
+
+    in the filter expression is determined by the property type.
+
+
+    |Function|Arguments|Semantics|Supported property types|
+
+    |-|-|-|-|
+
+    |`isNull`|0|is null|all types|
+
+    |`isNotNull`|0|is not null|all types|
+
+    |`eq`|1|equals|all types|
+
+    |`ne`|1|not equals|all types|
+
+    |`gt`|1|greater than|`STRING` `NUMBER` `TIMESTAMP` `UUID`|
+
+    |`ge`|1|greater than or equals|`STRING` `NUMBER` `TIMESTAMP` `UUID`|
+
+    |`lt`|1|less than|`STRING` `NUMBER` `TIMESTAMP` `UUID`|
+
+    |`le`|1|less than or equals|`STRING` `NUMBER` `TIMESTAMP` `UUID`|
+
+    |`like`|1|matches pattern*|`STRING`|
+
+    |`in`|1 or more|one of|`STRING` `NUMBER` `TIMESTAMP` `UUID`|
+
+    |`notIn`|1 or more|not one of|`STRING` `NUMBER` `TIMESTAMP` `UUID`|
+
+
+    *`like` allows matching string properties against simple patterns, which comply
+    to the following rules:
+
+
+    - `.` matches to any 1 character. For example: `type.like(''type.'')` will match
+    `type1`, but will not match `type100`;
+
+    - `*` matches to any number of any characters. For example: `name.like(''guest*'')`
+    will match both `guest1` and `guest100`;
+
+    - `\` can be used to escape `.` and `*`.
+
+
+    Endpoints may have certain functions disabled for some properties due to technical
+    or logical limitations.
+
+    For example, mandatory fields will not support `isNull` and `isNotNull`. Each
+    endpoint supporting filtering will
+
+    have a detailed documentation of filterable properties, their types and allowed
+    functions.
+
+    '
+paths:
+  /v1/sites/{siteId}/hotspot/vouchers:
+    get:
+      tags:
+      - Hotspot Vouchers
+      summary: List Vouchers
+      description: 'List Hotspot vouchers (paginated)
+
+
+        <details>
+
+        <summary>Filterable properties (click to expand)</summary>
+
+
+        |Name|Type|Allowed functions|
+
+        |-|-|-|
+
+        |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+        |`createdAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`name`|`STRING`|`eq` `ne` `in` `notIn` `like`|
+
+        |`code`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        |`authorizedGuestLimit`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+        `lt` `le`|
+
+        |`authorizedGuestCount`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`activatedAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`expiresAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`expired`|`BOOLEAN`|`eq` `ne`|
+
+        |`timeLimitMinutes`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`dataUsageLimitMBytes`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+        `lt` `le`|
+
+        |`rxRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+        `le`|
+
+        |`txRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+        `le`|
+
+        </details>'
+      operationId: getVouchers
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 100
+          maximum: 1000
+          minimum: 0
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotspotVoucherDetailPage'
+    post:
+      tags:
+      - Hotspot Vouchers
+      summary: Generate Vouchers
+      description: Generate one or more Hotspot vouchers
+      operationId: createVouchers
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HotspotVoucherCreationRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationVoucherCreationResultDto'
+    delete:
+      tags:
+      - Hotspot Vouchers
+      summary: Delete Vouchers
+      description: 'Delete Hotspot vouchers by filter
+
+
+        <details>
+
+        <summary>Filterable properties (click to expand)</summary>
+
+
+        |Name|Type|Allowed functions|
+
+        |-|-|-|
+
+        |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+        |`createdAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`name`|`STRING`|`eq` `ne` `in` `notIn` `like`|
+
+        |`code`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        |`authorizedGuestLimit`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+        `lt` `le`|
+
+        |`authorizedGuestCount`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`activatedAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`expiresAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`expired`|`BOOLEAN`|`eq` `ne`|
+
+        |`timeLimitMinutes`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`dataUsageLimitMBytes`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+        `lt` `le`|
+
+        |`rxRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+        `le`|
+
+        |`txRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+        `le`|
+
+        </details>'
+      operationId: deleteVouchers
+      parameters:
+      - name: filter
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoucherDeletionResults'
+  /v1/sites/{siteId}/devices/{deviceId}/interfaces/ports/{portIdx}/actions:
+    post:
+      tags:
+      - Devices
+      summary: Execute Port Action
+      description: Execute an action on a specific port. Request body should contain
+        action name and input arguments, if apply.
+      operationId: executePortAction
+      parameters:
+      - name: portIdx
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: deviceId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortActionRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+  /v1/sites/{siteId}/devices/{deviceId}/actions:
+    post:
+      tags:
+      - Devices
+      summary: Execute Device Action
+      description: Execute an action on a specific adopted device. Request body should
+        contain action name and input arguments, if apply.
+      operationId: executeDeviceAction
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: deviceId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceActionRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+  /v1/sites/{siteId}/clients/{clientId}/actions:
+    post:
+      tags:
+      - Clients
+      summary: Execute Client Action
+      description: Execute an action on a specific connected client. Request body
+        should contain action name and input arguments, if apply.
+      operationId: executeConnectedClientAction
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientActionRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientActionResponse'
+  /v1/sites:
+    get:
+      tags:
+      - Sites
+      summary: List Local Sites
+      description: 'List local sites managed by this Network application (paginated).
+
+        Setups using Multi-Site option enabled will return all created sites
+
+        while if option is disabled it will return just the default site.
+
+
+        <details>
+
+        <summary>Filterable properties (click to expand)</summary>
+
+
+        |Name|Type|Allowed functions|
+
+        |-|-|-|
+
+        |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+        |`internalReference`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        |`name`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        </details>'
+      operationId: getSiteOverviewPage
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 25
+          maximum: 200
+          minimum: 0
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SiteOverviewPage'
+  /v1/sites/{siteId}/hotspot/vouchers/{voucherId}:
+    get:
+      tags:
+      - Hotspot Vouchers
+      summary: Get Voucher Details
+      description: Get details of a specific Hotspot voucher
+      operationId: getVoucher
+      parameters:
+      - name: voucherId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotspotVoucherDetails'
+    delete:
+      tags:
+      - Hotspot Vouchers
+      summary: Delete Voucher
+      description: Delete a specific Hotspot voucher
+      operationId: deleteVoucher
+      parameters:
+      - name: voucherId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoucherDeletionResults'
+  /v1/sites/{siteId}/devices:
+    get:
+      tags:
+      - Devices
+      summary: List Devices
+      description: List adopted devices of a site (paginated). Response contains basic
+        information about site's adopted devices.
+      operationId: getDeviceOverviewPage
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 25
+          maximum: 200
+          minimum: 0
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceOverviewPage'
+  /v1/sites/{siteId}/devices/{deviceId}:
+    get:
+      tags:
+      - Devices
+      summary: Get Device Details
+      description: Get detailed information about a specific adopted device. Response
+        includes more information about a single device, as well as more detailed
+        information about device features, such as switch ports and/or access point
+        radios
+      operationId: getDeviceDetails
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: deviceId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceDetails'
+  /v1/sites/{siteId}/devices/{deviceId}/statistics/latest:
+    get:
+      tags:
+      - Devices
+      summary: Get Latest Device Statistics
+      description: Get latest (live) statistics of a specific adopted device. Response
+        contains latest readings from a single device, such as CPU and memory utilization,
+        uptime, uplink tx/rx rates etc
+      operationId: getDeviceLatestStatistics
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: deviceId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestStatisticsForADevice'
+  /v1/sites/{siteId}/clients:
+    get:
+      tags:
+      - Clients
+      summary: List Connected Clients
+      description: 'List connected clients of a site (paginated). Clients are either
+        physical devices (computers, smartphones, connected by wire or wirelessly),
+        or active VPN connections.
+
+
+        <details>
+
+        <summary>Filterable properties (click to expand)</summary>
+
+
+        |Name|Type|Allowed functions|
+
+        |-|-|-|
+
+        |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+        |`type`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        |`macAddress`|`STRING`|`isNull` `isNotNull` `eq` `ne` `in` `notIn`|
+
+        |`ipAddress`|`STRING`|`isNull` `isNotNull` `eq` `ne` `in` `notIn`|
+
+        |`connectedAt`|`TIMESTAMP`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt` `le`|
+
+        |`access.type`|`STRING`|`eq` `ne` `in` `notIn`|
+
+        |`access.authorized`|`BOOLEAN`|`isNull` `isNotNull` `eq` `ne`|
+
+        </details>'
+      operationId: getConnectedClientOverviewPage
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          format: int32
+          default: 25
+          maximum: 200
+          minimum: 0
+      - name: filter
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientOverviewPage'
+  /v1/sites/{siteId}/clients/{clientId}:
+    get:
+      tags:
+      - Clients
+      summary: Get Connected Client Details
+      operationId: getConnectedClientDetails
+      parameters:
+      - name: clientId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientDetails'
+  /v1/info:
+    get:
+      tags:
+      - About application
+      summary: Get Application Info
+      description: Get generic information about the Network application
+      operationId: getInfo
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationInfo'
+components:
+  schemas:
+    ErrorResponse:
+      description: This generic error message format is used across all endpoints.
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          example: 400
+        statusName:
+          type: string
+          example: UNAUTHORIZED
+        message:
+          type: string
+          example: Missing credentials
+        timestamp:
+          type: string
+          format: date-time
+          example: '2024-11-27T08:13:46.966Z'
+        requestPath:
+          type: string
+          example: /integration/v1/sites/123
+        requestId:
+          type: string
+          format: uuid
+          description: In case of Internal Server Error (core = 500), request ID can
+            be used to track down the error in the server log
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      x-tags: Generic information
+    HotspotVoucherCreationRequest:
+      properties:
+        count:
+          type: integer
+          format: int32
+          default: '1'
+          description: Number of vouchers to generate
+          maximum: 1000
+          minimum: 1
+        name:
+          type: string
+          description: Voucher note, duplicated across all generated vouchers
+        authorizedGuestLimit:
+          type: integer
+          format: int64
+          description: (Optional) limit for how many different guests can use the
+            same voucher to authorize network access
+          example: 1
+          minimum: 1
+        timeLimitMinutes:
+          type: integer
+          format: int64
+          description: 'How long (in minutes) the voucher will provide access to the
+            network since authorization of the first guest.
+
+            Subsequently connected guests, if allowed, will share the same expiration
+            time.'
+          maximum: 1000000
+          minimum: 1
+        dataUsageLimitMBytes:
+          type: integer
+          format: int64
+          description: (Optional) data usage limit in megabytes
+          maximum: 1048576
+          minimum: 1
+        rxRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) download rate limit in kilobits per second
+          maximum: 100000
+          minimum: 2
+        txRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) upload rate limit in kilobits per second
+          maximum: 100000
+          minimum: 2
+      required:
+      - name
+      - timeLimitMinutes
+    HotspotVoucherDetails:
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+          description: Voucher note, may contain duplicate values across multiple
+            vouchers
+          example: hotel-guest
+        code:
+          type: string
+          description: Secret code to active the voucher using the Hotspot portal
+          example: 4861409510
+        authorizedGuestLimit:
+          type: integer
+          format: int64
+          description: (Optional) limit for how many different guests can use the
+            same voucher to authorize network access
+          example: 1
+        authorizedGuestCount:
+          type: integer
+          format: int64
+          description: For how many guests the voucher has been used to authorize
+            network access
+          example: 0
+        activatedAt:
+          type: string
+          format: date-time
+          description: (Optional) timestamp when the voucher has been activated (authorization
+            time of the first guest)
+        expiresAt:
+          type: string
+          format: date-time
+          description: (Optional) timestamp when the voucher will become expired.
+            All guests using the voucher will be unauthorized from network access
+        expired:
+          type: boolean
+          description: Whether the voucher has been expired and can no longer be used
+            to authorize network access
+        timeLimitMinutes:
+          type: integer
+          format: int64
+          description: 'How long (in minutes) the voucher will provide access to the
+            network since authorization of the first guest.
+
+            Subsequently connected guests, if allowed, will share the same expiration
+            time.'
+          example: 1440
+        dataUsageLimitMBytes:
+          type: integer
+          format: int64
+          description: (Optional) data usage limit in megabytes
+          example: 1024
+        rxRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) download rate limit in kilobits per second
+          example: 1000
+        txRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) upload rate limit in kilobits per second
+          example: 1000
+      required:
+      - authorizedGuestCount
+      - code
+      - createdAt
+      - expired
+      - id
+      - name
+      - timeLimitMinutes
+    IntegrationVoucherCreationResultDto:
+      properties:
+        vouchers:
+          type: array
+          items:
+            $ref: '#/components/schemas/HotspotVoucherDetails'
+    PortPoEPowerCycleRequest:
+      allOf:
+      - $ref: '#/components/schemas/PortActionRequest'
+    PortActionRequest:
+      discriminator:
+        propertyName: action
+        mapping:
+          POWER_CYCLE: '#/components/schemas/PortPoEPowerCycleRequest'
+      oneOf:
+      - $ref: '#/components/schemas/PortPoEPowerCycleRequest'
+    DeviceActionRequest:
+      discriminator:
+        propertyName: action
+        mapping:
+          RESTART: '#/components/schemas/DeviceRestartRequest'
+      oneOf:
+      - $ref: '#/components/schemas/DeviceRestartRequest'
+    DeviceRestartRequest:
+      allOf:
+      - $ref: '#/components/schemas/DeviceActionRequest'
+    ClientActionRequest:
+      discriminator:
+        propertyName: action
+        mapping:
+          AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationRequest'
+          UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationRequest'
+      oneOf:
+      - $ref: '#/components/schemas/GuestAccessAuthorizationRequest'
+      - $ref: '#/components/schemas/GuestAccessUnauthorizationRequest'
+    GuestAccessAuthorizationRequest:
+      allOf:
+      - $ref: '#/components/schemas/ClientActionRequest'
+      - type: object
+        properties:
+          timeLimitMinutes:
+            type: integer
+            format: int64
+            description: '(Optional) how long (in minutes) the guest will be authorized
+              to access the network.
+
+              If not specified, the default limit is used from the site settings'
+            maximum: 1000000
+            minimum: 1
+          dataUsageLimitMBytes:
+            type: integer
+            format: int64
+            description: (Optional) data usage limit in megabytes
+            maximum: 1048576
+            minimum: 1
+          rxRateLimitKbps:
+            type: integer
+            format: int64
+            description: (Optional) download rate limit in kilobits per second
+            maximum: 100000
+            minimum: 2
+          txRateLimitKbps:
+            type: integer
+            format: int64
+            description: (Optional) upload rate limit in kilobits per second
+            maximum: 100000
+            minimum: 2
+      description: 'Authorizes network access to a guest client. Client must be a
+        guest.
+
+        This action cancels existing active authorization (if exists), creates a new
+        one with new limits
+
+        and resets guest traffic counters.'
+    GuestAccessUnauthorizationRequest:
+      allOf:
+      - $ref: '#/components/schemas/ClientActionRequest'
+      description: Unauthorizes network access and disconnects a guest client.
+    ClientActionResponse:
+      discriminator:
+        propertyName: action
+        mapping:
+          AUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessAuthorizationResponse'
+          UNAUTHORIZE_GUEST_ACCESS: '#/components/schemas/GuestAccessUnauthorizationResponse'
+      oneOf:
+      - $ref: '#/components/schemas/GuestAccessAuthorizationResponse'
+      - $ref: '#/components/schemas/GuestAccessUnauthorizationResponse'
+    GuestAccessAuthorizationResponse:
+      allOf:
+      - $ref: '#/components/schemas/ClientActionResponse'
+      - type: object
+        properties:
+          revokedAuthorization:
+            $ref: '#/components/schemas/GuestAuthorizationDetails'
+            description: (Optional) Revoked authorization in case the guest was already
+              authorized at the time of this request
+          grantedAuthorization:
+            $ref: '#/components/schemas/GuestAuthorizationDetails'
+            description: Granted guest authorization
+      required:
+      - grantedAuthorization
+    GuestAccessUnauthorizationResponse:
+      allOf:
+      - $ref: '#/components/schemas/ClientActionResponse'
+      - type: object
+        properties:
+          revokedAuthorization:
+            $ref: '#/components/schemas/GuestAuthorizationDetails'
+            description: Revoked guest authorization
+      required:
+      - revokedAuthorization
+    GuestAuthorizationDetails:
+      properties:
+        authorizedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the guest has been authorized
+        authorizationMethod:
+          type: string
+          description: Guest authorization method (API, Voucher etc)
+          enum:
+          - VOUCHER
+          - API
+          - OTHER
+        expiresAt:
+          type: string
+          format: date-time
+          description: Timestamp when the guest will get automatically unauthorized
+        dataUsageLimitMBytes:
+          type: integer
+          format: int64
+          description: (Optional) data usage limit in megabytes
+          example: 1024
+        rxRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) download rate limit in kilobits per second
+          example: 1000
+        txRateLimitKbps:
+          type: integer
+          format: int64
+          description: (Optional) upload rate limit in kilobits per second
+          example: 1000
+        usage:
+          $ref: '#/components/schemas/GuestAuthorizationUsageDetails'
+      required:
+      - authorizationMethod
+      - authorizedAt
+      - expiresAt
+    GuestAuthorizationUsageDetails:
+      properties:
+        durationSec:
+          type: integer
+          format: int64
+        rxBytes:
+          type: integer
+          format: int64
+        txBytes:
+          type: integer
+          format: int64
+        bytes:
+          type: integer
+          format: int64
+      required:
+      - bytes
+      - durationSec
+      - rxBytes
+      - txBytes
+    SiteOverview:
+      properties:
+        id:
+          type: string
+          format: uuid
+        internalReference:
+          type: string
+          description: Internal unique name of the site used in older APIs
+        name:
+          type: string
+      required:
+      - id
+      - internalReference
+      - name
+    SiteOverviewPage:
+      properties:
+        offset:
+          type: integer
+          format: int64
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          example: 25
+        count:
+          type: integer
+          format: int32
+          example: 10
+        totalCount:
+          type: integer
+          format: int64
+          example: 1000
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SiteOverview'
+      required:
+      - count
+      - data
+      - limit
+      - offset
+      - totalCount
+    HotspotVoucherDetailPage:
+      properties:
+        offset:
+          type: integer
+          format: int64
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          example: 25
+        count:
+          type: integer
+          format: int32
+          example: 10
+        totalCount:
+          type: integer
+          format: int64
+          example: 1000
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HotspotVoucherDetails'
+      required:
+      - count
+      - data
+      - limit
+      - offset
+      - totalCount
+    DeviceOverview:
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: IW HD
+        model:
+          type: string
+          example: UHDIW
+        macAddress:
+          type: string
+          example: 94:2a:6f:26:c6:ca
+        ipAddress:
+          type: string
+          example: 192.168.1.55
+        state:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - PENDING_ADOPTION
+          - UPDATING
+          - GETTING_READY
+          - ADOPTING
+          - DELETING
+          - CONNECTION_INTERRUPTED
+          - ISOLATED
+        features:
+          type: array
+          items:
+            type: string
+            enum:
+            - switching
+            - accessPoint
+            - gateway
+          uniqueItems: true
+        interfaces:
+          type: array
+          items:
+            type: string
+            enum:
+            - ports
+            - radios
+          uniqueItems: true
+      required:
+      - features
+      - id
+      - interfaces
+      - ipAddress
+      - macAddress
+      - model
+      - name
+      - state
+    DeviceOverviewPage:
+      properties:
+        offset:
+          type: integer
+          format: int64
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          example: 25
+        count:
+          type: integer
+          format: int32
+          example: 10
+        totalCount:
+          type: integer
+          format: int64
+          example: 1000
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceOverview'
+      required:
+      - count
+      - data
+      - limit
+      - offset
+      - totalCount
+    AccessPointFeatureOverview: {}
+    DeviceDetails:
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: IW HD
+        model:
+          type: string
+          example: UHDIW
+        supported:
+          type: boolean
+        macAddress:
+          type: string
+          example: 94:2a:6f:26:c6:ca
+        ipAddress:
+          type: string
+          example: 192.168.1.55
+        state:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - PENDING_ADOPTION
+          - UPDATING
+          - GETTING_READY
+          - ADOPTING
+          - DELETING
+          - CONNECTION_INTERRUPTED
+          - ISOLATED
+        firmwareVersion:
+          type: string
+          example: 6.6.55
+        firmwareUpdatable:
+          type: boolean
+        adoptedAt:
+          type: string
+          format: date-time
+        provisionedAt:
+          type: string
+          format: date-time
+        configurationId:
+          type: string
+          example: 7596498d2f367dc2
+        uplink:
+          $ref: '#/components/schemas/DeviceUplinkInterfaceOverview'
+        features:
+          $ref: '#/components/schemas/DeviceFeatures'
+        interfaces:
+          $ref: '#/components/schemas/DevicePhysicalInterfaces'
+      required:
+      - configurationId
+      - features
+      - firmwareUpdatable
+      - id
+      - interfaces
+      - ipAddress
+      - macAddress
+      - model
+      - name
+      - state
+      - supported
+    DeviceFeatures:
+      properties:
+        switching:
+          $ref: '#/components/schemas/SwitchFeatureOverview'
+          example: {}
+        accessPoint:
+          $ref: '#/components/schemas/AccessPointFeatureOverview'
+          example: {}
+    DevicePhysicalInterfaces:
+      properties:
+        ports:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortOverview'
+        radios:
+          type: array
+          items:
+            $ref: '#/components/schemas/WirelessRadioOverview'
+    DeviceUplinkInterfaceOverview:
+      description: Uplink interface is device's connection to the parent device in
+        the network topology
+      properties:
+        deviceId:
+          type: string
+          format: uuid
+      required:
+      - deviceId
+    PortPoEOverview:
+      properties:
+        standard:
+          type: string
+          enum:
+          - 802.3af
+          - 802.3at
+          - 802.3bt
+          example: 802.3bt
+        type:
+          type: integer
+          format: int32
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          example: 3
+        enabled:
+          type: boolean
+          description: Whether the PoE feature is enabled on the port
+        state:
+          type: string
+          description: Whether the port currently supplies power to the (connected)
+            device.
+          enum:
+          - UP
+          - DOWN
+          - LIMITED
+          - UNKNOWN
+      required:
+      - enabled
+      - standard
+      - state
+      - type
+    PortOverview:
+      properties:
+        idx:
+          type: integer
+          format: int32
+          example: 1
+          minimum: 1
+        state:
+          type: string
+          enum:
+          - UP
+          - DOWN
+          - UNKNOWN
+        connector:
+          type: string
+          enum:
+          - RJ45
+          - SFP
+          - SFPPLUS
+          - SFP28
+          - QSFP28
+        maxSpeedMbps:
+          type: integer
+          format: int32
+          example: 10000
+        speedMbps:
+          type: integer
+          format: int32
+          example: 1000
+        poe:
+          $ref: '#/components/schemas/PortPoEOverview'
+      required:
+      - connector
+      - idx
+      - maxSpeedMbps
+      - state
+    SwitchFeatureOverview: {}
+    WirelessRadioOverview:
+      properties:
+        wlanStandard:
+          type: string
+          enum:
+          - 802.11a
+          - 802.11b
+          - 802.11g
+          - 802.11n
+          - 802.11ac
+          - 802.11ax
+          - 802.11be
+        frequencyGHz:
+          type: string
+          enum:
+          - '2.4'
+          - '5'
+          - '6'
+          - '60'
+        channelWidthMHz:
+          type: integer
+          format: int32
+          example: 40
+        channel:
+          type: integer
+          format: int32
+          example: 36
+      required:
+      - channelWidthMHz
+      - frequencyGHz
+      - wlanStandard
+    LatestStatisticsForADevice:
+      properties:
+        uptimeSec:
+          type: integer
+          format: int64
+        lastHeartbeatAt:
+          type: string
+          format: date-time
+        nextHeartbeatAt:
+          type: string
+          format: date-time
+        loadAverage1Min:
+          type: number
+          format: double
+        loadAverage5Min:
+          type: number
+          format: double
+        loadAverage15Min:
+          type: number
+          format: double
+        cpuUtilizationPct:
+          type: number
+          format: double
+        memoryUtilizationPct:
+          type: number
+          format: double
+        uplink:
+          $ref: '#/components/schemas/LatestStatisticsForADeviceUplinkInterface'
+        interfaces:
+          $ref: '#/components/schemas/LatestStatisticsForDeviceInterfaces'
+      required:
+      - interfaces
+    LatestStatisticsForADeviceUplinkInterface:
+      properties:
+        txRateBps:
+          type: integer
+          format: int64
+        rxRateBps:
+          type: integer
+          format: int64
+    LatestStatisticsForDeviceInterfaces:
+      properties:
+        radios:
+          type: array
+          items:
+            $ref: '#/components/schemas/LatestStatisticsForWirelessRadio'
+    LatestStatisticsForWirelessRadio:
+      properties:
+        frequencyGHz:
+          type: string
+          enum:
+          - '2.4'
+          - '5'
+          - '6'
+          - '60'
+        txRetriesPct:
+          type: number
+          format: double
+      required:
+      - frequencyGHz
+    ClientAccessOverview:
+      example:
+        type: DEFAULT
+    ClientOverview:
+      discriminator:
+        propertyName: type
+        mapping:
+          WIRED: '#/components/schemas/WiredClientOverview'
+          WIRELESS: '#/components/schemas/WirelessClientOverview'
+          VPN: '#/components/schemas/VPNClientConnectionOverview'
+          TELEPORT: '#/components/schemas/TeleportClientConnectionOverview'
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        connectedAt:
+          type: string
+          format: date-time
+        ipAddress:
+          type: string
+        access:
+          $ref: '#/components/schemas/ClientAccessOverview'
+        type:
+          type: string
+      required:
+      - access
+      - id
+      - name
+      - type
+    ClientOverviewPage:
+      properties:
+        offset:
+          type: integer
+          format: int64
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          example: 25
+        count:
+          type: integer
+          format: int32
+          example: 10
+        totalCount:
+          type: integer
+          format: int64
+          example: 1000
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientOverview'
+      required:
+      - count
+      - data
+      - limit
+      - offset
+      - totalCount
+    DefaultClientAccessOverview:
+      allOf:
+      - $ref: '#/components/schemas/LocalClientAccessOverview'
+      - $ref: '#/components/schemas/VPNClientAccessOverview'
+      - $ref: '#/components/schemas/TeleportClientAccessOverview'
+    GuestAccessOverview:
+      allOf:
+      - $ref: '#/components/schemas/LocalClientAccessOverview'
+      - type: object
+        properties:
+          authorized:
+            type: boolean
+      required:
+      - authorized
+    LocalClientAccessOverview:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+          GUEST: '#/components/schemas/GuestAccessOverview'
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessOverview'
+      - $ref: '#/components/schemas/GuestAccessOverview'
+    TeleportClientConnectionOverview:
+      allOf:
+      - $ref: '#/components/schemas/ClientOverview'
+      - type: object
+        properties:
+          access:
+            $ref: '#/components/schemas/TeleportClientAccessOverview'
+      required:
+      - access
+      - id
+      - name
+    TeleportClientAccessOverview:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessOverview'
+    VPNClientConnectionOverview:
+      allOf:
+      - $ref: '#/components/schemas/ClientOverview'
+      - type: object
+        properties:
+          access:
+            $ref: '#/components/schemas/VPNClientAccessOverview'
+      required:
+      - access
+      - id
+      - name
+    VPNClientAccessOverview:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessOverview'
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessOverview'
+    WiredClientOverview:
+      allOf:
+      - $ref: '#/components/schemas/ClientOverview'
+      - type: object
+        properties:
+          macAddress:
+            type: string
+          uplinkDeviceId:
+            type: string
+            format: uuid
+          access:
+            $ref: '#/components/schemas/LocalClientAccessOverview'
+      required:
+      - access
+      - id
+      - macAddress
+      - name
+      - uplinkDeviceId
+    WirelessClientOverview:
+      allOf:
+      - $ref: '#/components/schemas/ClientOverview'
+      - type: object
+        properties:
+          macAddress:
+            type: string
+          uplinkDeviceId:
+            type: string
+            format: uuid
+          access:
+            $ref: '#/components/schemas/LocalClientAccessOverview'
+      required:
+      - access
+      - id
+      - macAddress
+      - name
+      - uplinkDeviceId
+    ClientDetails:
+      discriminator:
+        propertyName: type
+        mapping:
+          WIRED: '#/components/schemas/WiredClientDetails'
+          WIRELESS: '#/components/schemas/WirelessClientDetails'
+          VPN: '#/components/schemas/VPNClientConnectionDetails'
+          TELEPORT: '#/components/schemas/TeleportClientConnectionDetails'
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        connectedAt:
+          type: string
+          format: date-time
+        ipAddress:
+          type: string
+        access: {}
+        type:
+          type: string
+      required:
+      - access
+      - id
+      - name
+      - type
+    DefaultClientAccessDetails:
+      allOf:
+      - $ref: '#/components/schemas/LocalClientAccessDetails'
+      - $ref: '#/components/schemas/VPNClientAccessDetails'
+      - $ref: '#/components/schemas/TeleportClientAccessDetails'
+    GuestAccessDetails:
+      allOf:
+      - $ref: '#/components/schemas/LocalClientAccessDetails'
+      - type: object
+        properties:
+          authorized:
+            type: boolean
+          authorization:
+            $ref: '#/components/schemas/GuestAuthorizationDetails'
+      required:
+      - authorized
+    LocalClientAccessDetails:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+          GUEST: '#/components/schemas/GuestAccessDetails'
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessDetails'
+      - $ref: '#/components/schemas/GuestAccessDetails'
+    TeleportClientConnectionDetails:
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        connectedAt:
+          type: string
+          format: date-time
+        ipAddress:
+          type: string
+        access:
+          $ref: '#/components/schemas/TeleportClientAccessDetails'
+      required:
+      - access
+      - id
+      - name
+    TeleportClientAccessDetails:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessDetails'
+    VPNClientConnectionDetails:
+      allOf:
+      - $ref: '#/components/schemas/ClientDetails'
+      - type: object
+        properties:
+          access:
+            $ref: '#/components/schemas/VPNClientAccessDetails'
+      required:
+      - access
+      - id
+      - name
+    VPNClientAccessDetails:
+      description: "Represents the type of network access and/or any applicable authorization\
+        \ status the client is using.\n\n- **Wired clients** may have direct access\
+        \ without additional authorization.\n- **Wireless clients** can be connected\
+        \ via a protected network or an open network\n  that may require additional\
+        \ authorization (e.g., a guest portal).\n- **VPN clients** may have different\
+        \ authorization mechanisms.\n\nCurrently, the only two supported access types\
+        \ are `GUEST` (used for wired and wireless guest clients)\nand `DEFAULT` (a\
+        \ placeholder, which might be refined in the future releases, used for all\
+        \ other clients).\n\nFiltering is possible by `access.type`, for example `access.type.eq('GUEST')`\
+        \ to list guest clients."
+      discriminator:
+        propertyName: type
+        mapping:
+          DEFAULT: '#/components/schemas/DefaultClientAccessDetails'
+      oneOf:
+      - $ref: '#/components/schemas/DefaultClientAccessDetails'
+    WiredClientDetails:
+      allOf:
+      - $ref: '#/components/schemas/ClientDetails'
+      - type: object
+        properties:
+          macAddress:
+            type: string
+          uplinkDeviceId:
+            type: string
+            format: uuid
+          access:
+            $ref: '#/components/schemas/LocalClientAccessDetails'
+      required:
+      - access
+      - id
+      - macAddress
+      - name
+      - uplinkDeviceId
+    WirelessClientDetails:
+      allOf:
+      - $ref: '#/components/schemas/ClientDetails'
+      - type: object
+        properties:
+          macAddress:
+            type: string
+          uplinkDeviceId:
+            type: string
+            format: uuid
+          access:
+            $ref: '#/components/schemas/LocalClientAccessDetails'
+      required:
+      - access
+      - id
+      - macAddress
+      - name
+      - uplinkDeviceId
+    ApplicationInfo:
+      properties:
+        applicationVersion:
+          type: string
+          example: 9.1.0
+      required:
+      - applicationVersion
+    VoucherDeletionResults:
+      properties:
+        vouchersDeleted:
+          type: integer
+          format: int64

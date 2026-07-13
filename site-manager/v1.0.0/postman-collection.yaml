@@ -1,0 +1,4731 @@
+item:
+- id: a2497e44-c2a5-4977-a216-3cb3bfc79667
+  name: cloud-connector
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: f1c7f1b9-7964-4d31-af3d-fc05365eda78
+    name: Connector - DELETE
+    request:
+      name: Connector - DELETE
+      description:
+        content: 'Forward DELETE requests to UniFi applications using RESTful HTTP
+          methods. <br/><br/>**Request Flow**: The request is proxied through `api.ui.com`
+          cloud endpoint to the remote console at `http://127.0.0.1/proxy/[path]`
+          with DELETE method. <br/><br/>**Requirements**: <br/>- Console firmware
+          version must >= 5.0.3<br/>- For non-organization API keys: Limited to API
+          key owner''s consoles only (cannot access other admins'' consoles)<br/>-
+          For organization API keys: Can access any console within the organization<br/><br/>**Rate
+          Limit**: <br/>- Each console is limited to 100 requests per minute<br/><br/>**Limits**:
+          <br/>- Request timeout: each proxied request must complete within 25 seconds;
+          otherwise it is terminated and a timeout error is returned<br/>- Response
+          body size: the upstream response body is limited to 10 MB; larger responses
+          are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
+          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+          On success, the upstream API response is passed through directly. On error,
+          a standardized error schema is returned.'
+        type: text/plain
+      url:
+        path:
+        - v1
+        - connector
+        - consoles
+        - :id
+        - '*path'
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Host ID to proxy the request to
+        - disabled: false
+          type: any
+          value: <string>
+          key: path
+          description: (Required) API path to proxy
+      header:
+      - key: Accept
+        value: application/json
+      method: DELETE
+      auth: null
+    response:
+    - id: 5601f719-be4e-4fe5-ae4c-8255756eb309
+      name: '200'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: DELETE
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"vouchersDeleted\": 0\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 2b2cfd42-f6e8-426a-821b-0ef9a8020ef3
+      name: '400'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: DELETE
+        body: {}
+      status: Bad Request
+      code: 400
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"parameter_invalid\",\n  \"httpStatusCode\": 400,\n \
+        \ \"message\": \"path is invalid\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 59def124-8afe-4b02-940d-9ebee76d3c3b
+      name: '401'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: DELETE
+        body: {}
+      status: Unauthorized
+      code: 401
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+        : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n\
+        }"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 57f161cc-c2ff-448b-86ac-b355d5e2cb47
+      name: '403'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: DELETE
+        body: {}
+      status: Forbidden
+      code: 403
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"forbidden\",\n  \"httpStatusCode\": 403,\n  \"message\"\
+        : \"insufficient permissions or not the owner of the host\",\n  \"traceId\"\
+        : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: e06f9ae8-4b1a-4d12-8bc6-8cf2fe4af4f7
+      name: '408'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: DELETE
+        body: {}
+      status: Request Timeout
+      code: 408
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"DeviceTimeout\",\n  \"httpStatusCode\": 408,\n  \"message\"\
+        : \"Device connection timeout\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 191ec661-b1fa-42b1-b594-539d086b02dc
+      name: '429'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: DELETE
+        body: {}
+      status: Too Many Requests
+      code: 429
+      header:
+      - disabled: false
+        key: Retry-After
+        value: '5'
+        description: ''
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+        : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: d766039e-8b43-4b64-b4a8-4d23fe056f42
+      name: '500'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: DELETE
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+        : \"failed to proxy request\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: df43c4d4-7b41-476e-beb1-b8e1d7eb0b47
+      name: '502'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: DELETE
+        body: {}
+      status: Bad Gateway
+      code: 502
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+        : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 1649ea28-1cd4-4d7e-b196-1c5e2cf6a360
+    name: Connector - GET
+    request:
+      name: Connector - GET
+      description:
+        content: 'Forward GET requests to UniFi applications using RESTful HTTP methods.
+          <br/><br/>**Request Flow**: The request is proxied through `api.ui.com`
+          cloud endpoint to the remote console at `http://127.0.0.1/proxy/[path]`
+          with GET method. <br/><br/>**Requirements**: <br/>- Console firmware version
+          must >= 5.0.3<br/>- For non-organization API keys: Limited to API key owner''s
+          consoles only (cannot access other admins'' consoles)<br/>- For organization
+          API keys: Can access any console within the organization<br/><br/>**Rate
+          Limit**: <br/>- Each console is limited to 100 requests per minute<br/><br/>**Limits**:
+          <br/>- Request timeout: each proxied request must complete within 25 seconds;
+          otherwise it is terminated and a timeout error is returned<br/>- Response
+          body size: the upstream response body is limited to 10 MB; larger responses
+          are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
+          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Examples**:
+          <br/>- Network: `GET /v1/connector/consoles/{id}/network/integration/v1/sites`
+          retrieves network sites<br/>- Protect: `GET /v1/connector/consoles/{id}/protect/integration/v1/meta/info`
+          retrieves protect application info<br/><br/>**Response**: On success, the
+          upstream API response is passed through directly. On error, a standardized
+          error schema is returned.'
+        type: text/plain
+      url:
+        path:
+        - v1
+        - connector
+        - consoles
+        - :id
+        - '*path'
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Host ID to proxy the request to
+        - disabled: false
+          type: any
+          value: <string>
+          key: path
+          description: (Required) API path to proxy
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 209f7c29-dfa1-41dc-932d-38c26eee0062
+      name: '200'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"count\": 1,\n  \"data\": [\n    {\n      \"id\": \"88f7af54-98f8-306a-a1c7-c9349722b1f6\"\
+        ,\n      \"internalReference\": \"default\",\n      \"name\": \"Default\"\n\
+        \    }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 2e010893-8210-45df-a363-67f1677c5793
+      name: '400'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Bad Request
+      code: 400
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"parameter_invalid\",\n  \"httpStatusCode\": 400,\n \
+        \ \"message\": \"path is invalid\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 3d75021c-449c-4160-bc52-cfc9ff03c2b8
+      name: '401'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Unauthorized
+      code: 401
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+        : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n\
+        }"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 006aac05-0357-489f-b57c-65128972aa19
+      name: '403'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Forbidden
+      code: 403
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"forbidden\",\n  \"httpStatusCode\": 403,\n  \"message\"\
+        : \"insufficient permissions or not the owner of the host\",\n  \"traceId\"\
+        : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: ea583fc5-1f5c-40cb-b1a4-639a0686b9e9
+      name: '408'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Request Timeout
+      code: 408
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"DeviceTimeout\",\n  \"httpStatusCode\": 408,\n  \"message\"\
+        : \"Device connection timeout\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 0a157677-ead4-46e3-a746-a4c943197448
+      name: '429'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Too Many Requests
+      code: 429
+      header:
+      - disabled: false
+        key: Retry-After
+        value: '5'
+        description: ''
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+        : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 4a4efee7-cdba-4d2f-8c9e-6299c5629023
+      name: '500'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+        : \"failed to proxy request\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: d3c6c379-3aea-4b2c-b2b1-305987fdb70d
+      name: '502'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: Bad Gateway
+      code: 502
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+        : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 255c791e-c5bc-4315-a261-7a6d07cd3b21
+    name: Connector - PATCH
+    request:
+      name: Connector - PATCH
+      description:
+        content: 'Forward PATCH requests to UniFi applications using RESTful HTTP
+          methods. <br/><br/>**Request Flow**: The request is proxied through `api.ui.com`
+          cloud endpoint to the remote console at `http://127.0.0.1/proxy/[path]`
+          with PATCH method. <br/><br/>**Requirements**: <br/>- Console firmware version
+          must >= 5.0.3<br/>- For non-organization API keys: Limited to API key owner''s
+          consoles only (cannot access other admins'' consoles)<br/>- For organization
+          API keys: Can access any console within the organization<br/><br/>**Rate
+          Limit**: <br/>- Each console is limited to 100 requests per minute<br/><br/>**Limits**:
+          <br/>- Request timeout: each proxied request must complete within 25 seconds;
+          otherwise it is terminated and a timeout error is returned<br/>- Response
+          body size: the upstream response body is limited to 10 MB; larger responses
+          are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
+          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+          On success, the upstream API response is passed through directly. On error,
+          a standardized error schema is returned.'
+        type: text/plain
+      url:
+        path:
+        - v1
+        - connector
+        - consoles
+        - :id
+        - '*path'
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Host ID to proxy the request to
+        - disabled: false
+          type: any
+          value: <string>
+          key: path
+          description: (Required) API path to proxy
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: PATCH
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"key_0\": {},\n  \"key_1\": {}\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: 040f2faf-cd84-418d-8718-487428d195ed
+      name: '200'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Viewer Name\"\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"507f1f77bcf86cd799439011\",\n  \"liveview\": \"507f1f77bcf86cd799439012\"\
+        ,\n  \"modelKey\": \"viewer\",\n  \"name\": \"Living Room Viewer\",\n  \"\
+        state\": \"CONNECTED\",\n  \"streamLimit\": 4\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: b8bd4cb9-10e2-4e80-b302-fe3ed6a7f44d
+      name: '400'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Viewer Name\"\n}"
+          options:
+            raw:
+              language: json
+      status: Bad Request
+      code: 400
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"parameter_invalid\",\n  \"httpStatusCode\": 400,\n \
+        \ \"message\": \"path is invalid\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 50e49680-8d4c-405d-b557-0d2f4f3ec3bd
+      name: '401'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Viewer Name\"\n}"
+          options:
+            raw:
+              language: json
+      status: Unauthorized
+      code: 401
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+        : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n\
+        }"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 11722b5b-0008-42cc-8c86-955d0da43dca
+      name: '403'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Viewer Name\"\n}"
+          options:
+            raw:
+              language: json
+      status: Forbidden
+      code: 403
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"forbidden\",\n  \"httpStatusCode\": 403,\n  \"message\"\
+        : \"insufficient permissions or not the owner of the host\",\n  \"traceId\"\
+        : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 77c271bc-f17f-45bf-80cc-5ccc56104c3f
+      name: '408'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Viewer Name\"\n}"
+          options:
+            raw:
+              language: json
+      status: Request Timeout
+      code: 408
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"DeviceTimeout\",\n  \"httpStatusCode\": 408,\n  \"message\"\
+        : \"Device connection timeout\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 7191f553-0fa5-4efc-98c4-4ec70d85b1c1
+      name: '429'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Viewer Name\"\n}"
+          options:
+            raw:
+              language: json
+      status: Too Many Requests
+      code: 429
+      header:
+      - disabled: false
+        key: Retry-After
+        value: '5'
+        description: ''
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+        : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 7a2e13fe-44e5-4ac1-953e-57ff344abb42
+      name: '500'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Viewer Name\"\n}"
+          options:
+            raw:
+              language: json
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+        : \"failed to proxy request\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 78f4dbb1-f9c7-4328-80a8-6f2336887afb
+      name: '502'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PATCH
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Viewer Name\"\n}"
+          options:
+            raw:
+              language: json
+      status: Bad Gateway
+      code: 502
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+        : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: e08ac3c8-3a65-4785-a6f3-6fc2ca22ec69
+    name: Connector - POST
+    request:
+      name: Connector - POST
+      description:
+        content: 'Forward POST requests to UniFi applications using RESTful HTTP methods.
+          <br/><br/>**Request Flow**: The request is proxied through `api.ui.com`
+          cloud endpoint to the remote console at `http://127.0.0.1/proxy/[path]`
+          with POST method. <br/><br/>**Requirements**: <br/>- Console firmware version
+          must >= 5.0.3<br/>- For non-organization API keys: Limited to API key owner''s
+          consoles only (cannot access other admins'' consoles)<br/>- For organization
+          API keys: Can access any console within the organization<br/><br/>**Rate
+          Limit**: <br/>- Each console is limited to 100 requests per minute<br/><br/>**Limits**:
+          <br/>- Request timeout: each proxied request must complete within 25 seconds;
+          otherwise it is terminated and a timeout error is returned<br/>- Response
+          body size: the upstream response body is limited to 10 MB; larger responses
+          are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
+          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+          On success, the upstream API response is passed through directly. On error,
+          a standardized error schema is returned.'
+        type: text/plain
+      url:
+        path:
+        - v1
+        - connector
+        - consoles
+        - :id
+        - '*path'
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Host ID to proxy the request to
+        - disabled: false
+          type: any
+          value: <string>
+          key: path
+          description: (Required) API path to proxy
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"key_0\": {},\n  \"key_1\": {}\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: 67f19ae9-69a8-4fd9-8bf9-7c87678527b5
+      name: '200'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"action\": \"AUTHORIZE_GUEST_ACCESS\"\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"success\": true\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: dc2e18da-c8db-485d-88fe-638fc63fe59d
+      name: '400'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"action\": \"AUTHORIZE_GUEST_ACCESS\"\n}"
+          options:
+            raw:
+              language: json
+      status: Bad Request
+      code: 400
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"parameter_invalid\",\n  \"httpStatusCode\": 400,\n \
+        \ \"message\": \"path is invalid\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: d38c4b5b-cfbd-4c56-a25a-04f8dd226439
+      name: '401'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"action\": \"AUTHORIZE_GUEST_ACCESS\"\n}"
+          options:
+            raw:
+              language: json
+      status: Unauthorized
+      code: 401
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+        : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n\
+        }"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: ab4b4099-c4f2-441a-b588-3a0cd91688da
+      name: '403'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"action\": \"AUTHORIZE_GUEST_ACCESS\"\n}"
+          options:
+            raw:
+              language: json
+      status: Forbidden
+      code: 403
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"forbidden\",\n  \"httpStatusCode\": 403,\n  \"message\"\
+        : \"insufficient permissions or not the owner of the host\",\n  \"traceId\"\
+        : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: a54db63b-3236-4a4a-a9c4-9c363c47718c
+      name: '408'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"action\": \"AUTHORIZE_GUEST_ACCESS\"\n}"
+          options:
+            raw:
+              language: json
+      status: Request Timeout
+      code: 408
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"DeviceTimeout\",\n  \"httpStatusCode\": 408,\n  \"message\"\
+        : \"Device connection timeout\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 3e64b580-4c8d-4d83-a1f3-ee7be1835b3d
+      name: '429'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"action\": \"AUTHORIZE_GUEST_ACCESS\"\n}"
+          options:
+            raw:
+              language: json
+      status: Too Many Requests
+      code: 429
+      header:
+      - disabled: false
+        key: Retry-After
+        value: '5'
+        description: ''
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+        : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 73a85bff-cf1f-4776-a71e-18d2366d2de7
+      name: '500'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"action\": \"AUTHORIZE_GUEST_ACCESS\"\n}"
+          options:
+            raw:
+              language: json
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+        : \"failed to proxy request\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: f8104d6d-32be-4f6f-90d8-0c55eb615394
+      name: '502'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"action\": \"AUTHORIZE_GUEST_ACCESS\"\n}"
+          options:
+            raw:
+              language: json
+      status: Bad Gateway
+      code: 502
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+        : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 550cec07-afb6-4055-b67f-0dd79c8ca3f9
+    name: Connector - PUT
+    request:
+      name: Connector - PUT
+      description:
+        content: 'Forward PUT requests to UniFi applications using RESTful HTTP methods.
+          <br/><br/>**Request Flow**: The request is proxied through `api.ui.com`
+          cloud endpoint to the remote console at `http://127.0.0.1/proxy/[path]`
+          with PUT method. <br/><br/>**Requirements**: <br/>- Console firmware version
+          must >= 5.0.3<br/>- For non-organization API keys: Limited to API key owner''s
+          consoles only (cannot access other admins'' consoles)<br/>- For organization
+          API keys: Can access any console within the organization<br/><br/>**Rate
+          Limit**: <br/>- Each console is limited to 100 requests per minute<br/><br/>**Limits**:
+          <br/>- Request timeout: each proxied request must complete within 25 seconds;
+          otherwise it is terminated and a timeout error is returned<br/>- Response
+          body size: the upstream response body is limited to 10 MB; larger responses
+          are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
+          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+          On success, the upstream API response is passed through directly. On error,
+          a standardized error schema is returned.'
+        type: text/plain
+      url:
+        path:
+        - v1
+        - connector
+        - consoles
+        - :id
+        - '*path'
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Host ID to proxy the request to
+        - disabled: false
+          type: any
+          value: <string>
+          key: path
+          description: (Required) API path to proxy
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: PUT
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"key_0\": {},\n  \"key_1\": {}\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: 4a11948a-463f-4b13-9bcb-ff054f8968d8
+      name: '200'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PUT
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Firewall Zone\"\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"id\": \"ffcdb32c-6278-4364-8947-df4f77118df8\",\n  \"metadata\"\
+        : {\n    \"isConfigurable\": true,\n    \"type\": \"system\"\n  },\n  \"name\"\
+        : \"External\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 256a1b0f-3599-46db-9cc0-1d77ff4e1102
+      name: '400'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PUT
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Firewall Zone\"\n}"
+          options:
+            raw:
+              language: json
+      status: Bad Request
+      code: 400
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"parameter_invalid\",\n  \"httpStatusCode\": 400,\n \
+        \ \"message\": \"path is invalid\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: dfb4ac98-fa18-468a-b324-ca2cb2e43d64
+      name: '401'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PUT
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Firewall Zone\"\n}"
+          options:
+            raw:
+              language: json
+      status: Unauthorized
+      code: 401
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+        : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n\
+        }"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 178fb031-27c4-4976-a6de-6df27b3dd9ec
+      name: '403'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PUT
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Firewall Zone\"\n}"
+          options:
+            raw:
+              language: json
+      status: Forbidden
+      code: 403
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"forbidden\",\n  \"httpStatusCode\": 403,\n  \"message\"\
+        : \"insufficient permissions or not the owner of the host\",\n  \"traceId\"\
+        : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 4e62cff4-50f6-4214-9a32-94e55ffc2b2c
+      name: '408'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PUT
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Firewall Zone\"\n}"
+          options:
+            raw:
+              language: json
+      status: Request Timeout
+      code: 408
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"DeviceTimeout\",\n  \"httpStatusCode\": 408,\n  \"message\"\
+        : \"Device connection timeout\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: fce85562-97da-458b-87ff-ce9ecda080f8
+      name: '429'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PUT
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Firewall Zone\"\n}"
+          options:
+            raw:
+              language: json
+      status: Too Many Requests
+      code: 429
+      header:
+      - disabled: false
+        key: Retry-After
+        value: '5'
+        description: ''
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+        : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: 7cd376da-5340-4dcc-b539-3fb2a507db61
+      name: '500'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PUT
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Firewall Zone\"\n}"
+          options:
+            raw:
+              language: json
+      status: Internal Server Error
+      code: 500
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+        : \"failed to proxy request\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+        \n}"
+      cookie: []
+      _postman_previewlanguage: json
+    - id: c7b27e08-7317-4dd0-89a7-8f20bd0a7e70
+      name: '502'
+      originalRequest:
+        url:
+          path:
+          - v1
+          - connector
+          - consoles
+          - :id
+          - '*path'
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <string>
+            key: id
+            description: (Required) Host ID to proxy the request to
+          - disabled: false
+            type: any
+            value: <string>
+            key: path
+            description: (Required) API path to proxy
+        header:
+        - description:
+            content: 'Added as a part of security scheme: apikey'
+            type: text/plain
+          key: X-API-Key
+          value: <API Key>
+        - key: Accept
+          value: application/json
+        method: PUT
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"Updated Firewall Zone\"\n}"
+          options:
+            raw:
+              language: json
+      status: Bad Gateway
+      code: 502
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+        : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: 12fb2a1a-2f07-4c2d-bff1-a542dcdf9e94
+  name: List Devices
+  request:
+    name: List Devices
+    description:
+      content: 'Retrieves a list of UniFi devices managed by hosts where the UI account
+        making the API call is the owner or a super admin. <br/><br/>**Note**: The
+        structure of the `devices.uidb` field may vary depending on the UniFi OS or
+        Network Server version. The example provided is based on UniFi OS 4.1.13.'
+      type: text/plain
+    url:
+      path:
+      - v1
+      - devices
+      host:
+      - '{{baseUrl}}'
+      query:
+      - disabled: false
+        key: hostIds[]
+        value: <string>
+        description: List of host IDs to filter the results
+      - disabled: false
+        key: hostIds[]
+        value: <string>
+        description: List of host IDs to filter the results
+      - disabled: false
+        key: time
+        value: <string>
+        description: Last processed timestamp of devices in RFC3339 format
+      - disabled: false
+        key: pageSize
+        value: <string>
+        description: Number of items to return per page
+      - disabled: false
+        key: nextToken
+        value: <string>
+        description: Token for pagination to retrieve the next set of results
+      variable: []
+    header:
+    - key: Accept
+      value: application/json
+    method: GET
+    auth: null
+  response:
+  - id: 15d9b126-0b90-4ff5-8c29-b5d6db6bba1c
+    name: '200'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - devices
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:987654321
+        - key: time
+          value: '2026-06-15T07:21:27Z'
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: OK
+    code: 200
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"data\": [\n    {\n      \"hostId\": \"900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789\"\
+      ,\n      \"hostName\": \"unifi.yourdomain.com\",\n      \"devices\": [\n   \
+      \     {\n          \"id\": \"F4E2C6C23F13\",\n          \"mac\": \"F4E2C6C23F13\"\
+      ,\n          \"name\": \"unifi.yourdomain.com\",\n          \"model\": \"UDM\
+      \ SE\",\n          \"shortname\": \"UDMPROSE\",\n          \"ip\": \"192.168.1.226\"\
+      ,\n          \"productLine\": \"network\",\n          \"status\": \"online\"\
+      ,\n          \"version\": \"4.1.13\",\n          \"firmwareStatus\": \"upToDate\"\
+      ,\n          \"updateAvailable\": null,\n          \"isConsole\": true,\n  \
+      \        \"isManaged\": true,\n          \"startupTime\": \"2024-06-19T13:41:43Z\"\
+      ,\n          \"adoptionTime\": null,\n          \"note\": null,\n          \"\
+      uidb\": {\n            \"guid\": \"0fd8c390-a0e8-4cb2-b93a-7b3051c83c46\",\n\
+      \            \"id\": \"e85485da-54c3-4906-8f19-3cef4116ff02\",\n           \
+      \ \"images\": {\n              \"default\": \"3008400039c483c496f4ad820242c447\"\
+      ,\n              \"nopadding\": \"67b553529d0e523ca9dd4826076c5f3f\",\n    \
+      \          \"topology\": \"8371ecdda1f00f1636a2eefadf0d7d47\"\n            }\n\
+      \          }\n        }\n      ],\n      \"updatedAt\": \"2026-06-15T07:21:27Z\"\
+      \n    }\n  ],\n  \"httpStatusCode\": 200,\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      ,\n  \"nextToken\": \"ba8e384e-3308-4236-b344-7357657351ca\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 861a7149-7ae7-4cf9-a949-5fafdcbfd414
+    name: '400'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - devices
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:987654321
+        - key: time
+          value: '2026-06-15T07:21:27Z'
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Bad Request
+    code: 400
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"parameter_invalid\",\n  \"httpStatusCode\": 400,\n  \"\
+      message\": \"invalid time format: 2024-04-24\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: e98c7a18-e64e-4258-b70d-b26ebbd749ea
+    name: '401'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - devices
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:987654321
+        - key: time
+          value: '2026-06-15T07:21:27Z'
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Unauthorized
+    code: 401
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+      : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: e3a6fe4d-bd10-4769-8d98-dd116ba27272
+    name: '429'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - devices
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:987654321
+        - key: time
+          value: '2026-06-15T07:21:27Z'
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Too Many Requests
+    code: 429
+    header:
+    - disabled: false
+      key: Retry-After
+      value: '5'
+      description: ''
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+      : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 204f08c1-1576-4e23-a21b-6ab42fdd22ca
+    name: '500'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - devices
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:987654321
+        - key: time
+          value: '2026-06-15T07:21:27Z'
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Internal Server Error
+    code: 500
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+      : \"failed to list devices\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: ff24063b-3551-4a75-9c41-b1f1cd52e51e
+    name: '502'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - devices
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789
+        - key: hostIds[]
+          value: 900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:987654321
+        - key: time
+          value: '2026-06-15T07:21:27Z'
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Bad Gateway
+    code: 502
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+      : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  event: []
+  protocolProfileBehavior:
+    disableBodyPruning: true
+- id: 7a8d310f-87e9-4139-bf50-3443d7a9567d
+  name: List Hosts
+  request:
+    name: List Hosts
+    description:
+      content: 'Retrieves a list of all hosts associated with the UI account making
+        the API call. <br/><br/>**Note**: The structure of `userData` and `reportedState`
+        fields may vary depending on the UniFi OS or Network Server version. The example
+        provided is based on UniFi OS 4.1.13.'
+      type: text/plain
+    url:
+      path:
+      - v1
+      - hosts
+      host:
+      - '{{baseUrl}}'
+      query:
+      - disabled: false
+        key: pageSize
+        value: <string>
+        description: Number of items to return per page
+      - disabled: false
+        key: nextToken
+        value: <string>
+        description: Token for pagination to retrieve the next set of results
+      variable: []
+    header:
+    - key: Accept
+      value: application/json
+    method: GET
+    auth: null
+  response:
+  - id: 4afb45e1-602a-4538-b29e-66fc82be19c6
+    name: '200'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - hosts
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: OK
+    code: 200
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"data\": [\n    {\n      \"id\": \"70A7419783ED0000000006797F060000000006C719490000000062ABD4EA:1261206302\"\
+      ,\n      \"hardwareId\": \"e5bf13cd-98a7-5a96-9463-0d65d78cd3a4\",\n      \"\
+      type\": \"ucore\",\n      \"ipAddress\": \"220.130.137.169\",\n      \"owner\"\
+      : true,\n      \"isBlocked\": false,\n      \"registrationTime\": \"\",\n  \
+      \    \"lastConnectionStateChange\": \"2024-04-16T02:52:54.193Z\",\n      \"\
+      latestBackupTime\": \"\",\n      \"userData\": {\n        \"apps\": [\n    \
+      \      \"users\"\n        ],\n        \"consoleGroupMembers\": [\n         \
+      \ {\n            \"mac\": \"70A7419783ED\",\n            \"role\": \"UNADOPTED\"\
+      ,\n            \"roleAttributes\": {\n              \"applications\": {\n  \
+      \              \"access\": {\n                  \"owned\": false,\n        \
+      \          \"required\": false,\n                  \"supported\": true\n   \
+      \             },\n                \"connect\": {\n                  \"owned\"\
+      : false,\n                  \"required\": false,\n                  \"supported\"\
+      : true\n                },\n                \"innerspace\": {\n            \
+      \      \"owned\": false,\n                  \"required\": false,\n         \
+      \         \"supported\": true\n                },\n                \"network\"\
+      : {\n                  \"owned\": false,\n                  \"required\": true,\n\
+      \                  \"supported\": true\n                },\n               \
+      \ \"protect\": {\n                  \"owned\": false,\n                  \"\
+      required\": false,\n                  \"supported\": true\n                },\n\
+      \                \"talk\": {\n                  \"owned\": false,\n        \
+      \          \"required\": false,\n                  \"supported\": true\n   \
+      \             }\n              },\n              \"candidateRoles\": [\n   \
+      \             \"PRIMARY\"\n              ],\n              \"connectedState\"\
+      : \"CONNECTED\",\n              \"connectedStateLastChanged\": \"2024-04-16T02:52:54.193Z\"\
+      \n            },\n            \"sysId\": 59925\n          }\n        ],\n  \
+      \      \"controllers\": [\n          \"network\",\n          \"protect\",\n\
+      \          \"access\",\n          \"talk\",\n          \"connect\",\n      \
+      \    \"innerspace\"\n        ],\n        \"email\": \"example@ui.com\",\n  \
+      \      \"features\": {\n          \"deviceGroups\": true,\n          \"floorplan\"\
+      : {\n            \"canEdit\": true,\n            \"canView\": true\n       \
+      \   },\n          \"manageApplications\": true,\n          \"notifications\"\
+      : true,\n          \"pion\": true,\n          \"webrtc\": {\n            \"\
+      iceRestart\": true,\n            \"mediaStreams\": true,\n            \"twoWayAudio\"\
+      : true\n          }\n        },\n        \"fullName\": \"UniFi User\",\n   \
+      \     \"localId\": \"d4eb483d-98a7-438b-abe1-f46628dff73f\",\n        \"permissions\"\
+      : {\n          \"access.management\": [\n            \"admin\"\n          ],\n\
+      \          \"connect.management\": [\n            \"admin\"\n          ],\n\
+      \          \"innerspace.management\": [\n            \"admin\"\n          ],\n\
+      \          \"network.management\": [\n            \"admin\"\n          ],\n\
+      \          \"protect.management\": [\n            \"admin\"\n          ],\n\
+      \          \"system.management.location\": [\n            \"admin\"\n      \
+      \    ],\n          \"system.management.user\": [\n            \"admin\"\n  \
+      \        ],\n          \"talk.management\": [\n            \"admin\"\n     \
+      \     ]\n        },\n        \"role\": \"owner\",\n        \"roleId\": \"c349b256-98a7-44ab-b8a1-13c437ea7742\"\
+      ,\n        \"status\": \"ACTIVE\"\n      },\n      \"reportedState\": null\n\
+      \    }\n  ],\n  \"httpStatusCode\": 200,\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      ,\n  \"nextToken\": \"ba8e384e-3308-4236-b344-7357657351ca\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: a1371f52-a43d-4329-be98-c1a57ee1540d
+    name: '401'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - hosts
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Unauthorized
+    code: 401
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+      : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 45f6239e-f38c-4f6d-8baf-fc49f11c4699
+    name: '429'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - hosts
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Too Many Requests
+    code: 429
+    header:
+    - disabled: false
+      key: Retry-After
+      value: '5'
+      description: ''
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+      : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 4d26f27d-f53a-4eb8-baba-de1baed9ebdc
+    name: '500'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - hosts
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Internal Server Error
+    code: 500
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+      : \"failed to list hosts\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 89fd7d97-4c5b-4643-8980-59025081923e
+    name: '502'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - hosts
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Bad Gateway
+    code: 502
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+      : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  event: []
+  protocolProfileBehavior:
+    disableBodyPruning: true
+- id: 1012495d-566d-4cbc-9592-03b47ab92397
+  name: Get Host by ID
+  request:
+    name: Get Host by ID
+    description:
+      content: 'Retrieves detailed information about a specific host by ID. <br/><br/>**Note**:
+        The structure of the `userData` and `reportedState` fields may vary depending
+        on the UniFi OS or Network Server version. The example provided is based on
+        UniFi OS 4.1.13.'
+      type: text/plain
+    url:
+      path:
+      - v1
+      - hosts
+      - :id
+      host:
+      - '{{baseUrl}}'
+      query: []
+      variable:
+      - disabled: false
+        type: any
+        value: <string>
+        key: id
+        description: (Required) Unique identifier of the host
+    header:
+    - key: Accept
+      value: application/json
+    method: GET
+    auth: null
+  response:
+  - id: 38c6a06d-2a13-40b8-aee2-feb8e9b39321
+    name: '200'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - hosts
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the host
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: OK
+    code: 200
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"data\": {\n    \"id\": \"70A7419783ED0000000006797F060000000006C719490000000062ABD4EA:1261206302\"\
+      ,\n    \"hardwareId\": \"e5bf13cd-98a7-5a96-9463-0d65d78cd3a4\",\n    \"type\"\
+      : \"ucore\",\n    \"ipAddress\": \"220.130.137.169\",\n    \"owner\": true,\n\
+      \    \"isBlocked\": false,\n    \"registrationTime\": \"\",\n    \"lastConnectionStateChange\"\
+      : \"2024-04-16T02:52:54.193Z\",\n    \"latestBackupTime\": \"\",\n    \"userData\"\
+      : {\n      \"apps\": [\n        \"users\"\n      ],\n      \"consoleGroupMembers\"\
+      : [\n        {\n          \"mac\": \"70A7419783ED\",\n          \"role\": \"\
+      UNADOPTED\",\n          \"roleAttributes\": {\n            \"applications\"\
+      : {\n              \"access\": {\n                \"owned\": false,\n      \
+      \          \"required\": false,\n                \"supported\": true\n     \
+      \         },\n              \"connect\": {\n                \"owned\": false,\n\
+      \                \"required\": false,\n                \"supported\": true\n\
+      \              },\n              \"innerspace\": {\n                \"owned\"\
+      : false,\n                \"required\": false,\n                \"supported\"\
+      : true\n              },\n              \"network\": {\n                \"owned\"\
+      : false,\n                \"required\": true,\n                \"supported\"\
+      : true\n              },\n              \"protect\": {\n                \"owned\"\
+      : false,\n                \"required\": false,\n                \"supported\"\
+      : true\n              },\n              \"talk\": {\n                \"owned\"\
+      : false,\n                \"required\": false,\n                \"supported\"\
+      : true\n              }\n            },\n            \"candidateRoles\": [\n\
+      \              \"PRIMARY\"\n            ],\n            \"connectedState\":\
+      \ \"CONNECTED\",\n            \"connectedStateLastChanged\": \"2024-04-16T02:52:54.193Z\"\
+      \n          },\n          \"sysId\": 59925\n        }\n      ],\n      \"controllers\"\
+      : [\n        \"network\",\n        \"protect\",\n        \"access\",\n     \
+      \   \"talk\",\n        \"connect\",\n        \"innerspace\"\n      ],\n    \
+      \  \"email\": \"example@ui.com\",\n      \"features\": {\n        \"deviceGroups\"\
+      : true,\n        \"floorplan\": {\n          \"canEdit\": true,\n          \"\
+      canView\": true\n        },\n        \"manageApplications\": true,\n       \
+      \ \"notifications\": true,\n        \"pion\": true,\n        \"webrtc\": {\n\
+      \          \"iceRestart\": true,\n          \"mediaStreams\": true,\n      \
+      \    \"twoWayAudio\": true\n        }\n      },\n      \"fullName\": \"UniFi\
+      \ User\",\n      \"localId\": \"d4eb483d-98a7-438b-abe1-f46628dff73f\",\n  \
+      \    \"permissions\": {\n        \"access.management\": [\n          \"admin\"\
+      \n        ],\n        \"connect.management\": [\n          \"admin\"\n     \
+      \   ],\n        \"innerspace.management\": [\n          \"admin\"\n        ],\n\
+      \        \"network.management\": [\n          \"admin\"\n        ],\n      \
+      \  \"protect.management\": [\n          \"admin\"\n        ],\n        \"system.management.location\"\
+      : [\n          \"admin\"\n        ],\n        \"system.management.user\": [\n\
+      \          \"admin\"\n        ],\n        \"talk.management\": [\n         \
+      \ \"admin\"\n        ]\n      },\n      \"role\": \"owner\",\n      \"roleId\"\
+      : \"c349b256-98a7-44ab-b8a1-13c437ea7742\",\n      \"status\": \"ACTIVE\"\n\
+      \    },\n    \"reportedState\": null\n  },\n  \"httpStatusCode\": 200,\n  \"\
+      traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 3621cd29-7244-4938-99dd-cfddecd160c1
+    name: '401'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - hosts
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the host
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Unauthorized
+    code: 401
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+      : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: b60e2437-f040-4045-ac33-afe9db6314b6
+    name: '404'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - hosts
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the host
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Not Found
+    code: 404
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"NOT_FOUND\",\n  \"httpStatusCode\": 404,\n  \"message\"\
+      : \"thing not found: 942A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:714694\"\
+      ,\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 6a3c8160-5a89-45a4-8bc4-7f03ba5350ea
+    name: '429'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - hosts
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the host
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Too Many Requests
+    code: 429
+    header:
+    - disabled: false
+      key: Retry-After
+      value: '5'
+      description: ''
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+      : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 5c24fd66-acc9-4aa3-9d1c-41c70ed11524
+    name: '500'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - hosts
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the host
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Internal Server Error
+    code: 500
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+      : \"failed to get host\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: ad0d196b-6bb2-41e4-ab2a-91f774de4ada
+    name: '502'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - hosts
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the host
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Bad Gateway
+    code: 502
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+      : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  event: []
+  protocolProfileBehavior:
+    disableBodyPruning: true
+- id: 949d42a2-b711-4ba4-b92f-9ee09492a778
+  name: Get ISP Metrics
+  request:
+    name: Get ISP Metrics
+    description:
+      content: Retrieves ISP metrics data for all sites linked to the UI account's
+        API key. 5-minute interval metrics are available for at least 24 hours, and
+        1-hour interval metrics are available for at least 30 days.
+      type: text/plain
+    url:
+      path:
+      - v1
+      - isp-metrics
+      - :type
+      host:
+      - '{{baseUrl}}'
+      query:
+      - disabled: false
+        key: beginTimestamp
+        value: <string>
+        description: The earliest timestamp to retrieve data from (RFC3339 format)
+      - disabled: false
+        key: endTimestamp
+        value: <string>
+        description: The latest timestamp to retrieve data up to (RFC3339 format)
+      - disabled: false
+        key: duration
+        value: <string>
+        description: Specifies the time range of metrics to retrieve, starting from
+          when the request is made. Supports `24h` for 5-minute metrics, and `7d`
+          or `30d` for 1-hour metrics. This parameter **cannot** be used with `beginTimestamp`
+          or `endTimestamp`.
+      variable:
+      - disabled: false
+        type: any
+        value: <string>
+        key: type
+        description: (Required) Specifies whether metrics are returned using `5m`
+          or `1h` intervals
+    header:
+    - key: Accept
+      value: application/json
+    method: GET
+    auth: null
+  response:
+  - id: 8a45a6c3-a3a4-4f73-b50c-c880219581f9
+    name: '200'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: beginTimestamp
+          value: '2024-06-30T13:35:00Z'
+        - key: endTimestamp
+          value: '2024-06-30T15:35:00Z'
+        - key: duration
+          value: <string>
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: OK
+    code: 200
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"data\": [\n    {\n      \"metricType\": \"5m\",\n      \"periods\"\
+      : [\n        {\n          \"data\": {\n            \"wan\": {\n            \
+      \  \"avgLatency\": 1,\n              \"download_kbps\": 0,\n              \"\
+      downtime\": 0,\n              \"ispAsn\": \"12578\",\n              \"ispName\"\
+      : \"ISP\",\n              \"maxLatency\": 2,\n              \"packetLoss\":\
+      \ 0,\n              \"upload_kbps\": 0,\n              \"uptime\": 100\n   \
+      \         }\n          },\n          \"metricTime\": \"2024-06-30T13:35:00Z\"\
+      ,\n          \"version\": \"1\"\n        }\n      ],\n      \"hostId\": \"900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789\"\
+      ,\n      \"siteId\": \"661900ae6aec8f548d49fd54\"\n    }\n  ],\n  \"httpStatusCode\"\
+      : 200,\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: c59d17be-ac86-402c-b14b-4daf0f195010
+    name: '400'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: beginTimestamp
+          value: '2024-06-30T13:35:00Z'
+        - key: endTimestamp
+          value: '2024-06-30T15:35:00Z'
+        - key: duration
+          value: <string>
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Bad Request
+    code: 400
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"parameter_invalid\",\n  \"httpStatusCode\": 400,\n  \"\
+      message\": \"invalid beginTimestamp format: 2024-06-30\",\n  \"traceId\": \"\
+      a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 7c77ab1d-eae2-4bfd-aeee-e3851c6957a6
+    name: '401'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: beginTimestamp
+          value: '2024-06-30T13:35:00Z'
+        - key: endTimestamp
+          value: '2024-06-30T15:35:00Z'
+        - key: duration
+          value: <string>
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Unauthorized
+    code: 401
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+      : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: e67048c2-8d67-4640-a706-106fcfff136e
+    name: '429'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: beginTimestamp
+          value: '2024-06-30T13:35:00Z'
+        - key: endTimestamp
+          value: '2024-06-30T15:35:00Z'
+        - key: duration
+          value: <string>
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Too Many Requests
+    code: 429
+    header:
+    - disabled: false
+      key: Retry-After
+      value: '5'
+      description: ''
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+      : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 2c30b4c6-c884-4c2f-8b72-53c0ad1590ff
+    name: '500'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: beginTimestamp
+          value: '2024-06-30T13:35:00Z'
+        - key: endTimestamp
+          value: '2024-06-30T15:35:00Z'
+        - key: duration
+          value: <string>
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Internal Server Error
+    code: 500
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+      : \"failed to get ISP metrics\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: e0a5265e-9e9a-4289-9f12-dbecd4673670
+    name: '502'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: beginTimestamp
+          value: '2024-06-30T13:35:00Z'
+        - key: endTimestamp
+          value: '2024-06-30T15:35:00Z'
+        - key: duration
+          value: <string>
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Bad Gateway
+    code: 502
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+      : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  event: []
+  protocolProfileBehavior:
+    disableBodyPruning: true
+- id: 0708c3f1-1ec0-4c43-98ab-084ccf5edce5
+  name: Query ISP Metrics
+  request:
+    name: Query ISP Metrics
+    description:
+      content: 'Retrieves ISP metrics data based on specific query parameters. 5-minute
+        interval metrics are available for at least 24 hours, and 1-hour interval
+        metrics are available for at least 30 days. <br/><br/>**Note:** If the UI
+        account lacks access to all requested sites, a 502 error is returned. If partial
+        access is granted, the response will include `status: partialSuccess`.'
+      type: text/plain
+    url:
+      path:
+      - v1
+      - isp-metrics
+      - :type
+      - query
+      host:
+      - '{{baseUrl}}'
+      query: []
+      variable:
+      - disabled: false
+        type: any
+        value: <string>
+        key: type
+        description: (Required) Specifies whether metrics are returned using `5m`
+          or `1h` intervals
+    header:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    method: POST
+    auth: null
+    body:
+      mode: raw
+      raw: "{\n  \"sites\": [\n    {\n      \"hostId\": \"<string>\",\n      \"siteId\"\
+        : \"<string>\",\n      \"beginTimestamp\": \"<dateTime>\",\n      \"endTimestamp\"\
+        : \"<dateTime>\"\n    },\n    {\n      \"hostId\": \"<string>\",\n      \"\
+        siteId\": \"<string>\",\n      \"beginTimestamp\": \"<dateTime>\",\n     \
+        \ \"endTimestamp\": \"<dateTime>\"\n    }\n  ]\n}"
+      options:
+        raw:
+          language: json
+  response:
+  - id: 6b9a8c36-7c9e-40c3-a195-b5c00a12ab01
+    name: '200'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        - query
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: POST
+      body:
+        mode: raw
+        raw: "{\n  \"sites\": [\n    {\n      \"beginTimestamp\": \"2024-06-30T13:35:00Z\"\
+          ,\n      \"hostId\": \"900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789\"\
+          ,\n      \"endTimestamp\": \"2024-06-30T15:35:00Z\",\n      \"siteId\":\
+          \ \"661900ae6aec8f548d49fd54\"\n    }\n  ]\n}"
+        options:
+          raw:
+            language: json
+    status: OK
+    code: 200
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"data\": {\n    \"metrics\": [\n      {\n        \"metricType\":\
+      \ \"5m\",\n        \"periods\": [\n          {\n            \"data\": {\n  \
+      \            \"wan\": {\n                \"avgLatency\": 1,\n              \
+      \  \"download_kbps\": 0,\n                \"downtime\": 0,\n               \
+      \ \"ispAsn\": \"12578\",\n                \"ispName\": \"ISP\",\n          \
+      \      \"maxLatency\": 2,\n                \"packetLoss\": 0,\n            \
+      \    \"upload_kbps\": 0,\n                \"uptime\": 100\n              }\n\
+      \            },\n            \"metricTime\": \"2024-06-30T13:35:00Z\",\n   \
+      \         \"version\": \"1\"\n          }\n        ],\n        \"hostId\": \"\
+      900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789\",\n\
+      \        \"siteId\": \"661900ae6aec8f548d49fd54\"\n      }\n    ]\n  },\n  \"\
+      httpStatusCode\": 200,\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n\
+      }"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 34377629-da15-4725-8cc8-0c21aaf3aad5
+    name: '400'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        - query
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: POST
+      body:
+        mode: raw
+        raw: "{\n  \"sites\": [\n    {\n      \"beginTimestamp\": \"2024-06-30T13:35:00Z\"\
+          ,\n      \"hostId\": \"900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789\"\
+          ,\n      \"endTimestamp\": \"2024-06-30T15:35:00Z\",\n      \"siteId\":\
+          \ \"661900ae6aec8f548d49fd54\"\n    }\n  ]\n}"
+        options:
+          raw:
+            language: json
+    status: Bad Request
+    code: 400
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"parameter_invalid\",\n  \"httpStatusCode\": 400,\n  \"\
+      message\": \"invalid beginTimestamp format: 2024-06-30\",\n  \"traceId\": \"\
+      a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 2bead0f7-42c3-4c0a-ac92-961bdcc1c661
+    name: '401'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        - query
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: POST
+      body:
+        mode: raw
+        raw: "{\n  \"sites\": [\n    {\n      \"beginTimestamp\": \"2024-06-30T13:35:00Z\"\
+          ,\n      \"hostId\": \"900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789\"\
+          ,\n      \"endTimestamp\": \"2024-06-30T15:35:00Z\",\n      \"siteId\":\
+          \ \"661900ae6aec8f548d49fd54\"\n    }\n  ]\n}"
+        options:
+          raw:
+            language: json
+    status: Unauthorized
+    code: 401
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+      : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 4de2ea19-4edc-4dc9-b485-084e99289080
+    name: '429'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        - query
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: POST
+      body:
+        mode: raw
+        raw: "{\n  \"sites\": [\n    {\n      \"beginTimestamp\": \"2024-06-30T13:35:00Z\"\
+          ,\n      \"hostId\": \"900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789\"\
+          ,\n      \"endTimestamp\": \"2024-06-30T15:35:00Z\",\n      \"siteId\":\
+          \ \"661900ae6aec8f548d49fd54\"\n    }\n  ]\n}"
+        options:
+          raw:
+            language: json
+    status: Too Many Requests
+    code: 429
+    header:
+    - disabled: false
+      key: Retry-After
+      value: '5'
+      description: ''
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+      : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 6aeb339d-4e7e-4ba1-8c48-e17ca523e952
+    name: '500'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        - query
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: POST
+      body:
+        mode: raw
+        raw: "{\n  \"sites\": [\n    {\n      \"beginTimestamp\": \"2024-06-30T13:35:00Z\"\
+          ,\n      \"hostId\": \"900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789\"\
+          ,\n      \"endTimestamp\": \"2024-06-30T15:35:00Z\",\n      \"siteId\":\
+          \ \"661900ae6aec8f548d49fd54\"\n    }\n  ]\n}"
+        options:
+          raw:
+            language: json
+    status: Internal Server Error
+    code: 500
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+      : \"failed to query ISP metrics\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: d04cdfe0-4f78-4c5f-85a0-6b3e886fe892
+    name: '502'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - isp-metrics
+        - :type
+        - query
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: type
+          description: (Required) Specifies whether metrics are returned using `5m`
+            or `1h` intervals
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: POST
+      body:
+        mode: raw
+        raw: "{\n  \"sites\": [\n    {\n      \"beginTimestamp\": \"2024-06-30T13:35:00Z\"\
+          ,\n      \"hostId\": \"900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789\"\
+          ,\n      \"endTimestamp\": \"2024-06-30T15:35:00Z\",\n      \"siteId\":\
+          \ \"661900ae6aec8f548d49fd54\"\n    }\n  ]\n}"
+        options:
+          raw:
+            language: json
+    status: Bad Gateway
+    code: 502
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+      : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  event: []
+  protocolProfileBehavior:
+    disableBodyPruning: true
+- id: 8b5ce95e-217e-45fa-bb74-7e19a9c2a92d
+  name: List SD-WAN Configs
+  request:
+    name: List SD-WAN Configs
+    description:
+      content: Retrieves a list of all hub-and-spoke SD-WAN configurations associated
+        with the UI account making the API call.
+      type: text/plain
+    url:
+      path:
+      - v1
+      - sd-wan-configs
+      host:
+      - '{{baseUrl}}'
+      query: []
+      variable: []
+    header:
+    - key: Accept
+      value: application/json
+    method: GET
+    auth: null
+  response:
+  - id: 3f4912f3-b6a2-4bc2-8841-20fc3cba66e9
+    name: '200'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: OK
+    code: 200
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"data\": [\n    {\n      \"id\": \"9304163b-680d-4de8-a7a0-7617e328911d\"\
+      ,\n      \"name\": \"SD-WAN test\",\n      \"type\": \"sdwan-hbsp\"\n    }\n\
+      \  ],\n  \"httpStatusCode\": 200,\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: a53c0f0c-75b4-47bf-87ce-c41779444d76
+    name: '401'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Unauthorized
+    code: 401
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+      : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 0eec2e80-c980-47b0-8eca-8330e750d98f
+    name: '429'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Too Many Requests
+    code: 429
+    header:
+    - disabled: false
+      key: Retry-After
+      value: '5'
+      description: ''
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+      : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 5d265827-51a0-4c66-8ce9-c06bae8d3fae
+    name: '500'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Internal Server Error
+    code: 500
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+      : \"failed to list network cloud SD-WAN configs\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 0b765c1d-1f5e-414a-ae80-f2530a94527b
+    name: '502'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Bad Gateway
+    code: 502
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+      : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  event: []
+  protocolProfileBehavior:
+    disableBodyPruning: true
+- id: efa79afb-72de-4829-a53e-1ef021298636
+  name: Get SD-WAN Config by ID
+  request:
+    name: Get SD-WAN Config by ID
+    description:
+      content: Retrieves detailed information about a specific SD-WAN configuration
+        by ID.
+      type: text/plain
+    url:
+      path:
+      - v1
+      - sd-wan-configs
+      - :id
+      host:
+      - '{{baseUrl}}'
+      query: []
+      variable:
+      - disabled: false
+        type: any
+        value: <string>
+        key: id
+        description: (Required) Unique identifier of the SD-WAN configuration
+    header:
+    - key: Accept
+      value: application/json
+    method: GET
+    auth: null
+  response:
+  - id: 70cef759-75ba-40b2-9a5e-962c923de28d
+    name: '200'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: OK
+    code: 200
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"data\": {\n    \"id\": \"b344034f-2636-478c-8c7a-e3350f8ed37a\"\
+      ,\n    \"name\": \"RS test\",\n    \"type\": \"sdwan-hbsp\",\n    \"variant\"\
+      : \"single\",\n    \"settings\": {\n      \"hubsInterconnect\": null,\n    \
+      \  \"spokeToHubTunnelsMode\": \"scalable\",\n      \"spokesAutoScaleAndNatEnabled\"\
+      : true,\n      \"spokesAutoScaleAndNatRange\": \"172.16.0.0/12\",\n      \"\
+      spokesIsolate\": true,\n      \"spokeStandardSettingsEnabled\": false,\n   \
+      \   \"spokeStandardSettingsValues\": null,\n      \"spokeToHubRouting\": \"\
+      geo\"\n    },\n    \"hubs\": [\n      {\n        \"id\": \"9C05D6B1DA7100000000080A820B000000000877B4A4000000006634E113:779231894_670d14b2b4e979611b761866\"\
+      ,\n        \"hostId\": \"9C05D6B1DA7100000000080A820B000000000877B4A4000000006634E113:779231894\"\
+      ,\n        \"siteId\": \"670d14b2b4e979611b761866\",\n        \"networkIds\"\
+      : [\n          \"670d14deb4e979611b761880\"\n        ],\n        \"routes\"\
+      : [],\n        \"primaryWan\": \"WAN\",\n        \"wanFailover\": false\n  \
+      \    }\n    ],\n    \"spokes\": [\n      {\n        \"id\": \"28704E43D00C0000000008339D3C0000000008A2F4D300000000669FE9E7:1731456649_670d153bf6db0d4204f8d150\"\
+      ,\n        \"hostId\": \"28704E43D00C0000000008339D3C0000000008A2F4D300000000669FE9E7:1731456649\"\
+      ,\n        \"siteId\": \"670d153bf6db0d4204f8d150\",\n        \"networkIds\"\
+      : [],\n        \"routes\": [\n          \"172.16.1.0/24\"\n        ],\n    \
+      \    \"primaryWan\": \"WAN\",\n        \"wanFailover\": false,\n        \"hubsPriority\"\
+      : null\n      },\n      {\n        \"id\": \"F4E2C61FA6000000000007D5831A00000000083CEEC600000000655DA309:763649230_66b5f02af5521234f6f28a23\"\
+      ,\n        \"hostId\": \"F4E2C61FA6000000000007D5831A00000000083CEEC600000000655DA309:763649230\"\
+      ,\n        \"siteId\": \"66b5f02af5521234f6f28a23\",\n        \"networkIds\"\
+      : [],\n        \"routes\": [\n          \"172.16.2.0/24\"\n        ],\n    \
+      \    \"primaryWan\": \"WAN\",\n        \"wanFailover\": false,\n        \"hubsPriority\"\
+      : null\n      }\n    ]\n  },\n  \"httpStatusCode\": 200,\n  \"traceId\": \"\
+      a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 682b485e-63f6-4b3f-b16b-c655f8477149
+    name: '401'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Unauthorized
+    code: 401
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+      : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: dc7d015d-5b67-4af0-81a7-5ca303018121
+    name: '404'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Not Found
+    code: 404
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"not_found\",\n  \"httpStatusCode\": 404,\n  \"message\"\
+      : \"config not found\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 6c01558a-a579-4ba1-a73c-dc24cd4d5441
+    name: '429'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Too Many Requests
+    code: 429
+    header:
+    - disabled: false
+      key: Retry-After
+      value: '5'
+      description: ''
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+      : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 54ffe131-bb7d-49b5-b545-e79c4daea3f9
+    name: '500'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Internal Server Error
+    code: 500
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+      : \"failed to get network cloud SD-WAN config by ID\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: e473f9ce-94be-442a-890e-d7f649ea09db
+    name: '502'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Bad Gateway
+    code: 502
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+      : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  event: []
+  protocolProfileBehavior:
+    disableBodyPruning: true
+- id: bded7ef4-091f-4c0d-8a33-36f4d0678c2f
+  name: Get SD-WAN Config Status
+  request:
+    name: Get SD-WAN Config Status
+    description:
+      content: Retrieves the status of a specific SD-WAN configuration, including
+        deployment progress, errors, and associated hubs.
+      type: text/plain
+    url:
+      path:
+      - v1
+      - sd-wan-configs
+      - :id
+      - status
+      host:
+      - '{{baseUrl}}'
+      query: []
+      variable:
+      - disabled: false
+        type: any
+        value: <string>
+        key: id
+        description: (Required) Unique identifier of the SD-WAN configuration
+    header:
+    - key: Accept
+      value: application/json
+    method: GET
+    auth: null
+  response:
+  - id: 31ceebb4-77cd-4fed-a7db-06361cffd6bd
+    name: '200'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        - status
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: OK
+    code: 200
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"data\": {\n    \"id\": \"\",\n    \"fingerprint\": \"85d521a1b3c8992f\"\
+      ,\n    \"updatedAt\": 1739454923342,\n    \"hubs\": [\n      {\n        \"id\"\
+      : \"9C05D6B1DA7100000000080A820B000000000877B4A4000000006634E113:779231894_670d14b2b4e979611b761866\"\
+      ,\n        \"hostId\": \"9C05D6B1DA7100000000080A820B000000000877B4A4000000006634E113:779231894\"\
+      ,\n        \"siteId\": \"670d14b2b4e979611b761866\",\n        \"name\": \"Marlind's\
+      \ UDM SE\",\n        \"primaryWanStatus\": {\n          \"ip\": \"194.22.30.166\"\
+      ,\n          \"latency\": 1,\n          \"internetIssues\": [],\n          \"\
+      wanId\": \"WAN\"\n        },\n        \"secondaryWanStatus\": {\n          \"\
+      ip\": \"\",\n          \"latency\": null,\n          \"internetIssues\": null,\n\
+      \          \"wanId\": \"\"\n        },\n        \"errors\": [],\n        \"\
+      warnings\": [],\n        \"numberOfTunnelsUsedByOtherFeatures\": 0,\n      \
+      \  \"networks\": [\n          {\n            \"networkId\": \"670d14deb4e979611b761880\"\
+      ,\n            \"name\": \"Default\",\n            \"errors\": [],\n       \
+      \     \"warnings\": []\n          }\n        ],\n        \"routes\": [],\n \
+      \       \"applyStatus\": \"OK\"\n      }\n    ],\n    \"spokes\": [\n      {\n\
+      \        \"id\": \"28704E43D00C0000000008339D3C0000000008A2F4D300000000669FE9E7:1731456649_670d153bf6db0d4204f8d150\"\
+      ,\n        \"hostId\": \"28704E43D00C0000000008339D3C0000000008A2F4D300000000669FE9E7:1731456649\"\
+      ,\n        \"siteId\": \"670d153bf6db0d4204f8d150\",\n        \"name\": \"Marlind's\
+      \ UDR\",\n        \"primaryWanStatus\": {\n          \"ip\": \"10.0.1.142\"\
+      ,\n          \"latency\": 1,\n          \"internetIssues\": [],\n          \"\
+      wanId\": \"WAN\"\n        },\n        \"secondaryWanStatus\": {\n          \"\
+      ip\": \"\",\n          \"latency\": null,\n          \"internetIssues\": null,\n\
+      \          \"wanId\": \"\"\n        },\n        \"errors\": [],\n        \"\
+      warnings\": [],\n        \"numberOfTunnelsUsedByOtherFeatures\": 0,\n      \
+      \  \"networks\": [],\n        \"routes\": [\n          {\n            \"routeValue\"\
+      : \"172.16.1.0/24\",\n            \"errors\": [],\n            \"warnings\"\
+      : []\n          }\n        ],\n        \"connections\": [\n          {\n   \
+      \         \"hubId\": \"9C05D6B1DA7100000000080A820B000000000877B4A4000000006634E113:779231894_670d14b2b4e979611b761866\"\
+      ,\n            \"tunnels\": [\n              {\n                \"spokeWanId\"\
+      : \"WAN\",\n                \"hubWanId\": \"WAN\",\n                \"status\"\
+      : \"connected\"\n              }\n            ]\n          }\n        ],\n \
+      \       \"applyStatus\": \"OK\"\n      },\n      {\n        \"id\": \"F4E2C61FA6000000000007D5831A00000000083CEEC600000000655DA309:763649230_66b5f02af5521234f6f28a23\"\
+      ,\n        \"hostId\": \"F4E2C61FA6000000000007D5831A00000000083CEEC600000000655DA309:763649230\"\
+      ,\n        \"siteId\": \"66b5f02af5521234f6f28a23\",\n        \"name\": \"AG\
+      \ UCG Ultra STG\",\n        \"primaryWanStatus\": {\n          \"ip\": \"10.35.87.53\"\
+      ,\n          \"latency\": 2,\n          \"internetIssues\": [],\n          \"\
+      wanId\": \"WAN\"\n        },\n        \"secondaryWanStatus\": {\n          \"\
+      ip\": \"\",\n          \"latency\": null,\n          \"internetIssues\": null,\n\
+      \          \"wanId\": \"\"\n        },\n        \"errors\": [],\n        \"\
+      warnings\": [],\n        \"numberOfTunnelsUsedByOtherFeatures\": 0,\n      \
+      \  \"networks\": [],\n        \"routes\": [\n          {\n            \"routeValue\"\
+      : \"172.16.2.0/24\",\n            \"errors\": [],\n            \"warnings\"\
+      : []\n          }\n        ],\n        \"connections\": [\n          {\n   \
+      \         \"hubId\": \"9C05D6B1DA7100000000080A820B000000000877B4A4000000006634E113:779231894_670d14b2b4e979611b761866\"\
+      ,\n            \"tunnels\": [\n              {\n                \"spokeWanId\"\
+      : \"WAN\",\n                \"hubWanId\": \"WAN\",\n                \"status\"\
+      : \"connected\"\n              }\n            ]\n          }\n        ],\n \
+      \       \"applyStatus\": \"OK\"\n      }\n    ],\n    \"lastGeneratedAt\": 1739454923342,\n\
+      \    \"generateStatus\": \"OK\",\n    \"errors\": [],\n    \"warnings\": []\n\
+      \  },\n  \"httpStatusCode\": 200,\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 14634fce-63dd-4812-a62b-39f72d8e704a
+    name: '401'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        - status
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Unauthorized
+    code: 401
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+      : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 1a35aa4e-5731-432a-aa78-64d04e8ef657
+    name: '404'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        - status
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Not Found
+    code: 404
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"not_found\",\n  \"httpStatusCode\": 404,\n  \"message\"\
+      : \"config not found\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 7d1b14e0-f63c-4c15-aa48-464ef7719ae4
+    name: '429'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        - status
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Too Many Requests
+    code: 429
+    header:
+    - disabled: false
+      key: Retry-After
+      value: '5'
+      description: ''
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+      : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 976077d7-1d73-4e53-9173-8c5551d16ead
+    name: '500'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        - status
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Internal Server Error
+    code: 500
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+      : \"failed to get network cloud SD-WAN config status by ID\",\n  \"traceId\"\
+      : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 1517ffa8-50ee-49c2-abcf-adecbf63be46
+    name: '502'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sd-wan-configs
+        - :id
+        - status
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <string>
+          key: id
+          description: (Required) Unique identifier of the SD-WAN configuration
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Bad Gateway
+    code: 502
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+      : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  event: []
+  protocolProfileBehavior:
+    disableBodyPruning: true
+- id: a704b527-419b-465c-b7ee-1b8eda18ce94
+  name: List Sites
+  request:
+    name: List Sites
+    description:
+      content: 'Retrieves a list of all sites (from hosts running the UniFi Network
+        application) associated with the UI account making the API call. <br/><br/>**Note**:
+        The structure of the `meta` and `statistics` fields may vary depending on
+        the UniFi Network version. The example provided is based on UniFi OS 4.1.13.'
+      type: text/plain
+    url:
+      path:
+      - v1
+      - sites
+      host:
+      - '{{baseUrl}}'
+      query:
+      - disabled: false
+        key: pageSize
+        value: <string>
+        description: Number of items to return per page
+      - disabled: false
+        key: nextToken
+        value: <string>
+        description: Token for pagination to retrieve the next set of results
+      variable: []
+    header:
+    - key: Accept
+      value: application/json
+    method: GET
+    auth: null
+  response:
+  - id: 33dea095-f074-4000-898c-b6b25450c988
+    name: '200'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sites
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: OK
+    code: 200
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"data\": [\n    {\n      \"siteId\": \"661de833b6b2463f0c20b319\"\
+      ,\n      \"hostId\": \"900A6F00301100000000074A6BA90000000007A3387E0000000063EC9853:123456789\"\
+      ,\n      \"meta\": {\n        \"desc\": \"Default\",\n        \"gatewayMac\"\
+      : \"70:a7:41:97:83:ed\",\n        \"name\": \"default\",\n        \"timezone\"\
+      : \"Asia/Taipei\"\n      },\n      \"statistics\": {\n        \"counts\": {\n\
+      \          \"criticalNotification\": 0,\n          \"gatewayDevice\": 1,\n \
+      \         \"guestClient\": 0,\n          \"lanConfiguration\": 1,\n        \
+      \  \"offlineDevice\": 0,\n          \"offlineGatewayDevice\": 0,\n         \
+      \ \"offlineWifiDevice\": 0,\n          \"offlineWiredDevice\": 0,\n        \
+      \  \"pendingUpdateDevice\": 0,\n          \"totalDevice\": 1,\n          \"\
+      wanConfiguration\": 2,\n          \"wifiClient\": 0,\n          \"wifiConfiguration\"\
+      : 0,\n          \"wifiDevice\": 0,\n          \"wiredClient\": 0,\n        \
+      \  \"wiredDevice\": 0\n        },\n        \"gateway\": {\n          \"hardwareId\"\
+      : \"e5bf13cd-98a7-5a96-9463-0d65d78cd3a4\",\n          \"inspectionState\":\
+      \ \"off\",\n          \"ipsMode\": \"disabled\",\n          \"ipsSignature\"\
+      : {\n            \"rulesCount\": 53031,\n            \"type\": \"ET\"\n    \
+      \      },\n          \"shortname\": \"UDMPRO\"\n        },\n        \"internetIssues\"\
+      : [],\n        \"ispInfo\": {\n          \"name\": \"Chunghwa Telecom\",\n \
+      \         \"organization\": \"Data Communication Business Group\"\n        },\n\
+      \        \"percentages\": {\n          \"wanUptime\": 100\n        }\n     \
+      \ },\n      \"permission\": \"admin\",\n      \"isOwner\": true\n    }\n  ],\n\
+      \  \"httpStatusCode\": 200,\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      ,\n  \"nextToken\": \"ba8e384e-3308-4236-b344-7357657351ca\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 58bdfded-202c-4ec2-bd92-8480f4140db5
+    name: '401'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sites
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Unauthorized
+    code: 401
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"unauthorized\",\n  \"httpStatusCode\": 401,\n  \"message\"\
+      : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 781ce462-1352-4301-8bbc-0cbe92df5464
+    name: '429'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sites
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Too Many Requests
+    code: 429
+    header:
+    - disabled: false
+      key: Retry-After
+      value: '5'
+      description: ''
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"rate_limit\",\n  \"httpStatusCode\": 429,\n  \"message\"\
+      : \"rate limit exceeded, retry after 5.372786998s\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 56e7b109-2b9f-4474-9645-8c00c7b470cb
+    name: '500'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sites
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Internal Server Error
+    code: 500
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"server_error\",\n  \"httpStatusCode\": 500,\n  \"message\"\
+      : \"failed to list sites\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\
+      \n}"
+    cookie: []
+    _postman_previewlanguage: json
+  - id: 3cf91b67-a3d3-4e75-b1d5-dd166ffdfc44
+    name: '502'
+    originalRequest:
+      url:
+        path:
+        - v1
+        - sites
+        host:
+        - '{{baseUrl}}'
+        query:
+        - key: pageSize
+          value: '10'
+        - key: nextToken
+          value: 602232A870250000000006C514FF00000000073DD8DB000000006369FDA2:1467082514
+        variable: []
+      header:
+      - description:
+          content: 'Added as a part of security scheme: apikey'
+          type: text/plain
+        key: X-API-Key
+        value: <API Key>
+      - key: Accept
+        value: application/json
+      method: GET
+      body: {}
+    status: Bad Gateway
+    code: 502
+    header:
+    - key: Content-Type
+      value: application/json
+    body: "{\n  \"code\": \"bad_gateway\",\n  \"httpStatusCode\": 502,\n  \"message\"\
+      : \"bad gateway\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
+    cookie: []
+    _postman_previewlanguage: json
+  event: []
+  protocolProfileBehavior:
+    disableBodyPruning: true
+event: []
+variable:
+- type: string
+  value: https://api.ui.com
+  key: baseUrl
+auth:
+  type: apikey
+  apikey:
+  - key: key
+    value: X-API-Key
+  - key: value
+    value: '{{apiKey}}'
+  - key: in
+    value: header
+info:
+  _postman_id: 0bc529d8-d11f-4d5b-9247-d7dc4ac3eb1f
+  name: UniFi Site Manager API
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  description:
+    content: ''
+    type: text/plain

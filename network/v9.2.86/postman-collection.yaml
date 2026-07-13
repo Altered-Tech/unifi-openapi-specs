@@ -1,0 +1,1706 @@
+item:
+- id: 4ecebdec-6394-4510-9da0-32fc9afd606d
+  name: Generic information
+  description:
+    content: '
+
+      ## Notes on Filtering
+
+
+      Some `GET` and `DELETE` endpoints support filtering using the `filter` query
+      parameter.
+
+
+      Filtering follows a URL-safe syntax that includes:
+
+
+      - **Property expressions**, which use various filtering functions;
+
+      - **Compound expressions**, which combine multiple property, compound, and "not"
+      expressions using logical operators like `and` and `or`;
+
+      - **"Not" expressions**, which negate property, compound, and "not" expressions.
+
+
+      ### Property Expression Syntax
+
+
+      A property expression follows the format: `<property>.<function>(<arguments>)`.
+      Argument values must be separated by commas.
+
+      Examples:
+
+
+      - `id.eq(123)` checks if `id` is equal to `123`;
+
+      - `name.isNotNull()` checks if `name` is not null;
+
+      - `createdAt.in(2025-01-01, 2025-01-05)` checks if `createdAt` is either `2025-01-01`
+      or `2025-01-05`.
+
+
+      ### Compound Expression Syntax
+
+
+      A compound expression follows the format: `<logical-operator>(<expressions>)`.
+
+      Expressions must separated by commas. A compound expression must contain at
+      least two expressions.
+
+      Examples:
+
+
+      - `and(name.isNull(), createdAt.gt(2025-01-01))` checks if `name` is null **and**
+      `createdAt` is greater than `2025-01-01`;
+
+      - `or(name.isNull(), expired.isNull(), expiresAt.isNull())` check is **any**
+      of `name`, `expired`, or `expiresAt` is null.
+
+
+      ### "Not" Expression Syntax
+
+
+      To negate an expression use the `not` function: `not(<expression>)`.
+
+      Example:
+
+
+      - `not(name.like(''guest*''))` checks if `name` does **not**  start with `guest`.
+
+
+      ### Filterable Property Types
+
+
+      The table below lists all supported property types.
+
+
+      |Type|Examples|Syntax|
+
+      |-|-|-|
+
+      |`STRING`|`''Hello, ''''World''''!''`|Wrapped in single quotes. To escape a
+      single quote, use another single quote.|
+
+      |`NUMBER`|`123`, `123.321`|Starts with a digit and may include an optional decimal
+      part, using a dot as the separator.|
+
+      |`TIMESTAMP`|`2025-01-29`, `2025-01-29T12:39:11Z`|Follows the ISO 8601 date
+      or date-time format.|
+
+      |`BOOLEAN`|`true`, `false`|Either `true` or `false`.|
+
+      |`UUID`|`550e8400-e29b-41d4-a716-446655440000`|A string representation without
+      quotes, following the 8-4-4-4-12 format.|
+
+
+      ### Filtering Functions
+
+
+      The table below lists all supported filtering functions.
+
+      Not all functions support all property types, and the number of arguments may
+      vary between functions.
+
+
+      |Function|Arguments|Semantics|Supported property types|
+
+      |-|-|-|-|
+
+      |`isNull`|0|is null|all types|
+
+      |`isNotNull`|0|is not null|all types|
+
+      |`eq`|1|equals|all types|
+
+      |`ne`|1|not equals|all types|
+
+      |`gt`|1|greater than|`STRING`, `NUMBER`, `TIMESTAMP`, `UUID`|
+
+      |`ge`|1|greater than or equals|`STRING`, `NUMBER`, `TIMESTAMP`, `UUID`|
+
+      |`lt`|1|less than|`STRING`, `NUMBER`, `TIMESTAMP`, `UUID`|
+
+      |`le`|1|less than or equals|`STRING`, `NUMBER`, `TIMESTAMP`, `UUID`|
+
+      |`like`|1|matches pattern|`STRING`|
+
+      |`in`|1 or more|one of|`STRING`, `NUMBER`, `TIMESTAMP`, `UUID`|
+
+      |`notIn`|1 or more|not one of|`STRING`, `NUMBER`, `TIMESTAMP`, `UUID`|
+
+
+      Certain functions may be disabled for specific properties at some endpoints
+      due to technical or logical limitations.
+
+      For example, mandatory fields do not support `isNull` or `isNotNull`.
+
+      The documentation for each endpoint that supports filtering will have detailed
+      information on filterable properties,
+
+      their types, and the allowed functions.
+
+
+      #### Pattern Matching (`like` Function)
+
+
+      The `like` function allows matching string properties using simple patterns:
+
+
+      - `.` matches any **single** character. Example: `type.like(''type.'')` matches
+      `type1`, but not `type100`;
+
+      - `*` matches **any number** of characters. Example: `name.like(''guest*'')`
+      matches `guest1` and `guest100`;
+
+      - `\` is used to escape `.` and `*`.
+
+      '
+    type: text/plain
+  item: []
+  event: []
+- id: 743f8473-64e9-45e4-96b2-6ba27f8682ec
+  name: Hotspot Vouchers
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: d7a7932b-d7e5-44c1-a18a-4fcc79b94203
+    name: List Vouchers
+    request:
+      name: List Vouchers
+      description:
+        content: 'Retrieve a paginated list of Hotspot vouchers.
+
+
+          <details>
+
+          <summary>Filterable properties (click to expand)</summary>
+
+
+          |Name|Type|Allowed functions|
+
+          |-|-|-|
+
+          |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+          |`createdAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+          |`name`|`STRING`|`eq` `ne` `in` `notIn` `like`|
+
+          |`code`|`STRING`|`eq` `ne` `in` `notIn`|
+
+          |`authorizedGuestLimit`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+          `lt` `le`|
+
+          |`authorizedGuestCount`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+          |`activatedAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+          |`expiresAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+          |`expired`|`BOOLEAN`|`eq` `ne`|
+
+          |`timeLimitMinutes`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+          |`dataUsageLimitMBytes`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+          `lt` `le`|
+
+          |`rxRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+          `le`|
+
+          |`txRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+          `le`|
+
+          </details>'
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - hotspot
+        - vouchers
+        host:
+        - '{{baseUrl}}'
+        query:
+        - disabled: false
+          key: offset
+          value: '0'
+        - disabled: false
+          key: limit
+          value: '100'
+        - disabled: false
+          key: filter
+          value: <string>
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: a15741b5-a2af-4a86-8673-322a1fb2e963
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - hotspot
+          - vouchers
+          host:
+          - '{{baseUrl}}'
+          query:
+          - key: offset
+            value: '0'
+          - key: limit
+            value: '100'
+          - key: filter
+            value: <string>
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"authorizedGuestCount\"\
+        : 0,\n      \"code\": \"string\",\n      \"createdAt\": \"2002-10-31T05:33:57.430Z\"\
+        ,\n      \"expired\": true,\n      \"id\": \"e12bffba-fe2f-624b-3fa3-eda8b1367f31\"\
+        ,\n      \"name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n \
+        \     \"authorizedGuestLimit\": 1,\n      \"activatedAt\": \"1992-08-31T19:41:07.391Z\"\
+        ,\n      \"expiresAt\": \"1985-10-30T04:48:05.473Z\",\n      \"dataUsageLimitMBytes\"\
+        : 1024,\n      \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n\
+        \    },\n    {\n      \"authorizedGuestCount\": 0,\n      \"code\": \"string\"\
+        ,\n      \"createdAt\": \"1996-12-15T14:33:32.067Z\",\n      \"expired\":\
+        \ true,\n      \"id\": \"fa819066-dd79-21d5-e775-28c540c381f1\",\n      \"\
+        name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n      \"authorizedGuestLimit\"\
+        : 1,\n      \"activatedAt\": \"1960-03-17T21:24:35.402Z\",\n      \"expiresAt\"\
+        : \"1955-09-02T07:24:25.815Z\",\n      \"dataUsageLimitMBytes\": 1024,\n \
+        \     \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n    }\n\
+        \  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1000\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: c8a96fd9-96f9-41c5-8511-80ba3799cf56
+    name: Generate Vouchers
+    request:
+      name: Generate Vouchers
+      description:
+        content: Create one or more Hotspot vouchers.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - hotspot
+        - vouchers
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"name\": \"<string>\",\n  \"timeLimitMinutes\": \"<long>\",\n\
+          \  \"count\": \"1\",\n  \"authorizedGuestLimit\": \"<long>\",\n  \"dataUsageLimitMBytes\"\
+          : \"<long>\",\n  \"rxRateLimitKbps\": \"<long>\",\n  \"txRateLimitKbps\"\
+          : \"<long>\"\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: ede38acf-8926-4ee2-a6ee-fb8d0ff88d13
+      name: Created
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - hotspot
+          - vouchers
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"name\": \"<string>\",\n  \"timeLimitMinutes\": \"<long>\",\n\
+            \  \"count\": \"1\",\n  \"authorizedGuestLimit\": 1,\n  \"dataUsageLimitMBytes\"\
+            : \"<long>\",\n  \"rxRateLimitKbps\": \"<long>\",\n  \"txRateLimitKbps\"\
+            : \"<long>\"\n}"
+          options:
+            raw:
+              language: json
+      status: Created
+      code: 201
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"vouchers\": [\n    {\n      \"authorizedGuestCount\": 0,\n   \
+        \   \"code\": \"string\",\n      \"createdAt\": \"1981-01-12T16:18:07.170Z\"\
+        ,\n      \"expired\": true,\n      \"id\": \"a987b438-7598-acdd-7136-6cf49eb84baa\"\
+        ,\n      \"name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n \
+        \     \"authorizedGuestLimit\": 1,\n      \"activatedAt\": \"1952-02-22T08:29:00.594Z\"\
+        ,\n      \"expiresAt\": \"1950-12-11T19:50:12.610Z\",\n      \"dataUsageLimitMBytes\"\
+        : 1024,\n      \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n\
+        \    },\n    {\n      \"authorizedGuestCount\": 0,\n      \"code\": \"string\"\
+        ,\n      \"createdAt\": \"1985-10-11T18:49:13.079Z\",\n      \"expired\":\
+        \ false,\n      \"id\": \"75e09779-6f45-39df-e379-9955c803199b\",\n      \"\
+        name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n      \"authorizedGuestLimit\"\
+        : 1,\n      \"activatedAt\": \"1950-07-04T03:44:13.807Z\",\n      \"expiresAt\"\
+        : \"1979-03-02T01:21:31.845Z\",\n      \"dataUsageLimitMBytes\": 1024,\n \
+        \     \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n    }\n\
+        \  ]\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 39299158-8110-4772-86dd-4da629eb102e
+    name: Delete Vouchers
+    request:
+      name: Delete Vouchers
+      description:
+        content: 'Remove Hotspot vouchers based on the specified filter criteria.
+
+
+          <details>
+
+          <summary>Filterable properties (click to expand)</summary>
+
+
+          |Name|Type|Allowed functions|
+
+          |-|-|-|
+
+          |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+          |`createdAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+          |`name`|`STRING`|`eq` `ne` `in` `notIn` `like`|
+
+          |`code`|`STRING`|`eq` `ne` `in` `notIn`|
+
+          |`authorizedGuestLimit`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+          `lt` `le`|
+
+          |`authorizedGuestCount`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+          |`activatedAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+          |`expiresAt`|`TIMESTAMP`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+          |`expired`|`BOOLEAN`|`eq` `ne`|
+
+          |`timeLimitMinutes`|`NUMBER`|`eq` `ne` `gt` `ge` `lt` `le`|
+
+          |`dataUsageLimitMBytes`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge`
+          `lt` `le`|
+
+          |`rxRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+          `le`|
+
+          |`txRateLimitKbps`|`NUMBER`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+          `le`|
+
+          </details>'
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - hotspot
+        - vouchers
+        host:
+        - '{{baseUrl}}'
+        query:
+        - disabled: false
+          key: filter
+          value: <string>
+          description: '(Required) '
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: DELETE
+      auth: null
+    response:
+    - id: 74f5f412-c71d-4b6f-b59d-1952b85af7fb
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - hotspot
+          - vouchers
+          host:
+          - '{{baseUrl}}'
+          query:
+          - key: filter
+            value: <string>
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: DELETE
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"vouchersDeleted\": 6080\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: c69d5235-5740-482a-b39d-7374675f667b
+    name: Get Voucher Details
+    request:
+      name: Get Voucher Details
+      description:
+        content: Retrieve details of a specific Hotspot voucher.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - hotspot
+        - vouchers
+        - :voucherId
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: voucherId
+          description: '(Required) '
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 60c30592-f7fa-4ac9-962d-493bd20ea6f5
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - hotspot
+          - vouchers
+          - :voucherId
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: voucherId
+            description: '(Required) '
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"authorizedGuestCount\": 0,\n  \"code\": \"string\",\n  \"createdAt\"\
+        : \"1967-01-30T22:50:26.132Z\",\n  \"expired\": true,\n  \"id\": \"937745e2-e8e9-7bba-3746-d4f00efb10c3\"\
+        ,\n  \"name\": \"hotel-guest\",\n  \"timeLimitMinutes\": 1440,\n  \"authorizedGuestLimit\"\
+        : 1,\n  \"activatedAt\": \"2021-02-20T05:50:26.658Z\",\n  \"expiresAt\": \"\
+        1980-08-29T13:54:46.631Z\",\n  \"dataUsageLimitMBytes\": 1024,\n  \"rxRateLimitKbps\"\
+        : 1000,\n  \"txRateLimitKbps\": 1000\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: b827b5e0-c147-4739-9144-50d29998fed8
+    name: Delete Voucher
+    request:
+      name: Delete Voucher
+      description:
+        content: Remove a specific Hotspot voucher.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - hotspot
+        - vouchers
+        - :voucherId
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: voucherId
+          description: '(Required) '
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: DELETE
+      auth: null
+    response:
+    - id: 61349f49-01bf-4bf9-877a-b2a6c0d443df
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - hotspot
+          - vouchers
+          - :voucherId
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: voucherId
+            description: '(Required) '
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: DELETE
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"vouchersDeleted\": 6080\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: 23e722e6-8579-432e-8698-114c36d2b0fd
+  name: UniFi Devices
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: 2ca507b4-9991-41dd-8724-4caa875e58f1
+    name: Execute Port Action
+    request:
+      name: Execute Port Action
+      description:
+        content: Perform an action on a specific device port. The request body must
+          include the action name and any applicable input arguments.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - devices
+        - :deviceId
+        - interfaces
+        - ports
+        - :portIdx
+        - actions
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <integer>
+          key: portIdx
+          description: '(Required) '
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: deviceId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      method: POST
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"action\": \"<string>\"\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: 102869ed-6e6a-4666-aaee-66ea0ed92599
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - devices
+          - :deviceId
+          - interfaces
+          - ports
+          - :portIdx
+          - actions
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <integer>
+            key: portIdx
+            description: '(Required) '
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: deviceId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"action\": \"<string>\"\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: text/plain
+      body: ''
+      cookie: []
+      _postman_previewlanguage: text
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: c50f9c32-e683-4b96-b516-2d6d2a973c83
+    name: Execute Device Action
+    request:
+      name: Execute Device Action
+      description:
+        content: Perform an action on an specific adopted device. The request body
+          must include the action name and any applicable input arguments.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - devices
+        - :deviceId
+        - actions
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: deviceId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      method: POST
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"action\": \"<string>\"\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: cf329f2a-e4e1-4c48-885d-a68ea000a224
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - devices
+          - :deviceId
+          - actions
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: deviceId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"action\": \"<string>\"\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: text/plain
+      body: ''
+      cookie: []
+      _postman_previewlanguage: text
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: f851b713-c062-40c9-8389-d4065f51465b
+    name: List Devices
+    request:
+      name: List Devices
+      description:
+        content: Retrieve a paginated list of all adopted devices on a site, including
+          basic device information.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - devices
+        host:
+        - '{{baseUrl}}'
+        query:
+        - disabled: false
+          key: offset
+          value: '0'
+        - disabled: false
+          key: limit
+          value: '25'
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 9e9c4aeb-8348-47b4-94f6-1e24b1d6734f
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - devices
+          host:
+          - '{{baseUrl}}'
+          query:
+          - key: offset
+            value: '0'
+          - key: limit
+            value: '25'
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"features\": [\n  \
+        \      \"gateway\",\n        \"accessPoint\"\n      ],\n      \"id\": \"aca37262-72f5-6492-1f59-26f83669645d\"\
+        ,\n      \"interfaces\": [\n        \"ports\",\n        \"radios\"\n     \
+        \ ],\n      \"ipAddress\": \"192.168.1.55\",\n      \"macAddress\": \"94:2a:6f:26:c6:ca\"\
+        ,\n      \"model\": \"UHDIW\",\n      \"name\": \"IW HD\",\n      \"state\"\
+        : \"ISOLATED\"\n    },\n    {\n      \"features\": [\n        \"gateway\"\
+        ,\n        \"accessPoint\"\n      ],\n      \"id\": \"fb35b37b-f42e-cfd6-7a7f-994b36b1f2bd\"\
+        ,\n      \"interfaces\": [\n        \"radios\",\n        \"ports\"\n     \
+        \ ],\n      \"ipAddress\": \"192.168.1.55\",\n      \"macAddress\": \"94:2a:6f:26:c6:ca\"\
+        ,\n      \"model\": \"UHDIW\",\n      \"name\": \"IW HD\",\n      \"state\"\
+        : \"CONNECTION_INTERRUPTED\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\"\
+        : 0,\n  \"totalCount\": 1000\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: 7dc63ada-a9da-40f5-86bf-c106e3e1ec96
+    name: Get Device Details
+    request:
+      name: Get Device Details
+      description:
+        content: Retrieve detailed information about a specific adopted device, including
+          firmware versioning, uplink state, details about device features and interfaces
+          (ports, radios) and other key attributes.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - devices
+        - :deviceId
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: deviceId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: ec8372e7-5b8b-431d-8d99-b379eeefa55d
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - devices
+          - :deviceId
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: deviceId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"configurationId\": \"7596498d2f367dc2\",\n  \"features\": {\n\
+        \    \"switching\": {},\n    \"accessPoint\": {}\n  },\n  \"firmwareUpdatable\"\
+        : true,\n  \"id\": \"bb6fe35e-35b2-f7f4-fb81-41e7b7329514\",\n  \"interfaces\"\
+        : {\n    \"ports\": [\n      {\n        \"connector\": \"RJ45\",\n       \
+        \ \"idx\": 1,\n        \"maxSpeedMbps\": 10000,\n        \"state\": \"UNKNOWN\"\
+        ,\n        \"speedMbps\": 1000,\n        \"poe\": {\n          \"enabled\"\
+        : false,\n          \"standard\": \"802.3bt\",\n          \"state\": \"LIMITED\"\
+        ,\n          \"type\": 1\n        }\n      },\n      {\n        \"connector\"\
+        : \"QSFP28\",\n        \"idx\": 1,\n        \"maxSpeedMbps\": 10000,\n   \
+        \     \"state\": \"UNKNOWN\",\n        \"speedMbps\": 1000,\n        \"poe\"\
+        : {\n          \"enabled\": true,\n          \"standard\": \"802.3bt\",\n\
+        \          \"state\": \"DOWN\",\n          \"type\": 3\n        }\n      }\n\
+        \    ],\n    \"radios\": [\n      {\n        \"channelWidthMHz\": 40,\n  \
+        \      \"frequencyGHz\": \"6\",\n        \"wlanStandard\": \"802.11b\",\n\
+        \        \"channel\": 36\n      },\n      {\n        \"channelWidthMHz\":\
+        \ 40,\n        \"frequencyGHz\": \"60\",\n        \"wlanStandard\": \"802.11b\"\
+        ,\n        \"channel\": 36\n      }\n    ]\n  },\n  \"ipAddress\": \"192.168.1.55\"\
+        ,\n  \"macAddress\": \"94:2a:6f:26:c6:ca\",\n  \"model\": \"UHDIW\",\n  \"\
+        name\": \"IW HD\",\n  \"state\": \"ONLINE\",\n  \"supported\": true,\n  \"\
+        firmwareVersion\": \"6.6.55\",\n  \"adoptedAt\": \"1965-09-02T18:03:25.849Z\"\
+        ,\n  \"provisionedAt\": \"1972-12-13T14:21:38.400Z\",\n  \"uplink\": {\n \
+        \   \"deviceId\": \"cf15cfeb-c102-4c2e-0f0c-a1c017631384\"\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: b6679205-89ab-4b4c-a1ea-653ec625a325
+    name: Get Latest Device Statistics
+    request:
+      name: Get Latest Device Statistics
+      description:
+        content: Retrieve the latest real-time statistics of a specific adopted device,
+          such as uptime, data transmission rates, CPU and memory utilization.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - devices
+        - :deviceId
+        - statistics
+        - latest
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: deviceId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 55fc1161-1101-4b54-b4e2-0155d27f4c2a
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - devices
+          - :deviceId
+          - statistics
+          - latest
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: deviceId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"interfaces\": {\n    \"radios\": [\n      {\n        \"frequencyGHz\"\
+        : \"6\",\n        \"txRetriesPct\": 9789.086668185368\n      },\n      {\n\
+        \        \"frequencyGHz\": \"5\",\n        \"txRetriesPct\": 2956.0405265994796\n\
+        \      }\n    ]\n  },\n  \"uptimeSec\": 8243,\n  \"lastHeartbeatAt\": \"1998-07-20T13:08:12.751Z\"\
+        ,\n  \"nextHeartbeatAt\": \"1994-04-04T09:53:48.429Z\",\n  \"loadAverage1Min\"\
+        : 1076.7563701021254,\n  \"loadAverage5Min\": 8368.56329988169,\n  \"loadAverage15Min\"\
+        : 4368.498464149467,\n  \"cpuUtilizationPct\": 6113.016063218284,\n  \"memoryUtilizationPct\"\
+        : 7082.85063740848,\n  \"uplink\": {\n    \"txRateBps\": 900,\n    \"rxRateBps\"\
+        : 7332\n  }\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: 452dca3f-2aa7-4a22-9aa7-3e1add9044fe
+  name: Clients
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: e0851534-e76c-469d-b77a-046d6aa7f5e8
+    name: Execute Client Action
+    request:
+      name: Execute Client Action
+      description:
+        content: Perform an action on a specific connected client. The request body
+          must include the action name and any applicable input arguments.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - clients
+        - :clientId
+        - actions
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: clientId
+          description: '(Required) '
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Content-Type
+        value: application/json
+      - key: Accept
+        value: application/json
+      method: POST
+      auth: null
+      body:
+        mode: raw
+        raw: "{\n  \"action\": \"<string>\"\n}"
+        options:
+          raw:
+            language: json
+    response:
+    - id: f168d509-1b09-4411-8a6e-e6b8e41040a4
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - clients
+          - :clientId
+          - actions
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: clientId
+            description: '(Required) '
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: POST
+        body:
+          mode: raw
+          raw: "{\n  \"action\": \"<string>\"\n}"
+          options:
+            raw:
+              language: json
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"action\": \"string\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: daa0753e-ac34-4a3e-bdeb-2f04444e755a
+    name: List Connected Clients
+    request:
+      name: List Connected Clients
+      description:
+        content: 'Retrieve a paginated list of all connected clients on a site, including
+          physical devices (computers, smartphones) and active VPN connections.
+
+
+          <details>
+
+          <summary>Filterable properties (click to expand)</summary>
+
+
+          |Name|Type|Allowed functions|
+
+          |-|-|-|
+
+          |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+          |`type`|`STRING`|`eq` `ne` `in` `notIn`|
+
+          |`macAddress`|`STRING`|`isNull` `isNotNull` `eq` `ne` `in` `notIn`|
+
+          |`ipAddress`|`STRING`|`isNull` `isNotNull` `eq` `ne` `in` `notIn`|
+
+          |`connectedAt`|`TIMESTAMP`|`isNull` `isNotNull` `eq` `ne` `gt` `ge` `lt`
+          `le`|
+
+          |`access.type`|`STRING`|`eq` `ne` `in` `notIn`|
+
+          |`access.authorized`|`BOOLEAN`|`isNull` `isNotNull` `eq` `ne`|
+
+          </details>'
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - clients
+        host:
+        - '{{baseUrl}}'
+        query:
+        - disabled: false
+          key: offset
+          value: '0'
+        - disabled: false
+          key: limit
+          value: '25'
+        - disabled: false
+          key: filter
+          value: <string>
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: aaaf42a6-5521-4e16-83d7-9b3c63d2b99f
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - clients
+          host:
+          - '{{baseUrl}}'
+          query:
+          - key: offset
+            value: '0'
+          - key: limit
+            value: '25'
+          - key: filter
+            value: <string>
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"access\": {},\n  \
+        \    \"id\": \"8ad09759-f8cb-3a24-2d7c-78162b547e4e\",\n      \"name\": \"\
+        string\",\n      \"type\": \"string\",\n      \"connectedAt\": \"1995-11-01T17:55:42.621Z\"\
+        ,\n      \"ipAddress\": \"string\"\n    },\n    {\n      \"access\": {},\n\
+        \      \"id\": \"60bb8009-36a2-218c-6b43-cbd86a596992\",\n      \"name\":\
+        \ \"string\",\n      \"type\": \"string\",\n      \"connectedAt\": \"1972-06-30T18:16:28.312Z\"\
+        ,\n      \"ipAddress\": \"string\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\"\
+        : 0,\n  \"totalCount\": 1000\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  - id: d7e2b9bf-e49e-4dfb-a77c-f64efcf51c50
+    name: Get Connected Client Details
+    request:
+      name: Get Connected Client Details
+      description:
+        content: Retrieve detailed information about a specific connected client,
+          including name, IP address, MAC address, connection type and access information.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        - :siteId
+        - clients
+        - :clientId
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: clientId
+          description: '(Required) '
+        - disabled: false
+          type: any
+          value: <uuid>
+          key: siteId
+          description: '(Required) '
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 843e76dd-9af2-455d-b25b-fd83d4993140
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          - :siteId
+          - clients
+          - :clientId
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: clientId
+            description: '(Required) '
+          - disabled: false
+            type: any
+            value: <uuid>
+            key: siteId
+            description: '(Required) '
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"access\": \"\",\n  \"id\": \"130036a8-1df5-e322-9b08-f5055c961f9a\"\
+        ,\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"connectedAt\": \"\
+        1954-10-16T12:14:34.587Z\",\n  \"ipAddress\": \"string\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: cbccd195-257b-4fd8-9868-ebe9aff7ecf8
+  name: Sites
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: 38106d90-ae1d-41e7-8cd2-52a4e952a1c1
+    name: List Local Sites
+    request:
+      name: List Local Sites
+      description:
+        content: 'Retrieve a paginated list of local sites managed by this Network
+          application.
+
+          Site ID is required for other UniFi Network API calls.
+
+
+          <details>
+
+          <summary>Filterable properties (click to expand)</summary>
+
+
+          |Name|Type|Allowed functions|
+
+          |-|-|-|
+
+          |`id`|`UUID`|`eq` `ne` `in` `notIn`|
+
+          |`internalReference`|`STRING`|`eq` `ne` `in` `notIn`|
+
+          |`name`|`STRING`|`eq` `ne` `in` `notIn`|
+
+          </details>'
+        type: text/plain
+      url:
+        path:
+        - v1
+        - sites
+        host:
+        - '{{baseUrl}}'
+        query:
+        - disabled: false
+          key: offset
+          value: '0'
+        - disabled: false
+          key: limit
+          value: '25'
+        - disabled: false
+          key: filter
+          value: <string>
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 91c64ed7-8d9b-49e1-86d4-161f65f12a83
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - sites
+          host:
+          - '{{baseUrl}}'
+          query:
+          - key: offset
+            value: '0'
+          - key: limit
+            value: '25'
+          - key: filter
+            value: <string>
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"a0a20138-9f1d-5874-7ab0-ced5e5c70be0\"\
+        ,\n      \"internalReference\": \"string\",\n      \"name\": \"string\"\n\
+        \    },\n    {\n      \"id\": \"60f921fd-5be1-2f8b-050f-9db262c00d7b\",\n\
+        \      \"internalReference\": \"string\",\n      \"name\": \"string\"\n  \
+        \  }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1000\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+- id: 3b9690fd-81eb-43c5-9c69-83379859fd91
+  name: About application
+  description:
+    content: ''
+    type: text/plain
+  item:
+  - id: e1e7b6f8-eeeb-47f3-8cc1-2e0627837b10
+    name: Get Application Info
+    request:
+      name: Get Application Info
+      description:
+        content: Retrieve general information about the UniFi Network application.
+        type: text/plain
+      url:
+        path:
+        - v1
+        - info
+        host:
+        - '{{baseUrl}}'
+        query: []
+        variable:
+        - description: ID of the console to proxy requests to
+          type: any
+          value: '{{consoleId}}'
+          key: consoleId
+      header:
+      - key: Accept
+        value: application/json
+      method: GET
+      auth: null
+    response:
+    - id: 29629a6d-4dd5-4fd2-a931-817dac8f60ff
+      name: OK
+      originalRequest:
+        url:
+          path:
+          - v1
+          - info
+          host:
+          - '{{baseUrl}}'
+          query: []
+          variable:
+          - description: ID of the console to proxy requests to
+            type: any
+            value: '{{consoleId}}'
+            key: consoleId
+        header:
+        - key: Accept
+          value: application/json
+        method: GET
+        body: {}
+      status: OK
+      code: 200
+      header:
+      - key: Content-Type
+        value: application/json
+      body: "{\n  \"applicationVersion\": \"9.1.0\"\n}"
+      cookie: []
+      _postman_previewlanguage: json
+    event: []
+    protocolProfileBehavior:
+      disableBodyPruning: true
+  event: []
+event: []
+variable:
+- description:
+    content: ID of the console to proxy requests to
+    type: text/plain
+  type: any
+  value: 942A6FF664C0000000000964970E0000000009E710560000000068A9873F:9999999999
+  key: consoleId
+- type: string
+  value: https://api.ui.com/v1/connector/consoles/{{consoleId}}/proxy/network/integration
+  key: baseUrl
+info:
+  _postman_id: f2b096f3-3a47-4c64-a85b-dc96b5c6e484
+  name: UniFi Network API
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  description:
+    content: The API provides powerful tools to manage Sites, Devices, and Clients,
+      offering access to detailed configuration, real-time status, and live statistics.
+      It supports insights for WiFi, Wired, and VPN clients, including connection
+      details.
+    type: text/plain

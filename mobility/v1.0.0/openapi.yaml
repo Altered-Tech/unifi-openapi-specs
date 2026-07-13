@@ -4,10 +4,43 @@ info:
   version: 1.0.0
   contact:
     name: UniFi Cloud Platform Team
-  description: $1b
+  description: "Proxy API for UniFi Mobility services exposed through the cloudservice-apis\
+    \ gateway.\nRequests are authenticated at the proxy layer and forwarded to the\
+    \ mobility cloud.\n\n\n## Quick Start\n\n```bash\n# 1. Obtain an API key from\
+    \ the UniFi Cloud Platform with mobility scope\n# 2. List your workspaces\ncurl\
+    \ https://api.ui.com/v1/mobility/workspaces \\\n  -H \"X-API-Key: <your-key>\"\
+    \n\n# 3. List devices in a workspace\ncurl https://api.ui.com/v1/mobility/workspaces/<workspaceID>/devices\
+    \ \\\n  -H \"X-API-Key: <your-key>\"\n\n# 4. Get full detail for a device\ncurl\
+    \ https://api.ui.com/v1/mobility/workspaces/<workspaceID>/devices/<deviceID> \\\
+    \n  -H \"X-API-Key: <your-key>\"\n```\n\n## Authentication\n\nEvery request must\
+    \ include the API key in the `X-API-Key` header.\nAPI keys carry two layers of\
+    \ access control:\n\n**App scope** — the key must be issued with `mobility` app\
+    \ scope.\nKeys without this scope receive `403 forbidden`.\n\n**Read / write scope**\
+    \ — controls which operations the key can perform:\n\n| Scope | Permitted operations\
+    \ |\n|-------|----------------------|\n| `read:mobility` | All `GET` endpoints\
+    \ |\n| `write:mobility` | All `PUT` endpoints (requires `read:mobility` as well)\
+    \ |\n\n## Request Headers\n\n| Header | Required | Description |\n|--------|----------|-------------|\n\
+    | `X-API-Key` | Yes | API key for authentication |\n| `X-Request-ID` | No | Client-supplied\
+    \ trace identifier for end-to-end tracing. |\n\n## Rate Limiting\n\n**100 requests\
+    \ per minute** per API key across all mobility endpoints.\nWhen the limit is exceeded,\
+    \ `429 Too Many Requests` is returned immediately.\n\n## Response Format\n\nAll\
+    \ responses use a **unified format** with `httpStatusCode` and `traceId` as common\
+    \ fields.\n\n### Success — single item\n\n```json\n{\n  \"data\": { ... },\n \
+    \ \"httpStatusCode\": 200,\n  \"traceId\": \"abc-123\"\n}\n```\n\n### Success\
+    \ — collection (paginated)\n\n```json\n{\n  \"data\": [ ... ],\n  \"total\": 42,\n\
+    \  \"offset\": 0,\n  \"limit\": 200,\n  \"httpStatusCode\": 200,\n  \"traceId\"\
+    : \"abc-123\"\n}\n```\n\n### Success — no content (PUT)\n\nHTTP `204` with an\
+    \ empty body.\n\n### Error\n\n```json\n{\n  \"code\": \"upstream_error\",\n  \"\
+    httpStatusCode\": 404,\n  \"message\": \"device not found\",\n  \"traceId\": \"\
+    abc-123\"\n}\n```\n\n**Error codes:**\n\n| `code` | HTTP | When |\n|--------|------|------|\n\
+    | `unauthorized` | 401 | API key is missing, expired, or invalid |\n| `forbidden`\
+    \ | 403 | Key lacks `mobility` app scope or read/write scope |\n| `rate_limit`\
+    \ | 429 | Rate limit exceeded |\n| `upstream_error` | 400, 404, 500 | Validation\
+    \ error, resource not found, or service error |\n| `server_error` | 500 | Unexpected\
+    \ internal error |\n"
 servers:
 - url: https://api.ui.com
-  description: Production
+  description: UniFi API
 tags:
 - name: Workspaces
   description: 'Workspace listing and admin management
@@ -142,9 +175,15 @@ components:
       properties:
         umr:
           type: string
-          description: "Mobile Routing permission level.\n- `ALL` â\x80\x94 can view\
-            \ and configure devices (admin)\n- `VIEW_ONLY` â\x80\x94 read-only access\
-            \ (viewer)\n- `NONE` â\x80\x94 no access\n"
+          description: 'Mobile Routing permission level.
+
+            - `ALL` — can view and configure devices (admin)
+
+            - `VIEW_ONLY` — read-only access (viewer)
+
+            - `NONE` — no access
+
+            '
           enum:
           - ALL
           - VIEW_ONLY
@@ -176,25 +215,7 @@ components:
           type: object
           nullable: true
           allOf:
-          - type: object
-            description: 'Permission levels for the admin. Only mobility permissions
-              are exposed.
-
-              The `umr` field is omitted if the admin has no role binding.
-
-              '
-            properties:
-              umr:
-                type: string
-                description: "Mobile Routing permission level.\n- `ALL` â\x80\x94\
-                  \ can view and configure devices (admin)\n- `VIEW_ONLY` â\x80\x94\
-                  \ read-only access (viewer)\n- `NONE` â\x80\x94 no access\n"
-                enum:
-                - ALL
-                - VIEW_ONLY
-                - NONE
-                example: ALL
-            title: AdminPermission
+          - $ref: '#/components/schemas/AdminPermission'
           description: Mobility permissions for the admin. `null` when the admin has
             no role bindings (e.g. pending invitation).
       required:
@@ -216,9 +237,15 @@ components:
           example: Office Router
         model:
           type: string
-          description: "Hardware model name.\n- `UMR` â\x80\x94 UMR Flex EU/US\n-\
-            \ `UMR Industrial` â\x80\x94 UMR Industrial EU/US\n- `UMR Ultra` â\x80\
-            \x94 UMR Ultra EU/US/ROW\n"
+          description: 'Hardware model name.
+
+            - `UMR` — UMR Flex EU/US
+
+            - `UMR Industrial` — UMR Industrial EU/US
+
+            - `UMR Ultra` — UMR Ultra EU/US/ROW
+
+            '
           enum:
           - UMR
           - UMR Industrial
@@ -292,8 +319,12 @@ components:
       - mac_address
     DeviceLocation:
       type: object
-      description: "GPS location. This field is **omitted** (not `null`) when no GPS\
-        \ fix\nis available â\x80\x94 check for key presence rather than null check.\n"
+      description: 'GPS location. This field is **omitted** (not `null`) when no GPS
+        fix
+
+        is available — check for key presence rather than null check.
+
+        '
       properties:
         latitude:
           type: number
@@ -316,93 +347,7 @@ components:
       - last_updated
     DeviceDetail:
       allOf:
-      - type: object
-        description: Lightweight device representation returned in the device list.
-        properties:
-          id:
-            type: string
-            format: uuid
-            example: 550e8400-e29b-41d4-a716-446655440000
-          name:
-            type: string
-            example: Office Router
-          model:
-            type: string
-            description: "Hardware model name.\n- `UMR` â\x80\x94 UMR Flex EU/US\n\
-              - `UMR Industrial` â\x80\x94 UMR Industrial EU/US\n- `UMR Ultra` â\x80\
-              \x94 UMR Ultra EU/US/ROW\n"
-            enum:
-            - UMR
-            - UMR Industrial
-            - UMR Ultra
-            example: UMR
-          state:
-            type: string
-            description: 'Current device state.
-
-
-              | Value | Description |
-
-              |-------|-------------|
-
-              | `CONNECTED` | Online and communicating normally |
-
-              | `DISCONNECTED` | Lost connection to the cloud |
-
-              | `ADOPTING` | Adoption in progress |
-
-              | `ADOPTING_TIMEOUT` | Adoption timed out |
-
-              | `DOWNLOADING` | Downloading firmware update |
-
-              | `UPGRADING` | Applying firmware update |
-
-              | `RESTARTING` | Rebooting |
-
-              | `FACTORY_RESET` | Performing factory reset |
-
-              | `GETTING_READY` | Initialising after adoption |
-
-              | `RESTORING` | Restoring from backup |
-
-              | `NULL` | Record exists but adoption not started |
-
-              | `DELETING` | Cloud-side deletion in progress |
-
-              '
-            enum:
-            - CONNECTED
-            - DISCONNECTED
-            - ADOPTING
-            - ADOPTING_TIMEOUT
-            - DOWNLOADING
-            - UPGRADING
-            - RESTARTING
-            - FACTORY_RESET
-            - GETTING_READY
-            - RESTORING
-            - 'NULL'
-            - DELETING
-            example: CONNECTED
-          firmware_version:
-            type: string
-            example: 3.1.14
-          mac_address:
-            type: string
-            description: 'Primary MAC address in upper-case colon-separated format.
-
-              Empty string when not yet initialised.
-
-              '
-            example: 00:1A:2B:3C:4D:5E
-        required:
-        - id
-        - name
-        - model
-        - state
-        - firmware_version
-        - mac_address
-        title: DeviceSummary
+      - $ref: '#/components/schemas/DeviceSummary'
       - type: object
         description: Full device detail including WAN, cellular, WiFi, VPN, subscription,
           and GPS.
@@ -498,8 +443,13 @@ components:
             example: false
           device_mode:
             type: string
-            description: "- `ROUTER` â\x80\x94 standard NAT router\n- `WANBRIDGE`\
-              \ â\x80\x94 WAN bridge mode\n- `LTEPASS` â\x80\x94 LTE passthrough\n"
+            description: '- `ROUTER` — standard NAT router
+
+              - `WANBRIDGE` — WAN bridge mode
+
+              - `LTEPASS` — LTE passthrough
+
+              '
             enum:
             - ROUTER
             - WANBRIDGE
@@ -526,10 +476,17 @@ components:
             example: HQ-VPN
           vpn_status:
             type: string
-            description: "- `CONNECTING` â\x80\x94 tunnel being established\n- `CONNECTED`\
-              \ â\x80\x94 tunnel active\n- `DISCONNECTED` â\x80\x94 configured but\
-              \ not connected\n- `FAILED` â\x80\x94 connection failed\n- `\"\"` â\x80\
-              \x94 no VPN session\n"
+            description: '- `CONNECTING` — tunnel being established
+
+              - `CONNECTED` — tunnel active
+
+              - `DISCONNECTED` — configured but not connected
+
+              - `FAILED` — connection failed
+
+              - `""` — no VPN session
+
+              '
             enum:
             - CONNECTING
             - CONNECTED
@@ -601,31 +558,7 @@ components:
             example: ACTIVE
           location:
             allOf:
-            - type: object
-              description: "GPS location. This field is **omitted** (not `null`) when\
-                \ no GPS fix\nis available â\x80\x94 check for key presence rather\
-                \ than null check.\n"
-              properties:
-                latitude:
-                  type: number
-                  format: float
-                  description: WGS-84 latitude in decimal degrees.
-                  example: 37.7749
-                longitude:
-                  type: number
-                  format: float
-                  description: WGS-84 longitude in decimal degrees.
-                  example: -122.4194
-                last_updated:
-                  type: integer
-                  format: int64
-                  description: Unix timestamp in milliseconds of the last GPS fix.
-                  example: 1709712000000
-              required:
-              - latitude
-              - longitude
-              - last_updated
-              title: DeviceLocation
+            - $ref: '#/components/schemas/DeviceLocation'
             description: Omitted (not null) when no GPS fix is available.
     DeviceClient:
       type: object
@@ -646,9 +579,13 @@ components:
           example: WIRELESS
         connection_status:
           type: string
-          description: "- `ONLINE` â\x80\x94 actively connected\n- `OFFLINE` â\x80\
-            \x94 previously connected, no longer seen\n- `BLOCKED` â\x80\x94 network\
-            \ access blocked; `is_blocked` will be `true`\n"
+          description: '- `ONLINE` — actively connected
+
+            - `OFFLINE` — previously connected, no longer seen
+
+            - `BLOCKED` — network access blocked; `is_blocked` will be `true`
+
+            '
           enum:
           - ONLINE
           - OFFLINE
@@ -690,8 +627,11 @@ components:
       - name
     UpdateNetworkReq:
       type: object
-      description: "Partial update â\x80\x94 only provided fields are applied.\nWAN,\
-        \ IPv6, and InternetSource are not configurable via this endpoint.\n"
+      description: 'Partial update — only provided fields are applied.
+
+        WAN, IPv6, and InternetSource are not configurable via this endpoint.
+
+        '
       properties:
         host_address:
           type: string
@@ -766,352 +706,49 @@ components:
     WorkspaceListResponse:
       description: Paginated list of workspaces.
       allOf:
-      - type: object
-        description: Common envelope fields shared by all paginated collection responses.
-        properties:
-          total:
-            type: integer
-            description: Total number of records matching the query, ignoring pagination.
-          offset:
-            type: integer
-            description: Number of records skipped (echoes the `offset` query parameter).
-          limit:
-            type: integer
-            description: Page size applied (echoes the `limit` query parameter).
-          httpStatusCode:
-            type: integer
-            description: HTTP status code.
-          traceId:
-            type: string
-            description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-        required:
-        - httpStatusCode
-        - traceId
-        title: PaginationMeta
+      - $ref: '#/components/schemas/PaginationMeta'
       - type: object
         properties:
           data:
             type: array
             items:
-              type: object
-              description: A workspace (mobility cloud site) visible to the authenticated
-                user.
-              properties:
-                workspace_id:
-                  type: string
-                  format: uuid
-                  example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-                workspace_name:
-                  type: string
-                  example: John's Cloud
-                is_owner:
-                  type: boolean
-                  example: true
-                status:
-                  type: string
-                  enum:
-                  - ACTIVE
-                  - PENDING
-                  - INACTIVE
-                  - DECLINED
-                  example: ACTIVE
-              required:
-              - workspace_id
-              - workspace_name
-              - is_owner
-              - status
-              title: WorkspaceSummary
+              $ref: '#/components/schemas/WorkspaceSummary'
         required:
         - data
     AdminListResponse:
       description: Paginated list of workspace admins.
       allOf:
-      - type: object
-        description: Common envelope fields shared by all paginated collection responses.
-        properties:
-          total:
-            type: integer
-            description: Total number of records matching the query, ignoring pagination.
-          offset:
-            type: integer
-            description: Number of records skipped (echoes the `offset` query parameter).
-          limit:
-            type: integer
-            description: Page size applied (echoes the `limit` query parameter).
-          httpStatusCode:
-            type: integer
-            description: HTTP status code.
-          traceId:
-            type: string
-            description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-        required:
-        - httpStatusCode
-        - traceId
-        title: PaginationMeta
+      - $ref: '#/components/schemas/PaginationMeta'
       - type: object
         properties:
           data:
             type: array
             items:
-              type: object
-              description: An admin of a workspace, with only mobility permissions
-                exposed.
-              properties:
-                name:
-                  type: string
-                  example: John Doe
-                email:
-                  type: string
-                  format: email
-                  example: john@example.com
-                status:
-                  type: string
-                  enum:
-                  - ACTIVE
-                  - PENDING
-                  - INACTIVE
-                  - DECLINED
-                  example: ACTIVE
-                is_owner:
-                  type: boolean
-                  example: true
-                permissions:
-                  type: object
-                  nullable: true
-                  allOf:
-                  - type: object
-                    description: 'Permission levels for the admin. Only mobility permissions
-                      are exposed.
-
-                      The `umr` field is omitted if the admin has no role binding.
-
-                      '
-                    properties:
-                      umr:
-                        type: string
-                        description: "Mobile Routing permission level.\n- `ALL` â\x80\
-                          \x94 can view and configure devices (admin)\n- `VIEW_ONLY`\
-                          \ â\x80\x94 read-only access (viewer)\n- `NONE` â\x80\x94\
-                          \ no access\n"
-                        enum:
-                        - ALL
-                        - VIEW_ONLY
-                        - NONE
-                        example: ALL
-                    title: AdminPermission
-                  description: Mobility permissions for the admin. `null` when the
-                    admin has no role bindings (e.g. pending invitation).
-              required:
-              - name
-              - email
-              - status
-              - is_owner
-              - permissions
-              title: AdminSummary
+              $ref: '#/components/schemas/AdminSummary'
         required:
         - data
     DeviceListResponse:
       description: Paginated list of devices.
       allOf:
-      - type: object
-        description: Common envelope fields shared by all paginated collection responses.
-        properties:
-          total:
-            type: integer
-            description: Total number of records matching the query, ignoring pagination.
-          offset:
-            type: integer
-            description: Number of records skipped (echoes the `offset` query parameter).
-          limit:
-            type: integer
-            description: Page size applied (echoes the `limit` query parameter).
-          httpStatusCode:
-            type: integer
-            description: HTTP status code.
-          traceId:
-            type: string
-            description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-        required:
-        - httpStatusCode
-        - traceId
-        title: PaginationMeta
+      - $ref: '#/components/schemas/PaginationMeta'
       - type: object
         properties:
           data:
             type: array
             items:
-              type: object
-              description: Lightweight device representation returned in the device
-                list.
-              properties:
-                id:
-                  type: string
-                  format: uuid
-                  example: 550e8400-e29b-41d4-a716-446655440000
-                name:
-                  type: string
-                  example: Office Router
-                model:
-                  type: string
-                  description: "Hardware model name.\n- `UMR` â\x80\x94 UMR Flex EU/US\n\
-                    - `UMR Industrial` â\x80\x94 UMR Industrial EU/US\n- `UMR Ultra`\
-                    \ â\x80\x94 UMR Ultra EU/US/ROW\n"
-                  enum:
-                  - UMR
-                  - UMR Industrial
-                  - UMR Ultra
-                  example: UMR
-                state:
-                  type: string
-                  description: 'Current device state.
-
-
-                    | Value | Description |
-
-                    |-------|-------------|
-
-                    | `CONNECTED` | Online and communicating normally |
-
-                    | `DISCONNECTED` | Lost connection to the cloud |
-
-                    | `ADOPTING` | Adoption in progress |
-
-                    | `ADOPTING_TIMEOUT` | Adoption timed out |
-
-                    | `DOWNLOADING` | Downloading firmware update |
-
-                    | `UPGRADING` | Applying firmware update |
-
-                    | `RESTARTING` | Rebooting |
-
-                    | `FACTORY_RESET` | Performing factory reset |
-
-                    | `GETTING_READY` | Initialising after adoption |
-
-                    | `RESTORING` | Restoring from backup |
-
-                    | `NULL` | Record exists but adoption not started |
-
-                    | `DELETING` | Cloud-side deletion in progress |
-
-                    '
-                  enum:
-                  - CONNECTED
-                  - DISCONNECTED
-                  - ADOPTING
-                  - ADOPTING_TIMEOUT
-                  - DOWNLOADING
-                  - UPGRADING
-                  - RESTARTING
-                  - FACTORY_RESET
-                  - GETTING_READY
-                  - RESTORING
-                  - 'NULL'
-                  - DELETING
-                  example: CONNECTED
-                firmware_version:
-                  type: string
-                  example: 3.1.14
-                mac_address:
-                  type: string
-                  description: 'Primary MAC address in upper-case colon-separated
-                    format.
-
-                    Empty string when not yet initialised.
-
-                    '
-                  example: 00:1A:2B:3C:4D:5E
-              required:
-              - id
-              - name
-              - model
-              - state
-              - firmware_version
-              - mac_address
-              title: DeviceSummary
+              $ref: '#/components/schemas/DeviceSummary'
         required:
         - data
     DeviceClientListResponse:
       description: Paginated list of device clients.
       allOf:
-      - type: object
-        description: Common envelope fields shared by all paginated collection responses.
-        properties:
-          total:
-            type: integer
-            description: Total number of records matching the query, ignoring pagination.
-          offset:
-            type: integer
-            description: Number of records skipped (echoes the `offset` query parameter).
-          limit:
-            type: integer
-            description: Page size applied (echoes the `limit` query parameter).
-          httpStatusCode:
-            type: integer
-            description: HTTP status code.
-          traceId:
-            type: string
-            description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-        required:
-        - httpStatusCode
-        - traceId
-        title: PaginationMeta
+      - $ref: '#/components/schemas/PaginationMeta'
       - type: object
         properties:
           data:
             type: array
             items:
-              type: object
-              description: A client associated with a device.
-              properties:
-                mac:
-                  type: string
-                  description: MAC address in upper-case colon-separated format.
-                  example: AA:BB:CC:DD:EE:FF
-                name:
-                  type: string
-                  example: John's iPhone
-                type:
-                  type: string
-                  enum:
-                  - WIRED
-                  - WIRELESS
-                  example: WIRELESS
-                connection_status:
-                  type: string
-                  description: "- `ONLINE` â\x80\x94 actively connected\n- `OFFLINE`\
-                    \ â\x80\x94 previously connected, no longer seen\n- `BLOCKED`\
-                    \ â\x80\x94 network access blocked; `is_blocked` will be `true`\n"
-                  enum:
-                  - ONLINE
-                  - OFFLINE
-                  - BLOCKED
-                  example: ONLINE
-                ip_address:
-                  type: string
-                  description: Empty when unknown.
-                  example: 192.168.1.100
-                is_blocked:
-                  type: boolean
-                  example: false
-                wifi_experience:
-                  type: integer
-                  minimum: 0
-                  maximum: 100
-                  nullable: true
-                  description: 'WiFi experience score (0-100). **Omitted** for wired
-                    clients.
-
-                    '
-                  example: 85
-              required:
-              - mac
-              - name
-              - type
-              - connection_status
-              - ip_address
-              - is_blocked
-              title: DeviceClient
+              $ref: '#/components/schemas/DeviceClient'
         required:
         - data
     DeviceDetailResponse:
@@ -1119,322 +756,7 @@ components:
       description: Single device detail response.
       properties:
         data:
-          allOf:
-          - type: object
-            description: Lightweight device representation returned in the device
-              list.
-            properties:
-              id:
-                type: string
-                format: uuid
-                example: 550e8400-e29b-41d4-a716-446655440000
-              name:
-                type: string
-                example: Office Router
-              model:
-                type: string
-                description: "Hardware model name.\n- `UMR` â\x80\x94 UMR Flex EU/US\n\
-                  - `UMR Industrial` â\x80\x94 UMR Industrial EU/US\n- `UMR Ultra`\
-                  \ â\x80\x94 UMR Ultra EU/US/ROW\n"
-                enum:
-                - UMR
-                - UMR Industrial
-                - UMR Ultra
-                example: UMR
-              state:
-                type: string
-                description: 'Current device state.
-
-
-                  | Value | Description |
-
-                  |-------|-------------|
-
-                  | `CONNECTED` | Online and communicating normally |
-
-                  | `DISCONNECTED` | Lost connection to the cloud |
-
-                  | `ADOPTING` | Adoption in progress |
-
-                  | `ADOPTING_TIMEOUT` | Adoption timed out |
-
-                  | `DOWNLOADING` | Downloading firmware update |
-
-                  | `UPGRADING` | Applying firmware update |
-
-                  | `RESTARTING` | Rebooting |
-
-                  | `FACTORY_RESET` | Performing factory reset |
-
-                  | `GETTING_READY` | Initialising after adoption |
-
-                  | `RESTORING` | Restoring from backup |
-
-                  | `NULL` | Record exists but adoption not started |
-
-                  | `DELETING` | Cloud-side deletion in progress |
-
-                  '
-                enum:
-                - CONNECTED
-                - DISCONNECTED
-                - ADOPTING
-                - ADOPTING_TIMEOUT
-                - DOWNLOADING
-                - UPGRADING
-                - RESTARTING
-                - FACTORY_RESET
-                - GETTING_READY
-                - RESTORING
-                - 'NULL'
-                - DELETING
-                example: CONNECTED
-              firmware_version:
-                type: string
-                example: 3.1.14
-              mac_address:
-                type: string
-                description: 'Primary MAC address in upper-case colon-separated format.
-
-                  Empty string when not yet initialised.
-
-                  '
-                example: 00:1A:2B:3C:4D:5E
-            required:
-            - id
-            - name
-            - model
-            - state
-            - firmware_version
-            - mac_address
-            title: DeviceSummary
-          - type: object
-            description: Full device detail including WAN, cellular, WiFi, VPN, subscription,
-              and GPS.
-            properties:
-              wan_source:
-                type: string
-                description: Active WAN interface. Empty when no WAN connected.
-                enum:
-                - LTE
-                - WAN
-                - WIFIWAN
-                - ''
-                example: LTE
-              wan_ip:
-                type: string
-                description: Public WAN IP. Empty when not connected.
-                example: 203.0.113.42
-              enabled_wans:
-                type: array
-                description: Enabled WAN interfaces sorted by priority (index 0 =
-                  highest).
-                items:
-                  type: string
-                  enum:
-                  - LTE
-                  - WAN
-                  - WIFIWAN
-                example:
-                - LTE
-                - WAN
-              isp:
-                type: string
-                example: AT&T
-              lte_signal_level:
-                type: string
-                description: 'LTE signal quality derived from RSSI (dBm).
-
-
-                  | Value | RSSI range | Description |
-
-                  |-------|-----------|-------------|
-
-                  | `NO_SIGNAL` | < -111 dBm | No usable signal |
-
-                  | `POOR` | -111 to -100 dBm | Weak signal |
-
-                  | `FAIR` | -99 to -89 dBm | Moderate signal |
-
-                  | `STRONG` | -88 dBm or better | Good signal |
-
-                  | `""` | N/A | RSSI not yet reported |
-
-                  '
-                enum:
-                - NO_SIGNAL
-                - POOR
-                - FAIR
-                - STRONG
-                - ''
-                example: FAIR
-              cellular_data_usage_bytes:
-                type: integer
-                format: int64
-                description: Data consumed in the current billing cycle, in bytes.
-                example: 524288000
-              cellular_data_limit_bytes:
-                type: integer
-                format: int64
-                description: 'Data cap in bytes for the current billing cycle.
-
-                  `-1` means unlimited. `0` is not a valid value.
-
-                  '
-                example: 5368709120
-              memory_usage_percent:
-                type: integer
-                minimum: 0
-                maximum: 100
-                example: 42
-              uptime_seconds:
-                type: integer
-                format: int64
-                description: Seconds since last boot. `0` when state is not `CONNECTED`.
-                example: 86400
-              client_count:
-                type: integer
-                example: 5
-              host_address:
-                type: string
-                description: LAN gateway IP. Contains WAN IP in `WANBRIDGE` mode.
-                example: 192.168.1.1
-              poe_passthrough:
-                type: boolean
-                example: false
-              device_mode:
-                type: string
-                description: "- `ROUTER` â\x80\x94 standard NAT router\n- `WANBRIDGE`\
-                  \ â\x80\x94 WAN bridge mode\n- `LTEPASS` â\x80\x94 LTE passthrough\n"
-                enum:
-                - ROUTER
-                - WANBRIDGE
-                - LTEPASS
-                example: ROUTER
-              wifi_enabled:
-                type: boolean
-                example: true
-              wifi_ssid:
-                type: string
-                example: UniFi-LTE
-              tx_power_level:
-                type: string
-                description: Empty when Wireless record is not initialised.
-                enum:
-                - HIGH
-                - MEDIUM
-                - LOW
-                - ''
-                example: HIGH
-              vpn_profile_name:
-                type: string
-                description: Empty when no VPN is configured.
-                example: HQ-VPN
-              vpn_status:
-                type: string
-                description: "- `CONNECTING` â\x80\x94 tunnel being established\n\
-                  - `CONNECTED` â\x80\x94 tunnel active\n- `DISCONNECTED` â\x80\x94\
-                  \ configured but not connected\n- `FAILED` â\x80\x94 connection\
-                  \ failed\n- `\"\"` â\x80\x94 no VPN session\n"
-                enum:
-                - CONNECTING
-                - CONNECTED
-                - DISCONNECTED
-                - FAILED
-                - ''
-                example: CONNECTED
-              firewall_rule_names:
-                type: array
-                items:
-                  type: string
-                example:
-                - Block-IoT-Outbound
-              routing_rule_names:
-                type: array
-                items:
-                  type: string
-                example: []
-              ddns_profile_names:
-                type: array
-                items:
-                  type: string
-                example: []
-              subscription_plan:
-                type: string
-                description: 'Active data plan. Empty when no subscription.
-
-
-                  | Value | Description |
-
-                  |-------|-------------|
-
-                  | `FREE_TRIAL` | Free trial |
-
-                  | `1GB` | Monthly 1 GB |
-
-                  | `5GB` | Monthly 5 GB |
-
-                  | `20GB` | Monthly 20 GB |
-
-                  | `2GB` | Daily 2 GB (QA/test) |
-
-                  | `CLOUD` | Cloud plan (daily/yearly/3-year) |
-
-                  | `""` | No subscription |
-
-                  '
-                enum:
-                - FREE_TRIAL
-                - 1GB
-                - 5GB
-                - 20GB
-                - 2GB
-                - CLOUD
-                - ''
-                example: 5GB
-              subscription_status:
-                type: string
-                description: 'Derived priority: FAILED > PENDING > ACTIVE > INACTIVE.
-
-                  A subscription cancelled at period end remains `ACTIVE` until expiry.
-
-                  '
-                enum:
-                - ACTIVE
-                - INACTIVE
-                - PENDING
-                - FAILED
-                example: ACTIVE
-              location:
-                allOf:
-                - type: object
-                  description: "GPS location. This field is **omitted** (not `null`)\
-                    \ when no GPS fix\nis available â\x80\x94 check for key presence\
-                    \ rather than null check.\n"
-                  properties:
-                    latitude:
-                      type: number
-                      format: float
-                      description: WGS-84 latitude in decimal degrees.
-                      example: 37.7749
-                    longitude:
-                      type: number
-                      format: float
-                      description: WGS-84 longitude in decimal degrees.
-                      example: -122.4194
-                    last_updated:
-                      type: integer
-                      format: int64
-                      description: Unix timestamp in milliseconds of the last GPS
-                        fix.
-                      example: 1709712000000
-                  required:
-                  - latitude
-                  - longitude
-                  - last_updated
-                  title: DeviceLocation
-                description: Omitted (not null) when no GPS fix is available.
-          title: DeviceDetail
+          $ref: '#/components/schemas/DeviceDetail'
         httpStatusCode:
           type: integer
           description: HTTP status code.
@@ -1466,69 +788,7 @@ paths:
           content:
             application/json:
               schema:
-                description: Paginated list of workspaces.
-                allOf:
-                - type: object
-                  description: Common envelope fields shared by all paginated collection
-                    responses.
-                  properties:
-                    total:
-                      type: integer
-                      description: Total number of records matching the query, ignoring
-                        pagination.
-                    offset:
-                      type: integer
-                      description: Number of records skipped (echoes the `offset`
-                        query parameter).
-                    limit:
-                      type: integer
-                      description: Page size applied (echoes the `limit` query parameter).
-                    httpStatusCode:
-                      type: integer
-                      description: HTTP status code.
-                    traceId:
-                      type: string
-                      description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                  required:
-                  - httpStatusCode
-                  - traceId
-                  title: PaginationMeta
-                - type: object
-                  properties:
-                    data:
-                      type: array
-                      items:
-                        type: object
-                        description: A workspace (mobility cloud site) visible to
-                          the authenticated user.
-                        properties:
-                          workspace_id:
-                            type: string
-                            format: uuid
-                            example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-                          workspace_name:
-                            type: string
-                            example: John's Cloud
-                          is_owner:
-                            type: boolean
-                            example: true
-                          status:
-                            type: string
-                            enum:
-                            - ACTIVE
-                            - PENDING
-                            - INACTIVE
-                            - DECLINED
-                            example: ACTIVE
-                        required:
-                        - workspace_id
-                        - workspace_name
-                        - is_owner
-                        - status
-                        title: WorkspaceSummary
-                  required:
-                  - data
-                title: WorkspaceListResponse
+                $ref: '#/components/schemas/WorkspaceListResponse'
               example:
                 data:
                 - workspace_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
@@ -1549,32 +809,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 400
@@ -1585,32 +820,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: unauthorized
                 httpStatusCode: 401
@@ -1627,32 +837,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: forbidden
                 httpStatusCode: 403
@@ -1663,32 +848,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: rate_limit
                 httpStatusCode: 429
@@ -1699,32 +859,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: server_error
                 httpStatusCode: 500
@@ -1749,110 +884,14 @@ paths:
       tags:
       - Workspaces
       parameters:
-      - name: workspaceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Workspace UUID. Obtain from API call: GET /v1/mobility/workspaces'
+      - $ref: '#/components/parameters/workspaceID'
       responses:
         '200':
           description: Admin list.
           content:
             application/json:
               schema:
-                description: Paginated list of workspace admins.
-                allOf:
-                - type: object
-                  description: Common envelope fields shared by all paginated collection
-                    responses.
-                  properties:
-                    total:
-                      type: integer
-                      description: Total number of records matching the query, ignoring
-                        pagination.
-                    offset:
-                      type: integer
-                      description: Number of records skipped (echoes the `offset`
-                        query parameter).
-                    limit:
-                      type: integer
-                      description: Page size applied (echoes the `limit` query parameter).
-                    httpStatusCode:
-                      type: integer
-                      description: HTTP status code.
-                    traceId:
-                      type: string
-                      description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                  required:
-                  - httpStatusCode
-                  - traceId
-                  title: PaginationMeta
-                - type: object
-                  properties:
-                    data:
-                      type: array
-                      items:
-                        type: object
-                        description: An admin of a workspace, with only mobility permissions
-                          exposed.
-                        properties:
-                          name:
-                            type: string
-                            example: John Doe
-                          email:
-                            type: string
-                            format: email
-                            example: john@example.com
-                          status:
-                            type: string
-                            enum:
-                            - ACTIVE
-                            - PENDING
-                            - INACTIVE
-                            - DECLINED
-                            example: ACTIVE
-                          is_owner:
-                            type: boolean
-                            example: true
-                          permissions:
-                            type: object
-                            nullable: true
-                            allOf:
-                            - type: object
-                              description: 'Permission levels for the admin. Only
-                                mobility permissions are exposed.
-
-                                The `umr` field is omitted if the admin has no role
-                                binding.
-
-                                '
-                              properties:
-                                umr:
-                                  type: string
-                                  description: "Mobile Routing permission level.\n\
-                                    - `ALL` â\x80\x94 can view and configure devices\
-                                    \ (admin)\n- `VIEW_ONLY` â\x80\x94 read-only access\
-                                    \ (viewer)\n- `NONE` â\x80\x94 no access\n"
-                                  enum:
-                                  - ALL
-                                  - VIEW_ONLY
-                                  - NONE
-                                  example: ALL
-                              title: AdminPermission
-                            description: Mobility permissions for the admin. `null`
-                              when the admin has no role bindings (e.g. pending invitation).
-                        required:
-                        - name
-                        - email
-                        - status
-                        - is_owner
-                        - permissions
-                        title: AdminSummary
-                  required:
-                  - data
-                title: AdminListResponse
+                $ref: '#/components/schemas/AdminListResponse'
               example:
                 data:
                 - name: Alice Owner
@@ -1882,32 +921,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 400
@@ -1918,32 +932,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: unauthorized
                 httpStatusCode: 401
@@ -1959,32 +948,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: forbidden
                 httpStatusCode: 403
@@ -1995,32 +959,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 404
@@ -2031,32 +970,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: rate_limit
                 httpStatusCode: 429
@@ -2079,160 +993,16 @@ paths:
       tags:
       - Devices
       parameters:
-      - name: workspaceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Workspace UUID. Obtain from API call: GET /v1/mobility/workspaces'
-      - name: limit
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 200
-          default: 200
-        description: Maximum records per page. Capped at 200.
-      - name: offset
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        description: Number of records to skip.
+      - $ref: '#/components/parameters/workspaceID'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Paginated device list.
           content:
             application/json:
               schema:
-                description: Paginated list of devices.
-                allOf:
-                - type: object
-                  description: Common envelope fields shared by all paginated collection
-                    responses.
-                  properties:
-                    total:
-                      type: integer
-                      description: Total number of records matching the query, ignoring
-                        pagination.
-                    offset:
-                      type: integer
-                      description: Number of records skipped (echoes the `offset`
-                        query parameter).
-                    limit:
-                      type: integer
-                      description: Page size applied (echoes the `limit` query parameter).
-                    httpStatusCode:
-                      type: integer
-                      description: HTTP status code.
-                    traceId:
-                      type: string
-                      description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                  required:
-                  - httpStatusCode
-                  - traceId
-                  title: PaginationMeta
-                - type: object
-                  properties:
-                    data:
-                      type: array
-                      items:
-                        type: object
-                        description: Lightweight device representation returned in
-                          the device list.
-                        properties:
-                          id:
-                            type: string
-                            format: uuid
-                            example: 550e8400-e29b-41d4-a716-446655440000
-                          name:
-                            type: string
-                            example: Office Router
-                          model:
-                            type: string
-                            description: "Hardware model name.\n- `UMR` â\x80\x94\
-                              \ UMR Flex EU/US\n- `UMR Industrial` â\x80\x94 UMR Industrial\
-                              \ EU/US\n- `UMR Ultra` â\x80\x94 UMR Ultra EU/US/ROW\n"
-                            enum:
-                            - UMR
-                            - UMR Industrial
-                            - UMR Ultra
-                            example: UMR
-                          state:
-                            type: string
-                            description: 'Current device state.
-
-
-                              | Value | Description |
-
-                              |-------|-------------|
-
-                              | `CONNECTED` | Online and communicating normally |
-
-                              | `DISCONNECTED` | Lost connection to the cloud |
-
-                              | `ADOPTING` | Adoption in progress |
-
-                              | `ADOPTING_TIMEOUT` | Adoption timed out |
-
-                              | `DOWNLOADING` | Downloading firmware update |
-
-                              | `UPGRADING` | Applying firmware update |
-
-                              | `RESTARTING` | Rebooting |
-
-                              | `FACTORY_RESET` | Performing factory reset |
-
-                              | `GETTING_READY` | Initialising after adoption |
-
-                              | `RESTORING` | Restoring from backup |
-
-                              | `NULL` | Record exists but adoption not started |
-
-                              | `DELETING` | Cloud-side deletion in progress |
-
-                              '
-                            enum:
-                            - CONNECTED
-                            - DISCONNECTED
-                            - ADOPTING
-                            - ADOPTING_TIMEOUT
-                            - DOWNLOADING
-                            - UPGRADING
-                            - RESTARTING
-                            - FACTORY_RESET
-                            - GETTING_READY
-                            - RESTORING
-                            - 'NULL'
-                            - DELETING
-                            example: CONNECTED
-                          firmware_version:
-                            type: string
-                            example: 3.1.14
-                          mac_address:
-                            type: string
-                            description: 'Primary MAC address in upper-case colon-separated
-                              format.
-
-                              Empty string when not yet initialised.
-
-                              '
-                            example: 00:1A:2B:3C:4D:5E
-                        required:
-                        - id
-                        - name
-                        - model
-                        - state
-                        - firmware_version
-                        - mac_address
-                        title: DeviceSummary
-                  required:
-                  - data
-                title: DeviceListResponse
+                $ref: '#/components/schemas/DeviceListResponse'
               example:
                 data:
                 - id: 550e8400-e29b-41d4-a716-446655440000
@@ -2257,32 +1027,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 400
@@ -2293,32 +1038,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: unauthorized
                 httpStatusCode: 401
@@ -2330,32 +1050,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: forbidden
                 httpStatusCode: 403
@@ -2366,32 +1061,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: rate_limit
                 httpStatusCode: 429
@@ -2402,32 +1072,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 500
@@ -2448,365 +1093,15 @@ paths:
       tags:
       - Devices
       parameters:
-      - name: workspaceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Workspace UUID. Obtain from API call: GET /v1/mobility/workspaces'
-      - name: deviceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Device UUID. Obtain from API call: GET /v1/mobility/workspaces/{workspaceID}/devices'
+      - $ref: '#/components/parameters/workspaceID'
+      - $ref: '#/components/parameters/deviceID'
       responses:
         '200':
           description: Full device detail.
           content:
             application/json:
               schema:
-                type: object
-                description: Single device detail response.
-                properties:
-                  data:
-                    allOf:
-                    - type: object
-                      description: Lightweight device representation returned in the
-                        device list.
-                      properties:
-                        id:
-                          type: string
-                          format: uuid
-                          example: 550e8400-e29b-41d4-a716-446655440000
-                        name:
-                          type: string
-                          example: Office Router
-                        model:
-                          type: string
-                          description: "Hardware model name.\n- `UMR` â\x80\x94 UMR\
-                            \ Flex EU/US\n- `UMR Industrial` â\x80\x94 UMR Industrial\
-                            \ EU/US\n- `UMR Ultra` â\x80\x94 UMR Ultra EU/US/ROW\n"
-                          enum:
-                          - UMR
-                          - UMR Industrial
-                          - UMR Ultra
-                          example: UMR
-                        state:
-                          type: string
-                          description: 'Current device state.
-
-
-                            | Value | Description |
-
-                            |-------|-------------|
-
-                            | `CONNECTED` | Online and communicating normally |
-
-                            | `DISCONNECTED` | Lost connection to the cloud |
-
-                            | `ADOPTING` | Adoption in progress |
-
-                            | `ADOPTING_TIMEOUT` | Adoption timed out |
-
-                            | `DOWNLOADING` | Downloading firmware update |
-
-                            | `UPGRADING` | Applying firmware update |
-
-                            | `RESTARTING` | Rebooting |
-
-                            | `FACTORY_RESET` | Performing factory reset |
-
-                            | `GETTING_READY` | Initialising after adoption |
-
-                            | `RESTORING` | Restoring from backup |
-
-                            | `NULL` | Record exists but adoption not started |
-
-                            | `DELETING` | Cloud-side deletion in progress |
-
-                            '
-                          enum:
-                          - CONNECTED
-                          - DISCONNECTED
-                          - ADOPTING
-                          - ADOPTING_TIMEOUT
-                          - DOWNLOADING
-                          - UPGRADING
-                          - RESTARTING
-                          - FACTORY_RESET
-                          - GETTING_READY
-                          - RESTORING
-                          - 'NULL'
-                          - DELETING
-                          example: CONNECTED
-                        firmware_version:
-                          type: string
-                          example: 3.1.14
-                        mac_address:
-                          type: string
-                          description: 'Primary MAC address in upper-case colon-separated
-                            format.
-
-                            Empty string when not yet initialised.
-
-                            '
-                          example: 00:1A:2B:3C:4D:5E
-                      required:
-                      - id
-                      - name
-                      - model
-                      - state
-                      - firmware_version
-                      - mac_address
-                      title: DeviceSummary
-                    - type: object
-                      description: Full device detail including WAN, cellular, WiFi,
-                        VPN, subscription, and GPS.
-                      properties:
-                        wan_source:
-                          type: string
-                          description: Active WAN interface. Empty when no WAN connected.
-                          enum:
-                          - LTE
-                          - WAN
-                          - WIFIWAN
-                          - ''
-                          example: LTE
-                        wan_ip:
-                          type: string
-                          description: Public WAN IP. Empty when not connected.
-                          example: 203.0.113.42
-                        enabled_wans:
-                          type: array
-                          description: Enabled WAN interfaces sorted by priority (index
-                            0 = highest).
-                          items:
-                            type: string
-                            enum:
-                            - LTE
-                            - WAN
-                            - WIFIWAN
-                          example:
-                          - LTE
-                          - WAN
-                        isp:
-                          type: string
-                          example: AT&T
-                        lte_signal_level:
-                          type: string
-                          description: 'LTE signal quality derived from RSSI (dBm).
-
-
-                            | Value | RSSI range | Description |
-
-                            |-------|-----------|-------------|
-
-                            | `NO_SIGNAL` | < -111 dBm | No usable signal |
-
-                            | `POOR` | -111 to -100 dBm | Weak signal |
-
-                            | `FAIR` | -99 to -89 dBm | Moderate signal |
-
-                            | `STRONG` | -88 dBm or better | Good signal |
-
-                            | `""` | N/A | RSSI not yet reported |
-
-                            '
-                          enum:
-                          - NO_SIGNAL
-                          - POOR
-                          - FAIR
-                          - STRONG
-                          - ''
-                          example: FAIR
-                        cellular_data_usage_bytes:
-                          type: integer
-                          format: int64
-                          description: Data consumed in the current billing cycle,
-                            in bytes.
-                          example: 524288000
-                        cellular_data_limit_bytes:
-                          type: integer
-                          format: int64
-                          description: 'Data cap in bytes for the current billing
-                            cycle.
-
-                            `-1` means unlimited. `0` is not a valid value.
-
-                            '
-                          example: 5368709120
-                        memory_usage_percent:
-                          type: integer
-                          minimum: 0
-                          maximum: 100
-                          example: 42
-                        uptime_seconds:
-                          type: integer
-                          format: int64
-                          description: Seconds since last boot. `0` when state is
-                            not `CONNECTED`.
-                          example: 86400
-                        client_count:
-                          type: integer
-                          example: 5
-                        host_address:
-                          type: string
-                          description: LAN gateway IP. Contains WAN IP in `WANBRIDGE`
-                            mode.
-                          example: 192.168.1.1
-                        poe_passthrough:
-                          type: boolean
-                          example: false
-                        device_mode:
-                          type: string
-                          description: "- `ROUTER` â\x80\x94 standard NAT router\n\
-                            - `WANBRIDGE` â\x80\x94 WAN bridge mode\n- `LTEPASS` â\x80\
-                            \x94 LTE passthrough\n"
-                          enum:
-                          - ROUTER
-                          - WANBRIDGE
-                          - LTEPASS
-                          example: ROUTER
-                        wifi_enabled:
-                          type: boolean
-                          example: true
-                        wifi_ssid:
-                          type: string
-                          example: UniFi-LTE
-                        tx_power_level:
-                          type: string
-                          description: Empty when Wireless record is not initialised.
-                          enum:
-                          - HIGH
-                          - MEDIUM
-                          - LOW
-                          - ''
-                          example: HIGH
-                        vpn_profile_name:
-                          type: string
-                          description: Empty when no VPN is configured.
-                          example: HQ-VPN
-                        vpn_status:
-                          type: string
-                          description: "- `CONNECTING` â\x80\x94 tunnel being established\n\
-                            - `CONNECTED` â\x80\x94 tunnel active\n- `DISCONNECTED`\
-                            \ â\x80\x94 configured but not connected\n- `FAILED` â\x80\
-                            \x94 connection failed\n- `\"\"` â\x80\x94 no VPN session\n"
-                          enum:
-                          - CONNECTING
-                          - CONNECTED
-                          - DISCONNECTED
-                          - FAILED
-                          - ''
-                          example: CONNECTED
-                        firewall_rule_names:
-                          type: array
-                          items:
-                            type: string
-                          example:
-                          - Block-IoT-Outbound
-                        routing_rule_names:
-                          type: array
-                          items:
-                            type: string
-                          example: []
-                        ddns_profile_names:
-                          type: array
-                          items:
-                            type: string
-                          example: []
-                        subscription_plan:
-                          type: string
-                          description: 'Active data plan. Empty when no subscription.
-
-
-                            | Value | Description |
-
-                            |-------|-------------|
-
-                            | `FREE_TRIAL` | Free trial |
-
-                            | `1GB` | Monthly 1 GB |
-
-                            | `5GB` | Monthly 5 GB |
-
-                            | `20GB` | Monthly 20 GB |
-
-                            | `2GB` | Daily 2 GB (QA/test) |
-
-                            | `CLOUD` | Cloud plan (daily/yearly/3-year) |
-
-                            | `""` | No subscription |
-
-                            '
-                          enum:
-                          - FREE_TRIAL
-                          - 1GB
-                          - 5GB
-                          - 20GB
-                          - 2GB
-                          - CLOUD
-                          - ''
-                          example: 5GB
-                        subscription_status:
-                          type: string
-                          description: 'Derived priority: FAILED > PENDING > ACTIVE
-                            > INACTIVE.
-
-                            A subscription cancelled at period end remains `ACTIVE`
-                            until expiry.
-
-                            '
-                          enum:
-                          - ACTIVE
-                          - INACTIVE
-                          - PENDING
-                          - FAILED
-                          example: ACTIVE
-                        location:
-                          allOf:
-                          - type: object
-                            description: "GPS location. This field is **omitted**\
-                              \ (not `null`) when no GPS fix\nis available â\x80\x94\
-                              \ check for key presence rather than null check.\n"
-                            properties:
-                              latitude:
-                                type: number
-                                format: float
-                                description: WGS-84 latitude in decimal degrees.
-                                example: 37.7749
-                              longitude:
-                                type: number
-                                format: float
-                                description: WGS-84 longitude in decimal degrees.
-                                example: -122.4194
-                              last_updated:
-                                type: integer
-                                format: int64
-                                description: Unix timestamp in milliseconds of the
-                                  last GPS fix.
-                                example: 1709712000000
-                            required:
-                            - latitude
-                            - longitude
-                            - last_updated
-                            title: DeviceLocation
-                          description: Omitted (not null) when no GPS fix is available.
-                    title: DeviceDetail
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - data
-                - httpStatusCode
-                - traceId
-                title: DeviceDetailResponse
+                $ref: '#/components/schemas/DeviceDetailResponse'
               example:
                 data:
                   id: 550e8400-e29b-41d4-a716-446655440000
@@ -2852,32 +1147,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: unauthorized
                 httpStatusCode: 401
@@ -2888,32 +1158,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: forbidden
                 httpStatusCode: 403
@@ -2932,32 +1177,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 404
@@ -2968,32 +1188,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: rate_limit
                 httpStatusCode: 429
@@ -3004,32 +1199,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 500
@@ -3050,36 +1220,14 @@ paths:
       tags:
       - Device Configuration
       parameters:
-      - name: workspaceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Workspace UUID. Obtain from API call: GET /v1/mobility/workspaces'
-      - name: deviceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Device UUID. Obtain from API call: GET /v1/mobility/workspaces/{workspaceID}/devices'
+      - $ref: '#/components/parameters/workspaceID'
+      - $ref: '#/components/parameters/deviceID'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  minLength: 1
-                  maxLength: 32
-                  description: New device name (1-32 characters).
-                  example: Branch Office Router
-              required:
-              - name
-              title: UpdateDeviceNameReq
+              $ref: '#/components/schemas/UpdateDeviceNameReq'
             example:
               name: Branch Office Router
       responses:
@@ -3090,32 +1238,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 400
@@ -3126,32 +1249,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: unauthorized
                 httpStatusCode: 401
@@ -3162,32 +1260,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: forbidden
                 httpStatusCode: 403
@@ -3206,32 +1279,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 404
@@ -3242,32 +1290,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: rate_limit
                 httpStatusCode: 429
@@ -3278,32 +1301,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 500
@@ -3327,131 +1325,17 @@ paths:
       tags:
       - Clients
       parameters:
-      - name: workspaceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Workspace UUID. Obtain from API call: GET /v1/mobility/workspaces'
-      - name: deviceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Device UUID. Obtain from API call: GET /v1/mobility/workspaces/{workspaceID}/devices'
-      - name: limit
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 200
-          default: 200
-        description: Maximum records per page. Capped at 200.
-      - name: offset
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        description: Number of records to skip.
+      - $ref: '#/components/parameters/workspaceID'
+      - $ref: '#/components/parameters/deviceID'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Paginated client list.
           content:
             application/json:
               schema:
-                description: Paginated list of device clients.
-                allOf:
-                - type: object
-                  description: Common envelope fields shared by all paginated collection
-                    responses.
-                  properties:
-                    total:
-                      type: integer
-                      description: Total number of records matching the query, ignoring
-                        pagination.
-                    offset:
-                      type: integer
-                      description: Number of records skipped (echoes the `offset`
-                        query parameter).
-                    limit:
-                      type: integer
-                      description: Page size applied (echoes the `limit` query parameter).
-                    httpStatusCode:
-                      type: integer
-                      description: HTTP status code.
-                    traceId:
-                      type: string
-                      description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                  required:
-                  - httpStatusCode
-                  - traceId
-                  title: PaginationMeta
-                - type: object
-                  properties:
-                    data:
-                      type: array
-                      items:
-                        type: object
-                        description: A client associated with a device.
-                        properties:
-                          mac:
-                            type: string
-                            description: MAC address in upper-case colon-separated
-                              format.
-                            example: AA:BB:CC:DD:EE:FF
-                          name:
-                            type: string
-                            example: John's iPhone
-                          type:
-                            type: string
-                            enum:
-                            - WIRED
-                            - WIRELESS
-                            example: WIRELESS
-                          connection_status:
-                            type: string
-                            description: "- `ONLINE` â\x80\x94 actively connected\n\
-                              - `OFFLINE` â\x80\x94 previously connected, no longer\
-                              \ seen\n- `BLOCKED` â\x80\x94 network access blocked;\
-                              \ `is_blocked` will be `true`\n"
-                            enum:
-                            - ONLINE
-                            - OFFLINE
-                            - BLOCKED
-                            example: ONLINE
-                          ip_address:
-                            type: string
-                            description: Empty when unknown.
-                            example: 192.168.1.100
-                          is_blocked:
-                            type: boolean
-                            example: false
-                          wifi_experience:
-                            type: integer
-                            minimum: 0
-                            maximum: 100
-                            nullable: true
-                            description: 'WiFi experience score (0-100). **Omitted**
-                              for wired clients.
-
-                              '
-                            example: 85
-                        required:
-                        - mac
-                        - name
-                        - type
-                        - connection_status
-                        - ip_address
-                        - is_blocked
-                        title: DeviceClient
-                  required:
-                  - data
-                title: DeviceClientListResponse
+                $ref: '#/components/schemas/DeviceClientListResponse'
               example:
                 data:
                 - mac: AA:BB:CC:DD:EE:FF
@@ -3477,32 +1361,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 400
@@ -3513,32 +1372,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: unauthorized
                 httpStatusCode: 401
@@ -3549,32 +1383,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: forbidden
                 httpStatusCode: 403
@@ -3593,32 +1402,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 404
@@ -3629,32 +1413,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: rate_limit
                 httpStatusCode: 429
@@ -3665,32 +1424,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 500
@@ -3700,65 +1434,28 @@ paths:
     put:
       operationId: updateDeviceNetwork
       summary: Update LAN / DHCP settings
-      description: "Partial update â\x80\x94 only provided fields are modified.\n\
-        WAN, IPv6, and InternetSource are not configurable.\n\n**Scope**: `write:mobility`\n\
-        \n**Permission**: workspace **Admin**\n"
+      description: 'Partial update — only provided fields are modified.
+
+        WAN, IPv6, and InternetSource are not configurable.
+
+
+        **Scope**: `write:mobility`
+
+
+        **Permission**: workspace **Admin**
+
+        '
       tags:
       - Device Configuration
       parameters:
-      - name: workspaceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Workspace UUID. Obtain from API call: GET /v1/mobility/workspaces'
-      - name: deviceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Device UUID. Obtain from API call: GET /v1/mobility/workspaces/{workspaceID}/devices'
+      - $ref: '#/components/parameters/workspaceID'
+      - $ref: '#/components/parameters/deviceID'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              description: "Partial update â\x80\x94 only provided fields are applied.\n\
-                WAN, IPv6, and InternetSource are not configurable via this endpoint.\n"
-              properties:
-                host_address:
-                  type: string
-                  format: ipv4
-                  nullable: true
-                  example: 192.168.10.1
-                dhcp_mode:
-                  type: string
-                  nullable: true
-                  enum:
-                  - dhcp
-                  - none
-                  description: '`dhcp` = enabled, `none` = disabled.'
-                  example: dhcp
-                dhcp_range_start:
-                  type: string
-                  format: ipv4
-                  nullable: true
-                  example: 192.168.10.100
-                dhcp_range_stop:
-                  type: string
-                  format: ipv4
-                  nullable: true
-                  example: 192.168.10.200
-                dhcp_lease_time:
-                  type: integer
-                  nullable: true
-                  minimum: 0
-                  description: Seconds. `0` = infinite.
-                  example: 86400
-              title: UpdateNetworkReq
+              $ref: '#/components/schemas/UpdateNetworkReq'
             examples:
               updateAll:
                 summary: Update gateway IP and DHCP range
@@ -3780,32 +1477,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 400
@@ -3816,32 +1488,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: unauthorized
                 httpStatusCode: 401
@@ -3852,32 +1499,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: forbidden
                 httpStatusCode: 403
@@ -3896,32 +1518,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 404
@@ -3932,32 +1529,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: rate_limit
                 httpStatusCode: 429
@@ -3968,32 +1540,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 500
@@ -4017,44 +1564,14 @@ paths:
       tags:
       - Device Configuration
       parameters:
-      - name: workspaceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Workspace UUID. Obtain from API call: GET /v1/mobility/workspaces'
-      - name: deviceID
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: 'Device UUID. Obtain from API call: GET /v1/mobility/workspaces/{workspaceID}/devices'
+      - $ref: '#/components/parameters/workspaceID'
+      - $ref: '#/components/parameters/deviceID'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              description: Both fields are required. Channel, TX power, and security
-                protocol are not configurable.
-              properties:
-                ssid:
-                  type: string
-                  minLength: 1
-                  maxLength: 32
-                  example: MyNetwork
-                password:
-                  type: string
-                  minLength: 8
-                  maxLength: 63
-                  description: WPA2-PSK password.
-                  example: securepass123
-              required:
-              - ssid
-              - password
-              title: UpdateWirelessReq
+              $ref: '#/components/schemas/UpdateWirelessReq'
             example:
               ssid: MyNetwork
               password: securepass123
@@ -4066,32 +1583,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 400
@@ -4102,32 +1594,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: unauthorized
                 httpStatusCode: 401
@@ -4138,32 +1605,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: forbidden
                 httpStatusCode: 403
@@ -4182,32 +1624,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 404
@@ -4218,32 +1635,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: rate_limit
                 httpStatusCode: 429
@@ -4254,32 +1646,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Standard error response for all error cases.
-                properties:
-                  code:
-                    type: string
-                    description: Machine-readable error code.
-                    enum:
-                    - unauthorized
-                    - forbidden
-                    - bad_request
-                    - rate_limit
-                    - upstream_error
-                    - server_error
-                  httpStatusCode:
-                    type: integer
-                    description: HTTP status code.
-                  message:
-                    type: string
-                    description: Human-readable error description.
-                  traceId:
-                    type: string
-                    description: Matches `X-Request-ID` if provided, otherwise auto-generated.
-                required:
-                - httpStatusCode
-                - traceId
-                title: ErrorResponse
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 code: upstream_error
                 httpStatusCode: 500
