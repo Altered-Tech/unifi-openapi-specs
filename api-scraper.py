@@ -3,8 +3,8 @@
 UniFi API spec fetcher.
 
 Downloads OpenAPI specs and Postman collections directly from developer.ui.com.
-Version discovery works by following the redirect from /{service} and parsing
-the versions list from the landing page RSC payload.
+Version discovery uses the /api/services/{service}/versions endpoint that
+backs the site's version picker.
 
 Output structure:
     {output_dir}/{service_id}/{version}/openapi.yaml
@@ -51,120 +51,27 @@ def make_session() -> requests.Session:
     return session
 
 
-def fetch_page(url: str, session: requests.Session) -> str:
-    resp = session.get(url, timeout=30)
-    resp.raise_for_status()
-    return resp.text
-
-
-# ---------------------------------------------------------------------------
-# RSC payload parsing (used for version list discovery only)
-# ---------------------------------------------------------------------------
-
-def parse_rsc_payload(html: str) -> str:
-    """Concatenate all Next.js __next_f push payloads into one string."""
-    pushes = re.findall(r'self\.__next_f\.push\(\[1,"(.*?)"\]\)', html, re.DOTALL)
-    combined = ""
-    for chunk in pushes:
-        try:
-            combined += bytes(chunk, "utf-8").decode("unicode_escape")
-        except Exception:
-            combined += chunk
-    return combined
-
-
-def extract_json_value(text: str, key: str) -> "dict | list | None":
-    """
-    Find the first occurrence of `"key":` in text and extract the JSON value.
-    Handles nested objects/arrays by tracking depth.
-    """
-    pattern = f'"{key}":'
-    idx = text.find(pattern)
-    if idx == -1:
-        return None
-
-    start = idx + len(pattern)
-    while start < len(text) and text[start] == " ":
-        start += 1
-    if start >= len(text):
-        return None
-
-    opener = text[start]
-    if opener not in ("{", "[", '"'):
-        end = start
-        while end < len(text) and text[end] not in (",", "}"):
-            end += 1
-        try:
-            return json.loads(text[start:end])
-        except Exception:
-            return None
-
-    depth = 0
-    in_string = False
-    escape_next = False
-    pos = start
-
-    while pos < len(text):
-        ch = text[pos]
-        if escape_next:
-            escape_next = False
-        elif ch == "\\":
-            escape_next = True
-        elif ch == '"':
-            if not in_string:
-                in_string = True
-            else:
-                in_string = False
-        elif not in_string:
-            if ch in ("{", "["):
-                depth += 1
-            elif ch in ("}", "]"):
-                depth -= 1
-                if depth == 0:
-                    break
-        pos += 1
-
-    raw = text[start: pos + 1]
-    try:
-        return json.loads(raw)
-    except json.JSONDecodeError:
-        return None
-
-
 # ---------------------------------------------------------------------------
 # Version discovery
 # ---------------------------------------------------------------------------
 
 def discover_versions(service_id: str, session: requests.Session) -> list:
     """
-    Follow the redirect from /{service_id} to find the current version page,
-    then parse the versions array from the RSC payload.
-    Returns a list of version strings.
+    Query the versions endpoint the developer.ui.com version picker uses.
+    Returns a list of version strings, newest first.
     """
-    resp = session.get(f"{BASE_URL}/{service_id}", allow_redirects=False, timeout=15)
-    if resp.status_code not in (301, 302, 307, 308):
-        print(f"  [{service_id}] No redirect (status {resp.status_code}), skipping", file=sys.stderr)
-        return []
-
-    location = resp.headers.get("location", "").lstrip("/")
-    parts = location.split("/")
-    if len(parts) < 3:
-        print(f"  [{service_id}] Unexpected redirect location: {location}", file=sys.stderr)
-        return []
-
-    current_version = parts[1]
-    seed_url = f"{BASE_URL}/{location}"
-
+    url = f"{BASE_URL}/api/services/{service_id}/versions"
     try:
-        html = fetch_page(seed_url, session)
-        payload = parse_rsc_payload(html)
-        raw_versions = extract_json_value(payload, "versions")
-        if raw_versions and isinstance(raw_versions, list):
-            return [v["version"] for v in raw_versions if "version" in v]
+        resp = session.get(url, timeout=15)
+        resp.raise_for_status()
+        versions = [v["version"] for v in resp.json() if "version" in v]
     except Exception as e:
         print(f"  [{service_id}] Failed to fetch versions list: {e}", file=sys.stderr)
-
-    return [current_version]
+        return []
+    if not versions:
+        # Unknown services return 200 with an empty list rather than 404.
+        print(f"  [{service_id}] No versions found (unknown service?)", file=sys.stderr)
+    return versions
 
 
 def discover_all_versions(service_ids: list, session: requests.Session) -> list:
@@ -413,6 +320,9 @@ def main():
 
     session = make_session()
     combos = discover_all_versions(service_ids, session)
+    if not combos:
+        # Fail loudly so CI doesn't report "up to date" when discovery is broken.
+        sys.exit("Error: no versions discovered for any service.")
 
     if args.discover:
         print(json.dumps(combos, indent=2))
