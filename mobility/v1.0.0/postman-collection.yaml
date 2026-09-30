@@ -1,5 +1,5 @@
 item:
-- id: 4a6a8005-b6c2-442b-9744-c45a33e639dc
+- id: ae4acf7b-9edc-4e73-b133-6e4eb6e3a7c4
   name: Workspaces
   description:
     content: 'Workspace listing and admin management
@@ -9,7 +9,7 @@ item:
       '
     type: text/plain
   item:
-  - id: 35f527af-ba81-450a-9615-1a53cdded797
+  - id: 57bea03a-44b7-47ae-a8e4-83b59715292b
     name: List workspaces
     request:
       name: List workspaces
@@ -38,7 +38,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 041b5fad-4415-4cf3-8385-1c2887399532
+    - id: 5343eb11-401b-40c4-8ba0-d99e3aa017aa
       name: Workspace list.
       originalRequest:
         url:
@@ -74,7 +74,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 2e0f741f-2b84-47a6-bc0b-fc662278a136
+    - id: 8e522c44-484c-4a10-bc7a-b6bc69e7944c
       name: Invalid request (e.g. malformed user token).
       originalRequest:
         url:
@@ -106,7 +106,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: a7dc3e0b-7b86-4fc0-a915-c35025c1012e
+    - id: 15a4f460-fb3b-4975-88f9-0447013f961c
       name: Missing or invalid API key.
       originalRequest:
         url:
@@ -138,7 +138,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: c40236bb-a2f6-4b2e-a48c-aafbb4aaa8e7
+    - id: 59c1dd6b-7101-4007-917c-aa210159592d
       name: 'API key lacks required scope.
 
         - Key has no `mobility` app scope
@@ -176,7 +176,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: eef1ea12-7484-4a37-902f-e00709d287a8
+    - id: 3d9b85db-d547-4c44-a32d-1a69bea9a633
       name: Rate limit exceeded.
       originalRequest:
         url:
@@ -208,7 +208,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: dea1975f-e99f-464d-a6c1-ab40d184fb32
+    - id: d44bdf74-516a-43fa-9cde-b2a76817b69e
       name: Internal server error.
       originalRequest:
         url:
@@ -243,7 +243,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 4a40e4be-d65d-460e-b9b3-10d37c4d0aa1
+  - id: e0268261-69af-4ff6-96ae-41cf01f6288d
     name: List workspace admins
     request:
       name: List workspace admins
@@ -283,7 +283,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: c2fdeb1f-4fb8-417b-b65a-9dc38879754a
+    - id: 52a09d5a-efc6-4600-a791-32244ea8bead
       name: Admin list.
       originalRequest:
         url:
@@ -330,7 +330,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: eead5786-b3d3-4f06-8b80-e0ef157ef904
+    - id: 708da880-c13b-4689-b2da-2afcbaefec4e
       name: Invalid request (e.g. malformed workspace ID).
       originalRequest:
         url:
@@ -369,7 +369,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 26fa3cd2-9887-414c-b3dc-e2c3b4a63f62
+    - id: b88e0b35-ed72-4c4f-b9b3-9ea989ee1356
       name: Missing or invalid API key.
       originalRequest:
         url:
@@ -408,7 +408,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: e0a114d1-fc7a-4a77-89cd-93e6ead47e83
+    - id: 47e6de84-b77b-4fad-8546-10ca8c4d2d4b
       name: 'API key lacks required scope, or the caller has no active membership
 
         in the specified workspace.
@@ -451,7 +451,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: e5e85aad-8ed6-4ecf-8459-4593ade15825
+    - id: b6be4884-76de-4119-8938-3e86d3162e15
       name: Workspace not found or not a standard workspace type.
       originalRequest:
         url:
@@ -490,7 +490,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 0fdc2ff5-f848-4be2-8a77-afe750edd7da
+    - id: edea37f3-7dba-455e-a991-3ddfbe871b54
       name: Rate limit exceeded.
       originalRequest:
         url:
@@ -533,7 +533,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 5d81b950-b82f-4382-8695-739d005a59ef
+- id: 62b6c7e9-84d3-476e-8437-adc71a77bd1e
   name: Devices
   description:
     content: 'Device listing and detail
@@ -543,7 +543,7 @@ item:
       '
     type: text/plain
   item:
-  - id: f90cdcd6-127c-4fa4-8a24-8ec5668f0bd2
+  - id: 57b91328-8940-4fd3-855a-67991a10687b
     name: List devices
     request:
       name: List devices
@@ -589,7 +589,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: f1b948cd-0098-4767-b95f-df4c4ad30f29
+    - id: 3f555d79-75bc-48b2-89a9-251e88f0fa28
       name: Paginated device list.
       originalRequest:
         url:
@@ -638,7 +638,7 @@ item:
         traceId\": \"7f3a1c2b-d4e5-4f6a-8b9c-0d1e2f3a4b5c\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: be33ab09-bfb5-48d3-99c5-3f86b442fda0
+    - id: 8f4a6f64-2350-4609-ae09-53eb5e01d852
       name: Invalid query parameters.
       originalRequest:
         url:
@@ -681,7 +681,7 @@ item:
         7f3a1c2b-d4e5-4f6a-8b9c-0d1e2f3a4b5c\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: b8532875-b94f-4408-8602-8151829bbceb
+    - id: dfc17323-8829-43c4-b691-a7d095eb921a
       name: Missing or invalid API key.
       originalRequest:
         url:
@@ -724,7 +724,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 4fd24834-863d-4650-9b27-a3eb517c9146
+    - id: c516980c-63ba-4146-bdde-9380a230fa95
       name: Key lacks required scope, or caller lacks Viewer permission on the workspace.
       originalRequest:
         url:
@@ -767,7 +767,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: bed60064-9157-4815-81e9-c39d3a946b36
+    - id: 3cc2bbc4-5471-4a70-b9b7-af7178673cd0
       name: Rate limit exceeded.
       originalRequest:
         url:
@@ -810,7 +810,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: f4d0274e-3887-48a2-b6ce-599b82f345ac
+    - id: ece60590-8bf1-422f-a575-47dbb450915d
       name: Internal server error.
       originalRequest:
         url:
@@ -856,7 +856,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 5828db2d-649d-431a-a574-957dea2cfdaa
+  - id: 634e5d50-99d3-40a5-92c3-5a12168996d7
     name: Get device detail
     request:
       name: Get device detail
@@ -898,7 +898,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 5033959f-ee9a-499f-a01a-3884e3e5cb10
+    - id: 43153a28-3179-4a59-96e9-c18cd417ca11
       name: Full device detail.
       originalRequest:
         url:
@@ -958,7 +958,7 @@ item:
         : 200,\n  \"traceId\": \"7f3a1c2b-d4e5-4f6a-8b9c-0d1e2f3a4b5c\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 7f2cc4a0-c145-463a-9b3d-8675b3e6c407
+    - id: 04835691-654b-4cca-a6fd-d3baeaa4ec31
       name: Missing or invalid API key.
       originalRequest:
         url:
@@ -1003,7 +1003,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 06d09dd6-bbb2-43f5-b44a-601da27dbee6
+    - id: 9dd51560-8c28-4e2b-abf8-d68cd5ef0d09
       name: Key lacks required scope, or caller lacks Viewer permission.
       originalRequest:
         url:
@@ -1048,7 +1048,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 63cc5047-267a-4104-8c26-2d87af89afbe
+    - id: 5b698d16-4bb1-41a5-ab3c-5be386c087c3
       name: 'Device not found. Two scenarios return the same message
 
         (to avoid leaking device IDs):
@@ -1101,7 +1101,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 872dadb4-fb58-4301-b97c-b2a1278295d4
+    - id: f73c840f-aadc-413f-ab1c-c2666706bc08
       name: Rate limit exceeded.
       originalRequest:
         url:
@@ -1146,7 +1146,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 8409acbd-2c58-4978-b207-3c72b45cebd6
+    - id: 58928f49-6e02-4751-b69c-4de6420e825c
       name: Internal server error.
       originalRequest:
         url:
@@ -1195,7 +1195,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 5d32ff0a-e92d-499d-bd2f-0ae472d3634c
+- id: 8b754988-8029-4697-ba7b-623b4cbd165a
   name: Clients
   description:
     content: 'Clients connected to a device
@@ -1203,7 +1203,7 @@ item:
       '
     type: text/plain
   item:
-  - id: d82bfe38-6b8a-4dab-939a-d7c235e27414
+  - id: e1bb31a5-6dae-4a3a-9427-4c813ca2e3ee
     name: List device clients
     request:
       name: List device clients
@@ -1257,7 +1257,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 7199214a-729b-4d9d-9962-37873422f676
+    - id: b8329022-0359-44f9-864b-d4d6e396fabe
       name: Paginated client list.
       originalRequest:
         url:
@@ -1313,7 +1313,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: da1f0208-8abf-4d51-b927-85712b565ba1
+    - id: d822f865-557f-4f4a-bace-e3b618b1354e
       name: Invalid query parameters or malformed device ID.
       originalRequest:
         url:
@@ -1363,7 +1363,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: b7a969ad-f194-4a8e-b327-00338f809532
+    - id: 46c3bdc0-5196-4fb1-8624-49edbc9628a5
       name: Missing or invalid API key.
       originalRequest:
         url:
@@ -1413,7 +1413,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: e979c81c-3d90-4d6c-9f4b-35ee205f4922
+    - id: 3e0fa91c-4f7d-44e3-86d2-ab994a748d7c
       name: Key lacks required scope, or caller lacks Viewer permission.
       originalRequest:
         url:
@@ -1463,7 +1463,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 1c592aa3-bf17-4989-966d-2c001c6cd0ed
+    - id: 4355e836-60fe-456d-afec-84433e88b6c9
       name: 'Device not found. Two scenarios return the same message
 
         (to avoid leaking device IDs):
@@ -1521,7 +1521,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 94484feb-1bc9-4e6b-b63c-789ada5cec2e
+    - id: 1f155374-88bd-405d-bb5e-db1bef3918e6
       name: Rate limit exceeded.
       originalRequest:
         url:
@@ -1571,7 +1571,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 27c852a5-129c-4592-a3d9-25b50a268332
+    - id: b54de3ca-7e35-4669-b42a-5b543d34a43f
       name: Internal server error.
       originalRequest:
         url:
@@ -1625,7 +1625,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 32cad82e-05a4-4f6c-a87f-d34f9727f4a1
+- id: f6cbb1fd-e224-4f5d-908c-da078403137e
   name: Device Configuration
   description:
     content: 'Write operations for device settings
@@ -1636,7 +1636,7 @@ item:
       '
     type: text/plain
   item:
-  - id: fdc1a905-031c-4a34-88ab-7542140a2a60
+  - id: 3c74a69c-e4f7-4c9b-b7db-9e424160ab2c
     name: Update device name
     request:
       name: Update device name
@@ -1687,7 +1687,7 @@ item:
           raw:
             language: json
     response:
-    - id: d132d77d-3306-4662-b3ea-6ba6ade5b81a
+    - id: 1c455511-3620-4146-9150-2719331c6bc2
       name: Name updated successfully. No response body.
       originalRequest:
         url:
@@ -1733,7 +1733,7 @@ item:
       body: ''
       cookie: []
       _postman_previewlanguage: text
-    - id: 9584fab7-1fd0-4953-85b7-2ef96729058b
+    - id: 241616ad-774e-4412-b61f-4dd8a9dddfd0
       name: Validation error.
       originalRequest:
         url:
@@ -1783,7 +1783,7 @@ item:
         7f3a1c2b-d4e5-4f6a-8b9c-0d1e2f3a4b5c\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: ed12ca4f-10ef-43df-9c3e-c77be3b146b3
+    - id: 8011ac3e-d57e-4f14-a857-a70dbd8d5d64
       name: Missing or invalid API key.
       originalRequest:
         url:
@@ -1833,7 +1833,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 04757c32-e7c7-4bd6-be5c-737f5f02bd09
+    - id: 1d545cb8-5508-44d1-89f8-0ba616109878
       name: Key lacks `write:mobility` scope, or caller lacks Admin permission.
       originalRequest:
         url:
@@ -1883,7 +1883,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 7351509c-44f9-4569-9ffd-be2c35268a85
+    - id: 5410d22f-cb34-41d5-83a6-183bac713d2a
       name: 'Device not found. Two scenarios return the same message
 
         (to avoid leaking device IDs):
@@ -1941,7 +1941,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 80e32295-4455-47bd-879e-b627ff9cc38c
+    - id: 9399c383-a9f6-4ed7-898d-cd914ff5ca92
       name: Rate limit exceeded.
       originalRequest:
         url:
@@ -1991,7 +1991,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 7c652969-4e25-4fc5-ab4c-9e1c15aca853
+    - id: 837960cd-7675-46d9-aceb-e268f9522980
       name: Internal server error.
       originalRequest:
         url:
@@ -2044,7 +2044,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: af2a6193-5575-4353-90f8-9e4d73b3161a
+  - id: f6a05299-afc8-4564-9ef3-a7908574b8d9
     name: Update LAN / DHCP settings
     request:
       name: Update LAN / DHCP settings
@@ -2100,7 +2100,7 @@ item:
           raw:
             language: json
     response:
-    - id: a2f64f8d-8c7a-4704-b206-b41197e5bb03
+    - id: 643da5c6-39cd-42e1-9060-f0352e38f542
       name: Network settings updated successfully. No response body.
       originalRequest:
         url:
@@ -2149,7 +2149,7 @@ item:
       body: ''
       cookie: []
       _postman_previewlanguage: text
-    - id: 0d790061-bdea-4810-9a13-bbd99f08520e
+    - id: 4858d27f-cba3-472b-91b6-3c00f6a8f565
       name: Validation error.
       originalRequest:
         url:
@@ -2202,7 +2202,7 @@ item:
         7f3a1c2b-d4e5-4f6a-8b9c-0d1e2f3a4b5c\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 5a56ddc9-5fd9-4343-93d5-bfc30edc5e6a
+    - id: 7c6dac16-ccdf-4c59-8739-19ce782b5bc4
       name: Missing or invalid API key.
       originalRequest:
         url:
@@ -2255,7 +2255,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 0d88ac37-c079-431d-9567-cc87126948dc
+    - id: cc40a53e-8470-4e85-87d4-b556be625d02
       name: Key lacks `write:mobility` scope, or caller lacks Admin permission.
       originalRequest:
         url:
@@ -2308,7 +2308,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 7bad8500-6fb0-4d51-b70a-0dacce1c3e6c
+    - id: 0a16d792-8f15-4d5c-8004-fcd9f01aaf23
       name: 'Device not found. Two scenarios return the same message
 
         (to avoid leaking device IDs):
@@ -2369,7 +2369,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: fcab6db9-d345-4c28-a0c3-425d6db09e09
+    - id: e9783c9f-e0ce-4a16-92ce-3d4edfbcaf9b
       name: Rate limit exceeded.
       originalRequest:
         url:
@@ -2422,7 +2422,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: deaa714e-44cd-4101-9667-d3704ab49111
+    - id: 1fd7f98e-1bda-4fc1-9961-c2070996aab9
       name: Internal server error.
       originalRequest:
         url:
@@ -2478,7 +2478,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 17824fa4-74d1-4249-81b8-644d6de13f47
+  - id: 7a745569-488a-4d00-92dc-b91ffc542468
     name: Update WiFi settings
     request:
       name: Update WiFi settings
@@ -2532,7 +2532,7 @@ item:
           raw:
             language: json
     response:
-    - id: d4fd7e55-fe4c-4802-bf8c-38f6a3cf35fc
+    - id: 10193dcb-f9f3-4e5e-9ac3-b9625dc88ff5
       name: WiFi settings updated successfully. No response body.
       originalRequest:
         url:
@@ -2580,7 +2580,7 @@ item:
       body: ''
       cookie: []
       _postman_previewlanguage: text
-    - id: 8f131719-8a88-4c9d-8873-f0db1216b917
+    - id: da67b51a-b2da-409c-843f-b3ab45a51a81
       name: Validation error.
       originalRequest:
         url:
@@ -2632,7 +2632,7 @@ item:
         : \"7f3a1c2b-d4e5-4f6a-8b9c-0d1e2f3a4b5c\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 36d147e2-f2d5-4ef1-a2b7-9251d18ec8f4
+    - id: 36b4061e-d2bd-4c28-9ccc-abd4eed205ea
       name: Missing or invalid API key.
       originalRequest:
         url:
@@ -2684,7 +2684,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: af5931e6-b0af-4c5b-9e81-2c7d52a1448a
+    - id: 79459348-52a2-4fe4-b44f-d720fa862e95
       name: Key lacks `write:mobility` scope, or caller lacks Admin permission.
       originalRequest:
         url:
@@ -2736,7 +2736,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: cdb4209f-7366-4710-a79a-03a07c642d09
+    - id: 5e29bb4e-ee88-4308-8cc7-f6bc6c27a612
       name: 'Device not found. Two scenarios return the same message
 
         (to avoid leaking device IDs):
@@ -2796,7 +2796,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 17323f72-35c5-4005-8733-449187d6f5aa
+    - id: 6df2b861-4118-466b-925e-66464b0a689b
       name: Rate limit exceeded.
       originalRequest:
         url:
@@ -2848,7 +2848,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 8d9300ec-c27c-4e28-b88f-37f7703859ef
+    - id: b072520f-031d-42c1-9975-6fc8fcc138a7
       name: Internal server error.
       originalRequest:
         url:
@@ -2919,7 +2919,7 @@ auth:
   - key: in
     value: header
 info:
-  _postman_id: e4d2a30b-f673-400f-891a-5a180af63a48
+  _postman_id: f4950423-ad76-407e-8541-8390106e2927
   name: UniFi Mobility API
   schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
   description:

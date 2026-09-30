@@ -1,5 +1,5 @@
 item:
-- id: a807778c-758d-46e5-939e-ec7b5c80e2b0
+- id: c5c30f8c-c881-4f6c-bebb-bc6f7ddc9f16
   name: Getting Started
   description:
     content: '### Introduction
@@ -25,7 +25,7 @@ item:
     type: text/plain
   item: []
   event: []
-- id: ba8b327f-6c5f-4292-93cc-eaa56e5e58ae
+- id: 1c6b251a-a8d6-4acc-a213-760905f0ee61
   name: Filtering
   description:
     content: 'Some `GET` and `DELETE` endpoints support filtering using the `filter`
@@ -165,20 +165,20 @@ item:
     type: text/plain
   item: []
   event: []
-- id: f83a3006-3d78-4973-bc2c-9564dce56af0
+- id: 572cfddd-79ca-4081-9447-f863ff7a8bbc
   name: Errors
   description:
     content: 'All endpoints use the same generic error message format:'
     type: text/plain
   item: []
   event: []
-- id: c4ae7963-dd34-4fc3-be33-7aeafcca00eb
+- id: c0d9e4ca-95c4-49ae-bade-914ab1ba84fe
   name: About Application
   description:
     content: ''
     type: text/plain
   item:
-  - id: 1105e4d6-a76f-4051-9bca-cc20a88633d1
+  - id: 4384723a-bb73-4ae9-810e-0c968694f80a
     name: Get Application Info
     request:
       name: Get Application Info
@@ -203,7 +203,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 6ac8d861-6a83-46e8-8d88-6599def0640f
+    - id: 5a6f5386-9364-40aa-b9f3-eb4fdba65617
       name: OK
       originalRequest:
         url:
@@ -235,13 +235,13 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 2d04f23a-604f-4cf8-8596-6d352f9d972e
+- id: 03746098-d763-427b-aeaa-fe2abd30cac6
   name: Sites
   description:
     content: ''
     type: text/plain
   item:
-  - id: d1ad5213-c42b-4d6a-b275-47ce3990869c
+  - id: 19badc6f-8c2a-4dd8-bc82-f7b92c7411de
     name: List Local Sites
     request:
       name: List Local Sites
@@ -296,7 +296,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 53a773ab-cc17-45a1-94e0-bb4d7ec085c7
+    - id: 55d3f409-57a7-4ff8-9e71-750190266ae4
       name: OK
       originalRequest:
         url:
@@ -327,9 +327,9 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"556e3dbb-e9d5-92ae-d35c-e3a3ebc20ff4\"\
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"4c2c7498-8ab2-c4fd-8406-fa5ed6164210\"\
         ,\n      \"internalReference\": \"string\",\n      \"name\": \"string\"\n\
-        \    },\n    {\n      \"id\": \"b0e086c8-b564-6274-de1d-5e862e038370\",\n\
+        \    },\n    {\n      \"id\": \"855b7a93-1c61-e2a8-f312-f3f01c89520f\",\n\
         \      \"internalReference\": \"string\",\n      \"name\": \"string\"\n  \
         \  }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1000\n}"
       cookie: []
@@ -338,13 +338,13 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 5584aebf-aae1-444a-b23d-ec8da5a87b23
+- id: 2df872ea-f6b4-44e7-bd23-c32e66be3107
   name: UniFi Devices
   description:
     content: ''
     type: text/plain
   item:
-  - id: c5662262-d9e0-4de0-97fc-93ec0b57edd2
+  - id: ea1a415d-d645-473d-80f4-33bb1cbc47cd
     name: Execute Port Action
     request:
       name: Execute Port Action
@@ -398,7 +398,7 @@ item:
           raw:
             language: json
     response:
-    - id: 0ad5a27a-74c9-4fad-bb55-161569e7dbf6
+    - id: 636984a9-246d-44b6-9b70-9bf89b3e0564
       name: OK
       originalRequest:
         url:
@@ -453,7 +453,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 9952de11-77a0-4bc0-84af-13761ecd6125
+  - id: 3a00ad50-aded-46b8-baf5-59ea14ec9aeb
     name: Execute Device Action
     request:
       name: Execute Device Action
@@ -499,7 +499,7 @@ item:
           raw:
             language: json
     response:
-    - id: 273a9ac6-bb59-416d-b652-6d510024c4bc
+    - id: 3cb77cce-6dac-4710-9f75-eb97d0e00c3a
       name: OK
       originalRequest:
         url:
@@ -546,7 +546,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: bca00d92-332c-4543-8178-ff02ee09b7aa
+  - id: e704e8af-037b-4f65-8ac1-36fd44f3d247
     name: List Devices
     request:
       name: List Devices
@@ -585,7 +585,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 446f9b7a-115b-4eac-a570-47cec392d8f6
+    - id: fa759574-5201-4e12-adc8-7d03d7f1fc88
       name: OK
       originalRequest:
         url:
@@ -622,24 +622,23 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"features\": [\n  \
-        \      \"accessPoint\",\n        \"switching\"\n      ],\n      \"id\": \"\
-        e2868ed2-999c-dc81-db7b-443295e995a6\",\n      \"interfaces\": [\n       \
-        \ \"radios\",\n        \"ports\"\n      ],\n      \"ipAddress\": \"192.168.1.55\"\
-        ,\n      \"macAddress\": \"94:2a:6f:26:c6:ca\",\n      \"model\": \"UHDIW\"\
-        ,\n      \"name\": \"IW HD\",\n      \"state\": \"ADOPTING\"\n    },\n   \
-        \ {\n      \"features\": [\n        \"switching\",\n        \"gateway\"\n\
-        \      ],\n      \"id\": \"3c61e1ba-e98c-5942-3655-48de155237b5\",\n     \
-        \ \"interfaces\": [\n        \"ports\",\n        \"radios\"\n      ],\n  \
-        \    \"ipAddress\": \"192.168.1.55\",\n      \"macAddress\": \"94:2a:6f:26:c6:ca\"\
+        \      \"gateway\",\n        \"accessPoint\"\n      ],\n      \"id\": \"88ed001c-c282-f0e9-1fe9-a137012b5f13\"\
+        ,\n      \"interfaces\": [\n        \"radios\",\n        \"ports\"\n     \
+        \ ],\n      \"ipAddress\": \"192.168.1.55\",\n      \"macAddress\": \"94:2a:6f:26:c6:ca\"\
         ,\n      \"model\": \"UHDIW\",\n      \"name\": \"IW HD\",\n      \"state\"\
-        : \"ONLINE\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\"\
+        : \"ADOPTING\"\n    },\n    {\n      \"features\": [\n        \"switching\"\
+        ,\n        \"accessPoint\"\n      ],\n      \"id\": \"d509e56c-2d47-2257-8258-a6d3bce23b76\"\
+        ,\n      \"interfaces\": [\n        \"radios\",\n        \"ports\"\n     \
+        \ ],\n      \"ipAddress\": \"192.168.1.55\",\n      \"macAddress\": \"94:2a:6f:26:c6:ca\"\
+        ,\n      \"model\": \"UHDIW\",\n      \"name\": \"IW HD\",\n      \"state\"\
+        : \"DELETING\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\"\
         : 1000\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: f7b1fb9f-8836-4c27-a135-8fcd35c676d1
+  - id: add84b54-a0de-4e01-8ecb-d1c99b065662
     name: Get Device Details
     request:
       name: Get Device Details
@@ -679,7 +678,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: c5f4e44d-34cb-4b3c-b6f8-34504ccedc70
+    - id: 48de1191-2ae4-4345-91c5-db6e19012831
       name: OK
       originalRequest:
         url:
@@ -719,32 +718,32 @@ item:
         value: application/json
       body: "{\n  \"configurationId\": \"7596498d2f367dc2\",\n  \"features\": {\n\
         \    \"switching\": {},\n    \"accessPoint\": {}\n  },\n  \"firmwareUpdatable\"\
-        : false,\n  \"id\": \"7edb9777-9bf9-c129-6c59-f474e29ba290\",\n  \"interfaces\"\
+        : true,\n  \"id\": \"831bb0a1-bf34-5217-b879-78ec0c9a86bb\",\n  \"interfaces\"\
         : {\n    \"ports\": [\n      {\n        \"connector\": \"RJ45\",\n       \
         \ \"idx\": 1,\n        \"maxSpeedMbps\": 10000,\n        \"state\": \"DOWN\"\
         ,\n        \"speedMbps\": 1000,\n        \"poe\": {\n          \"enabled\"\
         : true,\n          \"standard\": \"802.3bt\",\n          \"state\": \"UNKNOWN\"\
-        ,\n          \"type\": 2\n        }\n      },\n      {\n        \"connector\"\
-        : \"SFP\",\n        \"idx\": 1,\n        \"maxSpeedMbps\": 10000,\n      \
-        \  \"state\": \"UNKNOWN\",\n        \"speedMbps\": 1000,\n        \"poe\"\
+        ,\n          \"type\": 4\n        }\n      },\n      {\n        \"connector\"\
+        : \"SFP28\",\n        \"idx\": 1,\n        \"maxSpeedMbps\": 10000,\n    \
+        \    \"state\": \"UNKNOWN\",\n        \"speedMbps\": 1000,\n        \"poe\"\
         : {\n          \"enabled\": true,\n          \"standard\": \"802.3bt\",\n\
-        \          \"state\": \"DOWN\",\n          \"type\": 2\n        }\n      }\n\
-        \    ],\n    \"radios\": [\n      {\n        \"channelWidthMHz\": 40,\n  \
-        \      \"frequencyGHz\": \"2.4\",\n        \"wlanStandard\": \"802.11b\",\n\
-        \        \"channel\": 36\n      },\n      {\n        \"channelWidthMHz\":\
-        \ 40,\n        \"frequencyGHz\": \"5\",\n        \"wlanStandard\": \"802.11b\"\
+        \          \"state\": \"UNKNOWN\",\n          \"type\": 2\n        }\n   \
+        \   }\n    ],\n    \"radios\": [\n      {\n        \"channelWidthMHz\": 40,\n\
+        \        \"frequencyGHz\": \"5\",\n        \"wlanStandard\": \"802.11ax\"\
+        ,\n        \"channel\": 36\n      },\n      {\n        \"channelWidthMHz\"\
+        : 40,\n        \"frequencyGHz\": \"5\",\n        \"wlanStandard\": \"802.11a\"\
         ,\n        \"channel\": 36\n      }\n    ]\n  },\n  \"ipAddress\": \"192.168.1.55\"\
         ,\n  \"macAddress\": \"94:2a:6f:26:c6:ca\",\n  \"model\": \"UHDIW\",\n  \"\
-        name\": \"IW HD\",\n  \"state\": \"ISOLATED\",\n  \"supported\": false,\n\
-        \  \"firmwareVersion\": \"6.6.55\",\n  \"adoptedAt\": \"2020-07-11T23:10:53.734Z\"\
-        ,\n  \"provisionedAt\": \"1969-01-27T19:53:28.304Z\",\n  \"uplink\": {\n \
-        \   \"deviceId\": \"23dd252a-1fd2-26b4-dbf4-e286673ebb8c\"\n  }\n}"
+        name\": \"IW HD\",\n  \"state\": \"ONLINE\",\n  \"supported\": false,\n  \"\
+        firmwareVersion\": \"6.6.55\",\n  \"adoptedAt\": \"2024-12-06T09:32:57.179Z\"\
+        ,\n  \"provisionedAt\": \"1991-11-29T03:44:54.497Z\",\n  \"uplink\": {\n \
+        \   \"deviceId\": \"31042ec3-88df-1ab9-15c7-d1d5dce6203a\"\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 47f0e272-cf42-404c-9f42-2c3e8f1c3bb1
+  - id: b91a1cd5-b770-42b6-ad9d-2d9c980cd150
     name: Get Latest Device Statistics
     request:
       name: Get Latest Device Statistics
@@ -785,7 +784,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 42f35a31-8cae-4b4e-9473-cffe77b14913
+    - id: f8138536-7beb-4fef-b7e5-fc799678ac27
       name: OK
       originalRequest:
         url:
@@ -826,27 +825,27 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"interfaces\": {\n    \"radios\": [\n      {\n        \"frequencyGHz\"\
-        : \"5\",\n        \"txRetriesPct\": 3790.5747531047696\n      },\n      {\n\
-        \        \"frequencyGHz\": \"5\",\n        \"txRetriesPct\": 2058.097781506114\n\
-        \      }\n    ]\n  },\n  \"uptimeSec\": 9700,\n  \"lastHeartbeatAt\": \"2006-02-27T20:54:03.669Z\"\
-        ,\n  \"nextHeartbeatAt\": \"1957-03-05T13:05:25.549Z\",\n  \"loadAverage1Min\"\
-        : 8059.967122604404,\n  \"loadAverage5Min\": 6149.804322983141,\n  \"loadAverage15Min\"\
-        : 7843.48815072748,\n  \"cpuUtilizationPct\": 5149.615274149961,\n  \"memoryUtilizationPct\"\
-        : 8381.987116780603,\n  \"uplink\": {\n    \"txRateBps\": 5519,\n    \"rxRateBps\"\
-        : 3405\n  }\n}"
+        : \"6\",\n        \"txRetriesPct\": 6567.066705644888\n      },\n      {\n\
+        \        \"frequencyGHz\": \"6\",\n        \"txRetriesPct\": 1560.7179387266867\n\
+        \      }\n    ]\n  },\n  \"uptimeSec\": 4269,\n  \"lastHeartbeatAt\": \"1999-05-20T07:59:51.579Z\"\
+        ,\n  \"nextHeartbeatAt\": \"2018-03-17T08:14:53.065Z\",\n  \"loadAverage1Min\"\
+        : 3811.8516180954275,\n  \"loadAverage5Min\": 1351.3826631359827,\n  \"loadAverage15Min\"\
+        : 6103.97418139872,\n  \"cpuUtilizationPct\": 822.9343670786582,\n  \"memoryUtilizationPct\"\
+        : 1127.8722333690516,\n  \"uplink\": {\n    \"txRateBps\": 7672,\n    \"rxRateBps\"\
+        : 6860\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 948c59a5-e282-4e4e-82ed-98aba908e630
+- id: b8013945-12cd-4ef4-9660-c96206f4fe85
   name: Clients
   description:
     content: ''
     type: text/plain
   item:
-  - id: 16b29be0-521f-4650-875f-817e72be837a
+  - id: a413166b-efdf-4659-b10e-312593f58982
     name: Execute Client Action
     request:
       name: Execute Client Action
@@ -894,7 +893,7 @@ item:
           raw:
             language: json
     response:
-    - id: 998f44c7-fcdd-4770-b33a-96dc277a4103
+    - id: 9114d06c-4459-499d-aaa5-3a346cbd3472
       name: OK
       originalRequest:
         url:
@@ -944,7 +943,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 9badb96c-8dc0-406e-be3b-07d46bab5a35
+  - id: 109fb322-8e16-43df-a028-0d37deaf8ba2
     name: List Connected Clients
     request:
       name: List Connected Clients
@@ -1013,7 +1012,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 7e3ffed7-8068-4014-ac30-aa09c3a2a183
+    - id: 945f8826-8b2d-427a-a8e6-3d50a9306e3a
       name: OK
       originalRequest:
         url:
@@ -1052,11 +1051,11 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"access\": {},\n  \
-        \    \"id\": \"3dfc29f9-a520-7578-fd07-28327d5c8822\",\n      \"name\": \"\
-        string\",\n      \"type\": \"string\",\n      \"connectedAt\": \"1995-06-20T17:58:01.902Z\"\
+        \    \"id\": \"ac798484-b1b5-c6ab-ff92-a106ef3a4823\",\n      \"name\": \"\
+        string\",\n      \"type\": \"string\",\n      \"connectedAt\": \"2007-04-26T19:43:50.599Z\"\
         ,\n      \"ipAddress\": \"string\"\n    },\n    {\n      \"access\": {},\n\
-        \      \"id\": \"c81ec23e-bb37-eece-3d67-af94f5164232\",\n      \"name\":\
-        \ \"string\",\n      \"type\": \"string\",\n      \"connectedAt\": \"1949-06-01T08:54:44.013Z\"\
+        \      \"id\": \"09b072bf-05bb-f4d5-d8fb-fb13b047491b\",\n      \"name\":\
+        \ \"string\",\n      \"type\": \"string\",\n      \"connectedAt\": \"1997-08-20T16:01:28.216Z\"\
         ,\n      \"ipAddress\": \"string\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\"\
         : 0,\n  \"totalCount\": 1000\n}"
       cookie: []
@@ -1064,7 +1063,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 135a7d72-8ca7-4a07-89fb-024142d5afd4
+  - id: ad6d7f2d-1c80-44f8-b136-12a0cf5cba9c
     name: Get Connected Client Details
     request:
       name: Get Connected Client Details
@@ -1103,7 +1102,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 73b8c34f-52d8-492e-a6c1-e63aa3f6df39
+    - id: 3fe4c2dd-4843-4aa5-8a23-bc3076202fce
       name: OK
       originalRequest:
         url:
@@ -1141,22 +1140,22 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"access\": \"\",\n  \"id\": \"5ce30593-b1d9-f56a-e594-fa8416a6f14d\"\
+      body: "{\n  \"access\": \"\",\n  \"id\": \"8a99d963-6d23-3fce-a7c8-f95f23ef26c3\"\
         ,\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"connectedAt\": \"\
-        1965-01-17T16:53:59.596Z\",\n  \"ipAddress\": \"string\"\n}"
+        1964-09-21T22:48:08.068Z\",\n  \"ipAddress\": \"string\"\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 6913e82d-c30f-4722-9a0d-75c38b10ebde
+- id: ef8a1398-b48c-4edf-9c7c-2664dff28f28
   name: Hotspot Vouchers
   description:
     content: ''
     type: text/plain
   item:
-  - id: b067415d-e307-44a6-bb78-b4f0de5a0dc6
+  - id: 9fecae8f-f15c-443d-b95a-da06e95803a1
     name: List Vouchers
     request:
       name: List Vouchers
@@ -1240,7 +1239,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: b5e44583-978e-4363-8aa7-c96af0c5a726
+    - id: 941f6e0c-9579-419c-bcf9-34fc336fdbbd
       name: OK
       originalRequest:
         url:
@@ -1280,18 +1279,18 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"authorizedGuestCount\"\
-        : 0,\n      \"code\": \"string\",\n      \"createdAt\": \"2013-07-15T18:39:07.287Z\"\
-        ,\n      \"expired\": true,\n      \"id\": \"712481c2-e05a-493a-a52f-f7ef7e8aab81\"\
+        : 0,\n      \"code\": \"string\",\n      \"createdAt\": \"2019-10-03T08:33:44.827Z\"\
+        ,\n      \"expired\": false,\n      \"id\": \"de9cc5c1-dfff-ea9b-b766-3556bb5b576e\"\
         ,\n      \"name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n \
-        \     \"authorizedGuestLimit\": 1,\n      \"activatedAt\": \"1962-03-19T22:16:59.100Z\"\
-        ,\n      \"expiresAt\": \"1986-02-15T18:33:05.009Z\",\n      \"dataUsageLimitMBytes\"\
+        \     \"authorizedGuestLimit\": 1,\n      \"activatedAt\": \"1951-09-30T02:05:15.273Z\"\
+        ,\n      \"expiresAt\": \"1967-03-17T03:44:49.779Z\",\n      \"dataUsageLimitMBytes\"\
         : 1024,\n      \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n\
         \    },\n    {\n      \"authorizedGuestCount\": 0,\n      \"code\": \"string\"\
-        ,\n      \"createdAt\": \"1994-06-21T19:45:35.011Z\",\n      \"expired\":\
-        \ false,\n      \"id\": \"987287e8-96b9-910d-1dad-4e9a7ffda10b\",\n      \"\
+        ,\n      \"createdAt\": \"1987-11-09T02:38:39.931Z\",\n      \"expired\":\
+        \ true,\n      \"id\": \"0c99141e-f255-b12a-c75d-9a44048d7e52\",\n      \"\
         name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n      \"authorizedGuestLimit\"\
-        : 1,\n      \"activatedAt\": \"2001-03-14T00:16:52.244Z\",\n      \"expiresAt\"\
-        : \"2018-04-26T08:47:14.590Z\",\n      \"dataUsageLimitMBytes\": 1024,\n \
+        : 1,\n      \"activatedAt\": \"1969-05-01T15:26:02.939Z\",\n      \"expiresAt\"\
+        : \"2021-06-04T08:39:58.215Z\",\n      \"dataUsageLimitMBytes\": 1024,\n \
         \     \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n    }\n\
         \  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1000\n}"
       cookie: []
@@ -1299,7 +1298,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 5395ff9c-d8ff-4c7d-bae0-28eea0b3e3e1
+  - id: f5f7097b-1fae-4042-9610-80f71fe53569
     name: Generate Vouchers
     request:
       name: Generate Vouchers
@@ -1343,7 +1342,7 @@ item:
           raw:
             language: json
     response:
-    - id: 62893309-86f1-45f5-a5fc-0cd44cee74a9
+    - id: 8b830794-b84d-4305-862b-62a63280fdf5
       name: Created
       originalRequest:
         url:
@@ -1385,18 +1384,18 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"vouchers\": [\n    {\n      \"authorizedGuestCount\": 0,\n   \
-        \   \"code\": \"string\",\n      \"createdAt\": \"2007-06-10T23:17:30.808Z\"\
-        ,\n      \"expired\": true,\n      \"id\": \"ecd727ca-c3bb-44ff-9627-80aed1ad43a8\"\
+        \   \"code\": \"string\",\n      \"createdAt\": \"1971-03-06T10:22:21.806Z\"\
+        ,\n      \"expired\": true,\n      \"id\": \"b506c867-3824-85eb-d1d6-b42a150ec98e\"\
         ,\n      \"name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n \
-        \     \"authorizedGuestLimit\": 1,\n      \"activatedAt\": \"1989-12-07T18:09:55.482Z\"\
-        ,\n      \"expiresAt\": \"1998-08-20T07:00:05.224Z\",\n      \"dataUsageLimitMBytes\"\
+        \     \"authorizedGuestLimit\": 1,\n      \"activatedAt\": \"2020-04-21T16:01:02.652Z\"\
+        ,\n      \"expiresAt\": \"2012-09-27T06:47:31.727Z\",\n      \"dataUsageLimitMBytes\"\
         : 1024,\n      \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n\
         \    },\n    {\n      \"authorizedGuestCount\": 0,\n      \"code\": \"string\"\
-        ,\n      \"createdAt\": \"1961-08-19T17:20:36.711Z\",\n      \"expired\":\
-        \ true,\n      \"id\": \"c7f67850-2bc7-2f9e-0fe0-d3ec72e608f9\",\n      \"\
+        ,\n      \"createdAt\": \"2008-10-27T15:43:07.030Z\",\n      \"expired\":\
+        \ true,\n      \"id\": \"07dc6676-a404-842f-adde-b483e4208680\",\n      \"\
         name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n      \"authorizedGuestLimit\"\
-        : 1,\n      \"activatedAt\": \"2024-02-17T07:08:20.330Z\",\n      \"expiresAt\"\
-        : \"2019-01-24T09:16:23.391Z\",\n      \"dataUsageLimitMBytes\": 1024,\n \
+        : 1,\n      \"activatedAt\": \"1958-06-17T23:36:13.412Z\",\n      \"expiresAt\"\
+        : \"1949-03-31T04:25:40.363Z\",\n      \"dataUsageLimitMBytes\": 1024,\n \
         \     \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n    }\n\
         \  ]\n}"
       cookie: []
@@ -1404,7 +1403,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: de03fc18-ed0d-47b3-a75b-a7b9bd8c7208
+  - id: 855aef67-f3b1-4930-8052-a3a922391741
     name: Delete Vouchers
     request:
       name: Delete Vouchers
@@ -1483,7 +1482,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: fbdc580f-3a81-4f6b-a1e3-f6c7f508f02f
+    - id: d430a7b2-847f-4ed1-a624-0e0941bc0f79
       name: OK
       originalRequest:
         url:
@@ -1518,13 +1517,13 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"vouchersDeleted\": 1969\n}"
+      body: "{\n  \"vouchersDeleted\": 1558\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 19251c92-749c-4c3c-8fce-c374ac9ef6cb
+  - id: 342294de-d4d5-4a63-8bef-62281e305fe9
     name: Get Voucher Details
     request:
       name: Get Voucher Details
@@ -1563,7 +1562,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: a2c072a1-eaf5-4e60-aa8f-c4b6d275ba9a
+    - id: 5c4692ba-59ae-4d72-96ae-c960800613ed
       name: OK
       originalRequest:
         url:
@@ -1603,17 +1602,17 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"authorizedGuestCount\": 0,\n  \"code\": \"string\",\n  \"createdAt\"\
-        : \"1951-04-08T08:48:25.417Z\",\n  \"expired\": true,\n  \"id\": \"cd2b27c5-2a42-750f-0a2f-b235b44e0dd1\"\
+        : \"1962-01-31T04:13:28.030Z\",\n  \"expired\": false,\n  \"id\": \"0ea03125-df96-e280-7c25-15c4dae9a07d\"\
         ,\n  \"name\": \"hotel-guest\",\n  \"timeLimitMinutes\": 1440,\n  \"authorizedGuestLimit\"\
-        : 1,\n  \"activatedAt\": \"1985-11-19T05:28:43.269Z\",\n  \"expiresAt\": \"\
-        2005-04-22T19:51:11.905Z\",\n  \"dataUsageLimitMBytes\": 1024,\n  \"rxRateLimitKbps\"\
+        : 1,\n  \"activatedAt\": \"1954-05-18T19:47:20.363Z\",\n  \"expiresAt\": \"\
+        2006-11-14T11:26:37.192Z\",\n  \"dataUsageLimitMBytes\": 1024,\n  \"rxRateLimitKbps\"\
         : 1000,\n  \"txRateLimitKbps\": 1000\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 9ef8ed6d-7cf4-4654-b11e-f52aa5f1ba49
+  - id: adeb22cd-9907-41d2-b6f1-cf77f4389ec5
     name: Delete Voucher
     request:
       name: Delete Voucher
@@ -1652,7 +1651,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: d48a47d6-ba1e-420e-ab13-2f7b0a438111
+    - id: 8e59a1a6-1110-43ff-ac93-aa357e259382
       name: OK
       originalRequest:
         url:
@@ -1691,7 +1690,7 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"vouchersDeleted\": 1969\n}"
+      body: "{\n  \"vouchersDeleted\": 1558\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
@@ -1710,7 +1709,7 @@ variable:
   value: https://api.ui.com/v1/connector/consoles/{{consoleId}}/proxy/network/integration
   key: baseUrl
 info:
-  _postman_id: 244f9cba-b8b5-47ac-a0b7-0b0801753d5b
+  _postman_id: fa4da806-e280-493d-bb8b-c81139592a6e
   name: UniFi Network API
   schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
   description:

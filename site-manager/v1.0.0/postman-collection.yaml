@@ -1,11 +1,11 @@
 item:
-- id: a2497e44-c2a5-4977-a216-3cb3bfc79667
+- id: 7a8fac94-7a57-4928-9214-ebf1cb73c413
   name: cloud-connector
   description:
     content: ''
     type: text/plain
   item:
-  - id: f1c7f1b9-7964-4d31-af3d-fc05365eda78
+  - id: 03e3a123-7ac0-4cad-aa1a-24aaf8cc021c
     name: Connector - DELETE
     request:
       name: Connector - DELETE
@@ -22,7 +22,8 @@ item:
           otherwise it is terminated and a timeout error is returned<br/>- Response
           body size: the upstream response body is limited to 10 MB; larger responses
           are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
-          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/>-
+          InnerSpace API: [https://developer.ui.com/innerspace](https://developer.ui.com/innerspace)<br/><br/>**Response**:
           On success, the upstream API response is passed through directly. On error,
           a standardized error schema is returned.'
         type: text/plain
@@ -53,7 +54,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: 5601f719-be4e-4fe5-ae4c-8255756eb309
+    - id: b692a4d2-ca2c-4c81-8e10-42c951e0f6e8
       name: '200'
       originalRequest:
         url:
@@ -95,7 +96,7 @@ item:
       body: "{\n  \"vouchersDeleted\": 0\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 2b2cfd42-f6e8-426a-821b-0ef9a8020ef3
+    - id: 766bc8a9-b83c-4cfe-8148-fa0e86c1734d
       name: '400'
       originalRequest:
         url:
@@ -139,7 +140,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 59def124-8afe-4b02-940d-9ebee76d3c3b
+    - id: 7567b31c-2e58-4d22-8f4b-e14d3804ad25
       name: '401'
       originalRequest:
         url:
@@ -183,7 +184,7 @@ item:
         }"
       cookie: []
       _postman_previewlanguage: json
-    - id: 57f161cc-c2ff-448b-86ac-b355d5e2cb47
+    - id: f9eb348e-cf6e-4c22-932a-70bcb87a09ee
       name: '403'
       originalRequest:
         url:
@@ -227,7 +228,7 @@ item:
         : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: e06f9ae8-4b1a-4d12-8bc6-8cf2fe4af4f7
+    - id: f17b73be-651a-4e65-837d-04aee4256f4a
       name: '408'
       originalRequest:
         url:
@@ -271,7 +272,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 191ec661-b1fa-42b1-b594-539d086b02dc
+    - id: 7610616f-6ca6-49e8-8e55-65a712628eb2
       name: '429'
       originalRequest:
         url:
@@ -319,7 +320,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: d766039e-8b43-4b64-b4a8-4d23fe056f42
+    - id: 3fc9097a-a22a-4dd6-b41a-0ff41236e47e
       name: '500'
       originalRequest:
         url:
@@ -363,7 +364,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: df43c4d4-7b41-476e-beb1-b8e1d7eb0b47
+    - id: 0e0c6c88-12a7-4ccf-8905-92ead64bb80b
       name: '502'
       originalRequest:
         url:
@@ -409,7 +410,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 1649ea28-1cd4-4d7e-b196-1c5e2cf6a360
+  - id: 53b48283-d0fc-4e49-b2a6-caadd86ad89a
     name: Connector - GET
     request:
       name: Connector - GET
@@ -426,7 +427,8 @@ item:
           otherwise it is terminated and a timeout error is returned<br/>- Response
           body size: the upstream response body is limited to 10 MB; larger responses
           are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
-          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Examples**:
+          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/>-
+          InnerSpace API: [https://developer.ui.com/innerspace](https://developer.ui.com/innerspace)<br/><br/>**Examples**:
           <br/>- Network: `GET /v1/connector/consoles/{id}/network/integration/v1/sites`
           retrieves network sites<br/>- Protect: `GET /v1/connector/consoles/{id}/protect/integration/v1/meta/info`
           retrieves protect application info<br/><br/>**Response**: On success, the
@@ -460,7 +462,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 209f7c29-dfa1-41dc-932d-38c26eee0062
+    - id: b265a56e-854b-497b-b2ab-9fc4bb4d2e74
       name: '200'
       originalRequest:
         url:
@@ -504,7 +506,7 @@ item:
         \    }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 2e010893-8210-45df-a363-67f1677c5793
+    - id: 680fb69f-1638-4eca-b2ce-11d846f461ad
       name: '400'
       originalRequest:
         url:
@@ -548,7 +550,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 3d75021c-449c-4160-bc52-cfc9ff03c2b8
+    - id: ece8a3ef-a3da-484b-8797-13d6ceb8c957
       name: '401'
       originalRequest:
         url:
@@ -592,7 +594,7 @@ item:
         }"
       cookie: []
       _postman_previewlanguage: json
-    - id: 006aac05-0357-489f-b57c-65128972aa19
+    - id: 183f82de-f006-46eb-9acf-0335e50ac68b
       name: '403'
       originalRequest:
         url:
@@ -636,7 +638,7 @@ item:
         : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: ea583fc5-1f5c-40cb-b1a4-639a0686b9e9
+    - id: 7ec7e004-eeb3-4743-ae3d-4e6e6b6cb1dc
       name: '408'
       originalRequest:
         url:
@@ -680,7 +682,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 0a157677-ead4-46e3-a746-a4c943197448
+    - id: d687c749-ca5e-4771-a5eb-f2a1775a745b
       name: '429'
       originalRequest:
         url:
@@ -728,7 +730,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 4a4efee7-cdba-4d2f-8c9e-6299c5629023
+    - id: ca610766-bda4-4e84-a2b5-e84f4c479b7a
       name: '500'
       originalRequest:
         url:
@@ -772,7 +774,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: d3c6c379-3aea-4b2c-b2b1-305987fdb70d
+    - id: 54f3895a-ba58-45f8-937f-5cbc2df6a1ad
       name: '502'
       originalRequest:
         url:
@@ -818,7 +820,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 255c791e-c5bc-4315-a261-7a6d07cd3b21
+  - id: cf2ce0df-56fd-4b74-b1b1-c27f253bf3ce
     name: Connector - PATCH
     request:
       name: Connector - PATCH
@@ -835,7 +837,8 @@ item:
           otherwise it is terminated and a timeout error is returned<br/>- Response
           body size: the upstream response body is limited to 10 MB; larger responses
           are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
-          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/>-
+          InnerSpace API: [https://developer.ui.com/innerspace](https://developer.ui.com/innerspace)<br/><br/>**Response**:
           On success, the upstream API response is passed through directly. On error,
           a standardized error schema is returned.'
         type: text/plain
@@ -869,12 +872,12 @@ item:
       auth: null
       body:
         mode: raw
-        raw: "{\n  \"key_0\": {},\n  \"key_1\": {}\n}"
+        raw: "{\n  \"key_0\": {},\n  \"key_1\": {},\n  \"key_2\": {}\n}"
         options:
           raw:
             language: json
     response:
-    - id: 040f2faf-cd84-418d-8718-487428d195ed
+    - id: e5229104-e575-47cb-ae51-40c65ab80c4c
       name: '200'
       originalRequest:
         url:
@@ -923,7 +926,7 @@ item:
         state\": \"CONNECTED\",\n  \"streamLimit\": 4\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: b8bd4cb9-10e2-4e80-b302-fe3ed6a7f44d
+    - id: f47d356a-4d0b-4280-98d0-c59c7e029334
       name: '400'
       originalRequest:
         url:
@@ -972,7 +975,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 50e49680-8d4c-405d-b557-0d2f4f3ec3bd
+    - id: 5362f69b-6a65-44b4-8a9e-d3a27bfaec5d
       name: '401'
       originalRequest:
         url:
@@ -1021,7 +1024,7 @@ item:
         }"
       cookie: []
       _postman_previewlanguage: json
-    - id: 11722b5b-0008-42cc-8c86-955d0da43dca
+    - id: fac44cfd-9d6d-48f2-bab2-c736a2521e41
       name: '403'
       originalRequest:
         url:
@@ -1070,7 +1073,7 @@ item:
         : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 77c271bc-f17f-45bf-80cc-5ccc56104c3f
+    - id: eba832f9-82c9-4341-a134-bdaf69fcae59
       name: '408'
       originalRequest:
         url:
@@ -1119,7 +1122,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 7191f553-0fa5-4efc-98c4-4ec70d85b1c1
+    - id: 2f9b2b6f-bf2f-4f91-8998-cd44c7514faf
       name: '429'
       originalRequest:
         url:
@@ -1172,7 +1175,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 7a2e13fe-44e5-4ac1-953e-57ff344abb42
+    - id: b860ab10-f9e6-4ff6-b0a3-91ea988f21c1
       name: '500'
       originalRequest:
         url:
@@ -1221,7 +1224,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 78f4dbb1-f9c7-4328-80a8-6f2336887afb
+    - id: 8a1aef87-cca7-48e2-8991-7c70965fa156
       name: '502'
       originalRequest:
         url:
@@ -1272,7 +1275,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: e08ac3c8-3a65-4785-a6f3-6fc2ca22ec69
+  - id: fee7685d-6ed9-466a-a204-a4ddfe77a98f
     name: Connector - POST
     request:
       name: Connector - POST
@@ -1289,7 +1292,8 @@ item:
           otherwise it is terminated and a timeout error is returned<br/>- Response
           body size: the upstream response body is limited to 10 MB; larger responses
           are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
-          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/>-
+          InnerSpace API: [https://developer.ui.com/innerspace](https://developer.ui.com/innerspace)<br/><br/>**Response**:
           On success, the upstream API response is passed through directly. On error,
           a standardized error schema is returned.'
         type: text/plain
@@ -1323,12 +1327,12 @@ item:
       auth: null
       body:
         mode: raw
-        raw: "{\n  \"key_0\": {},\n  \"key_1\": {}\n}"
+        raw: "{\n  \"key_0\": {},\n  \"key_1\": {},\n  \"key_2\": {}\n}"
         options:
           raw:
             language: json
     response:
-    - id: 67f19ae9-69a8-4fd9-8bf9-7c87678527b5
+    - id: 6a638c51-d043-460e-966a-19d6936e3307
       name: '200'
       originalRequest:
         url:
@@ -1375,7 +1379,7 @@ item:
       body: "{\n  \"success\": true\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: dc2e18da-c8db-485d-88fe-638fc63fe59d
+    - id: 5cb3a728-b0d8-4af5-85dc-a2b3f543e778
       name: '400'
       originalRequest:
         url:
@@ -1424,7 +1428,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: d38c4b5b-cfbd-4c56-a25a-04f8dd226439
+    - id: 86dad3b2-1437-49cb-803f-a3f738519b0b
       name: '401'
       originalRequest:
         url:
@@ -1473,7 +1477,7 @@ item:
         }"
       cookie: []
       _postman_previewlanguage: json
-    - id: ab4b4099-c4f2-441a-b588-3a0cd91688da
+    - id: f85a1cb9-2bff-4384-a00f-73ba65e5031e
       name: '403'
       originalRequest:
         url:
@@ -1522,7 +1526,7 @@ item:
         : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: a54db63b-3236-4a4a-a9c4-9c363c47718c
+    - id: fd445ae8-c041-46ba-a96d-53ee68473912
       name: '408'
       originalRequest:
         url:
@@ -1571,7 +1575,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 3e64b580-4c8d-4d83-a1f3-ee7be1835b3d
+    - id: 145531ba-d4dd-4e9b-a63a-fc6b6ea5d07a
       name: '429'
       originalRequest:
         url:
@@ -1624,7 +1628,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 73a85bff-cf1f-4776-a71e-18d2366d2de7
+    - id: d700f4ca-8535-4033-8187-1d732737adf6
       name: '500'
       originalRequest:
         url:
@@ -1673,7 +1677,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: f8104d6d-32be-4f6f-90d8-0c55eb615394
+    - id: 86f75589-8029-41d0-8272-7a66bfac3731
       name: '502'
       originalRequest:
         url:
@@ -1724,7 +1728,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 550cec07-afb6-4055-b67f-0dd79c8ca3f9
+  - id: 15e6bcb6-75d1-4b22-8cb6-68f8acd79390
     name: Connector - PUT
     request:
       name: Connector - PUT
@@ -1741,7 +1745,8 @@ item:
           otherwise it is terminated and a timeout error is returned<br/>- Response
           body size: the upstream response body is limited to 10 MB; larger responses
           are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
-          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+          Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/>-
+          InnerSpace API: [https://developer.ui.com/innerspace](https://developer.ui.com/innerspace)<br/><br/>**Response**:
           On success, the upstream API response is passed through directly. On error,
           a standardized error schema is returned.'
         type: text/plain
@@ -1775,12 +1780,12 @@ item:
       auth: null
       body:
         mode: raw
-        raw: "{\n  \"key_0\": {},\n  \"key_1\": {}\n}"
+        raw: "{\n  \"key_0\": {},\n  \"key_1\": {},\n  \"key_2\": {}\n}"
         options:
           raw:
             language: json
     response:
-    - id: 4a11948a-463f-4b13-9bcb-ff054f8968d8
+    - id: 1b7d2d4c-d496-4c81-a3d7-34bff7d32c6c
       name: '200'
       originalRequest:
         url:
@@ -1829,7 +1834,7 @@ item:
         : \"External\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 256a1b0f-3599-46db-9cc0-1d77ff4e1102
+    - id: 8be3f8a9-3459-4901-b9b2-cf399211eebf
       name: '400'
       originalRequest:
         url:
@@ -1878,7 +1883,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: dfb4ac98-fa18-468a-b324-ca2cb2e43d64
+    - id: b79fdee5-a7ad-4cea-a190-795557674ad2
       name: '401'
       originalRequest:
         url:
@@ -1927,7 +1932,7 @@ item:
         }"
       cookie: []
       _postman_previewlanguage: json
-    - id: 178fb031-27c4-4976-a6de-6df27b3dd9ec
+    - id: b7edddcb-a144-4bd7-bb37-000f8114bb55
       name: '403'
       originalRequest:
         url:
@@ -1976,7 +1981,7 @@ item:
         : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 4e62cff4-50f6-4214-9a32-94e55ffc2b2c
+    - id: 0345e38b-512c-47d6-a156-daf4303ca59c
       name: '408'
       originalRequest:
         url:
@@ -2025,7 +2030,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: fce85562-97da-458b-87ff-ce9ecda080f8
+    - id: a67d7439-78c7-4614-b261-960a59555a1a
       name: '429'
       originalRequest:
         url:
@@ -2078,7 +2083,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 7cd376da-5340-4dcc-b539-3fb2a507db61
+    - id: 0f909abb-fe94-4d79-9623-802f50f3044b
       name: '500'
       originalRequest:
         url:
@@ -2127,7 +2132,7 @@ item:
         \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: c7b27e08-7317-4dd0-89a7-8f20bd0a7e70
+    - id: 1d810126-08e5-4e0d-9935-46b0c5f9776b
       name: '502'
       originalRequest:
         url:
@@ -2179,7 +2184,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 12fb2a1a-2f07-4c2d-bff1-a542dcdf9e94
+- id: 17d52b03-71a0-44e2-a341-511f0d94b9a0
   name: List Devices
   request:
     name: List Devices
@@ -2223,7 +2228,7 @@ item:
     method: GET
     auth: null
   response:
-  - id: 15d9b126-0b90-4ff5-8c29-b5d6db6bba1c
+  - id: 3c860bda-b90f-42f4-8b94-9907d9afcc9d
     name: '200'
     originalRequest:
       url:
@@ -2279,7 +2284,7 @@ item:
       ,\n  \"nextToken\": \"ba8e384e-3308-4236-b344-7357657351ca\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 861a7149-7ae7-4cf9-a949-5fafdcbfd414
+  - id: 9c868b38-f6ea-41c2-8429-8a9063e181cb
     name: '400'
     originalRequest:
       url:
@@ -2320,7 +2325,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: e98c7a18-e64e-4258-b70d-b26ebbd749ea
+  - id: 4fcfd4c1-3358-4a78-b6d3-03b3e28eae2b
     name: '401'
     originalRequest:
       url:
@@ -2360,7 +2365,7 @@ item:
       : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: e3a6fe4d-bd10-4769-8d98-dd116ba27272
+  - id: 72b98048-8ae7-4bc0-ba6c-b5dad00229f3
     name: '429'
     originalRequest:
       url:
@@ -2405,7 +2410,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 204f08c1-1576-4e23-a21b-6ab42fdd22ca
+  - id: 4135a035-359d-4ff9-8a7d-2005f88a025f
     name: '500'
     originalRequest:
       url:
@@ -2446,7 +2451,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: ff24063b-3551-4a75-9c41-b1f1cd52e51e
+  - id: ad641aa8-3a9f-4174-8e12-65450aafc247
     name: '502'
     originalRequest:
       url:
@@ -2489,7 +2494,7 @@ item:
   event: []
   protocolProfileBehavior:
     disableBodyPruning: true
-- id: 7a8d310f-87e9-4139-bf50-3443d7a9567d
+- id: 7665aec5-9a05-4dfc-ad96-e070ca375a44
   name: List Hosts
   request:
     name: List Hosts
@@ -2521,7 +2526,7 @@ item:
     method: GET
     auth: null
   response:
-  - id: 4afb45e1-602a-4538-b29e-66fc82be19c6
+  - id: 2c3b5be4-cef1-4671-b5ec-57fbe0f5a696
     name: '200'
     originalRequest:
       url:
@@ -2601,7 +2606,7 @@ item:
       ,\n  \"nextToken\": \"ba8e384e-3308-4236-b344-7357657351ca\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: a1371f52-a43d-4329-be98-c1a57ee1540d
+  - id: ce0a057a-4db3-4e15-939c-3dccb95dceed
     name: '401'
     originalRequest:
       url:
@@ -2635,7 +2640,7 @@ item:
       : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 45f6239e-f38c-4f6d-8baf-fc49f11c4699
+  - id: 7518e556-94a7-4356-b69b-101391305753
     name: '429'
     originalRequest:
       url:
@@ -2674,7 +2679,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 4d26f27d-f53a-4eb8-baba-de1baed9ebdc
+  - id: bd9e25e2-0e0e-4f6c-b667-35f49f80af35
     name: '500'
     originalRequest:
       url:
@@ -2709,7 +2714,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 89fd7d97-4c5b-4643-8980-59025081923e
+  - id: fc7fefb9-d906-4269-89ca-52fb2a73f235
     name: '502'
     originalRequest:
       url:
@@ -2746,7 +2751,7 @@ item:
   event: []
   protocolProfileBehavior:
     disableBodyPruning: true
-- id: 1012495d-566d-4cbc-9592-03b47ab92397
+- id: 190d8a04-4eb7-472d-a649-749ca8f7f6d5
   name: Get Host by ID
   request:
     name: Get Host by ID
@@ -2776,7 +2781,7 @@ item:
     method: GET
     auth: null
   response:
-  - id: 38c6a06d-2a13-40b8-aee2-feb8e9b39321
+  - id: 245c3d55-5be6-4ffc-a7ad-cc643242f1ff
     name: '200'
     originalRequest:
       url:
@@ -2854,7 +2859,7 @@ item:
       traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 3621cd29-7244-4938-99dd-cfddecd160c1
+  - id: 2d27742f-c0f6-40bf-9d41-edc58330e8ba
     name: '401'
     originalRequest:
       url:
@@ -2890,7 +2895,7 @@ item:
       : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: b60e2437-f040-4045-ac33-afe9db6314b6
+  - id: 870955da-9549-467f-97cf-662c4753ad69
     name: '404'
     originalRequest:
       url:
@@ -2927,7 +2932,7 @@ item:
       ,\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 6a3c8160-5a89-45a4-8bc4-7f03ba5350ea
+  - id: 17c1c4bd-6471-45e3-8f0a-63c360af38c1
     name: '429'
     originalRequest:
       url:
@@ -2968,7 +2973,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 5c24fd66-acc9-4aa3-9d1c-41c70ed11524
+  - id: 55754fc3-66f6-4e7d-9438-82c58f129c62
     name: '500'
     originalRequest:
       url:
@@ -3005,7 +3010,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: ad0d196b-6bb2-41e4-ab2a-91f774de4ada
+  - id: 1cf174d1-68f1-428e-8e83-0eac4bc04277
     name: '502'
     originalRequest:
       url:
@@ -3044,7 +3049,7 @@ item:
   event: []
   protocolProfileBehavior:
     disableBodyPruning: true
-- id: 949d42a2-b711-4ba4-b92f-9ee09492a778
+- id: a735fd41-46ca-413e-a41f-ca8b15a8577b
   name: Get ISP Metrics
   request:
     name: Get ISP Metrics
@@ -3089,7 +3094,7 @@ item:
     method: GET
     auth: null
   response:
-  - id: 8a45a6c3-a3a4-4f73-b50c-c880219581f9
+  - id: 32dac5af-6db0-401f-b563-f2a47ee789cf
     name: '200'
     originalRequest:
       url:
@@ -3140,7 +3145,7 @@ item:
       : 200,\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: c59d17be-ac86-402c-b14b-4daf0f195010
+  - id: e855a340-8bfa-4436-b1f8-59153250bf54
     name: '400'
     originalRequest:
       url:
@@ -3184,7 +3189,7 @@ item:
       a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 7c77ab1d-eae2-4bfd-aeee-e3851c6957a6
+  - id: b6ea19be-e703-438e-ae31-2d6bd5a89c5d
     name: '401'
     originalRequest:
       url:
@@ -3227,7 +3232,7 @@ item:
       : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: e67048c2-8d67-4640-a706-106fcfff136e
+  - id: d3ca16ac-0e4b-47e7-9cdf-b61c8a04b60e
     name: '429'
     originalRequest:
       url:
@@ -3275,7 +3280,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 2c30b4c6-c884-4c2f-8b72-53c0ad1590ff
+  - id: 091e7d9f-549d-4698-af73-d220de62bd89
     name: '500'
     originalRequest:
       url:
@@ -3319,7 +3324,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: e0a5265e-9e9a-4289-9f12-dbecd4673670
+  - id: b95eff79-f13c-4938-b020-0df6ecc10970
     name: '502'
     originalRequest:
       url:
@@ -3365,7 +3370,7 @@ item:
   event: []
   protocolProfileBehavior:
     disableBodyPruning: true
-- id: 0708c3f1-1ec0-4c43-98ab-084ccf5edce5
+- id: 2a4174c9-51fe-4122-b4b0-beb4e21bb858
   name: Query ISP Metrics
   request:
     name: Query ISP Metrics
@@ -3410,7 +3415,7 @@ item:
         raw:
           language: json
   response:
-  - id: 6b9a8c36-7c9e-40c3-a195-b5c00a12ab01
+  - id: 08b0e3f4-a4e0-4c88-a8c6-9d31c6b849f0
     name: '200'
     originalRequest:
       url:
@@ -3467,7 +3472,7 @@ item:
       }"
     cookie: []
     _postman_previewlanguage: json
-  - id: 34377629-da15-4725-8cc8-0c21aaf3aad5
+  - id: 666c42c0-0370-4531-9a1a-51f37ada90df
     name: '400'
     originalRequest:
       url:
@@ -3514,7 +3519,7 @@ item:
       a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 2bead0f7-42c3-4c0a-ac92-961bdcc1c661
+  - id: b7d0f929-1964-4ddb-b6a5-0927dce88061
     name: '401'
     originalRequest:
       url:
@@ -3560,7 +3565,7 @@ item:
       : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 4de2ea19-4edc-4dc9-b485-084e99289080
+  - id: 5c122759-b785-406e-bc00-5349efaf70a9
     name: '429'
     originalRequest:
       url:
@@ -3611,7 +3616,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 6aeb339d-4e7e-4ba1-8c48-e17ca523e952
+  - id: bffd2429-a5d3-4376-a897-7bb582d4d5c1
     name: '500'
     originalRequest:
       url:
@@ -3658,7 +3663,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: d04cdfe0-4f78-4c5f-85a0-6b3e886fe892
+  - id: 98d5d0a5-ddf2-4a8a-af99-2a45cc11718f
     name: '502'
     originalRequest:
       url:
@@ -3707,13 +3712,13 @@ item:
   event: []
   protocolProfileBehavior:
     disableBodyPruning: true
-- id: 8b5ce95e-217e-45fa-bb74-7e19a9c2a92d
+- id: a16205fc-0aac-434b-a167-c4669a67d15d
   name: List SD-WAN Configs
   request:
     name: List SD-WAN Configs
     description:
-      content: Retrieves a list of all hub-and-spoke SD-WAN configurations associated
-        with the UI account making the API call.
+      content: Retrieves a list of all SD-WAN configurations associated with the UI
+        account making the API call.
       type: text/plain
     url:
       path:
@@ -3729,7 +3734,7 @@ item:
     method: GET
     auth: null
   response:
-  - id: 3f4912f3-b6a2-4bc2-8841-20fc3cba66e9
+  - id: 9fe0754f-72ef-4f36-8238-8eb485461914
     name: '200'
     originalRequest:
       url:
@@ -3761,7 +3766,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: a53c0f0c-75b4-47bf-87ce-c41779444d76
+  - id: 4e54e932-02c2-499e-8d2e-6ada094c0879
     name: '401'
     originalRequest:
       url:
@@ -3791,7 +3796,7 @@ item:
       : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 0eec2e80-c980-47b0-8eca-8330e750d98f
+  - id: 7f4a93fc-61e8-4632-b2a8-8add47e55970
     name: '429'
     originalRequest:
       url:
@@ -3826,7 +3831,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 5d265827-51a0-4c66-8ce9-c06bae8d3fae
+  - id: aa9cd24d-d867-4a5e-8680-74229e365cf7
     name: '500'
     originalRequest:
       url:
@@ -3857,7 +3862,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 0b765c1d-1f5e-414a-ae80-f2530a94527b
+  - id: d4c4ecb2-5efa-47c4-b924-66f70aafcceb
     name: '502'
     originalRequest:
       url:
@@ -3890,7 +3895,7 @@ item:
   event: []
   protocolProfileBehavior:
     disableBodyPruning: true
-- id: efa79afb-72de-4829-a53e-1ef021298636
+- id: 09fc5d77-c200-4e85-a833-faa5d8d28284
   name: Get SD-WAN Config by ID
   request:
     name: Get SD-WAN Config by ID
@@ -3918,7 +3923,7 @@ item:
     method: GET
     auth: null
   response:
-  - id: 70cef759-75ba-40b2-9a5e-962c923de28d
+  - id: a2060c81-d431-44b5-9a9a-07b65776d435
     name: '200'
     originalRequest:
       url:
@@ -3976,7 +3981,7 @@ item:
       a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 682b485e-63f6-4b3f-b16b-c655f8477149
+  - id: d461fc94-2c22-4c6d-a4cf-235b51507f76
     name: '401'
     originalRequest:
       url:
@@ -4012,7 +4017,7 @@ item:
       : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: dc7d015d-5b67-4af0-81a7-5ca303018121
+  - id: 10b19748-1e58-4448-b26f-2a36cd889b57
     name: '404'
     originalRequest:
       url:
@@ -4049,7 +4054,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 6c01558a-a579-4ba1-a73c-dc24cd4d5441
+  - id: a60e14f8-3cc7-4ff0-abfc-5f9fd47069c3
     name: '429'
     originalRequest:
       url:
@@ -4090,7 +4095,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 54ffe131-bb7d-49b5-b545-e79c4daea3f9
+  - id: 54a08d9b-34cf-4f3c-8498-9d636c7640c7
     name: '500'
     originalRequest:
       url:
@@ -4127,7 +4132,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: e473f9ce-94be-442a-890e-d7f649ea09db
+  - id: 4eb6a3ad-d9bc-42fd-b089-59f2f61e329b
     name: '502'
     originalRequest:
       url:
@@ -4166,7 +4171,7 @@ item:
   event: []
   protocolProfileBehavior:
     disableBodyPruning: true
-- id: bded7ef4-091f-4c0d-8a33-36f4d0678c2f
+- id: 59b70070-8f07-4867-8c94-9cf1b0b572b6
   name: Get SD-WAN Config Status
   request:
     name: Get SD-WAN Config Status
@@ -4195,7 +4200,7 @@ item:
     method: GET
     auth: null
   response:
-  - id: 31ceebb4-77cd-4fed-a7db-06361cffd6bd
+  - id: 65b5becf-ad6c-4144-8568-7807547bd12c
     name: '200'
     originalRequest:
       url:
@@ -4281,7 +4286,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 14634fce-63dd-4812-a62b-39f72d8e704a
+  - id: 1ef06cda-de65-4b19-9e05-4f4543386b0c
     name: '401'
     originalRequest:
       url:
@@ -4318,7 +4323,7 @@ item:
       : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 1a35aa4e-5731-432a-aa78-64d04e8ef657
+  - id: f07feb16-a41b-439c-b7e3-4e285f16d48b
     name: '404'
     originalRequest:
       url:
@@ -4356,7 +4361,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 7d1b14e0-f63c-4c15-aa48-464ef7719ae4
+  - id: 763c14a3-479e-4138-b610-a8068889f85e
     name: '429'
     originalRequest:
       url:
@@ -4398,7 +4403,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 976077d7-1d73-4e53-9173-8c5551d16ead
+  - id: 53654c5d-8059-4649-a901-6f5112b6c8fc
     name: '500'
     originalRequest:
       url:
@@ -4436,7 +4441,7 @@ item:
       : \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 1517ffa8-50ee-49c2-abcf-adecbf63be46
+  - id: 8d75752d-4f2b-465b-b2ac-b448bb2a1620
     name: '502'
     originalRequest:
       url:
@@ -4476,7 +4481,7 @@ item:
   event: []
   protocolProfileBehavior:
     disableBodyPruning: true
-- id: a704b527-419b-465c-b7ee-1b8eda18ce94
+- id: cf07487a-cc6d-40b0-b072-160d7ece089a
   name: List Sites
   request:
     name: List Sites
@@ -4508,7 +4513,7 @@ item:
     method: GET
     auth: null
   response:
-  - id: 33dea095-f074-4000-898c-b6b25450c988
+  - id: a9b6ae76-ede0-470d-9285-0df2a1e83a4d
     name: '200'
     originalRequest:
       url:
@@ -4563,7 +4568,7 @@ item:
       ,\n  \"nextToken\": \"ba8e384e-3308-4236-b344-7357657351ca\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 58bdfded-202c-4ec2-bd92-8480f4140db5
+  - id: 73786a0b-2211-4019-bb0a-3852b00602c2
     name: '401'
     originalRequest:
       url:
@@ -4597,7 +4602,7 @@ item:
       : \"unauthorized\",\n  \"traceId\": \"a7dc15e0eb4527142d7823515b15f87d\"\n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 781ce462-1352-4301-8bbc-0cbe92df5464
+  - id: 1f2b1487-ca91-44ea-8d86-433178b2eb97
     name: '429'
     originalRequest:
       url:
@@ -4636,7 +4641,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 56e7b109-2b9f-4474-9645-8c00c7b470cb
+  - id: 07173b37-f649-4c4a-994e-1621526670d5
     name: '500'
     originalRequest:
       url:
@@ -4671,7 +4676,7 @@ item:
       \n}"
     cookie: []
     _postman_previewlanguage: json
-  - id: 3cf91b67-a3d3-4e75-b1d5-dd166ffdfc44
+  - id: 17bbbb09-eb2b-456e-a394-44886d2e64bc
     name: '502'
     originalRequest:
       url:
@@ -4723,7 +4728,7 @@ auth:
   - key: in
     value: header
 info:
-  _postman_id: 0bc529d8-d11f-4d5b-9247-d7dc4ac3eb1f
+  _postman_id: 420e83d8-2947-48be-93d0-0721178dad60
   name: UniFi Site Manager API
   schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
   description:

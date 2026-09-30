@@ -1,5 +1,5 @@
 item:
-- id: 4d0a3c22-7820-4adb-bb91-82590cacda97
+- id: fc403c8c-1915-4782-80ce-a5dcf81415f5
   name: Application Info
   description:
     content: 'Returns general details about the UniFi Network application,
@@ -7,7 +7,7 @@ item:
       including version and runtime metadata. Useful for integration validation.'
     type: text/plain
   item:
-  - id: a84fb1ae-e1f2-4666-bea8-5bb29f985d04
+  - id: b5d30700-b894-4214-b6c4-cd3b2aa5ecc3
     name: Get Application Info
     request:
       name: Get Application Info
@@ -32,7 +32,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 8b20a7ea-cdbd-48f4-9f2c-bf8d67208918
+    - id: 06688f53-93d6-4cd0-85a2-93d00f8c68a9
       name: OK
       originalRequest:
         url:
@@ -64,7 +64,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 58bcddcf-b3b6-4bbb-b487-fc2c9fa5ceb3
+- id: 4346acff-d493-4b8a-aaef-12e4563fcb4b
   name: Sites
   description:
     content: 'Endpoints for listing and managing UniFi sites within a local Network
@@ -73,7 +73,7 @@ item:
       Site ID is required for most other API requests.'
     type: text/plain
   item:
-  - id: 83d4fbe5-ed84-4812-be6c-f2c398411009
+  - id: 17359a2e-54bf-42c6-a7d8-13ff28c40d09
     name: List Local Sites
     request:
       name: List Local Sites
@@ -128,7 +128,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 5655a426-51ab-421b-a9aa-467b7250411d
+    - id: 612ed909-becd-4064-b4b3-69603b548dec
       name: OK
       originalRequest:
         url:
@@ -159,9 +159,9 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"478799d3-45ab-f9ba-df04-17bf28578190\"\
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"8bc8ef1c-03a7-db1b-6b58-0475e2e0dd8d\"\
         ,\n      \"internalReference\": \"string\",\n      \"name\": \"string\"\n\
-        \    },\n    {\n      \"id\": \"58c57243-81d5-ef53-1561-dc5858d880ae\",\n\
+        \    },\n    {\n      \"id\": \"6ecf36c7-e851-9d82-abb8-2e3da101743b\",\n\
         \      \"internalReference\": \"string\",\n      \"name\": \"string\"\n  \
         \  }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1000\n}"
       cookie: []
@@ -170,7 +170,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 287e36ea-73eb-426a-9f00-d075de8f2f60
+- id: 9d504606-e2a7-4956-a360-b42e5a2cc125
   name: UniFi Devices
   description:
     content: 'Endpoints to list, inspect, and interact with UniFi devices, including
@@ -179,7 +179,7 @@ item:
       Provides device stats, port control, and actions.'
     type: text/plain
   item:
-  - id: 62b98a6c-2467-441f-a3a0-af3d021742b5
+  - id: 2d96f7ca-8d06-4f1b-a10b-fe3bc4c6344d
     name: List Devices Pending Adoption
     request:
       name: List Devices Pending Adoption
@@ -244,7 +244,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 48577af2-9e09-4da6-bc39-39d579e1c4ce
+    - id: 1a624f1b-d3ba-420a-a9ca-3742152b43f2
       name: OK
       originalRequest:
         url:
@@ -276,17 +276,17 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"adoptionTargetSiteIds\"\
-        : [\n        \"e63a0428-491e-ba12-c28b-4275e11bc1cc\",\n        \"bc758953-f989-8aa7-734c-66ce42c19491\"\
-        \n      ],\n      \"features\": [\n        \"switching\",\n        \"gateway\"\
+        : [\n        \"c1e99bb3-ddcc-fbf7-2637-ec9e25a2c9cc\",\n        \"c63d4bb8-aaad-ff8b-e33c-bfa749549ca4\"\
+        \n      ],\n      \"features\": [\n        \"accessPoint\",\n        \"switching\"\
         \n      ],\n      \"firmwareUpdatable\": true,\n      \"ipAddress\": \"192.168.1.55\"\
         ,\n      \"macAddress\": \"94:2a:6f:26:c6:ca\",\n      \"model\": \"UHDIW\"\
-        ,\n      \"state\": \"UPDATING\",\n      \"supported\": false,\n      \"firmwareVersion\"\
-        : \"6.6.55\"\n    },\n    {\n      \"adoptionTargetSiteIds\": [\n        \"\
-        da5dfe47-bf3a-2e99-a811-4284e7bab07c\",\n        \"0bca5f29-8308-7dcf-bece-5572e87239c0\"\
-        \n      ],\n      \"features\": [\n        \"switching\",\n        \"gateway\"\
-        \n      ],\n      \"firmwareUpdatable\": false,\n      \"ipAddress\": \"192.168.1.55\"\
+        ,\n      \"state\": \"CONNECTION_INTERRUPTED\",\n      \"supported\": false,\n\
+        \      \"firmwareVersion\": \"6.6.55\"\n    },\n    {\n      \"adoptionTargetSiteIds\"\
+        : [\n        \"3668f206-4c96-fdd7-d1bc-4e8b48bef730\",\n        \"c17fbcd6-0c89-719e-8d5c-ae5609de62ba\"\
+        \n      ],\n      \"features\": [\n        \"switching\",\n        \"accessPoint\"\
+        \n      ],\n      \"firmwareUpdatable\": true,\n      \"ipAddress\": \"192.168.1.55\"\
         ,\n      \"macAddress\": \"94:2a:6f:26:c6:ca\",\n      \"model\": \"UHDIW\"\
-        ,\n      \"state\": \"UPDATING\",\n      \"supported\": false,\n      \"firmwareVersion\"\
+        ,\n      \"state\": \"ADOPTING\",\n      \"supported\": false,\n      \"firmwareVersion\"\
         : \"6.6.55\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\"\
         : 1000\n}"
       cookie: []
@@ -294,7 +294,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 0d5874f9-4223-4486-bdec-dd05646e7dee
+  - id: 44a42b69-a3b5-4ade-a681-30b664d9fed9
     name: List Adopted Devices
     request:
       name: List Adopted Devices
@@ -373,7 +373,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: e20ffb63-59cc-40a4-8b16-bfaac0ce8cf8
+    - id: 13c42abc-fbf9-4155-b5df-5e0d79f4b405
       name: OK
       originalRequest:
         url:
@@ -412,26 +412,26 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"features\": [\n  \
-        \      \"gateway\",\n        \"accessPoint\"\n      ],\n      \"firmwareUpdatable\"\
-        : false,\n      \"id\": \"98b32f6d-e824-949b-821c-fad158ccf618\",\n      \"\
+        \      \"switching\",\n        \"accessPoint\"\n      ],\n      \"firmwareUpdatable\"\
+        : false,\n      \"id\": \"5ec4d2f9-71f7-f518-9290-3fb996a9fcce\",\n      \"\
         interfaces\": [\n        \"ports\",\n        \"radios\"\n      ],\n      \"\
         ipAddress\": \"192.168.1.55\",\n      \"macAddress\": \"94:2a:6f:26:c6:ca\"\
         ,\n      \"model\": \"UHDIW\",\n      \"name\": \"IW HD\",\n      \"state\"\
-        : \"DELETING\",\n      \"supported\": true,\n      \"firmwareVersion\": \"\
-        6.6.55\"\n    },\n    {\n      \"features\": [\n        \"switching\",\n \
-        \       \"accessPoint\"\n      ],\n      \"firmwareUpdatable\": true,\n  \
-        \    \"id\": \"bccc6e37-ee94-4c63-1a27-f83fa0e821da\",\n      \"interfaces\"\
-        : [\n        \"ports\",\n        \"radios\"\n      ],\n      \"ipAddress\"\
-        : \"192.168.1.55\",\n      \"macAddress\": \"94:2a:6f:26:c6:ca\",\n      \"\
-        model\": \"UHDIW\",\n      \"name\": \"IW HD\",\n      \"state\": \"GETTING_READY\"\
-        ,\n      \"supported\": true,\n      \"firmwareVersion\": \"6.6.55\"\n   \
-        \ }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1000\n}"
+        : \"ADOPTING\",\n      \"supported\": true,\n      \"firmwareVersion\": \"\
+        6.6.55\"\n    },\n    {\n      \"features\": [\n        \"gateway\",\n   \
+        \     \"switching\"\n      ],\n      \"firmwareUpdatable\": true,\n      \"\
+        id\": \"d86226ce-b247-5859-0578-95dcd611d56e\",\n      \"interfaces\": [\n\
+        \        \"ports\",\n        \"radios\"\n      ],\n      \"ipAddress\": \"\
+        192.168.1.55\",\n      \"macAddress\": \"94:2a:6f:26:c6:ca\",\n      \"model\"\
+        : \"UHDIW\",\n      \"name\": \"IW HD\",\n      \"state\": \"GETTING_READY\"\
+        ,\n      \"supported\": false,\n      \"firmwareVersion\": \"6.6.55\"\n  \
+        \  }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1000\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: e229bec9-998f-4e5d-9b65-357f7afc1092
+  - id: 79ef359c-14bd-4d3f-9c10-5d3c08528a09
     name: Adopt Devices
     request:
       name: Adopt Devices
@@ -472,7 +472,7 @@ item:
           raw:
             language: json
     response:
-    - id: 5d457002-e23d-4493-981c-72f98a540444
+    - id: 73cc4962-afd9-4481-ad4a-a1ad3799d9ea
       name: OK
       originalRequest:
         url:
@@ -515,7 +515,7 @@ item:
         \   {\n          \"value\": \"<Error: Too many levels of nesting to fake this\
         \ schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many\
         \ levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n\
-        \  \"firmwareUpdatable\": false,\n  \"id\": \"dfa0b9c5-32f1-f946-755e-4939fede8541\"\
+        \  \"firmwareUpdatable\": true,\n  \"id\": \"742494e5-fe60-7233-b666-db2e6b6530b5\"\
         ,\n  \"interfaces\": {\n    \"ports\": [\n      {\n        \"connector\":\
         \ {\n          \"value\": \"<Error: Too many levels of nesting to fake this\
         \ schema>\"\n        },\n        \"idx\": {\n          \"value\": \"<Error:\
@@ -551,16 +551,16 @@ item:
         \        \"channel\": {\n          \"value\": \"<Error: Too many levels of\
         \ nesting to fake this schema>\"\n        }\n      }\n    ]\n  },\n  \"ipAddress\"\
         : \"192.168.1.55\",\n  \"macAddress\": \"94:2a:6f:26:c6:ca\",\n  \"model\"\
-        : \"UHDIW\",\n  \"name\": \"IW HD\",\n  \"state\": \"ONLINE\",\n  \"supported\"\
-        : true,\n  \"adoptedAt\": \"1962-06-23T22:09:17.107Z\",\n  \"firmwareVersion\"\
-        : \"6.6.55\",\n  \"provisionedAt\": \"1972-10-27T23:51:48.916Z\",\n  \"uplink\"\
-        : {\n    \"deviceId\": \"f39e5ac1-019b-5a28-94b2-73872c5efaa1\"\n  }\n}"
+        : \"UHDIW\",\n  \"name\": \"IW HD\",\n  \"state\": \"DELETING\",\n  \"supported\"\
+        : false,\n  \"adoptedAt\": \"1987-04-16T01:48:32.370Z\",\n  \"firmwareVersion\"\
+        : \"6.6.55\",\n  \"provisionedAt\": \"1959-08-14T07:54:41.385Z\",\n  \"uplink\"\
+        : {\n    \"deviceId\": \"2bd50312-44e8-1e73-e4b9-e966556d9217\"\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 3c070ce8-7734-452a-a2ab-d7f2dabf2f06
+  - id: e5189cb1-a6f6-4a44-aeb4-91f12804e252
     name: Remove (Unadopt) Device
     request:
       name: Remove (Unadopt) Device
@@ -596,7 +596,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: 60abd297-1566-4a24-9034-afc81e88fe36
+    - id: 60ebd6ac-3a15-4a72-989f-8636776b8a8a
       name: OK
       originalRequest:
         url:
@@ -637,7 +637,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 3ca45954-6dd0-4c9f-98e9-206c39e40f1d
+  - id: ceacc568-d803-4e18-b3bd-6be841bcaa0e
     name: Get Adopted Device Details
     request:
       name: Get Adopted Device Details
@@ -677,7 +677,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: cf4be4eb-c01a-4dff-9070-b39a4deee789
+    - id: 9a80ae6a-256e-4a98-bccc-a59ab382cf2a
       name: OK
       originalRequest:
         url:
@@ -720,7 +720,7 @@ item:
         \   {\n          \"value\": \"<Error: Too many levels of nesting to fake this\
         \ schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many\
         \ levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n\
-        \  \"firmwareUpdatable\": false,\n  \"id\": \"dfa0b9c5-32f1-f946-755e-4939fede8541\"\
+        \  \"firmwareUpdatable\": true,\n  \"id\": \"742494e5-fe60-7233-b666-db2e6b6530b5\"\
         ,\n  \"interfaces\": {\n    \"ports\": [\n      {\n        \"connector\":\
         \ {\n          \"value\": \"<Error: Too many levels of nesting to fake this\
         \ schema>\"\n        },\n        \"idx\": {\n          \"value\": \"<Error:\
@@ -756,16 +756,16 @@ item:
         \        \"channel\": {\n          \"value\": \"<Error: Too many levels of\
         \ nesting to fake this schema>\"\n        }\n      }\n    ]\n  },\n  \"ipAddress\"\
         : \"192.168.1.55\",\n  \"macAddress\": \"94:2a:6f:26:c6:ca\",\n  \"model\"\
-        : \"UHDIW\",\n  \"name\": \"IW HD\",\n  \"state\": \"ONLINE\",\n  \"supported\"\
-        : true,\n  \"adoptedAt\": \"1962-06-23T22:09:17.107Z\",\n  \"firmwareVersion\"\
-        : \"6.6.55\",\n  \"provisionedAt\": \"1972-10-27T23:51:48.916Z\",\n  \"uplink\"\
-        : {\n    \"deviceId\": \"f39e5ac1-019b-5a28-94b2-73872c5efaa1\"\n  }\n}"
+        : \"UHDIW\",\n  \"name\": \"IW HD\",\n  \"state\": \"DELETING\",\n  \"supported\"\
+        : false,\n  \"adoptedAt\": \"1987-04-16T01:48:32.370Z\",\n  \"firmwareVersion\"\
+        : \"6.6.55\",\n  \"provisionedAt\": \"1959-08-14T07:54:41.385Z\",\n  \"uplink\"\
+        : {\n    \"deviceId\": \"2bd50312-44e8-1e73-e4b9-e966556d9217\"\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 4347adbc-1482-4770-9bf0-040d78e19acc
+  - id: 216f112d-917b-4387-808b-7565600f824f
     name: Execute Adopted Device Action
     request:
       name: Execute Adopted Device Action
@@ -811,7 +811,7 @@ item:
           raw:
             language: json
     response:
-    - id: 77482e6f-893f-4f3e-bbf0-fade63f3d6c1
+    - id: bb61ffec-3b08-4f5d-aad5-d6e93b52427d
       name: OK
       originalRequest:
         url:
@@ -858,7 +858,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 17b0feda-7dec-4b39-affc-38961552366d
+  - id: 633d96db-5357-4d73-a6e5-d0d4da498904
     name: Execute Port Action
     request:
       name: Execute Port Action
@@ -912,7 +912,7 @@ item:
           raw:
             language: json
     response:
-    - id: 4fd1e25f-8583-4e95-8edc-989b66114cbd
+    - id: 5addcb25-9139-4b91-aaf5-ab05b8298dc2
       name: OK
       originalRequest:
         url:
@@ -967,7 +967,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 46b0506b-350c-4b8f-9182-72f569fcc7c8
+  - id: e0e6094d-331e-4d87-8006-1dd7714ba0ad
     name: Get Latest Adopted Device Statistics
     request:
       name: Get Latest Adopted Device Statistics
@@ -1008,7 +1008,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 9a427643-a3c7-444d-a649-e8528836f630
+    - id: 099d2cb2-dcc0-4882-bdd3-6f86a21ef79c
       name: OK
       originalRequest:
         url:
@@ -1056,19 +1056,19 @@ item:
         \ Too many levels of nesting to fake this schema>\"\n        },\n        \"\
         txRetriesPct\": {\n          \"value\": \"<Error: Too many levels of nesting\
         \ to fake this schema>\"\n        }\n      }\n    ]\n  },\n  \"cpuUtilizationPct\"\
-        : 4537.8214196645895,\n  \"lastHeartbeatAt\": \"1957-04-26T22:25:25.059Z\"\
-        ,\n  \"loadAverage15Min\": 2946.838432521377,\n  \"loadAverage1Min\": 1169.1379422131388,\n\
-        \  \"loadAverage5Min\": 662.1411136615252,\n  \"memoryUtilizationPct\": 8602.06012806463,\n\
-        \  \"nextHeartbeatAt\": \"2008-03-16T09:00:11.032Z\",\n  \"uplink\": {\n \
-        \   \"rxRateBps\": 5926,\n    \"txRateBps\": 6715\n  },\n  \"uptimeSec\":\
-        \ 7234\n}"
+        : 9330.157174623973,\n  \"lastHeartbeatAt\": \"1988-12-08T11:56:33.738Z\"\
+        ,\n  \"loadAverage15Min\": 8802.304244202414,\n  \"loadAverage1Min\": 3336.9282807064437,\n\
+        \  \"loadAverage5Min\": 136.40741565753567,\n  \"memoryUtilizationPct\": 5949.1068145845475,\n\
+        \  \"nextHeartbeatAt\": \"2011-11-15T06:16:59.011Z\",\n  \"uplink\": {\n \
+        \   \"rxRateBps\": 7837,\n    \"txRateBps\": 7694\n  },\n  \"uptimeSec\":\
+        \ 8953\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 81d37a67-dabd-41ea-a743-55a9c8902fd0
+- id: 7e3086de-0485-4cae-a5be-945940874593
   name: Clients
   description:
     content: 'Endpoints for viewing and managing connected clients (wired, wireless,
@@ -1077,7 +1077,7 @@ item:
       Supports actions such as authorizing or unauthorizing guest access.'
     type: text/plain
   item:
-  - id: bb8a039a-603f-45a2-bcf0-50b27703564d
+  - id: aed486de-595f-46d6-8eb1-2650714f617e
     name: List Connected Clients
     request:
       name: List Connected Clients
@@ -1146,7 +1146,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 01696a85-67db-4d8c-b08f-938a6ab40148
+    - id: f00b7aa8-cc9f-46cc-8250-9eaadfa21ce3
       name: OK
       originalRequest:
         url:
@@ -1185,11 +1185,11 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"access\": {},\n  \
-        \    \"id\": \"ef634a6e-74a4-15d1-b4a1-5d72f2b75310\",\n      \"name\": \"\
-        string\",\n      \"type\": \"string\",\n      \"connectedAt\": \"1989-09-05T05:34:48.179Z\"\
+        \    \"id\": \"c6c1ab91-d169-76ba-cd15-1917b1c43825\",\n      \"name\": \"\
+        string\",\n      \"type\": \"string\",\n      \"connectedAt\": \"1990-07-20T04:04:51.444Z\"\
         ,\n      \"ipAddress\": \"string\"\n    },\n    {\n      \"access\": {},\n\
-        \      \"id\": \"d37ff7f0-79ea-2435-8724-cccf34994cd3\",\n      \"name\":\
-        \ \"string\",\n      \"type\": \"string\",\n      \"connectedAt\": \"1969-01-10T04:05:06.806Z\"\
+        \      \"id\": \"68fd7533-bb1e-9b06-c7e4-f2c6a1965b91\",\n      \"name\":\
+        \ \"string\",\n      \"type\": \"string\",\n      \"connectedAt\": \"2025-01-01T06:59:57.348Z\"\
         ,\n      \"ipAddress\": \"string\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\"\
         : 0,\n  \"totalCount\": 1000\n}"
       cookie: []
@@ -1197,7 +1197,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 70516814-c20b-4663-99c6-b7d51d1e2c4c
+  - id: cb82a9d5-8b88-42df-bfde-c40d21a11788
     name: Get Connected Client Details
     request:
       name: Get Connected Client Details
@@ -1236,7 +1236,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: ffb574a5-fe7f-4462-b2ed-654a16dfe2b2
+    - id: 4b53391e-53c6-421b-a76b-7e1ec80917b8
       name: OK
       originalRequest:
         url:
@@ -1274,15 +1274,15 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"access\": \"\",\n  \"id\": \"e2bf735e-b985-e08d-ad0b-faf7b551c9f8\"\
+      body: "{\n  \"access\": \"\",\n  \"id\": \"13073259-7565-fe34-9080-f78de6ff6273\"\
         ,\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"connectedAt\": \"\
-        1994-12-31T03:36:02.638Z\",\n  \"ipAddress\": \"string\"\n}"
+        1968-07-08T04:42:04.341Z\",\n  \"ipAddress\": \"string\"\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 500b1438-3625-4d26-ba1d-fe6be183ffd6
+  - id: dab3a5af-993c-4a88-8d19-17703118d71c
     name: Execute Client Action
     request:
       name: Execute Client Action
@@ -1330,7 +1330,7 @@ item:
           raw:
             language: json
     response:
-    - id: 062cbe94-201f-45f5-a1d4-e47e372192fb
+    - id: b73a9c6b-95e0-4de4-aa8a-f1c89087d347
       name: OK
       originalRequest:
         url:
@@ -1381,7 +1381,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: b5c3fac7-1eb5-43fe-94ea-b767909a7893
+- id: 75996b01-ca5a-46a2-947a-4f9e853d3277
   name: Networks
   description:
     content: 'Endpoints for creating, updating, deleting, and inspecting network configurations
@@ -1389,7 +1389,7 @@ item:
       including VLANs, DHCP, NAT, and IPv4/IPv6 settings.'
     type: text/plain
   item:
-  - id: ddffb07b-4007-4550-89a3-a29c04c0fefd
+  - id: e66252dc-a01f-4360-90df-c093d6d835e0
     name: List Networks
     request:
       name: List Networks
@@ -1456,7 +1456,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 1722ba53-2fc6-4b97-a0c1-a87dcdb15499
+    - id: d9784ea3-2758-41d8-83c0-cacc565f85db
       name: OK
       originalRequest:
         url:
@@ -1495,23 +1495,23 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"default\": false,\n\
-        \      \"enabled\": false,\n      \"id\": \"4563fcc6-0169-fe0f-7c45-a2234f140e57\"\
+        \      \"enabled\": true,\n      \"id\": \"4d4ad6c1-71d6-fa4a-1313-22d26661dc6f\"\
         ,\n      \"management\": \"string\",\n      \"metadata\": {\n        \"origin\"\
         : {\n          \"value\": \"<Error: Too many levels of nesting to fake this\
         \ schema>\"\n        }\n      },\n      \"name\": \"Default Network\",\n \
-        \     \"vlanId\": 424\n    },\n    {\n      \"default\": true,\n      \"enabled\"\
-        : false,\n      \"id\": \"b0e32348-9f15-0495-838a-12e96f0871ac\",\n      \"\
+        \     \"vlanId\": 361\n    },\n    {\n      \"default\": true,\n      \"enabled\"\
+        : false,\n      \"id\": \"9fb16e33-7c92-345c-9853-8de0e5f2e5c6\",\n      \"\
         management\": \"string\",\n      \"metadata\": {\n        \"origin\": {\n\
         \          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\
         \n        }\n      },\n      \"name\": \"Default Network\",\n      \"vlanId\"\
-        : 3033\n    }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\"\
+        : 1991\n    }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\"\
         : 1000\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 1cef171d-b3ab-4ecb-8b2c-3c71e912f04c
+  - id: 0aa46550-d0a8-4ee1-b3d2-1deaffed54ba
     name: Create Network
     request:
       name: Create Network
@@ -1554,7 +1554,7 @@ item:
           raw:
             language: json
     response:
-    - id: 895594f9-2b37-4100-b3d3-a959ad35acf6
+    - id: 54e86aa3-278e-49ba-b8c4-9c1cd7de29ff
       name: Created
       originalRequest:
         url:
@@ -1594,9 +1594,9 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"default\": true,\n  \"enabled\": true,\n  \"id\": \"03074b82-9ccd-c75d-e3ff-0d94a1c33e36\"\
+      body: "{\n  \"default\": false,\n  \"enabled\": true,\n  \"id\": \"82b05602-983c-df7f-b66f-72120e37bfc0\"\
         ,\n  \"management\": \"string\",\n  \"metadata\": {\n    \"origin\": \"string\"\
-        \n  },\n  \"name\": \"Default Network\",\n  \"vlanId\": 926,\n  \"dhcpGuarding\"\
+        \n  },\n  \"name\": \"Default Network\",\n  \"vlanId\": 2516,\n  \"dhcpGuarding\"\
         : {\n    \"trustedDhcpServerIpAddresses\": [\n      \"string\"\n    ]\n  }\n\
         }"
       cookie: []
@@ -1604,7 +1604,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: abe8eea2-dbd7-4fde-a19a-09a43aa2b156
+  - id: dd21ad4b-0994-4160-aa0d-56a6c803b509
     name: Delete Network
     request:
       name: Delete Network
@@ -1642,7 +1642,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: 997a6916-5928-42f7-a9e9-8df22a5d56ad
+    - id: a9dff045-f7b5-4cde-83fe-bd9b01def8a8
       name: OK
       originalRequest:
         url:
@@ -1685,7 +1685,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: dd411a79-18bd-44e0-b05e-e50149e562da
+  - id: 368fbf21-3086-4c1f-b1b6-dcd05456277e
     name: Get Network Details
     request:
       name: Get Network Details
@@ -1723,7 +1723,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 059a2fc2-d1ab-459f-86cf-a8640cc7deb5
+    - id: eeab78d0-20fa-4ff2-8e11-7f6048e5188c
       name: OK
       originalRequest:
         url:
@@ -1761,9 +1761,9 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"default\": true,\n  \"enabled\": true,\n  \"id\": \"03074b82-9ccd-c75d-e3ff-0d94a1c33e36\"\
+      body: "{\n  \"default\": false,\n  \"enabled\": true,\n  \"id\": \"82b05602-983c-df7f-b66f-72120e37bfc0\"\
         ,\n  \"management\": \"string\",\n  \"metadata\": {\n    \"origin\": \"string\"\
-        \n  },\n  \"name\": \"Default Network\",\n  \"vlanId\": 926,\n  \"dhcpGuarding\"\
+        \n  },\n  \"name\": \"Default Network\",\n  \"vlanId\": 2516,\n  \"dhcpGuarding\"\
         : {\n    \"trustedDhcpServerIpAddresses\": [\n      \"string\"\n    ]\n  }\n\
         }"
       cookie: []
@@ -1771,7 +1771,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 1b44be02-1de4-49ad-94f5-62c49dac50a6
+  - id: 6ccd130c-fe3a-4588-ba1f-060575426634
     name: Update Network
     request:
       name: Update Network
@@ -1820,7 +1820,7 @@ item:
           raw:
             language: json
     response:
-    - id: 6cb58789-360a-4435-9539-c09aa2e3d840
+    - id: 88bada3e-f138-4d2c-bf06-b2578decb6ad
       name: OK
       originalRequest:
         url:
@@ -1866,9 +1866,9 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"default\": true,\n  \"enabled\": true,\n  \"id\": \"03074b82-9ccd-c75d-e3ff-0d94a1c33e36\"\
+      body: "{\n  \"default\": false,\n  \"enabled\": true,\n  \"id\": \"82b05602-983c-df7f-b66f-72120e37bfc0\"\
         ,\n  \"management\": \"string\",\n  \"metadata\": {\n    \"origin\": \"string\"\
-        \n  },\n  \"name\": \"Default Network\",\n  \"vlanId\": 926,\n  \"dhcpGuarding\"\
+        \n  },\n  \"name\": \"Default Network\",\n  \"vlanId\": 2516,\n  \"dhcpGuarding\"\
         : {\n    \"trustedDhcpServerIpAddresses\": [\n      \"string\"\n    ]\n  }\n\
         }"
       cookie: []
@@ -1876,7 +1876,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: dd1f9b25-3839-49b5-bb32-e1cb10597e78
+  - id: 95039ec8-4580-47fb-bfbb-85a60437d6e6
     name: Get Network References
     request:
       name: Get Network References
@@ -1915,7 +1915,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 4150e02b-1aa6-438d-8644-4c827b9ce353
+    - id: c00c119b-8b7b-43e3-aa5c-fda95884ec3f
       name: OK
       originalRequest:
         url:
@@ -1954,12 +1954,12 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"referenceResources\": [\n    {\n      \"referenceCount\": 5841,\n\
-        \      \"resourceType\": \"CLIENT\",\n      \"references\": [\n        {\n\
-        \          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\
+      body: "{\n  \"referenceResources\": [\n    {\n      \"referenceCount\": 3503,\n\
+        \      \"resourceType\": \"WIFI\",\n      \"references\": [\n        {\n \
+        \         \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\
         \n        },\n        {\n          \"value\": \"<Error: Too many levels of\
         \ nesting to fake this schema>\"\n        }\n      ]\n    },\n    {\n    \
-        \  \"referenceCount\": 3193,\n      \"resourceType\": \"WIFI\",\n      \"\
+        \  \"referenceCount\": 7580,\n      \"resourceType\": \"DEVICE\",\n      \"\
         references\": [\n        {\n          \"value\": \"<Error: Too many levels\
         \ of nesting to fake this schema>\"\n        },\n        {\n          \"value\"\
         : \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n\
@@ -1970,7 +1970,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 2dc4e476-2195-4b67-95fc-abac70991c54
+- id: 919d3904-2683-4421-8f7e-b05a5f2c8821
   name: WiFi Broadcasts
   description:
     content: 'Endpoints to create, update, or remove WiFi networks (SSIDs).
@@ -1979,7 +1979,7 @@ item:
       captive portals.'
     type: text/plain
   item:
-  - id: 375eb807-f359-48bb-a90e-8c7a12777fbb
+  - id: 3024def8-3997-493b-9c16-8eefda4c6a3f
     name: List Wifi Broadcasts
     request:
       name: List Wifi Broadcasts
@@ -2063,7 +2063,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 600fe2a9-2567-493a-a17d-71adfb739c6a
+    - id: 16ac0def-ef98-4234-9a14-18ee46ab5f8d
       name: OK
       originalRequest:
         url:
@@ -2103,7 +2103,7 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"enabled\": true,\n\
-        \      \"id\": \"f4298f90-cd77-2a08-9e9b-0033232188a6\",\n      \"metadata\"\
+        \      \"id\": \"38f7f6b2-60ec-1564-8160-cf3a6eca089a\",\n      \"metadata\"\
         : {\n        \"origin\": {\n          \"value\": \"<Error: Too many levels\
         \ of nesting to fake this schema>\"\n        }\n      },\n      \"name\":\
         \ \"string\",\n      \"securityConfiguration\": {\n        \"type\": {\n \
@@ -2113,7 +2113,7 @@ item:
         \ nesting to fake this schema>\"\n        }\n      },\n      \"network\":\
         \ {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of\
         \ nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n    \
-        \  \"enabled\": false,\n      \"id\": \"7cbe786e-85c9-0378-a565-88449c29e2d2\"\
+        \  \"enabled\": true,\n      \"id\": \"36ff61aa-84ed-0f93-6021-e31c791419eb\"\
         ,\n      \"metadata\": {\n        \"origin\": {\n          \"value\": \"<Error:\
         \ Too many levels of nesting to fake this schema>\"\n        }\n      },\n\
         \      \"name\": \"string\",\n      \"securityConfiguration\": {\n       \
@@ -2130,7 +2130,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: b16b6e0f-2c16-4125-9214-07b0aeab7c16
+  - id: 663515c5-d7d2-4260-8696-b79972e2b31c
     name: Create Wifi Broadcast
     request:
       name: Create Wifi Broadcast
@@ -2192,7 +2192,7 @@ item:
           raw:
             language: json
     response:
-    - id: 6bbb042e-cd67-482d-9321-bc6519067a4f
+    - id: 1aacedba-5f9e-430c-9888-7672bcfa8f32
       name: Created
       originalRequest:
         url:
@@ -2227,13 +2227,13 @@ item:
             : \"<boolean>\",\n  \"name\": \"<string>\",\n  \"securityConfiguration\"\
             : {\n    \"type\": \"string\",\n    \"radiusConfiguration\": \"\"\n  },\n\
             \  \"type\": \"<string>\",\n  \"uapsdEnabled\": \"<boolean>\",\n  \"basicDataRateKbpsByFrequencyGHz\"\
-            : {\n    \"5\": 6000,\n    \"2.4\": 1000\n  },\n  \"blackoutScheduleConfiguration\"\
+            : {\n    \"5\": 9000,\n    \"2.4\": 1000\n  },\n  \"blackoutScheduleConfiguration\"\
             : {\n    \"days\": [\n      {\n        \"day\": {\n          \"value\"\
             : \"<Error: Too many levels of nesting to fake this schema>\"\n      \
             \  },\n        \"type\": {\n          \"value\": \"<Error: Too many levels\
             \ of nesting to fake this schema>\"\n        }\n      }\n    ]\n  },\n\
             \  \"broadcastingDeviceFilter\": {\n    \"type\": \"string\"\n  },\n \
-            \ \"clientFilteringPolicy\": {\n    \"action\": \"BLOCK\",\n    \"macAddressFilter\"\
+            \ \"clientFilteringPolicy\": {\n    \"action\": \"ALLOW\",\n    \"macAddressFilter\"\
             : [\n      \"string\"\n    ]\n  },\n  \"mdnsProxyConfiguration\": {\n\
             \    \"mode\": \"string\"\n  },\n  \"multicastFilteringPolicy\": {\n \
             \   \"action\": \"string\"\n  },\n  \"network\": {\n    \"type\": \"string\"\
@@ -2246,9 +2246,9 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"channel2gLockedTo6\": true,\n  \"clientIsolationEnabled\": true,\n\
+      body: "{\n  \"channel2gLockedTo6\": false,\n  \"clientIsolationEnabled\": false,\n\
         \  \"dtimPeriod2gLockedTo3\": false,\n  \"enabled\": true,\n  \"hideName\"\
-        : true,\n  \"id\": \"4bece679-440b-f583-cc74-04858d656578\",\n  \"metadata\"\
+        : false,\n  \"id\": \"fbd68385-60af-4f7e-8800-49387f8f5140\",\n  \"metadata\"\
         : {\n    \"origin\": \"string\"\n  },\n  \"multicastToUnicastConversionEnabled\"\
         : true,\n  \"name\": \"string\",\n  \"securityConfiguration\": {\n    \"type\"\
         : \"string\",\n    \"radiusConfiguration\": \"\"\n  },\n  \"type\": \"string\"\
@@ -2268,7 +2268,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 9fcf366e-ff2b-4089-9eb0-6e1cca9af224
+  - id: 44c5d27d-b9f5-4b4a-ac88-0ff243c5ec9e
     name: Delete Wifi Broadcast
     request:
       name: Delete Wifi Broadcast
@@ -2307,7 +2307,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: 019e78c8-a69b-4693-b3ef-b1ee66fed9fc
+    - id: 3bca8d64-39c5-4ee2-a2b0-e66bad487410
       name: OK
       originalRequest:
         url:
@@ -2351,7 +2351,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: ced4f8c8-3380-4062-a066-f129480e18e9
+  - id: cca83360-23a7-4710-ba4e-149c253c2dee
     name: Get Wifi Broadcast Details
     request:
       name: Get Wifi Broadcast Details
@@ -2390,7 +2390,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 50dd48d9-bf31-4445-acdf-12f0ea943909
+    - id: 8faca1a4-caf0-4c56-a39b-a09e392f8fbc
       name: OK
       originalRequest:
         url:
@@ -2429,9 +2429,9 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"channel2gLockedTo6\": true,\n  \"clientIsolationEnabled\": true,\n\
+      body: "{\n  \"channel2gLockedTo6\": false,\n  \"clientIsolationEnabled\": false,\n\
         \  \"dtimPeriod2gLockedTo3\": false,\n  \"enabled\": true,\n  \"hideName\"\
-        : true,\n  \"id\": \"4bece679-440b-f583-cc74-04858d656578\",\n  \"metadata\"\
+        : false,\n  \"id\": \"fbd68385-60af-4f7e-8800-49387f8f5140\",\n  \"metadata\"\
         : {\n    \"origin\": \"string\"\n  },\n  \"multicastToUnicastConversionEnabled\"\
         : true,\n  \"name\": \"string\",\n  \"securityConfiguration\": {\n    \"type\"\
         : \"string\",\n    \"radiusConfiguration\": \"\"\n  },\n  \"type\": \"string\"\
@@ -2451,7 +2451,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 5fec0945-1269-4b1e-8392-9bc64ce0f8a9
+  - id: 500020b7-34e5-4d4e-967e-fd73d59fdb0e
     name: Update Wifi Broadcast
     request:
       name: Update Wifi Broadcast
@@ -2519,7 +2519,7 @@ item:
           raw:
             language: json
     response:
-    - id: d179e926-9755-4847-86ad-0026399b28d2
+    - id: e866957b-09e5-4886-aceb-86774becf521
       name: OK
       originalRequest:
         url:
@@ -2560,13 +2560,13 @@ item:
             : \"<boolean>\",\n  \"name\": \"<string>\",\n  \"securityConfiguration\"\
             : {\n    \"type\": \"string\",\n    \"radiusConfiguration\": \"\"\n  },\n\
             \  \"type\": \"<string>\",\n  \"uapsdEnabled\": \"<boolean>\",\n  \"basicDataRateKbpsByFrequencyGHz\"\
-            : {\n    \"5\": 6000,\n    \"2.4\": 1000\n  },\n  \"blackoutScheduleConfiguration\"\
+            : {\n    \"5\": 9000,\n    \"2.4\": 1000\n  },\n  \"blackoutScheduleConfiguration\"\
             : {\n    \"days\": [\n      {\n        \"day\": {\n          \"value\"\
             : \"<Error: Too many levels of nesting to fake this schema>\"\n      \
             \  },\n        \"type\": {\n          \"value\": \"<Error: Too many levels\
             \ of nesting to fake this schema>\"\n        }\n      }\n    ]\n  },\n\
             \  \"broadcastingDeviceFilter\": {\n    \"type\": \"string\"\n  },\n \
-            \ \"clientFilteringPolicy\": {\n    \"action\": \"BLOCK\",\n    \"macAddressFilter\"\
+            \ \"clientFilteringPolicy\": {\n    \"action\": \"ALLOW\",\n    \"macAddressFilter\"\
             : [\n      \"string\"\n    ]\n  },\n  \"mdnsProxyConfiguration\": {\n\
             \    \"mode\": \"string\"\n  },\n  \"multicastFilteringPolicy\": {\n \
             \   \"action\": \"string\"\n  },\n  \"network\": {\n    \"type\": \"string\"\
@@ -2579,9 +2579,9 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"channel2gLockedTo6\": true,\n  \"clientIsolationEnabled\": true,\n\
+      body: "{\n  \"channel2gLockedTo6\": false,\n  \"clientIsolationEnabled\": false,\n\
         \  \"dtimPeriod2gLockedTo3\": false,\n  \"enabled\": true,\n  \"hideName\"\
-        : true,\n  \"id\": \"4bece679-440b-f583-cc74-04858d656578\",\n  \"metadata\"\
+        : false,\n  \"id\": \"fbd68385-60af-4f7e-8800-49387f8f5140\",\n  \"metadata\"\
         : {\n    \"origin\": \"string\"\n  },\n  \"multicastToUnicastConversionEnabled\"\
         : true,\n  \"name\": \"string\",\n  \"securityConfiguration\": {\n    \"type\"\
         : \"string\",\n    \"radiusConfiguration\": \"\"\n  },\n  \"type\": \"string\"\
@@ -2602,7 +2602,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 4ba7c059-c818-4724-a11e-5ae9fd6a3f89
+- id: 820dac07-c3c3-4508-98e9-d71ffbd93e8b
   name: Hotspot
   description:
     content: 'Endpoints for managing guest access via Hotspot vouchers — create, list,
@@ -2611,7 +2611,7 @@ item:
       and track their usage and expiration.'
     type: text/plain
   item:
-  - id: e7ee7536-35d1-433e-84f3-cc654f2f63cc
+  - id: c1ff6b5b-2b6f-43a9-9395-79006eb09079
     name: Delete Vouchers
     request:
       name: Delete Vouchers
@@ -2690,7 +2690,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: da7028a4-4007-4d35-ba96-0a83adefee3e
+    - id: 5da8bcc0-f69f-4a6b-b453-85a839151f53
       name: OK
       originalRequest:
         url:
@@ -2725,13 +2725,13 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"vouchersDeleted\": 6301\n}"
+      body: "{\n  \"vouchersDeleted\": 3277\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: b97e24ed-5ad1-42e2-aa9c-d4aa4346027c
+  - id: 177cf942-0fc3-46c2-b4f4-2a9f93b2efdd
     name: List Vouchers
     request:
       name: List Vouchers
@@ -2815,7 +2815,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: e2651e66-81dd-4248-913f-ea799b7228ee
+    - id: fc96d075-a20b-48c7-a0e9-93f1e3ba1b63
       name: OK
       originalRequest:
         url:
@@ -2855,18 +2855,18 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"authorizedGuestCount\"\
-        : 0,\n      \"code\": \"string\",\n      \"createdAt\": \"1981-08-27T13:01:05.416Z\"\
-        ,\n      \"expired\": true,\n      \"id\": \"62e87324-e114-aa10-bb71-0a2bcb746eb7\"\
+        : 0,\n      \"code\": \"string\",\n      \"createdAt\": \"1989-11-26T18:55:52.001Z\"\
+        ,\n      \"expired\": true,\n      \"id\": \"d1a2eb0f-1184-8dd7-3f26-8e8884869312\"\
         ,\n      \"name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n \
-        \     \"activatedAt\": \"1977-06-27T15:03:20.515Z\",\n      \"authorizedGuestLimit\"\
-        : 1,\n      \"dataUsageLimitMBytes\": 1024,\n      \"expiresAt\": \"2007-04-06T10:25:12.616Z\"\
+        \     \"activatedAt\": \"2019-07-28T18:52:20.916Z\",\n      \"authorizedGuestLimit\"\
+        : 1,\n      \"dataUsageLimitMBytes\": 1024,\n      \"expiresAt\": \"1981-04-30T16:24:39.386Z\"\
         ,\n      \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n   \
         \ },\n    {\n      \"authorizedGuestCount\": 0,\n      \"code\": \"string\"\
-        ,\n      \"createdAt\": \"1952-08-16T10:49:59.590Z\",\n      \"expired\":\
-        \ true,\n      \"id\": \"60a06333-2662-430e-e227-7afea74c4de5\",\n      \"\
+        ,\n      \"createdAt\": \"1952-06-06T10:48:47.265Z\",\n      \"expired\":\
+        \ false,\n      \"id\": \"73f38e9f-dd43-5877-0af0-484d080b131c\",\n      \"\
         name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n      \"activatedAt\"\
-        : \"1989-10-29T09:27:59.544Z\",\n      \"authorizedGuestLimit\": 1,\n    \
-        \  \"dataUsageLimitMBytes\": 1024,\n      \"expiresAt\": \"1983-02-14T03:33:00.556Z\"\
+        : \"1948-08-02T20:06:03.873Z\",\n      \"authorizedGuestLimit\": 1,\n    \
+        \  \"dataUsageLimitMBytes\": 1024,\n      \"expiresAt\": \"1994-05-27T10:30:41.512Z\"\
         ,\n      \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n   \
         \ }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1000\n}"
       cookie: []
@@ -2874,7 +2874,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: d2319448-a609-4813-b5e6-7e49167d0f8c
+  - id: 08452e0e-8ae4-4094-9b43-0b00ea2c5580
     name: Generate Vouchers
     request:
       name: Generate Vouchers
@@ -2918,7 +2918,7 @@ item:
           raw:
             language: json
     response:
-    - id: 651b5add-2bff-40f1-8c3e-5b11003437b2
+    - id: 2b725ef9-7204-4bc0-a638-65420444c9e5
       name: Created
       originalRequest:
         url:
@@ -2960,18 +2960,18 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"vouchers\": [\n    {\n      \"authorizedGuestCount\": 0,\n   \
-        \   \"code\": \"string\",\n      \"createdAt\": \"1965-03-21T23:33:33.070Z\"\
-        ,\n      \"expired\": false,\n      \"id\": \"8122fb09-8c77-74a1-fc9d-f4e57e639649\"\
+        \   \"code\": \"string\",\n      \"createdAt\": \"1979-10-04T18:01:52.327Z\"\
+        ,\n      \"expired\": false,\n      \"id\": \"88f95021-9c38-317b-395f-70b437bc7bc6\"\
         ,\n      \"name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n \
-        \     \"activatedAt\": \"2005-03-10T06:00:47.089Z\",\n      \"authorizedGuestLimit\"\
-        : 1,\n      \"dataUsageLimitMBytes\": 1024,\n      \"expiresAt\": \"1970-12-11T17:04:01.519Z\"\
+        \     \"activatedAt\": \"1982-09-25T07:33:47.171Z\",\n      \"authorizedGuestLimit\"\
+        : 1,\n      \"dataUsageLimitMBytes\": 1024,\n      \"expiresAt\": \"1964-11-04T07:41:46.377Z\"\
         ,\n      \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n   \
         \ },\n    {\n      \"authorizedGuestCount\": 0,\n      \"code\": \"string\"\
-        ,\n      \"createdAt\": \"2016-09-29T04:27:27.541Z\",\n      \"expired\":\
-        \ false,\n      \"id\": \"e3824e3f-cbbf-6dee-536a-376302925c11\",\n      \"\
+        ,\n      \"createdAt\": \"2002-01-21T16:53:10.961Z\",\n      \"expired\":\
+        \ true,\n      \"id\": \"1380fd1a-fb96-2ba4-bde4-50c691855e91\",\n      \"\
         name\": \"hotel-guest\",\n      \"timeLimitMinutes\": 1440,\n      \"activatedAt\"\
-        : \"1949-12-23T01:38:06.406Z\",\n      \"authorizedGuestLimit\": 1,\n    \
-        \  \"dataUsageLimitMBytes\": 1024,\n      \"expiresAt\": \"1955-06-04T06:59:44.884Z\"\
+        : \"1985-06-23T10:40:31.255Z\",\n      \"authorizedGuestLimit\": 1,\n    \
+        \  \"dataUsageLimitMBytes\": 1024,\n      \"expiresAt\": \"1976-09-16T14:50:33.513Z\"\
         ,\n      \"rxRateLimitKbps\": 1000,\n      \"txRateLimitKbps\": 1000\n   \
         \ }\n  ]\n}"
       cookie: []
@@ -2979,7 +2979,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 50b97099-9067-4e6a-b146-1d8ef08f0558
+  - id: 5cc3e63a-e2e1-4b07-9f86-fd36b14eeafc
     name: Delete Voucher
     request:
       name: Delete Voucher
@@ -3018,7 +3018,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: 9b789157-6e33-4d2e-ba88-778f8915fe1e
+    - id: bfeababb-ad76-4d01-998d-2d00befb0c71
       name: OK
       originalRequest:
         url:
@@ -3057,13 +3057,13 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"vouchersDeleted\": 6301\n}"
+      body: "{\n  \"vouchersDeleted\": 3277\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 86993afb-87b8-4bf0-b102-36dff966c21f
+  - id: 4f69930d-422d-4eb4-88b3-745850bcdf8a
     name: Get Voucher Details
     request:
       name: Get Voucher Details
@@ -3102,7 +3102,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: d33d5718-9bd8-4433-af1c-1b8ba2000797
+    - id: d51cb4af-d33b-46f5-9338-f1a427dd8945
       name: OK
       originalRequest:
         url:
@@ -3142,10 +3142,10 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"authorizedGuestCount\": 0,\n  \"code\": \"string\",\n  \"createdAt\"\
-        : \"2022-02-08T18:01:43.137Z\",\n  \"expired\": false,\n  \"id\": \"452b80d6-865a-6684-f3a3-5780e0e34db8\"\
+        : \"1964-01-01T06:03:06.925Z\",\n  \"expired\": false,\n  \"id\": \"ad9c4e95-ca4d-6fcd-bc1f-c9a14fb9148c\"\
         ,\n  \"name\": \"hotel-guest\",\n  \"timeLimitMinutes\": 1440,\n  \"activatedAt\"\
-        : \"2003-10-30T07:32:37.332Z\",\n  \"authorizedGuestLimit\": 1,\n  \"dataUsageLimitMBytes\"\
-        : 1024,\n  \"expiresAt\": \"2007-09-21T13:23:10.174Z\",\n  \"rxRateLimitKbps\"\
+        : \"1983-10-15T08:36:55.192Z\",\n  \"authorizedGuestLimit\": 1,\n  \"dataUsageLimitMBytes\"\
+        : 1024,\n  \"expiresAt\": \"2007-03-01T12:58:53.871Z\",\n  \"rxRateLimitKbps\"\
         : 1000,\n  \"txRateLimitKbps\": 1000\n}"
       cookie: []
       _postman_previewlanguage: json
@@ -3153,7 +3153,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: e44fd6e0-37bb-4d1a-b496-f074879f931d
+- id: 513e68ed-1eb6-4401-a3f1-a5327c2fa36d
   name: Firewall
   description:
     content: 'Endpoints for managing custom firewall zones and policies within a site.
@@ -3161,7 +3161,7 @@ item:
       Define or update network segmentation and security boundaries.'
     type: text/plain
   item:
-  - id: e858ce43-d812-4a29-9214-08ad6473a6ef
+  - id: 306c6289-9785-43ce-8ca9-44b457ab5e52
     name: List Firewall Policies
     request:
       name: List Firewall Policies
@@ -3225,7 +3225,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: cbdd9cf5-c62a-46c8-a893-0d4457fbc51b
+    - id: feea149c-9f18-4bc6-8bb7-b5ee72f574ec
       name: OK
       originalRequest:
         url:
@@ -3270,20 +3270,20 @@ item:
         \        \"zoneId\": {\n          \"value\": \"<Error: Too many levels of\
         \ nesting to fake this schema>\"\n        },\n        \"trafficFilter\": {\n\
         \          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\
-        \n        }\n      },\n      \"enabled\": false,\n      \"id\": \"d461bbd9-689d-61cd-987f-eab3e3dfade1\"\
-        ,\n      \"index\": 8515,\n      \"ipProtocolScope\": {\n        \"ipVersion\"\
+        \n        }\n      },\n      \"enabled\": true,\n      \"id\": \"33aca85b-c2d4-9c0f-1852-952de2172903\"\
+        ,\n      \"index\": 3644,\n      \"ipProtocolScope\": {\n        \"ipVersion\"\
         : {\n          \"value\": \"<Error: Too many levels of nesting to fake this\
-        \ schema>\"\n        }\n      },\n      \"loggingEnabled\": true,\n      \"\
-        metadata\": {\n        \"origin\": {\n          \"value\": \"<Error: Too many\
-        \ levels of nesting to fake this schema>\"\n        }\n      },\n      \"\
-        name\": \"My firewall policy\",\n      \"source\": {\n        \"zoneId\":\
-        \ {\n          \"value\": \"<Error: Too many levels of nesting to fake this\
+        \ schema>\"\n        }\n      },\n      \"loggingEnabled\": false,\n     \
+        \ \"metadata\": {\n        \"origin\": {\n          \"value\": \"<Error: Too\
+        \ many levels of nesting to fake this schema>\"\n        }\n      },\n   \
+        \   \"name\": \"My firewall policy\",\n      \"source\": {\n        \"zoneId\"\
+        : {\n          \"value\": \"<Error: Too many levels of nesting to fake this\
         \ schema>\"\n        },\n        \"trafficFilter\": {\n          \"value\"\
         : \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n\
-        \      },\n      \"connectionStateFilter\": [\n        \"INVALID\"\n     \
+        \      },\n      \"connectionStateFilter\": [\n        \"RELATED\"\n     \
         \ ],\n      \"description\": \"A description for my firewall policy\",\n \
-        \     \"ipsecFilter\": \"MATCH_ENCRYPTED\",\n      \"schedule\": {\n     \
-        \   \"mode\": {\n          \"value\": \"<Error: Too many levels of nesting\
+        \     \"ipsecFilter\": \"MATCH_NOT_ENCRYPTED\",\n      \"schedule\": {\n \
+        \       \"mode\": {\n          \"value\": \"<Error: Too many levels of nesting\
         \ to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"action\"\
         : {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of\
         \ nesting to fake this schema>\"\n        }\n      },\n      \"destination\"\
@@ -3291,19 +3291,19 @@ item:
         \ of nesting to fake this schema>\"\n        },\n        \"trafficFilter\"\
         : {\n          \"value\": \"<Error: Too many levels of nesting to fake this\
         \ schema>\"\n        }\n      },\n      \"enabled\": true,\n      \"id\":\
-        \ \"f31c6e12-d9d4-a5c7-d089-ef0c0b7eff6d\",\n      \"index\": 3825,\n    \
+        \ \"1ffa31eb-a2fa-08ab-2a1f-ae9e899b68a9\",\n      \"index\": 1099,\n    \
         \  \"ipProtocolScope\": {\n        \"ipVersion\": {\n          \"value\":\
         \ \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n\
-        \      },\n      \"loggingEnabled\": false,\n      \"metadata\": {\n     \
-        \   \"origin\": {\n          \"value\": \"<Error: Too many levels of nesting\
+        \      },\n      \"loggingEnabled\": true,\n      \"metadata\": {\n      \
+        \  \"origin\": {\n          \"value\": \"<Error: Too many levels of nesting\
         \ to fake this schema>\"\n        }\n      },\n      \"name\": \"My firewall\
         \ policy\",\n      \"source\": {\n        \"zoneId\": {\n          \"value\"\
         : \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n\
         \        \"trafficFilter\": {\n          \"value\": \"<Error: Too many levels\
         \ of nesting to fake this schema>\"\n        }\n      },\n      \"connectionStateFilter\"\
-        : [\n        \"NEW\"\n      ],\n      \"description\": \"A description for\
-        \ my firewall policy\",\n      \"ipsecFilter\": \"MATCH_NOT_ENCRYPTED\",\n\
-        \      \"schedule\": {\n        \"mode\": {\n          \"value\": \"<Error:\
+        : [\n        \"ESTABLISHED\"\n      ],\n      \"description\": \"A description\
+        \ for my firewall policy\",\n      \"ipsecFilter\": \"MATCH_NOT_ENCRYPTED\"\
+        ,\n      \"schedule\": {\n        \"mode\": {\n          \"value\": \"<Error:\
         \ Too many levels of nesting to fake this schema>\"\n        }\n      }\n\
         \    }\n  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1000\n\
         }"
@@ -3312,7 +3312,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 52db17cb-1d09-48c0-82cd-9cea62d15da7
+  - id: 069ef4ff-e9f7-422f-b10d-9a363f0e94f8
     name: Create Firewall Policy
     request:
       name: Create Firewall Policy
@@ -3361,7 +3361,7 @@ item:
           raw:
             language: json
     response:
-    - id: 381c2b88-14ac-4db6-9b00-271e871cb65c
+    - id: 3daa7461-81b5-4f2f-bede-775241bbcc4e
       name: Created
       originalRequest:
         url:
@@ -3391,11 +3391,11 @@ item:
         body:
           mode: raw
           raw: "{\n  \"action\": {\n    \"type\": \"string\"\n  },\n  \"destination\"\
-            : {\n    \"zoneId\": \"30e202f3-01fc-d571-2169-61b90c933a92\",\n    \"\
+            : {\n    \"zoneId\": \"48c6c964-13cc-1bac-9510-7ce4bd9bfd68\",\n    \"\
             trafficFilter\": {\n      \"type\": \"string\"\n    }\n  },\n  \"enabled\"\
             : \"<boolean>\",\n  \"ipProtocolScope\": {\n    \"ipVersion\": \"string\"\
             \n  },\n  \"loggingEnabled\": \"<boolean>\",\n  \"name\": \"My firewall\
-            \ policy\",\n  \"source\": {\n    \"zoneId\": \"66fbb513-f03f-485d-2ef3-6340a042904b\"\
+            \ policy\",\n  \"source\": {\n    \"zoneId\": \"374dfb4b-ff21-e21f-79d7-056240653e29\"\
             ,\n    \"trafficFilter\": {\n      \"type\": \"string\"\n    }\n  },\n\
             \  \"connectionStateFilter\": [\n    \"<string>\"\n  ],\n  \"description\"\
             : \"A description for my firewall policy\",\n  \"ipsecFilter\": \"<string>\"\
@@ -3409,22 +3409,22 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"action\": {\n    \"type\": \"string\"\n  },\n  \"destination\"\
-        : {\n    \"zoneId\": \"8966b0ed-5077-a675-9f31-28a83beb3d66\",\n    \"trafficFilter\"\
-        : {\n      \"type\": \"string\"\n    }\n  },\n  \"enabled\": true,\n  \"id\"\
-        : \"62d65a01-0f07-ac26-742b-13106d4eb0dc\",\n  \"index\": 1337,\n  \"ipProtocolScope\"\
-        : {\n    \"ipVersion\": \"string\"\n  },\n  \"loggingEnabled\": true,\n  \"\
-        metadata\": {\n    \"origin\": \"string\"\n  },\n  \"name\": \"My firewall\
-        \ policy\",\n  \"source\": {\n    \"zoneId\": \"148ab25d-f361-02e9-8f60-6d0feba88267\"\
+        : {\n    \"zoneId\": \"220dec74-cdb2-cd18-3207-686836a39598\",\n    \"trafficFilter\"\
+        : {\n      \"type\": \"string\"\n    }\n  },\n  \"enabled\": false,\n  \"\
+        id\": \"1c5c517a-8f44-59c7-0638-b8d1166fd293\",\n  \"index\": 5902,\n  \"\
+        ipProtocolScope\": {\n    \"ipVersion\": \"string\"\n  },\n  \"loggingEnabled\"\
+        : false,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n  \"name\"\
+        : \"My firewall policy\",\n  \"source\": {\n    \"zoneId\": \"e8f85e4d-ac27-a5f0-970f-18f07813e2c0\"\
         ,\n    \"trafficFilter\": {\n      \"type\": \"string\"\n    }\n  },\n  \"\
-        connectionStateFilter\": [\n    \"NEW\"\n  ],\n  \"description\": \"A description\
-        \ for my firewall policy\",\n  \"ipsecFilter\": \"MATCH_ENCRYPTED\",\n  \"\
-        schedule\": {\n    \"mode\": \"string\"\n  }\n}"
+        connectionStateFilter\": [\n    \"INVALID\"\n  ],\n  \"description\": \"A\
+        \ description for my firewall policy\",\n  \"ipsecFilter\": \"MATCH_ENCRYPTED\"\
+        ,\n  \"schedule\": {\n    \"mode\": \"string\"\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: cd1e67f6-3694-45b3-829c-9e389be87994
+  - id: 908cfa0f-8ce9-4d74-8947-eea4d1d3e7b5
     name: Get User-Defined Firewall Policy Ordering
     request:
       name: Get User-Defined Firewall Policy Ordering
@@ -3467,7 +3467,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 1412de7c-57f9-4dcc-b369-76f59dfa1123
+    - id: 870ae2e6-0dd3-4ca2-b268-0fb124a68f3c
       name: OK
       originalRequest:
         url:
@@ -3506,15 +3506,15 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"orderedFirewallPolicyIds\": {\n    \"afterSystemDefined\": [\n\
-        \      \"fdd895fa-d7fa-18f1-f1d7-6ad7805a1148\",\n      \"a7388f93-de50-7a56-ce81-df2b63e60c5d\"\
-        \n    ],\n    \"beforeSystemDefined\": [\n      \"7a49f5c9-eb24-8fe2-3de3-2cfc216e438e\"\
-        ,\n      \"ec6c5eeb-c3e0-7740-e429-9af9e8daa986\"\n    ]\n  }\n}"
+        \      \"942f1f6d-ab1d-ca02-fa29-bef135a1c16c\",\n      \"99d45057-3769-ebc1-fa09-089ee7a2ddde\"\
+        \n    ],\n    \"beforeSystemDefined\": [\n      \"ee3a0c52-525d-afb9-f048-ab319ccd313f\"\
+        ,\n      \"bf44d192-7270-9605-3936-72b2b25f011d\"\n    ]\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 6de4e8ab-4229-4cd9-8bca-65f0dd1f8cc2
+  - id: 310da732-332b-45b4-8aa4-ae03a17cf56b
     name: Reorder User-Defined Firewall Policies
     request:
       name: Reorder User-Defined Firewall Policies
@@ -3567,7 +3567,7 @@ item:
           raw:
             language: json
     response:
-    - id: 228d1fff-4c89-4bae-b9c3-53bd1d94054d
+    - id: 47fc7c5d-8e9d-431a-8dbf-73c968045220
       name: OK
       originalRequest:
         url:
@@ -3602,9 +3602,9 @@ item:
         body:
           mode: raw
           raw: "{\n  \"orderedFirewallPolicyIds\": {\n    \"afterSystemDefined\":\
-            \ [\n      \"fdd895fa-d7fa-18f1-f1d7-6ad7805a1148\",\n      \"a7388f93-de50-7a56-ce81-df2b63e60c5d\"\
-            \n    ],\n    \"beforeSystemDefined\": [\n      \"7a49f5c9-eb24-8fe2-3de3-2cfc216e438e\"\
-            ,\n      \"ec6c5eeb-c3e0-7740-e429-9af9e8daa986\"\n    ]\n  }\n}"
+            \ [\n      \"942f1f6d-ab1d-ca02-fa29-bef135a1c16c\",\n      \"99d45057-3769-ebc1-fa09-089ee7a2ddde\"\
+            \n    ],\n    \"beforeSystemDefined\": [\n      \"ee3a0c52-525d-afb9-f048-ab319ccd313f\"\
+            ,\n      \"bf44d192-7270-9605-3936-72b2b25f011d\"\n    ]\n  }\n}"
           options:
             raw:
               language: json
@@ -3614,15 +3614,15 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"orderedFirewallPolicyIds\": {\n    \"afterSystemDefined\": [\n\
-        \      \"fdd895fa-d7fa-18f1-f1d7-6ad7805a1148\",\n      \"a7388f93-de50-7a56-ce81-df2b63e60c5d\"\
-        \n    ],\n    \"beforeSystemDefined\": [\n      \"7a49f5c9-eb24-8fe2-3de3-2cfc216e438e\"\
-        ,\n      \"ec6c5eeb-c3e0-7740-e429-9af9e8daa986\"\n    ]\n  }\n}"
+        \      \"942f1f6d-ab1d-ca02-fa29-bef135a1c16c\",\n      \"99d45057-3769-ebc1-fa09-089ee7a2ddde\"\
+        \n    ],\n    \"beforeSystemDefined\": [\n      \"ee3a0c52-525d-afb9-f048-ab319ccd313f\"\
+        ,\n      \"bf44d192-7270-9605-3936-72b2b25f011d\"\n    ]\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: e5dd6cb7-bb1b-49c9-9705-5759c870e086
+  - id: 36d98b61-ddc2-4e08-b88f-f0a30f8d408e
     name: Delete Firewall Policy
     request:
       name: Delete Firewall Policy
@@ -3658,7 +3658,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: 7c946f05-b68c-4fe7-8b55-dfd2dfa87ce2
+    - id: fc55288c-16fb-4f7d-96ae-db940d509c5c
       name: OK
       originalRequest:
         url:
@@ -3700,7 +3700,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 75d3e895-0648-491c-91a9-7060af4a8744
+  - id: 08316c33-5b49-4218-a1a5-f8b0dd45222b
     name: Get Firewall Policy
     request:
       name: Get Firewall Policy
@@ -3739,7 +3739,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 334d6cb4-d4f1-45eb-bbfd-8f978f09a0fc
+    - id: 2823bba4-3009-4dbd-8774-d224dfe63aba
       name: OK
       originalRequest:
         url:
@@ -3779,22 +3779,22 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"action\": {\n    \"type\": \"string\"\n  },\n  \"destination\"\
-        : {\n    \"zoneId\": \"8966b0ed-5077-a675-9f31-28a83beb3d66\",\n    \"trafficFilter\"\
-        : {\n      \"type\": \"string\"\n    }\n  },\n  \"enabled\": true,\n  \"id\"\
-        : \"62d65a01-0f07-ac26-742b-13106d4eb0dc\",\n  \"index\": 1337,\n  \"ipProtocolScope\"\
-        : {\n    \"ipVersion\": \"string\"\n  },\n  \"loggingEnabled\": true,\n  \"\
-        metadata\": {\n    \"origin\": \"string\"\n  },\n  \"name\": \"My firewall\
-        \ policy\",\n  \"source\": {\n    \"zoneId\": \"148ab25d-f361-02e9-8f60-6d0feba88267\"\
+        : {\n    \"zoneId\": \"220dec74-cdb2-cd18-3207-686836a39598\",\n    \"trafficFilter\"\
+        : {\n      \"type\": \"string\"\n    }\n  },\n  \"enabled\": false,\n  \"\
+        id\": \"1c5c517a-8f44-59c7-0638-b8d1166fd293\",\n  \"index\": 5902,\n  \"\
+        ipProtocolScope\": {\n    \"ipVersion\": \"string\"\n  },\n  \"loggingEnabled\"\
+        : false,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n  \"name\"\
+        : \"My firewall policy\",\n  \"source\": {\n    \"zoneId\": \"e8f85e4d-ac27-a5f0-970f-18f07813e2c0\"\
         ,\n    \"trafficFilter\": {\n      \"type\": \"string\"\n    }\n  },\n  \"\
-        connectionStateFilter\": [\n    \"NEW\"\n  ],\n  \"description\": \"A description\
-        \ for my firewall policy\",\n  \"ipsecFilter\": \"MATCH_ENCRYPTED\",\n  \"\
-        schedule\": {\n    \"mode\": \"string\"\n  }\n}"
+        connectionStateFilter\": [\n    \"INVALID\"\n  ],\n  \"description\": \"A\
+        \ description for my firewall policy\",\n  \"ipsecFilter\": \"MATCH_ENCRYPTED\"\
+        ,\n  \"schedule\": {\n    \"mode\": \"string\"\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 02050d0e-c5ee-4c84-8a14-17cb30db4ef1
+  - id: 4374a0ed-5e9f-4922-aa47-3967d80987a1
     name: Patch Firewall Policy
     request:
       name: Patch Firewall Policy
@@ -3841,7 +3841,7 @@ item:
           raw:
             language: json
     response:
-    - id: a1144a44-4dc9-407c-91e0-e43e9cc6dd63
+    - id: 70d54bd6-7f71-42d4-973c-f29c083baba7
       name: OK
       originalRequest:
         url:
@@ -3886,22 +3886,22 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"action\": {\n    \"type\": \"string\"\n  },\n  \"destination\"\
-        : {\n    \"zoneId\": \"8966b0ed-5077-a675-9f31-28a83beb3d66\",\n    \"trafficFilter\"\
-        : {\n      \"type\": \"string\"\n    }\n  },\n  \"enabled\": true,\n  \"id\"\
-        : \"62d65a01-0f07-ac26-742b-13106d4eb0dc\",\n  \"index\": 1337,\n  \"ipProtocolScope\"\
-        : {\n    \"ipVersion\": \"string\"\n  },\n  \"loggingEnabled\": true,\n  \"\
-        metadata\": {\n    \"origin\": \"string\"\n  },\n  \"name\": \"My firewall\
-        \ policy\",\n  \"source\": {\n    \"zoneId\": \"148ab25d-f361-02e9-8f60-6d0feba88267\"\
+        : {\n    \"zoneId\": \"220dec74-cdb2-cd18-3207-686836a39598\",\n    \"trafficFilter\"\
+        : {\n      \"type\": \"string\"\n    }\n  },\n  \"enabled\": false,\n  \"\
+        id\": \"1c5c517a-8f44-59c7-0638-b8d1166fd293\",\n  \"index\": 5902,\n  \"\
+        ipProtocolScope\": {\n    \"ipVersion\": \"string\"\n  },\n  \"loggingEnabled\"\
+        : false,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n  \"name\"\
+        : \"My firewall policy\",\n  \"source\": {\n    \"zoneId\": \"e8f85e4d-ac27-a5f0-970f-18f07813e2c0\"\
         ,\n    \"trafficFilter\": {\n      \"type\": \"string\"\n    }\n  },\n  \"\
-        connectionStateFilter\": [\n    \"NEW\"\n  ],\n  \"description\": \"A description\
-        \ for my firewall policy\",\n  \"ipsecFilter\": \"MATCH_ENCRYPTED\",\n  \"\
-        schedule\": {\n    \"mode\": \"string\"\n  }\n}"
+        connectionStateFilter\": [\n    \"INVALID\"\n  ],\n  \"description\": \"A\
+        \ description for my firewall policy\",\n  \"ipsecFilter\": \"MATCH_ENCRYPTED\"\
+        ,\n  \"schedule\": {\n    \"mode\": \"string\"\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 4d928333-8662-47e8-a9a0-80a3af0a7e6a
+  - id: 1aac3ada-e651-472c-bddf-e3fecedd5754
     name: Update Firewall Policy
     request:
       name: Update Firewall Policy
@@ -3956,7 +3956,7 @@ item:
           raw:
             language: json
     response:
-    - id: abf4060f-33ce-4b3a-8142-37b3ee4e295a
+    - id: 545625dd-ead3-44b1-9024-ac648359aa59
       name: OK
       originalRequest:
         url:
@@ -3992,11 +3992,11 @@ item:
         body:
           mode: raw
           raw: "{\n  \"action\": {\n    \"type\": \"string\"\n  },\n  \"destination\"\
-            : {\n    \"zoneId\": \"30e202f3-01fc-d571-2169-61b90c933a92\",\n    \"\
+            : {\n    \"zoneId\": \"48c6c964-13cc-1bac-9510-7ce4bd9bfd68\",\n    \"\
             trafficFilter\": {\n      \"type\": \"string\"\n    }\n  },\n  \"enabled\"\
             : \"<boolean>\",\n  \"ipProtocolScope\": {\n    \"ipVersion\": \"string\"\
             \n  },\n  \"loggingEnabled\": \"<boolean>\",\n  \"name\": \"My firewall\
-            \ policy\",\n  \"source\": {\n    \"zoneId\": \"66fbb513-f03f-485d-2ef3-6340a042904b\"\
+            \ policy\",\n  \"source\": {\n    \"zoneId\": \"374dfb4b-ff21-e21f-79d7-056240653e29\"\
             ,\n    \"trafficFilter\": {\n      \"type\": \"string\"\n    }\n  },\n\
             \  \"connectionStateFilter\": [\n    \"<string>\"\n  ],\n  \"description\"\
             : \"A description for my firewall policy\",\n  \"ipsecFilter\": \"<string>\"\
@@ -4010,22 +4010,22 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"action\": {\n    \"type\": \"string\"\n  },\n  \"destination\"\
-        : {\n    \"zoneId\": \"8966b0ed-5077-a675-9f31-28a83beb3d66\",\n    \"trafficFilter\"\
-        : {\n      \"type\": \"string\"\n    }\n  },\n  \"enabled\": true,\n  \"id\"\
-        : \"62d65a01-0f07-ac26-742b-13106d4eb0dc\",\n  \"index\": 1337,\n  \"ipProtocolScope\"\
-        : {\n    \"ipVersion\": \"string\"\n  },\n  \"loggingEnabled\": true,\n  \"\
-        metadata\": {\n    \"origin\": \"string\"\n  },\n  \"name\": \"My firewall\
-        \ policy\",\n  \"source\": {\n    \"zoneId\": \"148ab25d-f361-02e9-8f60-6d0feba88267\"\
+        : {\n    \"zoneId\": \"220dec74-cdb2-cd18-3207-686836a39598\",\n    \"trafficFilter\"\
+        : {\n      \"type\": \"string\"\n    }\n  },\n  \"enabled\": false,\n  \"\
+        id\": \"1c5c517a-8f44-59c7-0638-b8d1166fd293\",\n  \"index\": 5902,\n  \"\
+        ipProtocolScope\": {\n    \"ipVersion\": \"string\"\n  },\n  \"loggingEnabled\"\
+        : false,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n  \"name\"\
+        : \"My firewall policy\",\n  \"source\": {\n    \"zoneId\": \"e8f85e4d-ac27-a5f0-970f-18f07813e2c0\"\
         ,\n    \"trafficFilter\": {\n      \"type\": \"string\"\n    }\n  },\n  \"\
-        connectionStateFilter\": [\n    \"NEW\"\n  ],\n  \"description\": \"A description\
-        \ for my firewall policy\",\n  \"ipsecFilter\": \"MATCH_ENCRYPTED\",\n  \"\
-        schedule\": {\n    \"mode\": \"string\"\n  }\n}"
+        connectionStateFilter\": [\n    \"INVALID\"\n  ],\n  \"description\": \"A\
+        \ description for my firewall policy\",\n  \"ipsecFilter\": \"MATCH_ENCRYPTED\"\
+        ,\n  \"schedule\": {\n    \"mode\": \"string\"\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 7e2303c5-8678-4244-bc1b-1b49a69ed588
+  - id: f555ed9c-cd7e-41f3-aee4-d8486d4587e4
     name: List Firewall Zones
     request:
       name: List Firewall Zones
@@ -4087,7 +4087,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: e29018f9-57ca-47cb-9930-08812c321fdd
+    - id: ae8ce40d-080f-404d-84dd-1c254c638c05
       name: OK
       originalRequest:
         url:
@@ -4143,7 +4143,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 951a3e6e-71a0-45fe-9715-5816c6142e12
+  - id: f9904fb8-aa45-4247-8426-da101d78944e
     name: Create Custom Firewall Zone
     request:
       name: Create Custom Firewall Zone
@@ -4185,7 +4185,7 @@ item:
           raw:
             language: json
     response:
-    - id: 6d8ba214-52cb-405d-a4d2-b97e983ead60
+    - id: 3fdf2884-9c0b-4c70-8190-19a04a6aec15
       name: Created
       originalRequest:
         url:
@@ -4234,7 +4234,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: f0187c7c-6236-4bbc-a1f6-4c05838269bb
+  - id: 0545f3f4-5219-44de-a203-ba21ddd3e204
     name: Delete Custom Firewall Zone
     request:
       name: Delete Custom Firewall Zone
@@ -4270,7 +4270,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: e28ad43a-dfbf-4414-995c-726393eef9c9
+    - id: e0256240-32b6-45f6-bf9a-49a7d20e2703
       name: OK
       originalRequest:
         url:
@@ -4312,7 +4312,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: dd40ed8e-d8b3-4e4f-83bb-bcc72261365d
+  - id: a853280b-054f-48a5-a0a9-a993e86e4322
     name: Get Firewall Zone
     request:
       name: Get Firewall Zone
@@ -4351,7 +4351,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 123ddee5-64c0-4bb3-bb39-5861e3df2fab
+    - id: 7c48124e-3228-4010-8a20-b21e1b6b0389
       name: OK
       originalRequest:
         url:
@@ -4399,7 +4399,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: f524c67d-ec73-4587-8089-8abe9eae7997
+  - id: 94a73574-d1cc-4e11-a2a4-4693756f901b
     name: Update Firewall Zone
     request:
       name: Update Firewall Zone
@@ -4447,7 +4447,7 @@ item:
           raw:
             language: json
     response:
-    - id: 4f3c94f2-7050-4ce0-b9b5-9973aa98be70
+    - id: 075c40e1-918b-45f8-8203-e7e784c000fe
       name: OK
       originalRequest:
         url:
@@ -4503,7 +4503,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 9d385fa5-7256-4206-9ee8-dbc020a54ea5
+- id: b2abfff4-9110-4e57-aaed-e39a56e4f1b9
   name: Access Control (ACL Rules)
   description:
     content: 'Endpoints for creating, listing, and managing ACL (Access Control List)
@@ -4512,7 +4512,7 @@ item:
       that enforce traffic filtering across devices and networks.'
     type: text/plain
   item:
-  - id: f3305be9-25d9-4135-afc2-ca3ec7f40e58
+  - id: df2012c1-3bbb-48a8-8118-d461f0592279
     name: List ACL Rules
     request:
       name: List ACL Rules
@@ -4623,7 +4623,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: bba0a0fc-0e77-4660-bec2-4b37386d2cdb
+    - id: 0288725c-f7e9-4013-bcee-ade1d8ecc66e
       name: OK
       originalRequest:
         url:
@@ -4661,17 +4661,17 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"action\": \"ALLOW\"\
-        ,\n      \"enabled\": true,\n      \"id\": \"b9da146c-943b-d194-122e-5702d8d9350d\"\
-        ,\n      \"index\": 9874,\n      \"metadata\": {\n        \"origin\": {\n\
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"action\": \"BLOCK\"\
+        ,\n      \"enabled\": true,\n      \"id\": \"e309d37f-79f2-dcac-8696-de63636c8920\"\
+        ,\n      \"index\": 2372,\n      \"metadata\": {\n        \"origin\": {\n\
         \          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\
         \n        }\n      },\n      \"name\": \"string\",\n      \"type\": \"string\"\
         ,\n      \"description\": \"string\",\n      \"destinationFilter\": {},\n\
         \      \"enforcingDeviceFilter\": {\n        \"type\": {\n          \"value\"\
         : \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n\
         \      },\n      \"sourceFilter\": {}\n    },\n    {\n      \"action\": \"\
-        ALLOW\",\n      \"enabled\": true,\n      \"id\": \"f6c91a81-901f-64b2-fa19-8ce236c9a835\"\
-        ,\n      \"index\": 3306,\n      \"metadata\": {\n        \"origin\": {\n\
+        ALLOW\",\n      \"enabled\": true,\n      \"id\": \"92342f97-ad6e-ce54-2888-ff343003e00c\"\
+        ,\n      \"index\": 5825,\n      \"metadata\": {\n        \"origin\": {\n\
         \          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\
         \n        }\n      },\n      \"name\": \"string\",\n      \"type\": \"string\"\
         ,\n      \"description\": \"string\",\n      \"destinationFilter\": {},\n\
@@ -4684,7 +4684,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: af61cab3-3e2a-427d-8ea4-82c7e193936f
+  - id: fe85881c-16b4-4349-b74f-2888e6987e37
     name: Create ACL Rule
     request:
       name: Create ACL Rule
@@ -4728,7 +4728,7 @@ item:
           raw:
             language: json
     response:
-    - id: acd65c3b-1ee4-4f5e-aaf1-cab67d4b5203
+    - id: 68116f27-b109-468a-83f8-c03ca39e4797
       name: Created
       originalRequest:
         url:
@@ -4769,8 +4769,8 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"action\": \"BLOCK\",\n  \"enabled\": true,\n  \"id\": \"7e94e40e-506f-1fa7-ba2f-e1bd07863337\"\
-        ,\n  \"index\": 9092,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n\
+      body: "{\n  \"action\": \"BLOCK\",\n  \"enabled\": true,\n  \"id\": \"5ad84316-eeba-2eaa-5909-242e8905c670\"\
+        ,\n  \"index\": 1303,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n\
         \  \"name\": \"string\",\n  \"type\": \"string\",\n  \"description\": \"string\"\
         ,\n  \"destinationFilter\": {},\n  \"enforcingDeviceFilter\": {\n    \"type\"\
         : \"string\"\n  },\n  \"sourceFilter\": {}\n}"
@@ -4779,7 +4779,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 07fe7dd0-964d-4d0f-9305-45e9ddcd4059
+  - id: 5014d7c0-4aee-4031-a94f-0829b9230f00
     name: Get User-Defined ACL Rule Ordering
     request:
       name: Get User-Defined ACL Rule Ordering
@@ -4812,7 +4812,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: a2fe3c6c-9e63-40ba-9a9b-bf1f2364a12d
+    - id: 6f042f73-9028-4bb7-9529-c8c1b3fad9d2
       name: OK
       originalRequest:
         url:
@@ -4845,14 +4845,14 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"orderedAclRuleIds\": [\n    \"9515d3dc-c4e1-d737-9698-4210db4133c8\"\
-        ,\n    \"4da14f75-d07f-76d3-88d3-2e53f2370aed\"\n  ]\n}"
+      body: "{\n  \"orderedAclRuleIds\": [\n    \"4d0f5527-f9c4-54df-4ef7-a5d1e7ffc81b\"\
+        ,\n    \"81b78b88-9ec5-e3a9-ec55-00458e41a2b6\"\n  ]\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: f6db067a-e711-4a9e-a9e7-d833d70a9316
+  - id: 00069df5-0fe7-4bf7-a30f-17aa364715f7
     name: Reorder User-Defined ACL Rules
     request:
       name: Reorder User-Defined ACL Rules
@@ -4894,7 +4894,7 @@ item:
           raw:
             language: json
     response:
-    - id: bd405dbe-fbd7-4720-9452-37218aa2e53c
+    - id: b0d6b7c5-f833-48d3-9a97-b0b4b43240df
       name: OK
       originalRequest:
         url:
@@ -4933,14 +4933,14 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"orderedAclRuleIds\": [\n    \"9515d3dc-c4e1-d737-9698-4210db4133c8\"\
-        ,\n    \"4da14f75-d07f-76d3-88d3-2e53f2370aed\"\n  ]\n}"
+      body: "{\n  \"orderedAclRuleIds\": [\n    \"4d0f5527-f9c4-54df-4ef7-a5d1e7ffc81b\"\
+        ,\n    \"81b78b88-9ec5-e3a9-ec55-00458e41a2b6\"\n  ]\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 71fe8c01-ce04-4c89-bb02-639a5240a680
+  - id: 78b344c8-f783-4c5a-9f81-ad0cdd62acaa
     name: Delete ACL Rule
     request:
       name: Delete ACL Rule
@@ -4975,7 +4975,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: 10a44976-8ec2-4855-ba48-cf1e6a96c504
+    - id: 5362076c-6925-4e0d-ae78-2c124db6a6fe
       name: OK
       originalRequest:
         url:
@@ -5016,7 +5016,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: f15d92f6-a5c8-4013-bb95-394eebb4eef9
+  - id: 21fd384f-2746-464e-90f4-3c80c7d47778
     name: Get ACL Rule
     request:
       name: Get ACL Rule
@@ -5052,7 +5052,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: c2c2a074-6fb3-41cb-9b2f-2ee29cf5d792
+    - id: 5406a584-37d2-4157-a796-9bc77e0e2cc8
       name: OK
       originalRequest:
         url:
@@ -5090,8 +5090,8 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"action\": \"BLOCK\",\n  \"enabled\": true,\n  \"id\": \"7e94e40e-506f-1fa7-ba2f-e1bd07863337\"\
-        ,\n  \"index\": 9092,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n\
+      body: "{\n  \"action\": \"BLOCK\",\n  \"enabled\": true,\n  \"id\": \"5ad84316-eeba-2eaa-5909-242e8905c670\"\
+        ,\n  \"index\": 1303,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n\
         \  \"name\": \"string\",\n  \"type\": \"string\",\n  \"description\": \"string\"\
         ,\n  \"destinationFilter\": {},\n  \"enforcingDeviceFilter\": {\n    \"type\"\
         : \"string\"\n  },\n  \"sourceFilter\": {}\n}"
@@ -5100,7 +5100,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: baaf8435-8267-49a1-870a-4dd99081d986
+  - id: 77817b29-985a-445b-ace6-8157f0a3a5b4
     name: Update ACL Rule
     request:
       name: Update ACL Rule
@@ -5150,7 +5150,7 @@ item:
           raw:
             language: json
     response:
-    - id: c1c929b5-fb2d-4727-aaaf-57842acaed23
+    - id: 7ef6297b-2f3a-4c2c-ae98-11a217cf4567
       name: OK
       originalRequest:
         url:
@@ -5197,8 +5197,8 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"action\": \"BLOCK\",\n  \"enabled\": true,\n  \"id\": \"7e94e40e-506f-1fa7-ba2f-e1bd07863337\"\
-        ,\n  \"index\": 9092,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n\
+      body: "{\n  \"action\": \"BLOCK\",\n  \"enabled\": true,\n  \"id\": \"5ad84316-eeba-2eaa-5909-242e8905c670\"\
+        ,\n  \"index\": 1303,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n\
         \  \"name\": \"string\",\n  \"type\": \"string\",\n  \"description\": \"string\"\
         ,\n  \"destinationFilter\": {},\n  \"enforcingDeviceFilter\": {\n    \"type\"\
         : \"string\"\n  },\n  \"sourceFilter\": {}\n}"
@@ -5208,13 +5208,13 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 8ac208e5-5a21-4835-85f0-df327ae1630f
+- id: a98b5465-c5f9-4309-b4a1-381de8d40e3b
   name: Switching
   description:
     content: Endpoints for managing switching features like Switch Stacking and LAG.
     type: text/plain
   item:
-  - id: ed25ac73-af51-4640-87f7-524a84171fd8
+  - id: ed435a00-d4cc-4df8-94d4-4da88e0abe14
     name: List LAGs
     request:
       name: List LAGs
@@ -5284,7 +5284,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 4a41fda1-b172-49e8-a9a2-1cb9c037e1fb
+    - id: d56d8a2e-d8cf-4d2a-bc9d-3f775b68d746
       name: OK
       originalRequest:
         url:
@@ -5323,13 +5323,13 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"c71a5916-c183-0fd9-87f3-22591d364569\"\
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"7b4a0329-7294-ffec-41c9-81b76ad8fe56\"\
         ,\n      \"members\": [\n        {\n          \"value\": \"<Error: Too many\
         \ levels of nesting to fake this schema>\"\n        },\n        {\n      \
         \    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\
         \n        }\n      ],\n      \"metadata\": {\n        \"value\": \"<Error:\
         \ Too many levels of nesting to fake this schema>\"\n      },\n      \"type\"\
-        : \"string\"\n    },\n    {\n      \"id\": \"2fe91417-7e43-34da-a889-cd7e0a5fa0a2\"\
+        : \"string\"\n    },\n    {\n      \"id\": \"d20f3d6d-2a36-b609-8611-0050adae5b8e\"\
         ,\n      \"members\": [\n        {\n          \"value\": \"<Error: Too many\
         \ levels of nesting to fake this schema>\"\n        },\n        {\n      \
         \    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\
@@ -5342,7 +5342,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 3ccd3abe-8e29-430c-b6b3-d5060a81dd33
+  - id: b44bf4f7-76e9-469a-841f-50276572fe19
     name: Get LAG Details
     request:
       name: Get LAG Details
@@ -5381,7 +5381,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 921ed226-4826-4061-8e75-feca5ff322d0
+    - id: c488f44f-bb6b-488f-8cf2-ebedeb311a20
       name: OK
       originalRequest:
         url:
@@ -5420,18 +5420,18 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"id\": \"ea037eef-f119-9101-b68d-495ef204a0b9\",\n  \"members\"\
-        : [\n    {\n      \"deviceId\": \"8dc93a37-a04b-7e9e-2c36-ee2c736882cd\",\n\
-        \      \"portIdxs\": [\n        5708,\n        9984\n      ]\n    },\n   \
-        \ {\n      \"deviceId\": \"6b849d28-e82f-1a81-1a8e-a594b88ccdca\",\n     \
-        \ \"portIdxs\": [\n        4366,\n        4870\n      ]\n    }\n  ],\n  \"\
+      body: "{\n  \"id\": \"bdb6c3ff-db9d-37ea-7379-34db9ddc4b45\",\n  \"members\"\
+        : [\n    {\n      \"deviceId\": \"8e92fda7-416c-b9fc-dead-606b8801377f\",\n\
+        \      \"portIdxs\": [\n        4251,\n        2453\n      ]\n    },\n   \
+        \ {\n      \"deviceId\": \"dbbe4fda-e58f-c162-18c7-d0f503f3c29d\",\n     \
+        \ \"portIdxs\": [\n        7061,\n        8218\n      ]\n    }\n  ],\n  \"\
         metadata\": {\n    \"origin\": \"string\"\n  },\n  \"type\": \"string\"\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: b0bffdda-39bc-4d7e-99d9-d967b3adf5c2
+  - id: 3eb006eb-4088-4699-ae1f-078203e4cac1
     name: List MC-LAG Domains
     request:
       name: List MC-LAG Domains
@@ -5493,7 +5493,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: ff8dea34-b701-41f1-b3dc-d126bb5a2168
+    - id: 37ffd0b6-a5eb-4da0-93e4-be51b034cd72
       name: OK
       originalRequest:
         url:
@@ -5532,7 +5532,7 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"b4f77694-9ad8-427d-7bac-107f4a12b5cc\"\
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"6c2b8d18-adea-a17c-ad3d-8a7e573ac24d\"\
         ,\n      \"lags\": [\n        {\n          \"value\": \"<Error: Too many levels\
         \ of nesting to fake this schema>\"\n        },\n        {\n          \"value\"\
         : \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n\
@@ -5541,7 +5541,7 @@ item:
         ,\n      \"peers\": [\n        {\n          \"value\": \"<Error: Too many\
         \ levels of nesting to fake this schema>\"\n        },\n        {\n      \
         \    \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\
-        \n        }\n      ]\n    },\n    {\n      \"id\": \"a3bfa181-0f5a-65ab-a87a-0925f7f53b8f\"\
+        \n        }\n      ]\n    },\n    {\n      \"id\": \"5ba5d3bc-deaf-291d-736b-e61bf565b890\"\
         ,\n      \"lags\": [\n        {\n          \"value\": \"<Error: Too many levels\
         \ of nesting to fake this schema>\"\n        },\n        {\n          \"value\"\
         : \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n\
@@ -5557,7 +5557,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 86937627-77be-4ca1-99f5-2323b0968cd9
+  - id: 8a7f3cdc-fc18-4f03-ba2b-6971c45834c5
     name: Get MC-LAG Domain
     request:
       name: Get MC-LAG Domain
@@ -5596,7 +5596,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: cbc88802-9038-43ce-adc2-365ffab0c851
+    - id: ae865ff3-521f-48b3-8df3-38dd6c545d31
       name: OK
       originalRequest:
         url:
@@ -5635,30 +5635,30 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"id\": \"0e07edeb-e643-a39d-279e-decf733618c4\",\n  \"lags\": [\n\
-        \    {\n      \"id\": \"e10eb3fd-db5b-7ee6-ae13-a5d8880d1faf\",\n      \"\
+      body: "{\n  \"id\": \"48cee705-78e5-ba5d-8879-f32e801bb567\",\n  \"lags\": [\n\
+        \    {\n      \"id\": \"d2d48e5c-2651-eb12-6794-879bde8fb572\",\n      \"\
         members\": [\n        {\n          \"value\": \"<Error: Too many levels of\
         \ nesting to fake this schema>\"\n        },\n        {\n          \"value\"\
         : \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n\
         \      ],\n      \"metadata\": {\n        \"value\": \"<Error: Too many levels\
         \ of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"id\"\
-        : \"5722c7b8-ac5f-487a-5b84-f9d628f5c8d3\",\n      \"members\": [\n      \
+        : \"ad4e309f-7e99-d1b4-2aab-6f2eea090fcb\",\n      \"members\": [\n      \
         \  {\n          \"value\": \"<Error: Too many levels of nesting to fake this\
         \ schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many\
         \ levels of nesting to fake this schema>\"\n        }\n      ],\n      \"\
         metadata\": {\n        \"value\": \"<Error: Too many levels of nesting to\
         \ fake this schema>\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"origin\"\
         : \"string\"\n  },\n  \"name\": \"string\",\n  \"peers\": [\n    {\n     \
-        \ \"deviceId\": \"9867fc50-98ab-3fe1-ecc4-51c441dff4cc\",\n      \"linkPortIdxs\"\
-        : [\n        5815\n      ],\n      \"role\": \"TOP\"\n    },\n    {\n    \
-        \  \"deviceId\": \"f8041c49-bb2b-d464-2412-493cc492eeb2\",\n      \"linkPortIdxs\"\
-        : [\n        8111\n      ],\n      \"role\": \"TOP\"\n    }\n  ]\n}"
+        \ \"deviceId\": \"d53c6b11-ee72-6a8f-ad5f-af97b7c964a7\",\n      \"linkPortIdxs\"\
+        : [\n        6709\n      ],\n      \"role\": \"BOTTOM\"\n    },\n    {\n \
+        \     \"deviceId\": \"90790873-c6bc-194b-768a-141f98980954\",\n      \"linkPortIdxs\"\
+        : [\n        5911\n      ],\n      \"role\": \"TOP\"\n    }\n  ]\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 52a0f897-b871-4a63-a544-6b2d5b68c6bd
+  - id: febe38d3-e6c5-490d-a454-69b1edb0811c
     name: List Switch Stacks
     request:
       name: List Switch Stacks
@@ -5720,7 +5720,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 5fd96b3e-d7a0-4ec9-9d5f-af0905387593
+    - id: c12ecfa3-ce98-4522-aeed-45037a407b39
       name: OK
       originalRequest:
         url:
@@ -5759,7 +5759,7 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"4f8f3dfd-505b-a8f0-113c-ce1a4ee443c6\"\
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"3862c4b1-d245-c32d-3aa5-cacf652ead4f\"\
         ,\n      \"lags\": [\n        {\n          \"value\": \"<Error: Too many levels\
         \ of nesting to fake this schema>\"\n        },\n        {\n          \"value\"\
         : \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n\
@@ -5768,7 +5768,7 @@ item:
         \          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\
         \n        }\n      ],\n      \"metadata\": {\n        \"value\": \"<Error:\
         \ Too many levels of nesting to fake this schema>\"\n      },\n      \"name\"\
-        : \"string\"\n    },\n    {\n      \"id\": \"ca58e451-11fc-6dab-d47a-4dcef4805b66\"\
+        : \"string\"\n    },\n    {\n      \"id\": \"c5351112-2f8d-c777-88ec-e690ec130b29\"\
         ,\n      \"lags\": [\n        {\n          \"value\": \"<Error: Too many levels\
         \ of nesting to fake this schema>\"\n        },\n        {\n          \"value\"\
         : \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n\
@@ -5784,7 +5784,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: bb56c0b8-2fa5-47ce-b22e-6f0103c60ddd
+  - id: 896c5eef-fd7a-40f6-95b9-f576ebb456b5
     name: Get Switch Stack
     request:
       name: Get Switch Stack
@@ -5823,7 +5823,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 95de27d9-484a-43b2-94b2-92bc26b8c42c
+    - id: a0246a11-5485-4ca1-b474-3509d7e161e8
       name: OK
       originalRequest:
         url:
@@ -5862,18 +5862,18 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"id\": \"a780dd1a-6d96-08a8-7ee3-2885dc868dfa\",\n  \"lags\": [\n\
-        \    {\n      \"id\": \"7132aef8-1b7f-ac21-ecbe-dc01d39475b2\",\n      \"\
+      body: "{\n  \"id\": \"e1c74290-f691-768a-8159-46d8a3ec8e1a\",\n  \"lags\": [\n\
+        \    {\n      \"id\": \"2eecad2d-8165-4d22-de0d-cd029677f1d1\",\n      \"\
         members\": [\n        {\n          \"value\": \"<Error: Too many levels of\
         \ nesting to fake this schema>\"\n        }\n      ],\n      \"metadata\"\
         : {\n        \"value\": \"<Error: Too many levels of nesting to fake this\
-        \ schema>\"\n      }\n    },\n    {\n      \"id\": \"f58f47f1-33b9-4d87-dbe3-4a8da28b3c09\"\
+        \ schema>\"\n      }\n    },\n    {\n      \"id\": \"d137fe3f-5e35-1812-bb7a-0e70bef79b65\"\
         ,\n      \"members\": [\n        {\n          \"value\": \"<Error: Too many\
         \ levels of nesting to fake this schema>\"\n        }\n      ],\n      \"\
         metadata\": {\n        \"value\": \"<Error: Too many levels of nesting to\
         \ fake this schema>\"\n      }\n    }\n  ],\n  \"members\": [\n    {\n   \
-        \   \"deviceId\": \"ffdb579f-b180-0a1a-c91b-7aaa905b13cf\"\n    },\n    {\n\
-        \      \"deviceId\": \"ee55f564-7b95-3322-4bd0-d3c6bbaf7fa8\"\n    }\n  ],\n\
+        \   \"deviceId\": \"1f3951cf-f428-456e-7a3b-751f50fb400a\"\n    },\n    {\n\
+        \      \"deviceId\": \"c314c4e8-db44-e871-89b6-f9d49c56647c\"\n    }\n  ],\n\
         \  \"metadata\": {\n    \"origin\": \"string\"\n  },\n  \"name\": \"string\"\
         \n}"
       cookie: []
@@ -5882,13 +5882,13 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 04573cb3-50ec-4bbe-a3b0-d5cad0ccd5fa
+- id: 2f94f32b-aea7-4f4e-afd6-b219663eac13
   name: DNS Policies
   description:
     content: Endpoints for managing DNS Policies within a site.
     type: text/plain
   item:
-  - id: 54c17dce-5da0-429b-a727-eddb44a4c02f
+  - id: 76288a3d-05d6-4ed6-bee6-a22ad7879dfc
     name: List DNS Policies
     request:
       name: List DNS Policies
@@ -5976,7 +5976,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 4b776ee9-9163-4f82-ba96-75dd0e7b6bd9
+    - id: c4eab562-9509-49bb-94d7-2ac56c8f5753
       name: OK
       originalRequest:
         url:
@@ -6015,11 +6015,11 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"enabled\": false,\n\
-        \      \"id\": \"7273825d-0f6c-eb71-9fd8-3e08fe62f2b3\",\n      \"metadata\"\
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"enabled\": true,\n\
+        \      \"id\": \"a70c5789-a018-3e7e-1374-d2b53c2105e7\",\n      \"metadata\"\
         : {\n        \"value\": \"<Error: Too many levels of nesting to fake this\
         \ schema>\"\n      },\n      \"type\": \"string\",\n      \"domain\": \"string\"\
-        \n    },\n    {\n      \"enabled\": true,\n      \"id\": \"bd350c57-c5b6-5f18-a072-4d4e94fb90c6\"\
+        \n    },\n    {\n      \"enabled\": false,\n      \"id\": \"1a9e3146-3a4a-4e2e-c564-d0f0d51adfb4\"\
         ,\n      \"metadata\": {\n        \"value\": \"<Error: Too many levels of\
         \ nesting to fake this schema>\"\n      },\n      \"type\": \"string\",\n\
         \      \"domain\": \"string\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\"\
@@ -6029,7 +6029,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: fc73e710-b0ef-45ad-80ed-56f3cded7ed7
+  - id: 8896b7e9-d229-47bb-ada2-b633a2c16183
     name: Create DNS Policy
     request:
       name: Create DNS Policy
@@ -6070,7 +6070,7 @@ item:
           raw:
             language: json
     response:
-    - id: 874fbe55-d7ea-4eb1-9ff6-b285a53e51be
+    - id: b11d5e38-c399-4c9d-bdc3-9fb7b92a8beb
       name: Created
       originalRequest:
         url:
@@ -6108,7 +6108,7 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"enabled\": false,\n  \"id\": \"bc712f7d-983a-e08c-28f8-aeab45e8819a\"\
+      body: "{\n  \"enabled\": true,\n  \"id\": \"e60df258-702a-7b6d-c48d-a3908c4b4d28\"\
         ,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n  \"type\": \"string\"\
         ,\n  \"domain\": \"string\"\n}"
       cookie: []
@@ -6116,7 +6116,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: e825343a-1938-4de7-bab5-4d939ba30be7
+  - id: 1bbe4629-a5e8-471c-88b6-a56ec48806f5
     name: Delete DNS Policy
     request:
       name: Delete DNS Policy
@@ -6152,7 +6152,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: bcdaff6d-23dd-4297-b387-1809475572de
+    - id: 662817b4-737f-4f31-a0b5-e2a4316f37a7
       name: OK
       originalRequest:
         url:
@@ -6194,7 +6194,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 9745984c-7bf7-4577-baa5-de0cb9198755
+  - id: 2764458d-ce44-461f-bd8c-67e9f082f534
     name: Get DNS Policy
     request:
       name: Get DNS Policy
@@ -6233,7 +6233,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 3ae4de01-ff91-431a-b5a2-a5815df38fcf
+    - id: d65f208a-141e-485c-8b6c-6efaed7a93d2
       name: OK
       originalRequest:
         url:
@@ -6272,7 +6272,7 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"enabled\": false,\n  \"id\": \"bc712f7d-983a-e08c-28f8-aeab45e8819a\"\
+      body: "{\n  \"enabled\": true,\n  \"id\": \"e60df258-702a-7b6d-c48d-a3908c4b4d28\"\
         ,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n  \"type\": \"string\"\
         ,\n  \"domain\": \"string\"\n}"
       cookie: []
@@ -6280,7 +6280,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 36ef88c6-6823-4fc9-b388-d98a4b126ae4
+  - id: 6fd2c1fb-8911-4274-acdd-58779491dcf2
     name: Update DNS Policy
     request:
       name: Update DNS Policy
@@ -6327,7 +6327,7 @@ item:
           raw:
             language: json
     response:
-    - id: 40c9a7b5-d277-407f-89b2-5888e6361d15
+    - id: f0b5c074-fb21-42f4-817d-34ee897fa7d9
       name: OK
       originalRequest:
         url:
@@ -6371,7 +6371,7 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"enabled\": false,\n  \"id\": \"bc712f7d-983a-e08c-28f8-aeab45e8819a\"\
+      body: "{\n  \"enabled\": true,\n  \"id\": \"e60df258-702a-7b6d-c48d-a3908c4b4d28\"\
         ,\n  \"metadata\": {\n    \"origin\": \"string\"\n  },\n  \"type\": \"string\"\
         ,\n  \"domain\": \"string\"\n}"
       cookie: []
@@ -6380,14 +6380,14 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 5c18b1d9-2aeb-4a40-b61e-0b0f6474990d
+- id: 7da88fa0-38d4-4b43-8e41-d4d14478a48c
   name: Traffic Matching Lists
   description:
     content: Endpoints for managing port and IP address lists used across firewall
       policy configurations.
     type: text/plain
   item:
-  - id: 84556b06-6956-4206-8f4a-e873c16cae83
+  - id: 8e13055a-717f-4439-a815-769dde10fc87
     name: List Traffic Matching Lists
     request:
       name: List Traffic Matching Lists
@@ -6444,7 +6444,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: e1c3fc24-453a-47cb-85d0-973208a86708
+    - id: 1e922eba-78bb-4b69-af47-47cdcbceaab1
       name: OK
       originalRequest:
         url:
@@ -6493,7 +6493,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 20edc557-939e-4036-8fa4-9e9145ff8b89
+  - id: 876f29de-4b48-47d4-a0d7-60e9dfe97aba
     name: Create Traffic Matching List
     request:
       name: Create Traffic Matching List
@@ -6533,7 +6533,7 @@ item:
           raw:
             language: json
     response:
-    - id: 5b8cbfca-6275-45ed-a695-516ef5389a7e
+    - id: 0fb4878b-659e-4ff1-9ebc-0f4d805eae23
       name: Created
       originalRequest:
         url:
@@ -6578,7 +6578,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 822d36bb-b3bf-486c-bd5e-4a9297b4c084
+  - id: d83e1bda-9ee3-40f2-98c8-0487fee70f4f
     name: Delete Traffic Matching List
     request:
       name: Delete Traffic Matching List
@@ -6613,7 +6613,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: a763e684-0afb-4cfe-91eb-6192bbd5e862
+    - id: 458f1680-9c0d-4b66-9cba-d5a3bb46014f
       name: OK
       originalRequest:
         url:
@@ -6654,7 +6654,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: f30b59b7-c0d4-4e1b-a30c-502f968d9e27
+  - id: 7c6419c7-0211-49c1-ac8c-c620033e31bb
     name: Get Traffic Matching List
     request:
       name: Get Traffic Matching List
@@ -6692,7 +6692,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 4b98982b-5af4-453e-8bdd-ac0b163e5fe2
+    - id: b57fb327-921c-4cf1-a6ed-5c727dee5b26
       name: OK
       originalRequest:
         url:
@@ -6737,7 +6737,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: f0bf33f3-5245-4c5a-b8f6-15baa359c6de
+  - id: 3e9fb373-1e59-467a-8682-7cf4f1983f95
     name: Update Traffic Matching List
     request:
       name: Update Traffic Matching List
@@ -6783,7 +6783,7 @@ item:
           raw:
             language: json
     response:
-    - id: bce8e447-a166-49b4-84a9-cba3ac909ada
+    - id: f056737a-589d-48ac-a719-91983b863eea
       name: OK
       originalRequest:
         url:
@@ -6835,7 +6835,7 @@ item:
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 7d5e37dc-1930-462a-82e8-e059227b2d74
+- id: 842578e6-8c8e-43ef-8670-97ca83f65aba
   name: Supporting Resources
   description:
     content: 'Contains read-only reference endpoints used to retrieve supporting data
@@ -6844,7 +6844,7 @@ item:
       device tags.'
     type: text/plain
   item:
-  - id: 076e4a0b-c6d6-459c-a871-9549189986e5
+  - id: 89f8d782-9784-4f80-bfe4-82a4cb3af8ec
     name: List Countries
     request:
       name: List Countries
@@ -6896,7 +6896,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: ec87d26a-395d-4bf9-b692-f74c7a1d8f32
+    - id: f5642e63-e928-4ecd-9795-4482f6ad313f
       name: OK
       originalRequest:
         url:
@@ -6937,7 +6937,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: d20254bc-b3eb-404f-ac66-6eca6ff18b6d
+  - id: 698d5edd-97be-4217-b6cc-fbd5d2d58104
     name: List DPI Applications
     request:
       name: List DPI Applications
@@ -6989,7 +6989,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: ac5988fc-f0e1-4d69-ac97-f0125d4fbca4
+    - id: cbb7b5eb-d2a6-43d1-922c-cbb9dba166c5
       name: OK
       originalRequest:
         url:
@@ -7021,16 +7021,16 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": 554,\n     \
-        \ \"name\": \"Adobe Express|Zoom\"\n    },\n    {\n      \"id\": 6850,\n \
-        \     \"name\": \"Adobe Express|Zoom\"\n    }\n  ],\n  \"limit\": 25,\n  \"\
-        offset\": 0,\n  \"totalCount\": 1000\n}"
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": 3893,\n    \
+        \  \"name\": \"Adobe Express|Zoom\"\n    },\n    {\n      \"id\": 7074,\n\
+        \      \"name\": \"Adobe Express|Zoom\"\n    }\n  ],\n  \"limit\": 25,\n \
+        \ \"offset\": 0,\n  \"totalCount\": 1000\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 42b8df5b-0797-4975-9bdd-32de9bf47f49
+  - id: db817b00-0911-4e13-b9a3-6e755d39b179
     name: List DPI Application Categories
     request:
       name: List DPI Application Categories
@@ -7082,7 +7082,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 17697a36-3706-4a6f-be72-8351321baee5
+    - id: 15783b28-d8f5-45c9-babe-1c41efa0c8b7
       name: OK
       originalRequest:
         url:
@@ -7114,16 +7114,16 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": 4409,\n    \
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": 4593,\n    \
         \  \"name\": \"Network protocols|Business tools\"\n    },\n    {\n      \"\
-        id\": 2633,\n      \"name\": \"Network protocols|Business tools\"\n    }\n\
+        id\": 6251,\n      \"name\": \"Network protocols|Business tools\"\n    }\n\
         \  ],\n  \"limit\": 25,\n  \"offset\": 0,\n  \"totalCount\": 1000\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 492a8fcf-19a8-4825-831d-b0a3ff4690f3
+  - id: e0888005-05e6-4a70-854f-fc7470fe0d77
     name: List Device Tags
     request:
       name: List Device Tags
@@ -7180,7 +7180,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 4bc771bf-4bca-4665-a0da-7afe74b836fd
+    - id: 79b70ff0-fabd-4267-b2aa-692ae1c29d44
       name: OK
       originalRequest:
         url:
@@ -7217,12 +7217,12 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"deviceIds\": [\n \
-        \       \"0fceeccb-b2f7-b2dd-5c39-aea8c316dd1c\"\n      ],\n      \"id\":\
-        \ \"3b66da43-af32-326b-aedb-739a3a57e947\",\n      \"metadata\": {\n     \
+        \       \"5e03bc69-a2fd-db1d-d21a-b8c2ad637619\"\n      ],\n      \"id\":\
+        \ \"be0dff51-2b23-1a3b-38bb-553332f5c7f7\",\n      \"metadata\": {\n     \
         \   \"origin\": {\n          \"value\": \"<Error: Too many levels of nesting\
         \ to fake this schema>\"\n        }\n      },\n      \"name\": \"string\"\n\
-        \    },\n    {\n      \"deviceIds\": [\n        \"ca59a8cf-ae44-aee9-e8dc-e8de8010b667\"\
-        \n      ],\n      \"id\": \"3d574935-432f-404c-6bd1-90f0d71481ad\",\n    \
+        \    },\n    {\n      \"deviceIds\": [\n        \"61559fc6-5693-4729-13db-daae89f56b85\"\
+        \n      ],\n      \"id\": \"4cd611ce-f382-12d0-ca8a-b8954df37b70\",\n    \
         \  \"metadata\": {\n        \"origin\": {\n          \"value\": \"<Error:\
         \ Too many levels of nesting to fake this schema>\"\n        }\n      },\n\
         \      \"name\": \"string\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\":\
@@ -7232,7 +7232,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: f25f1b91-a4b2-488a-a141-94ec4e842033
+  - id: 4a3c2031-b4b8-42ba-97a6-f83e007971cf
     name: List Radius Profiles
     request:
       name: List Radius Profiles
@@ -7293,7 +7293,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 15e7ea5d-8936-4aca-9d28-86a973b65490
+    - id: cb0cf38a-c75d-4bbb-a1d4-979042aaf84a
       name: OK
       originalRequest:
         url:
@@ -7332,10 +7332,10 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"1a3e568c-fad8-b688-5d15-7eaf3f6e5d16\"\
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"77eb215d-9122-2f90-3a91-4843a30ef446\"\
         ,\n      \"metadata\": {\n        \"origin\": {\n          \"value\": \"<Error:\
         \ Too many levels of nesting to fake this schema>\"\n        }\n      },\n\
-        \      \"name\": \"string\"\n    },\n    {\n      \"id\": \"d1ed6a63-d63f-ee01-1e00-c9b5a272f77b\"\
+        \      \"name\": \"string\"\n    },\n    {\n      \"id\": \"2f63f2e3-b00e-e80d-4d57-8b54caf89825\"\
         ,\n      \"metadata\": {\n        \"origin\": {\n          \"value\": \"<Error:\
         \ Too many levels of nesting to fake this schema>\"\n        }\n      },\n\
         \      \"name\": \"string\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\":\
@@ -7345,7 +7345,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 4ee4a672-7d25-4eff-a482-b453042c6529
+  - id: eeb73236-54ec-45f8-8e1b-6a131cba049e
     name: List VPN Servers
     request:
       name: List VPN Servers
@@ -7409,7 +7409,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: d6c7dd24-6649-4a33-ad90-2789b1a10df7
+    - id: 650c1de8-e843-4055-bd58-4f752c181849
       name: OK
       originalRequest:
         url:
@@ -7448,12 +7448,12 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"enabled\": false,\n\
-        \      \"id\": \"d43d1808-0954-5589-48ce-a85ec75b9c4d\",\n      \"metadata\"\
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"enabled\": true,\n\
+        \      \"id\": \"754fc610-ae20-653c-f824-5a835c7e3cb3\",\n      \"metadata\"\
         : {\n        \"origin\": {\n          \"value\": \"<Error: Too many levels\
         \ of nesting to fake this schema>\"\n        }\n      },\n      \"name\":\
         \ \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"enabled\"\
-        : true,\n      \"id\": \"cf6c4539-0fa9-78c7-8d97-60579f44b1e8\",\n      \"\
+        : true,\n      \"id\": \"4eef7f30-167c-0e37-2faa-47388db84da9\",\n      \"\
         metadata\": {\n        \"origin\": {\n          \"value\": \"<Error: Too many\
         \ levels of nesting to fake this schema>\"\n        }\n      },\n      \"\
         name\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"limit\"\
@@ -7463,7 +7463,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 625f547f-49bc-4696-8458-a6b7eb4d3b1d
+  - id: df384759-8171-4e5a-a881-ef5da239323f
     name: List Site-To-Site VPN Tunnels
     request:
       name: List Site-To-Site VPN Tunnels
@@ -7527,7 +7527,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 4a5f5c88-eeb2-4902-8b8c-f9b4f4d929b5
+    - id: e58c0d61-c134-4a8b-a645-2128334068d8
       name: OK
       originalRequest:
         url:
@@ -7566,11 +7566,11 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"f7f86899-27d7-dca0-a4c4-c48039335e86\"\
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"98871378-b795-8507-94dd-a369fcb361d8\"\
         ,\n      \"metadata\": {\n        \"origin\": {\n          \"value\": \"<Error:\
         \ Too many levels of nesting to fake this schema>\"\n        }\n      },\n\
         \      \"name\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n\
-        \      \"id\": \"0edcd60f-8042-6a70-a988-b523adefdea2\",\n      \"metadata\"\
+        \      \"id\": \"3e62bc44-c005-098d-18ab-5727f222d4a6\",\n      \"metadata\"\
         : {\n        \"origin\": {\n          \"value\": \"<Error: Too many levels\
         \ of nesting to fake this schema>\"\n        }\n      },\n      \"name\":\
         \ \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"limit\": 25,\n\
@@ -7580,7 +7580,7 @@ item:
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 0845603f-a1a6-4089-a634-1059ef4610b4
+  - id: 8a733084-b74d-4734-9b38-ef831428e36c
     name: List WAN Interfaces
     request:
       name: List WAN Interfaces
@@ -7620,7 +7620,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 4c8364d4-5978-4be2-b9b7-2e135ee1f6bc
+    - id: c028c00b-15ff-4514-bdfc-c32aacaf7d8e
       name: OK
       originalRequest:
         url:
@@ -7656,8 +7656,8 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"51924a3c-2112-b9ac-5e58-a6c7c6053741\"\
-        ,\n      \"name\": \"Internet 1\"\n    },\n    {\n      \"id\": \"1bafed75-5461-c384-5787-c3ab31955e3d\"\
+      body: "{\n  \"count\": 10,\n  \"data\": [\n    {\n      \"id\": \"658ede47-39e0-d0ef-e58b-ea0e93ee8ea6\"\
+        ,\n      \"name\": \"Internet 1\"\n    },\n    {\n      \"id\": \"ebb01f15-99c4-1680-dee0-3440b4f7fec4\"\
         ,\n      \"name\": \"Internet 1\"\n    }\n  ],\n  \"limit\": 25,\n  \"offset\"\
         : 0,\n  \"totalCount\": 1000\n}"
       cookie: []
@@ -7678,7 +7678,7 @@ variable:
   value: https://api.ui.com/v1/connector/consoles/{{consoleId}}/proxy/network/integration
   key: baseUrl
 info:
-  _postman_id: dcf30f27-1308-4aaa-8ce2-f968d0a0bddb
+  _postman_id: dc6049f2-2303-40d1-8712-b85dbed70acc
   name: UniFi Network API
   schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
   description:

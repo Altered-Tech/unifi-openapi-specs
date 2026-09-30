@@ -1,11 +1,11 @@
 item:
-- id: 51ce134f-0e43-4321-9a06-8f2a1e217b95
+- id: 50536f89-56b0-4ebe-a5d0-f27e3add7904
   name: Information about application
   description:
     content: ''
     type: text/plain
   item:
-  - id: 3c71a503-ec08-4f3a-b56c-917dccb075ee
+  - id: 8d7674e0-0eb8-4188-b727-9bd7c51c189f
     name: Get application information
     request:
       name: Get application information
@@ -31,7 +31,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 64af5b6a-c95a-40d1-bab2-52c8e3320d72
+    - id: 705fef40-fb43-45c5-8272-ee44281149d1
       name: Success response
       originalRequest:
         url:
@@ -60,7 +60,7 @@ item:
       body: "{\n  \"applicationVersion\": \"1.0.0\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 9ddd03d7-c2b3-420b-bba7-4855f24a6825
+    - id: 81bd814a-25f7-4486-83f6-08af451a1fbb
       name: Error response
       originalRequest:
         url:
@@ -87,20 +87,20 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 80753d96-2057-407b-b4b0-6bfd7204c3b5
+- id: e51c5fda-c4aa-4d60-a960-b9633de5072a
   name: Viewer information & management
   description:
     content: ''
     type: text/plain
   item:
-  - id: a44d1d01-7274-4514-bcb7-a103a27b643c
+  - id: 70c24f37-1471-4820-8409-8f4c67a2b478
     name: Get viewer details
     request:
       name: Get viewer details
@@ -131,7 +131,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 83097873-5e5f-4b06-9d12-29cb1b76cdc7
+    - id: dfbe1a65-9d91-42a8-81be-1e5253bb9051
       name: Success response
       originalRequest:
         url:
@@ -164,11 +164,11 @@ item:
         value: application/json
       body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
         ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
-        ,\n  \"liveview\": \"66d025b301ebc903e80003ea\",\n  \"streamLimit\": 4800.154110036312\n\
+        ,\n  \"liveview\": \"66d025b301ebc903e80003ea\",\n  \"streamLimit\": 4144.878569964881\n\
         }"
       cookie: []
       _postman_previewlanguage: json
-    - id: d1ca27a5-eb09-43bc-9bb3-796a4c1fbeac
+    - id: 9a88e82c-bdf1-442b-b7c6-bf6f8fe57c11
       name: Error response
       originalRequest:
         url:
@@ -200,13 +200,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 5e6ff587-b356-44a2-af08-1012a5846562
+  - id: 82adfbb3-815e-4b38-b9c5-25fb70763f81
     name: Patch viewer settings
     request:
       name: Patch viewer settings
@@ -245,7 +245,7 @@ item:
           raw:
             language: json
     response:
-    - id: 02cca6a6-0c0a-43f7-8785-77544f712f07
+    - id: ccc611bc-cc44-497b-95d5-eaf4e9856524
       name: Success response
       originalRequest:
         url:
@@ -284,11 +284,11 @@ item:
         value: application/json
       body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
         ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
-        ,\n  \"liveview\": \"66d025b301ebc903e80003ea\",\n  \"streamLimit\": 4800.154110036312\n\
+        ,\n  \"liveview\": \"66d025b301ebc903e80003ea\",\n  \"streamLimit\": 4144.878569964881\n\
         }"
       cookie: []
       _postman_previewlanguage: json
-    - id: 3e487865-b392-49e7-b506-696b5fa3fef4
+    - id: 6af1f0b2-97fc-42e8-916b-c581b8db9421
       name: Error response
       originalRequest:
         url:
@@ -326,13 +326,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: c0494abd-cd53-4700-b525-fc934344f597
+  - id: 94fb51e9-168a-4d41-9303-266244d623d3
     name: Get all viewers
     request:
       name: Get all viewers
@@ -357,7 +357,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 8898202b-6382-42ec-b286-59417b8f30ef
+    - id: df49841d-5c3f-4659-b513-00c0c8359ba9
       name: Success response
       originalRequest:
         url:
@@ -385,13 +385,13 @@ item:
       body: "[\n  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\":\
         \ \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n\
         \    \"mac\": \"string\",\n    \"liveview\": \"66d025b301ebc903e80003ea\"\
-        ,\n    \"streamLimit\": 4756.787194960434\n  },\n  {\n    \"id\": \"66d025b301ebc903e80003ea\"\
+        ,\n    \"streamLimit\": 7513.564763606901\n  },\n  {\n    \"id\": \"66d025b301ebc903e80003ea\"\
         ,\n    \"modelKey\": \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\"\
         : \"string\",\n    \"mac\": \"string\",\n    \"liveview\": \"66d025b301ebc903e80003ea\"\
-        ,\n    \"streamLimit\": 9698.422615845415\n  }\n]"
+        ,\n    \"streamLimit\": 9893.551202977746\n  }\n]"
       cookie: []
       _postman_previewlanguage: json
-    - id: 49eb720e-cfc7-4b4d-bd83-de8d8c5a27f9
+    - id: bdbbc90d-ec39-4897-b177-fc16624bc6f3
       name: Error response
       originalRequest:
         url:
@@ -417,20 +417,20 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 66360533-2e7f-4977-a3ff-c99d16f0a6a8
+- id: 72689797-6fdd-4c75-829e-e65ed2d9b2a1
   name: Live view management
   description:
     content: ''
     type: text/plain
   item:
-  - id: 81811e6e-8fbd-41c3-b9be-4596f910a613
+  - id: 86568645-a249-489f-9edb-6d826689230f
     name: Get live view details
     request:
       name: Get live view details
@@ -461,7 +461,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 2cb7b5d0-8558-4858-a77a-6ec54c0065a7
+    - id: 8d8fb61c-98bf-42fc-86bd-2492f1ea3e95
       name: Success response
       originalRequest:
         url:
@@ -494,16 +494,16 @@ item:
         value: application/json
       body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
         ,\n  \"name\": \"string\",\n  \"isDefault\": false,\n  \"isGlobal\": false,\n\
-        \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 15.678596322386795,\n\
+        \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 4.235525157074351,\n\
         \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
         ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
-        time\",\n      \"cycleInterval\": 3905.599698299429\n    },\n    {\n     \
-        \ \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n        \"66d025b301ebc903e80003ea\"\
-        \n      ],\n      \"cycleMode\": \"time\",\n      \"cycleInterval\": 4448.836591180309\n\
+        time\",\n      \"cycleInterval\": 1639.3597377415592\n    },\n    {\n    \
+        \  \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n        \"66d025b301ebc903e80003ea\"\
+        \n      ],\n      \"cycleMode\": \"motion\",\n      \"cycleInterval\": 3166.0155694489354\n\
         \    }\n  ]\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 1554d8a7-b8b2-4e2e-81fb-138a5d7a75e0
+    - id: 093e7dbb-8d3a-4908-9310-8f662ae63481
       name: Error response
       originalRequest:
         url:
@@ -535,13 +535,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: ef14a642-a18b-4818-a2ac-e5cfa1ca672c
+  - id: bde1e9e8-18c8-4f3e-a729-c3de54938696
     name: Patch live view configuration
     request:
       name: Patch live view configuration
@@ -587,7 +587,7 @@ item:
           raw:
             language: json
     response:
-    - id: 8ad161c3-f369-4d86-b05b-0ec4d6ff8e32
+    - id: d4c54bfa-dcf5-44ad-a72c-18c5a744729a
       name: Success response
       originalRequest:
         url:
@@ -615,14 +615,14 @@ item:
         body:
           mode: raw
           raw: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
-            ,\n  \"name\": \"string\",\n  \"isDefault\": false,\n  \"isGlobal\": true,\n\
-            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 1.8037850268489966,\n\
+            ,\n  \"name\": \"string\",\n  \"isDefault\": true,\n  \"isGlobal\": true,\n\
+            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 15.07392433534516,\n\
             \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
             ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\"\
-            : \"motion\",\n      \"cycleInterval\": 9579.46067970396\n    },\n   \
-            \ {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n   \
-            \     \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
-            time\",\n      \"cycleInterval\": 7978.1996816728615\n    }\n  ]\n}"
+            : \"motion\",\n      \"cycleInterval\": 6718.968326972426\n    },\n  \
+            \  {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n  \
+            \      \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
+            time\",\n      \"cycleInterval\": 3635.6467891020707\n    }\n  ]\n}"
           options:
             raw:
               language: json
@@ -633,16 +633,16 @@ item:
         value: application/json
       body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
         ,\n  \"name\": \"string\",\n  \"isDefault\": false,\n  \"isGlobal\": false,\n\
-        \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 15.678596322386795,\n\
+        \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 4.235525157074351,\n\
         \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
         ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
-        time\",\n      \"cycleInterval\": 3905.599698299429\n    },\n    {\n     \
-        \ \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n        \"66d025b301ebc903e80003ea\"\
-        \n      ],\n      \"cycleMode\": \"time\",\n      \"cycleInterval\": 4448.836591180309\n\
+        time\",\n      \"cycleInterval\": 1639.3597377415592\n    },\n    {\n    \
+        \  \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n        \"66d025b301ebc903e80003ea\"\
+        \n      ],\n      \"cycleMode\": \"motion\",\n      \"cycleInterval\": 3166.0155694489354\n\
         \    }\n  ]\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: e2875aa5-1050-46a9-adca-34fcc9d8c582
+    - id: 33995a62-4f16-4018-a6ed-51b46221cf85
       name: Error response
       originalRequest:
         url:
@@ -670,14 +670,14 @@ item:
         body:
           mode: raw
           raw: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
-            ,\n  \"name\": \"string\",\n  \"isDefault\": false,\n  \"isGlobal\": true,\n\
-            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 1.8037850268489966,\n\
+            ,\n  \"name\": \"string\",\n  \"isDefault\": true,\n  \"isGlobal\": true,\n\
+            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 15.07392433534516,\n\
             \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
             ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\"\
-            : \"motion\",\n      \"cycleInterval\": 9579.46067970396\n    },\n   \
-            \ {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n   \
-            \     \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
-            time\",\n      \"cycleInterval\": 7978.1996816728615\n    }\n  ]\n}"
+            : \"motion\",\n      \"cycleInterval\": 6718.968326972426\n    },\n  \
+            \  {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n  \
+            \      \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
+            time\",\n      \"cycleInterval\": 3635.6467891020707\n    }\n  ]\n}"
           options:
             raw:
               language: json
@@ -687,13 +687,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 9e8a19e0-8c26-44f0-a35e-6417a4cb3dcc
+  - id: 7323aa52-7281-4db3-aa01-d10e9ab16efc
     name: Get all live views
     request:
       name: Get all live views
@@ -718,7 +718,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 95bb4a43-d033-4b32-9695-63ef8dd8e860
+    - id: 07d42c3e-03d9-4867-bc81-afe489f078d5
       name: Success response
       originalRequest:
         url:
@@ -744,27 +744,27 @@ item:
       - key: Content-Type
         value: application/json
       body: "[\n  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\":\
-        \ \"string\",\n    \"name\": \"string\",\n    \"isDefault\": true,\n    \"\
-        isGlobal\": false,\n    \"owner\": \"66d025b301ebc903e80003ea\",\n    \"layout\"\
-        : 11.787872441863644,\n    \"slots\": [\n      {\n        \"cameras\": [\n\
+        \ \"string\",\n    \"name\": \"string\",\n    \"isDefault\": false,\n    \"\
+        isGlobal\": true,\n    \"owner\": \"66d025b301ebc903e80003ea\",\n    \"layout\"\
+        : 3.6281064152020055,\n    \"slots\": [\n      {\n        \"cameras\": [\n\
         \          \"66d025b301ebc903e80003ea\",\n          \"66d025b301ebc903e80003ea\"\
         \n        ],\n        \"cycleMode\": \"motion\",\n        \"cycleInterval\"\
-        : 958.1239927440688\n      },\n      {\n        \"cameras\": [\n         \
+        : 4682.181255561793\n      },\n      {\n        \"cameras\": [\n         \
         \ \"66d025b301ebc903e80003ea\",\n          \"66d025b301ebc903e80003ea\"\n\
-        \        ],\n        \"cycleMode\": \"time\",\n        \"cycleInterval\":\
-        \ 9170.35071109425\n      }\n    ]\n  },\n  {\n    \"id\": \"66d025b301ebc903e80003ea\"\
+        \        ],\n        \"cycleMode\": \"motion\",\n        \"cycleInterval\"\
+        : 2008.8604073930537\n      }\n    ]\n  },\n  {\n    \"id\": \"66d025b301ebc903e80003ea\"\
         ,\n    \"modelKey\": \"string\",\n    \"name\": \"string\",\n    \"isDefault\"\
         : false,\n    \"isGlobal\": true,\n    \"owner\": \"66d025b301ebc903e80003ea\"\
-        ,\n    \"layout\": 4.142910573105917,\n    \"slots\": [\n      {\n       \
+        ,\n    \"layout\": 17.04131836255352,\n    \"slots\": [\n      {\n       \
         \ \"cameras\": [\n          \"66d025b301ebc903e80003ea\",\n          \"66d025b301ebc903e80003ea\"\
         \n        ],\n        \"cycleMode\": \"motion\",\n        \"cycleInterval\"\
-        : 210.04338095143683\n      },\n      {\n        \"cameras\": [\n        \
-        \  \"66d025b301ebc903e80003ea\",\n          \"66d025b301ebc903e80003ea\"\n\
-        \        ],\n        \"cycleMode\": \"time\",\n        \"cycleInterval\":\
-        \ 7071.395945005305\n      }\n    ]\n  }\n]"
+        : 1599.793808350808\n      },\n      {\n        \"cameras\": [\n         \
+        \ \"66d025b301ebc903e80003ea\",\n          \"66d025b301ebc903e80003ea\"\n\
+        \        ],\n        \"cycleMode\": \"motion\",\n        \"cycleInterval\"\
+        : 7156.166891353188\n      }\n    ]\n  }\n]"
       cookie: []
       _postman_previewlanguage: json
-    - id: 1432fd32-35ad-4443-a584-b41c1306f06e
+    - id: c6bbc259-9935-4466-81da-7f12ad9d4b5d
       name: Error response
       originalRequest:
         url:
@@ -790,13 +790,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: c8e54676-25e7-484a-9979-74c77cc728ba
+  - id: 89e5c66c-7dd2-408b-8ac2-329cf6908e20
     name: Create live view
     request:
       name: Create live view
@@ -836,7 +836,7 @@ item:
           raw:
             language: json
     response:
-    - id: 1b4e316f-3a83-484c-9628-78ce94411fe1
+    - id: 52b2c976-2904-467e-a5d0-cab539bf0e38
       name: Success response
       originalRequest:
         url:
@@ -858,14 +858,14 @@ item:
         body:
           mode: raw
           raw: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
-            ,\n  \"name\": \"string\",\n  \"isDefault\": false,\n  \"isGlobal\": true,\n\
-            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 1.8037850268489966,\n\
+            ,\n  \"name\": \"string\",\n  \"isDefault\": true,\n  \"isGlobal\": true,\n\
+            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 15.07392433534516,\n\
             \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
             ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\"\
-            : \"motion\",\n      \"cycleInterval\": 9579.46067970396\n    },\n   \
-            \ {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n   \
-            \     \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
-            time\",\n      \"cycleInterval\": 7978.1996816728615\n    }\n  ]\n}"
+            : \"motion\",\n      \"cycleInterval\": 6718.968326972426\n    },\n  \
+            \  {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n  \
+            \      \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
+            time\",\n      \"cycleInterval\": 3635.6467891020707\n    }\n  ]\n}"
           options:
             raw:
               language: json
@@ -876,16 +876,16 @@ item:
         value: application/json
       body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
         ,\n  \"name\": \"string\",\n  \"isDefault\": false,\n  \"isGlobal\": false,\n\
-        \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 15.678596322386795,\n\
+        \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 4.235525157074351,\n\
         \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
         ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
-        time\",\n      \"cycleInterval\": 3905.599698299429\n    },\n    {\n     \
-        \ \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n        \"66d025b301ebc903e80003ea\"\
-        \n      ],\n      \"cycleMode\": \"time\",\n      \"cycleInterval\": 4448.836591180309\n\
+        time\",\n      \"cycleInterval\": 1639.3597377415592\n    },\n    {\n    \
+        \  \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n        \"66d025b301ebc903e80003ea\"\
+        \n      ],\n      \"cycleMode\": \"motion\",\n      \"cycleInterval\": 3166.0155694489354\n\
         \    }\n  ]\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 882786d9-a598-4f70-b7e3-08084f64bfe6
+    - id: 0e337c54-4634-4ad3-9873-28869808ff7e
       name: Error response
       originalRequest:
         url:
@@ -907,14 +907,14 @@ item:
         body:
           mode: raw
           raw: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
-            ,\n  \"name\": \"string\",\n  \"isDefault\": false,\n  \"isGlobal\": true,\n\
-            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 1.8037850268489966,\n\
+            ,\n  \"name\": \"string\",\n  \"isDefault\": true,\n  \"isGlobal\": true,\n\
+            \  \"owner\": \"66d025b301ebc903e80003ea\",\n  \"layout\": 15.07392433534516,\n\
             \  \"slots\": [\n    {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\"\
             ,\n        \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\"\
-            : \"motion\",\n      \"cycleInterval\": 9579.46067970396\n    },\n   \
-            \ {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n   \
-            \     \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
-            time\",\n      \"cycleInterval\": 7978.1996816728615\n    }\n  ]\n}"
+            : \"motion\",\n      \"cycleInterval\": 6718.968326972426\n    },\n  \
+            \  {\n      \"cameras\": [\n        \"66d025b301ebc903e80003ea\",\n  \
+            \      \"66d025b301ebc903e80003ea\"\n      ],\n      \"cycleMode\": \"\
+            time\",\n      \"cycleInterval\": 3635.6467891020707\n    }\n  ]\n}"
           options:
             raw:
               language: json
@@ -924,20 +924,20 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 7d247fc1-1ba9-4673-b748-0a4a875638c2
+- id: eae132be-567d-4184-a06a-60341eda503f
   name: WebSocket updates
   description:
     content: ''
     type: text/plain
   item:
-  - id: 9cda31c0-9a70-4aa4-ada5-4e9fe6f6beab
+  - id: be5fb96b-3423-42f6-93b7-f986dd9e6012
     name: Get update messages about devices
     request:
       name: Get update messages about devices
@@ -964,7 +964,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: c901727e-baa7-4546-b490-1b3d4c5a6e64
+    - id: fbea55ad-1528-45d1-93ad-0be8af3c7fe7
       name: Success response
       originalRequest:
         url:
@@ -993,7 +993,7 @@ item:
       body: "{\n  \"type\": \"string\",\n  \"item\": {\n    \"id\": \"66d025b301ebc903e80003ea\"\
         ,\n    \"modelKey\": \"string\",\n    \"name\": \"string\",\n    \"doorbellSettings\"\
         : {\n      \"defaultMessageText\": \"string\",\n      \"defaultMessageResetTimeoutMs\"\
-        : 7798.802497761097,\n      \"customMessages\": [\n        {\n          \"\
+        : 8172.676571434248,\n      \"customMessages\": [\n        {\n          \"\
         value\": \"<Error: Too many levels of nesting to fake this schema>\"\n   \
         \     },\n        {\n          \"value\": \"<Error: Too many levels of nesting\
         \ to fake this schema>\"\n        }\n      ],\n      \"customImages\": [\n\
@@ -1003,7 +1003,7 @@ item:
         \  }\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: ca40f69f-0b45-464c-99d6-cc1509126a49
+    - id: 384e2255-9932-4466-8b27-07f8e603c445
       name: Error response
       originalRequest:
         url:
@@ -1030,13 +1030,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 424886d9-a388-4c12-b88c-d2ff7d7f113a
+  - id: b00fb638-92d7-4d9e-ba9a-7db450167ac6
     name: Get Protect event messages
     request:
       name: Get Protect event messages
@@ -1062,7 +1062,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 7fd8ab8a-c397-4a7e-bc47-d5588bc5ec57
+    - id: a7e2f8cd-1cf7-4af6-9884-9404758850fe
       name: Success response
       originalRequest:
         url:
@@ -1094,7 +1094,7 @@ item:
         : 1445408048748\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: da69d012-7270-4b06-ab2c-c72e7b7d127d
+    - id: 04fdb24f-2b15-443a-b912-aa41d80adf03
       name: Error response
       originalRequest:
         url:
@@ -1121,20 +1121,20 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 00165ce3-5ef9-44fd-8001-ef93efb601c3
+- id: 45b2e649-95e3-4064-b77f-6b4b62e77ab5
   name: Camera PTZ control & management
   description:
     content: ''
     type: text/plain
   item:
-  - id: a43c501c-e8a1-45e0-9023-8b2229524c78
+  - id: 501ac4b1-12b5-4e99-a6fa-24a2ceb9f205
     name: Start a camera PTZ patrol
     request:
       name: Start a camera PTZ patrol
@@ -1175,7 +1175,7 @@ item:
       method: POST
       auth: null
     response:
-    - id: 4e37372d-6bde-4d5a-9f32-51708fbc9a81
+    - id: 8396929a-39a5-4a58-824f-393455bd7d69
       name: The camera PTZ patrol was started successfully.
       originalRequest:
         url:
@@ -1216,7 +1216,7 @@ item:
       body: ''
       cookie: []
       _postman_previewlanguage: text
-    - id: 4033a552-504e-4349-a2aa-9cf32e015b39
+    - id: dc225c05-0ad6-48e3-9b0c-5b65ba46b263
       name: Error response
       originalRequest:
         url:
@@ -1258,13 +1258,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 8c40aa2c-6b64-4a5a-8c7f-0448d84f56a8
+  - id: 072f03c0-88c7-4811-8c63-9202c420fc52
     name: Stop active camera PTZ patrol
     request:
       name: Stop active camera PTZ patrol
@@ -1298,7 +1298,7 @@ item:
       method: POST
       auth: null
     response:
-    - id: 76f47107-363a-4d26-87b2-67d1cb9c07ae
+    - id: e9a288ba-9644-44b7-9b25-a597412855a9
       name: The camera PTZ patrol was stopped successfully.
       originalRequest:
         url:
@@ -1332,7 +1332,7 @@ item:
       body: ''
       cookie: []
       _postman_previewlanguage: text
-    - id: e4ecfa55-7039-46e0-914b-65a14b5974c1
+    - id: c8d23f37-5e48-429a-82e9-e00c85ac8318
       name: Error response
       originalRequest:
         url:
@@ -1367,13 +1367,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: ef514731-1909-4b8b-b674-faca44df3bda
+  - id: 1a82891f-e5ec-4f74-a6e4-f5e103af5e5b
     name: Move PTZ camera to preset
     request:
       name: Move PTZ camera to preset
@@ -1413,7 +1413,7 @@ item:
       method: POST
       auth: null
     response:
-    - id: 79848197-826d-4473-b821-0c0c7c975da7
+    - id: 002b266d-e332-4664-b745-3f270add28ff
       name: The PTZ camera was moved to the given preset successfully.
       originalRequest:
         url:
@@ -1453,7 +1453,7 @@ item:
       body: ''
       cookie: []
       _postman_previewlanguage: text
-    - id: b8d0bcfb-e619-4121-aa12-8006e70ed254
+    - id: 4f15e812-e705-4d3d-ad38-132fe0cd05d0
       name: Error response
       originalRequest:
         url:
@@ -1494,20 +1494,20 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: c685a2bb-8d0b-4741-95f3-f6ad37bd1b50
+- id: a9efdfa9-6f8a-412f-9b94-05da17d7ae0f
   name: Alarm manager integration
   description:
     content: ''
     type: text/plain
   item:
-  - id: 8de06380-b5a0-48b8-974e-3afd1d4b3150
+  - id: 836f15b9-81a9-44de-9335-3f0f6c96e87b
     name: Send a webhook to the alarm manager
     request:
       name: Send a webhook to the alarm manager
@@ -1540,7 +1540,7 @@ item:
       method: POST
       auth: null
     response:
-    - id: e4e2ae54-bded-45e4-b149-21a6cd5ec9e5
+    - id: 0e6e7e47-b309-40a7-a31c-d6d8b9284ff8
       name: Webhook was sent to alarm manager successfully
       originalRequest:
         url:
@@ -1573,7 +1573,7 @@ item:
       body: ''
       cookie: []
       _postman_previewlanguage: text
-    - id: 9fbae9c8-d1ba-4409-a46a-49ba3dcfe302
+    - id: 628e812e-04c5-4b28-956f-a513f7645da6
       name: Bad request response
       originalRequest:
         url:
@@ -1607,20 +1607,21 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"'id' is required\",\n  \"name\": \"BAD_REQUEST\",\n\
-        \  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
+        \  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {},\n\
+        \    \"key_3\": {},\n    \"key_4\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 6b19db43-6967-44bf-9798-fa03f0ac034f
+- id: 13d08696-635f-447d-9cc1-0c99df91a7df
   name: Light information & management
   description:
     content: ''
     type: text/plain
   item:
-  - id: f7fd4f75-280f-487f-989e-c2aad7bd43e1
+  - id: cad65438-3f19-4452-abe1-b0d52f949013
     name: Get light details
     request:
       name: Get light details
@@ -1651,7 +1652,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 38bf3264-da2f-437b-bdf1-30cc8ffa8e2b
+    - id: c674f8dc-4e62-4690-b989-d87462e71b73
       name: Success response
       originalRequest:
         url:
@@ -1686,14 +1687,14 @@ item:
         ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
         ,\n  \"lightModeSettings\": {\n    \"mode\": \"string\",\n    \"enableAt\"\
         : \"string\"\n  },\n  \"lightDeviceSettings\": {\n    \"isIndicatorEnabled\"\
-        : false,\n    \"pirDuration\": 2289.244356600575,\n    \"pirSensitivity\"\
-        : 44.47706983587829,\n    \"ledLevel\": 1.8695342381408466\n  },\n  \"isDark\"\
-        : false,\n  \"isLightOn\": true,\n  \"isLightForceEnabled\": false,\n  \"\
-        lastMotion\": 2595.690072841701,\n  \"isPirMotionDetected\": false,\n  \"\
-        camera\": \"66d025b301ebc903e80003ea\"\n}"
+        : false,\n    \"pirDuration\": 3677.681276196425,\n    \"pirSensitivity\"\
+        : 98.45737328130103,\n    \"ledLevel\": 4.445897799001385\n  },\n  \"isDark\"\
+        : true,\n  \"isLightOn\": false,\n  \"isLightForceEnabled\": true,\n  \"lastMotion\"\
+        : 67.68545665302939,\n  \"isPirMotionDetected\": true,\n  \"camera\": \"66d025b301ebc903e80003ea\"\
+        \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 361e293b-2cfb-4aa3-af24-e81827d18b0b
+    - id: 21ab567a-fd39-4036-b8c0-615d03e17402
       name: Error response
       originalRequest:
         url:
@@ -1725,13 +1726,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: e32cbedd-273f-4bcc-9ff3-458c18c1b490
+  - id: 966d76ad-6feb-498a-bd21-644696f8a69a
     name: Patch light settings
     request:
       name: Patch light settings
@@ -1774,7 +1775,7 @@ item:
           raw:
             language: json
     response:
-    - id: 99a370f6-65ae-4258-98cc-89bd549b29cc
+    - id: 1c5302c0-a036-4672-b482-64a8c52bbd8d
       name: Success response
       originalRequest:
         url:
@@ -1801,11 +1802,11 @@ item:
         method: PATCH
         body:
           mode: raw
-          raw: "{\n  \"name\": \"string\",\n  \"isLightForceEnabled\": true,\n  \"\
+          raw: "{\n  \"name\": \"string\",\n  \"isLightForceEnabled\": false,\n  \"\
             lightModeSettings\": {\n    \"mode\": \"string\",\n    \"enableAt\": \"\
             string\"\n  },\n  \"lightDeviceSettings\": {\n    \"isIndicatorEnabled\"\
-            : true,\n    \"pirDuration\": 5030.108954409938,\n    \"pirSensitivity\"\
-            : 69.86051704994513,\n    \"ledLevel\": 5.855876127215741\n  }\n}"
+            : false,\n    \"pirDuration\": 6698.9432675016715,\n    \"pirSensitivity\"\
+            : 26.449627585600275,\n    \"ledLevel\": 5.942094447752508\n  }\n}"
           options:
             raw:
               language: json
@@ -1818,14 +1819,14 @@ item:
         ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
         ,\n  \"lightModeSettings\": {\n    \"mode\": \"string\",\n    \"enableAt\"\
         : \"string\"\n  },\n  \"lightDeviceSettings\": {\n    \"isIndicatorEnabled\"\
-        : false,\n    \"pirDuration\": 2289.244356600575,\n    \"pirSensitivity\"\
-        : 44.47706983587829,\n    \"ledLevel\": 1.8695342381408466\n  },\n  \"isDark\"\
-        : false,\n  \"isLightOn\": true,\n  \"isLightForceEnabled\": false,\n  \"\
-        lastMotion\": 2595.690072841701,\n  \"isPirMotionDetected\": false,\n  \"\
-        camera\": \"66d025b301ebc903e80003ea\"\n}"
+        : false,\n    \"pirDuration\": 3677.681276196425,\n    \"pirSensitivity\"\
+        : 98.45737328130103,\n    \"ledLevel\": 4.445897799001385\n  },\n  \"isDark\"\
+        : true,\n  \"isLightOn\": false,\n  \"isLightForceEnabled\": true,\n  \"lastMotion\"\
+        : 67.68545665302939,\n  \"isPirMotionDetected\": true,\n  \"camera\": \"66d025b301ebc903e80003ea\"\
+        \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: dcbe1b8d-ad7c-4000-9454-63e085818842
+    - id: 00b96979-6d43-4f61-9f99-9841789c0579
       name: Error response
       originalRequest:
         url:
@@ -1852,11 +1853,11 @@ item:
         method: PATCH
         body:
           mode: raw
-          raw: "{\n  \"name\": \"string\",\n  \"isLightForceEnabled\": true,\n  \"\
+          raw: "{\n  \"name\": \"string\",\n  \"isLightForceEnabled\": false,\n  \"\
             lightModeSettings\": {\n    \"mode\": \"string\",\n    \"enableAt\": \"\
             string\"\n  },\n  \"lightDeviceSettings\": {\n    \"isIndicatorEnabled\"\
-            : true,\n    \"pirDuration\": 5030.108954409938,\n    \"pirSensitivity\"\
-            : 69.86051704994513,\n    \"ledLevel\": 5.855876127215741\n  }\n}"
+            : false,\n    \"pirDuration\": 6698.9432675016715,\n    \"pirSensitivity\"\
+            : 26.449627585600275,\n    \"ledLevel\": 5.942094447752508\n  }\n}"
           options:
             raw:
               language: json
@@ -1866,13 +1867,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: e2b0cac2-bb0f-41a2-b79f-9ee2e3300af9
+  - id: 293efe60-edf6-417c-8d55-80b46ece2574
     name: Get all lights
     request:
       name: Get all lights
@@ -1897,7 +1898,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 41045679-845b-40c7-832a-bff555f4b156
+    - id: ce187668-ad3a-4d80-a707-69be75707d51
       name: Success response
       originalRequest:
         url:
@@ -1926,23 +1927,23 @@ item:
         \ \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n\
         \    \"mac\": \"string\",\n    \"lightModeSettings\": {\n      \"mode\": \"\
         string\",\n      \"enableAt\": \"string\"\n    },\n    \"lightDeviceSettings\"\
-        : {\n      \"isIndicatorEnabled\": true,\n      \"pirDuration\": 6509.940020994202,\n\
-        \      \"pirSensitivity\": 26.474232434805998,\n      \"ledLevel\": 1.905930070787233\n\
-        \    },\n    \"isDark\": false,\n    \"isLightOn\": false,\n    \"isLightForceEnabled\"\
-        : true,\n    \"lastMotion\": 5291.42986665639,\n    \"isPirMotionDetected\"\
-        : false,\n    \"camera\": \"66d025b301ebc903e80003ea\"\n  },\n  {\n    \"\
-        id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\": \"string\",\n    \"\
-        state\": \"CONNECTED\",\n    \"name\": \"string\",\n    \"mac\": \"string\"\
-        ,\n    \"lightModeSettings\": {\n      \"mode\": \"string\",\n      \"enableAt\"\
+        : {\n      \"isIndicatorEnabled\": true,\n      \"pirDuration\": 8761.574449185287,\n\
+        \      \"pirSensitivity\": 2.478086754094566,\n      \"ledLevel\": 4.525790789984246\n\
+        \    },\n    \"isDark\": true,\n    \"isLightOn\": false,\n    \"isLightForceEnabled\"\
+        : false,\n    \"lastMotion\": 904.5590719577278,\n    \"isPirMotionDetected\"\
+        : true,\n    \"camera\": \"66d025b301ebc903e80003ea\"\n  },\n  {\n    \"id\"\
+        : \"66d025b301ebc903e80003ea\",\n    \"modelKey\": \"string\",\n    \"state\"\
+        : \"CONNECTED\",\n    \"name\": \"string\",\n    \"mac\": \"string\",\n  \
+        \  \"lightModeSettings\": {\n      \"mode\": \"string\",\n      \"enableAt\"\
         : \"string\"\n    },\n    \"lightDeviceSettings\": {\n      \"isIndicatorEnabled\"\
-        : true,\n      \"pirDuration\": 4167.4093903211815,\n      \"pirSensitivity\"\
-        : 37.73115594746896,\n      \"ledLevel\": 1.575896915827141\n    },\n    \"\
-        isDark\": true,\n    \"isLightOn\": true,\n    \"isLightForceEnabled\": true,\n\
-        \    \"lastMotion\": 9908.102280390389,\n    \"isPirMotionDetected\": true,\n\
+        : false,\n      \"pirDuration\": 1431.4536748872454,\n      \"pirSensitivity\"\
+        : 90.38806126591766,\n      \"ledLevel\": 1.056231517748433\n    },\n    \"\
+        isDark\": false,\n    \"isLightOn\": true,\n    \"isLightForceEnabled\": true,\n\
+        \    \"lastMotion\": 7636.337475726555,\n    \"isPirMotionDetected\": true,\n\
         \    \"camera\": \"66d025b301ebc903e80003ea\"\n  }\n]"
       cookie: []
       _postman_previewlanguage: json
-    - id: cda901e2-7497-4360-98ca-a9f0948a9173
+    - id: 180f5b85-effa-4ba5-90f2-f26eb747654e
       name: Error response
       originalRequest:
         url:
@@ -1968,20 +1969,20 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 64a914e7-524b-47a1-9d45-3dd3afb42dc8
+- id: ae7b435a-29bd-4e71-b865-7ecc74f31d5f
   name: Camera information & management
   description:
     content: ''
     type: text/plain
   item:
-  - id: 2b3393dc-f553-4b2f-baf5-ad55b60de379
+  - id: 7328219b-0a64-4088-8710-a160d246fba1
     name: Get camera details
     request:
       name: Get camera details
@@ -2012,7 +2013,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 5ab24838-af2d-44a0-b55a-ab90007f3baa
+    - id: 27afb6c1-529f-4c68-9e57-a505c508fe81
       name: Success response
       originalRequest:
         url:
@@ -2045,25 +2046,25 @@ item:
         value: application/json
       body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
         ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
-        ,\n  \"isMicEnabled\": true,\n  \"osdSettings\": {\n    \"isNameEnabled\"\
-        : true,\n    \"isDateEnabled\": false,\n    \"isLogoEnabled\": true,\n   \
-        \ \"isDebugEnabled\": true,\n    \"overlayLocation\": \"bottomMiddle\"\n \
-        \ },\n  \"ledSettings\": {\n    \"isEnabled\": false,\n    \"welcomeLed\"\
-        : true,\n    \"floodLed\": true\n  },\n  \"lcdMessage\": {\n    \"type\":\
-        \ \"IMAGE\",\n    \"resetAt\": 9581.22758603789,\n    \"text\": \"string\"\
-        \n  },\n  \"micVolume\": 2.786059232521687,\n  \"activePatrolSlot\": 0,\n\
-        \  \"videoMode\": \"default\",\n  \"hdrType\": \"off\",\n  \"featureFlags\"\
-        : {\n    \"supportFullHdSnapshot\": false,\n    \"hasHdr\": true,\n    \"\
-        smartDetectTypes\": [\n      \"person\",\n      \"package\"\n    ],\n    \"\
-        smartDetectAudioTypes\": [\n      \"alrmCmonx\",\n      \"alrmBurglar\"\n\
-        \    ],\n    \"videoModes\": [\n      \"homekit\",\n      \"highFps\"\n  \
-        \  ],\n    \"hasMic\": false,\n    \"hasLedStatus\": true,\n    \"hasSpeaker\"\
-        : false\n  },\n  \"smartDetectSettings\": {\n    \"objectTypes\": [\n    \
-        \  \"person\",\n      \"face\"\n    ],\n    \"audioTypes\": [\n      \"alrmBark\"\
-        ,\n      \"alrmGlassBreak\"\n    ]\n  }\n}"
+        ,\n  \"isMicEnabled\": false,\n  \"osdSettings\": {\n    \"isNameEnabled\"\
+        : true,\n    \"isDateEnabled\": true,\n    \"isLogoEnabled\": true,\n    \"\
+        isDebugEnabled\": false,\n    \"overlayLocation\": \"topMiddle\"\n  },\n \
+        \ \"ledSettings\": {\n    \"isEnabled\": false,\n    \"welcomeLed\": true,\n\
+        \    \"floodLed\": true\n  },\n  \"lcdMessage\": {\n    \"type\": \"DO_NOT_DISTURB\"\
+        ,\n    \"resetAt\": 7936.672744211437,\n    \"text\": \"string\"\n  },\n \
+        \ \"micVolume\": 38.09894015332378,\n  \"activePatrolSlot\": 0,\n  \"videoMode\"\
+        : \"lprReflex\",\n  \"hdrType\": \"off\",\n  \"featureFlags\": {\n    \"supportFullHdSnapshot\"\
+        : true,\n    \"hasHdr\": true,\n    \"smartDetectTypes\": [\n      \"animal\"\
+        ,\n      \"face\"\n    ],\n    \"smartDetectAudioTypes\": [\n      \"alrmCmonx\"\
+        ,\n      \"alrmBark\"\n    ],\n    \"videoModes\": [\n      \"slowShutter\"\
+        ,\n      \"lprNoneReflex\"\n    ],\n    \"hasMic\": true,\n    \"hasLedStatus\"\
+        : true,\n    \"hasSpeaker\": false\n  },\n  \"smartDetectSettings\": {\n \
+        \   \"objectTypes\": [\n      \"licensePlate\",\n      \"package\"\n    ],\n\
+        \    \"audioTypes\": [\n      \"alrmSmoke\",\n      \"alrmGlassBreak\"\n \
+        \   ]\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: c5c2d440-019a-426f-996d-22863c0e7311
+    - id: dfc5db29-2355-4ee1-a116-0cc248cc4632
       name: Error response
       originalRequest:
         url:
@@ -2095,13 +2096,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: ef4ed196-57d4-4649-bca7-57d2e8339a01
+  - id: 5868db29-cdd6-4ebc-bbd5-4f1c3504cca0
     name: Patch camera settings
     request:
       name: Patch camera settings
@@ -2150,7 +2151,7 @@ item:
           raw:
             language: json
     response:
-    - id: 88e61971-4f72-4c1d-a8ff-6d366ccbc3b6
+    - id: 8c6a3cd9-6bb5-4a9d-b518-50ab464d7e6d
       name: Success response
       originalRequest:
         url:
@@ -2178,15 +2179,15 @@ item:
         body:
           mode: raw
           raw: "{\n  \"name\": \"<string>\",\n  \"osdSettings\": {\n    \"isNameEnabled\"\
-            : false,\n    \"isDateEnabled\": true,\n    \"isLogoEnabled\": true,\n\
-            \    \"isDebugEnabled\": false,\n    \"overlayLocation\": \"topRight\"\
+            : false,\n    \"isDateEnabled\": true,\n    \"isLogoEnabled\": false,\n\
+            \    \"isDebugEnabled\": true,\n    \"overlayLocation\": \"topMiddle\"\
             \n  },\n  \"ledSettings\": {\n    \"isEnabled\": false,\n    \"welcomeLed\"\
             : true,\n    \"floodLed\": false\n  },\n  \"lcdMessage\": {\n    \"type\"\
-            : \"string\",\n    \"resetAt\": 3083.02563151142\n  },\n  \"micVolume\"\
-            : 89.71458290605158,\n  \"videoMode\": \"lprReflex\",\n  \"hdrType\":\
-            \ \"off\",\n  \"smartDetectSettings\": {\n    \"objectTypes\": [\n   \
-            \   \"person\",\n      \"vehicle\"\n    ],\n    \"audioTypes\": [\n  \
-            \    \"alrmBabyCry\",\n      \"alrmBurglar\"\n    ]\n  }\n}"
+            : \"string\",\n    \"resetAt\": 987.5052193392863\n  },\n  \"micVolume\"\
+            : 64.56009484947384,\n  \"videoMode\": \"default\",\n  \"hdrType\": \"\
+            off\",\n  \"smartDetectSettings\": {\n    \"objectTypes\": [\n      \"\
+            vehicle\",\n      \"face\"\n    ],\n    \"audioTypes\": [\n      \"alrmCarHorn\"\
+            ,\n      \"alrmSmoke\"\n    ]\n  }\n}"
           options:
             raw:
               language: json
@@ -2197,25 +2198,25 @@ item:
         value: application/json
       body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
         ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
-        ,\n  \"isMicEnabled\": true,\n  \"osdSettings\": {\n    \"isNameEnabled\"\
-        : true,\n    \"isDateEnabled\": false,\n    \"isLogoEnabled\": true,\n   \
-        \ \"isDebugEnabled\": true,\n    \"overlayLocation\": \"bottomMiddle\"\n \
-        \ },\n  \"ledSettings\": {\n    \"isEnabled\": false,\n    \"welcomeLed\"\
-        : true,\n    \"floodLed\": true\n  },\n  \"lcdMessage\": {\n    \"type\":\
-        \ \"IMAGE\",\n    \"resetAt\": 9581.22758603789,\n    \"text\": \"string\"\
-        \n  },\n  \"micVolume\": 2.786059232521687,\n  \"activePatrolSlot\": 0,\n\
-        \  \"videoMode\": \"default\",\n  \"hdrType\": \"off\",\n  \"featureFlags\"\
-        : {\n    \"supportFullHdSnapshot\": false,\n    \"hasHdr\": true,\n    \"\
-        smartDetectTypes\": [\n      \"person\",\n      \"package\"\n    ],\n    \"\
-        smartDetectAudioTypes\": [\n      \"alrmCmonx\",\n      \"alrmBurglar\"\n\
-        \    ],\n    \"videoModes\": [\n      \"homekit\",\n      \"highFps\"\n  \
-        \  ],\n    \"hasMic\": false,\n    \"hasLedStatus\": true,\n    \"hasSpeaker\"\
-        : false\n  },\n  \"smartDetectSettings\": {\n    \"objectTypes\": [\n    \
-        \  \"person\",\n      \"face\"\n    ],\n    \"audioTypes\": [\n      \"alrmBark\"\
-        ,\n      \"alrmGlassBreak\"\n    ]\n  }\n}"
+        ,\n  \"isMicEnabled\": false,\n  \"osdSettings\": {\n    \"isNameEnabled\"\
+        : true,\n    \"isDateEnabled\": true,\n    \"isLogoEnabled\": true,\n    \"\
+        isDebugEnabled\": false,\n    \"overlayLocation\": \"topMiddle\"\n  },\n \
+        \ \"ledSettings\": {\n    \"isEnabled\": false,\n    \"welcomeLed\": true,\n\
+        \    \"floodLed\": true\n  },\n  \"lcdMessage\": {\n    \"type\": \"DO_NOT_DISTURB\"\
+        ,\n    \"resetAt\": 7936.672744211437,\n    \"text\": \"string\"\n  },\n \
+        \ \"micVolume\": 38.09894015332378,\n  \"activePatrolSlot\": 0,\n  \"videoMode\"\
+        : \"lprReflex\",\n  \"hdrType\": \"off\",\n  \"featureFlags\": {\n    \"supportFullHdSnapshot\"\
+        : true,\n    \"hasHdr\": true,\n    \"smartDetectTypes\": [\n      \"animal\"\
+        ,\n      \"face\"\n    ],\n    \"smartDetectAudioTypes\": [\n      \"alrmCmonx\"\
+        ,\n      \"alrmBark\"\n    ],\n    \"videoModes\": [\n      \"slowShutter\"\
+        ,\n      \"lprNoneReflex\"\n    ],\n    \"hasMic\": true,\n    \"hasLedStatus\"\
+        : true,\n    \"hasSpeaker\": false\n  },\n  \"smartDetectSettings\": {\n \
+        \   \"objectTypes\": [\n      \"licensePlate\",\n      \"package\"\n    ],\n\
+        \    \"audioTypes\": [\n      \"alrmSmoke\",\n      \"alrmGlassBreak\"\n \
+        \   ]\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 5befe16d-bc13-470f-91fc-654973affb9e
+    - id: 23393470-0d8e-49e9-bc61-ce1d7924bd12
       name: Error response
       originalRequest:
         url:
@@ -2243,15 +2244,15 @@ item:
         body:
           mode: raw
           raw: "{\n  \"name\": \"<string>\",\n  \"osdSettings\": {\n    \"isNameEnabled\"\
-            : false,\n    \"isDateEnabled\": true,\n    \"isLogoEnabled\": true,\n\
-            \    \"isDebugEnabled\": false,\n    \"overlayLocation\": \"topRight\"\
+            : false,\n    \"isDateEnabled\": true,\n    \"isLogoEnabled\": false,\n\
+            \    \"isDebugEnabled\": true,\n    \"overlayLocation\": \"topMiddle\"\
             \n  },\n  \"ledSettings\": {\n    \"isEnabled\": false,\n    \"welcomeLed\"\
             : true,\n    \"floodLed\": false\n  },\n  \"lcdMessage\": {\n    \"type\"\
-            : \"string\",\n    \"resetAt\": 3083.02563151142\n  },\n  \"micVolume\"\
-            : 89.71458290605158,\n  \"videoMode\": \"lprReflex\",\n  \"hdrType\":\
-            \ \"off\",\n  \"smartDetectSettings\": {\n    \"objectTypes\": [\n   \
-            \   \"person\",\n      \"vehicle\"\n    ],\n    \"audioTypes\": [\n  \
-            \    \"alrmBabyCry\",\n      \"alrmBurglar\"\n    ]\n  }\n}"
+            : \"string\",\n    \"resetAt\": 987.5052193392863\n  },\n  \"micVolume\"\
+            : 64.56009484947384,\n  \"videoMode\": \"default\",\n  \"hdrType\": \"\
+            off\",\n  \"smartDetectSettings\": {\n    \"objectTypes\": [\n      \"\
+            vehicle\",\n      \"face\"\n    ],\n    \"audioTypes\": [\n      \"alrmCarHorn\"\
+            ,\n      \"alrmSmoke\"\n    ]\n  }\n}"
           options:
             raw:
               language: json
@@ -2261,13 +2262,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: a58845c1-5ae3-45e4-8ea4-23688ecb9a3e
+  - id: 8285d621-a30c-42a8-a85e-2014160028b2
     name: Get all cameras
     request:
       name: Get all cameras
@@ -2292,7 +2293,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: b9f186dd-7980-491b-9b37-85f824ccab55
+    - id: d5b842ea-3387-4f8d-8317-cb23be552234
       name: Success response
       originalRequest:
         url:
@@ -2320,44 +2321,44 @@ item:
       body: "[\n  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\":\
         \ \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n\
         \    \"mac\": \"string\",\n    \"isMicEnabled\": false,\n    \"osdSettings\"\
-        : {\n      \"isNameEnabled\": true,\n      \"isDateEnabled\": true,\n    \
-        \  \"isLogoEnabled\": false,\n      \"isDebugEnabled\": true,\n      \"overlayLocation\"\
-        : \"bottomLeft\"\n    },\n    \"ledSettings\": {\n      \"isEnabled\": false,\n\
-        \      \"welcomeLed\": true,\n      \"floodLed\": true\n    },\n    \"lcdMessage\"\
-        : {\n      \"type\": \"CUSTOM_MESSAGE\",\n      \"resetAt\": 4323.655384045835,\n\
-        \      \"text\": \"string\"\n    },\n    \"micVolume\": 71.32340707334424,\n\
-        \    \"activePatrolSlot\": 0,\n    \"videoMode\": \"sport\",\n    \"hdrType\"\
-        : \"on\",\n    \"featureFlags\": {\n      \"supportFullHdSnapshot\": false,\n\
+        : {\n      \"isNameEnabled\": false,\n      \"isDateEnabled\": true,\n   \
+        \   \"isLogoEnabled\": true,\n      \"isDebugEnabled\": false,\n      \"overlayLocation\"\
+        : \"topMiddle\"\n    },\n    \"ledSettings\": {\n      \"isEnabled\": false,\n\
+        \      \"welcomeLed\": true,\n      \"floodLed\": false\n    },\n    \"lcdMessage\"\
+        : {\n      \"type\": \"CUSTOM_MESSAGE\",\n      \"resetAt\": 6645.111087023669,\n\
+        \      \"text\": \"string\"\n    },\n    \"micVolume\": 4.247873544996795,\n\
+        \    \"activePatrolSlot\": 0,\n    \"videoMode\": \"highFps\",\n    \"hdrType\"\
+        : \"off\",\n    \"featureFlags\": {\n      \"supportFullHdSnapshot\": false,\n\
         \      \"hasHdr\": false,\n      \"smartDetectTypes\": [\n        \"face\"\
         ,\n        \"package\"\n      ],\n      \"smartDetectAudioTypes\": [\n   \
-        \     \"alrmSpeak\",\n        \"alrmBabyCry\"\n      ],\n      \"videoModes\"\
-        : [\n        \"homekit\",\n        \"default\"\n      ],\n      \"hasMic\"\
-        : false,\n      \"hasLedStatus\": false,\n      \"hasSpeaker\": false\n  \
-        \  },\n    \"smartDetectSettings\": {\n      \"objectTypes\": [\n        \"\
+        \     \"alrmBark\",\n        \"alrmCarHorn\"\n      ],\n      \"videoModes\"\
+        : [\n        \"lprNoneReflex\",\n        \"slowShutter\"\n      ],\n     \
+        \ \"hasMic\": true,\n      \"hasLedStatus\": false,\n      \"hasSpeaker\"\
+        : false\n    },\n    \"smartDetectSettings\": {\n      \"objectTypes\": [\n\
+        \        \"person\",\n        \"person\"\n      ],\n      \"audioTypes\":\
+        \ [\n        \"alrmSiren\",\n        \"alrmSmoke\"\n      ]\n    }\n  },\n\
+        \  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\": \"string\"\
+        ,\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n    \"mac\":\
+        \ \"string\",\n    \"isMicEnabled\": false,\n    \"osdSettings\": {\n    \
+        \  \"isNameEnabled\": true,\n      \"isDateEnabled\": false,\n      \"isLogoEnabled\"\
+        : false,\n      \"isDebugEnabled\": false,\n      \"overlayLocation\": \"\
+        bottomRight\"\n    },\n    \"ledSettings\": {\n      \"isEnabled\": false,\n\
+        \      \"welcomeLed\": false,\n      \"floodLed\": true\n    },\n    \"lcdMessage\"\
+        : {\n      \"type\": \"LEAVE_PACKAGE_AT_DOOR\",\n      \"resetAt\": 4959.02349515012,\n\
+        \      \"text\": \"string\"\n    },\n    \"micVolume\": 8.628681224960333,\n\
+        \    \"activePatrolSlot\": 0,\n    \"videoMode\": \"highFps\",\n    \"hdrType\"\
+        : \"on\",\n    \"featureFlags\": {\n      \"supportFullHdSnapshot\": false,\n\
+        \      \"hasHdr\": false,\n      \"smartDetectTypes\": [\n        \"package\"\
+        ,\n        \"licensePlate\"\n      ],\n      \"smartDetectAudioTypes\": [\n\
+        \        \"alrmBark\",\n        \"alrmSmoke\"\n      ],\n      \"videoModes\"\
+        : [\n        \"highFps\",\n        \"lprReflex\"\n      ],\n      \"hasMic\"\
+        : true,\n      \"hasLedStatus\": false,\n      \"hasSpeaker\": false\n   \
+        \ },\n    \"smartDetectSettings\": {\n      \"objectTypes\": [\n        \"\
         person\",\n        \"face\"\n      ],\n      \"audioTypes\": [\n        \"\
-        alrmBark\",\n        \"alrmSiren\"\n      ]\n    }\n  },\n  {\n    \"id\"\
-        : \"66d025b301ebc903e80003ea\",\n    \"modelKey\": \"string\",\n    \"state\"\
-        : \"CONNECTED\",\n    \"name\": \"string\",\n    \"mac\": \"string\",\n  \
-        \  \"isMicEnabled\": false,\n    \"osdSettings\": {\n      \"isNameEnabled\"\
-        : true,\n      \"isDateEnabled\": true,\n      \"isLogoEnabled\": true,\n\
-        \      \"isDebugEnabled\": false,\n      \"overlayLocation\": \"topLeft\"\n\
-        \    },\n    \"ledSettings\": {\n      \"isEnabled\": false,\n      \"welcomeLed\"\
-        : false,\n      \"floodLed\": false\n    },\n    \"lcdMessage\": {\n     \
-        \ \"type\": \"IMAGE\",\n      \"resetAt\": 3568.438338754465,\n      \"text\"\
-        : \"string\"\n    },\n    \"micVolume\": 93.42617975854644,\n    \"activePatrolSlot\"\
-        : 0,\n    \"videoMode\": \"slowShutter\",\n    \"hdrType\": \"on\",\n    \"\
-        featureFlags\": {\n      \"supportFullHdSnapshot\": false,\n      \"hasHdr\"\
-        : true,\n      \"smartDetectTypes\": [\n        \"vehicle\",\n        \"animal\"\
-        \n      ],\n      \"smartDetectAudioTypes\": [\n        \"alrmBabyCry\",\n\
-        \        \"alrmSpeak\"\n      ],\n      \"videoModes\": [\n        \"default\"\
-        ,\n        \"sport\"\n      ],\n      \"hasMic\": false,\n      \"hasLedStatus\"\
-        : false,\n      \"hasSpeaker\": true\n    },\n    \"smartDetectSettings\"\
-        : {\n      \"objectTypes\": [\n        \"package\",\n        \"face\"\n  \
-        \    ],\n      \"audioTypes\": [\n        \"alrmSmoke\",\n        \"alrmCarHorn\"\
-        \n      ]\n    }\n  }\n]"
+        alrmBabyCry\",\n        \"alrmBurglar\"\n      ]\n    }\n  }\n]"
       cookie: []
       _postman_previewlanguage: json
-    - id: 540574ad-7d08-4216-b987-5835eb018f36
+    - id: 6098c403-c21f-49f0-818a-23e327daac14
       name: Error response
       originalRequest:
         url:
@@ -2383,13 +2384,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: a5394050-3172-491f-9f08-0c6616c16eaa
+  - id: 9ab0cc9a-22b5-4a53-a07c-493655d76f6f
     name: Create RTSPS streams for camera
     request:
       name: Create RTSPS streams for camera
@@ -2429,7 +2430,7 @@ item:
           raw:
             language: json
     response:
-    - id: f1eda82c-d329-4354-83c8-331f79982e65
+    - id: ecb1c4ae-6b5a-41bf-934e-ffa0c03e6246
       name: Success response
       originalRequest:
         url:
@@ -2471,7 +2472,7 @@ item:
         }"
       cookie: []
       _postman_previewlanguage: json
-    - id: b4371042-5392-4b7b-bfe7-c523fb6fa89d
+    - id: bdc5bf69-0f80-4a19-93ee-cd8e7296f687
       name: Error response
       originalRequest:
         url:
@@ -2509,13 +2510,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 5353127a-8757-4a15-a766-d1a54f3adc95
+  - id: 49a85309-5710-49b1-99a6-1a7a9f226d79
     name: Delete camera RTSPS stream
     request:
       name: Delete camera RTSPS stream
@@ -2552,7 +2553,7 @@ item:
       method: DELETE
       auth: null
     response:
-    - id: cc6639b3-c6a9-40f5-a86c-33f059c048d7
+    - id: fef764aa-2e46-4d0d-ba4d-f73d4a01abbb
       name: RTSPS stream successfully removed
       originalRequest:
         url:
@@ -2565,7 +2566,7 @@ item:
           - '{{baseUrl}}'
           query:
           - key: qualities
-            value: high
+            value: low
           variable:
           - disabled: false
             type: any
@@ -2586,7 +2587,7 @@ item:
       body: ''
       cookie: []
       _postman_previewlanguage: text
-    - id: 9089c57f-fcaa-470f-a128-205b35a551b2
+    - id: 4146193e-c4c0-4ed6-906f-d71285c2d9b0
       name: Error response
       originalRequest:
         url:
@@ -2599,7 +2600,7 @@ item:
           - '{{baseUrl}}'
           query:
           - key: qualities
-            value: high
+            value: low
           variable:
           - disabled: false
             type: any
@@ -2621,13 +2622,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: e7079ae1-3b13-4bba-9235-48e34fb81352
+  - id: 12916d07-cfd8-42c1-9c35-09ef818747a7
     name: Get RTSPS streams for camera
     request:
       name: Get RTSPS streams for camera
@@ -2659,7 +2660,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: b4bd6363-eb90-4174-b30c-2ed7510729e2
+    - id: a8f08911-324a-4713-8517-d2680d8c551f
       name: Success response
       originalRequest:
         url:
@@ -2691,12 +2692,14 @@ item:
       header:
       - key: Content-Type
         value: application/json
-      body: "{\n  \"high\": \"http://Gsdug.wttLbjxm\",\n  \"medium\": \"http://hephxKV.tbc2mE6A+FDu1S7Knb21WOKL8i-VGgY70\"\
-        ,\n  \"low\": \"https://keccdeXuBocuqJPWMhg.gziPgeUsxYj5rE\",\n  \"package\"\
-        : \"http://RinpRnAEFr.ydpiqMBn-hTyIL.EWQljUjpPfRejcAqCc\"\n}"
+      body: "{\n  \"high\": \"https://hpYJG.psvzIxQ+KopUFgc7uy2AoL-8XXTqyO\",\n  \"\
+        medium\": \"http://yZsnLSudxT.tsEMsJHj+EMoxCxOwXsDszJOglX.IW8qVUT0aFP4h\"\
+        ,\n  \"low\": \"http://rEyHhtYFKJHFKYUzo.rvxmxlmOAW0wR4XQGIhO5qKA3U-1nsnB+XZKi3qtiN8lmAYKCbS8xAYk1aZ0mETRaA\"\
+        ,\n  \"package\": \"http://Me.xpbvJ,DJAcUL1REtTrzpf2C.bE92cBSH3naWcSNykwaOeYgTTAYWsAjkEx,HA9sF4LK,hgwS8deoWkNvATwl.H\"\
+        \n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: a70405d7-73de-4d80-9dec-e330344b49c8
+    - id: b4f3646b-fbc0-4638-b42d-323ad70e5e82
       name: Error response
       originalRequest:
         url:
@@ -2729,13 +2732,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: a20691f3-115a-49bd-a0b0-34bbdb27b8ad
+  - id: 82048ebc-adfa-4789-a5e3-31238544d861
     name: Get camera snapshot
     request:
       name: Get camera snapshot
@@ -2771,7 +2774,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: f97595b5-daf2-402b-9a68-3fba2e6c6b23
+    - id: f5cce21b-0f69-4992-894a-b679a033f4db
       name: Camera snapshot
       originalRequest:
         url:
@@ -2808,7 +2811,7 @@ item:
       body: string
       cookie: []
       _postman_previewlanguage: text
-    - id: edbf0f35-1dad-49ef-8780-034a76eeeb1e
+    - id: 6626a254-9b1b-4696-bc0f-e40c7c2bca67
       name: Error response
       originalRequest:
         url:
@@ -2843,13 +2846,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 57273c62-fc48-41fb-97c3-97c55a2a1d67
+  - id: 557103e6-3900-45ee-90ae-d535dbb69050
     name: Permanently disable camera microphone
     request:
       name: Permanently disable camera microphone
@@ -2882,7 +2885,7 @@ item:
       method: POST
       auth: null
     response:
-    - id: 0de906ef-63be-4a50-af77-8de92ecc4c7b
+    - id: 80aaf267-b3c5-45cd-8e06-81d808b2a079
       name: Success response
       originalRequest:
         url:
@@ -2916,25 +2919,25 @@ item:
         value: application/json
       body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
         ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
-        ,\n  \"isMicEnabled\": true,\n  \"osdSettings\": {\n    \"isNameEnabled\"\
-        : true,\n    \"isDateEnabled\": false,\n    \"isLogoEnabled\": true,\n   \
-        \ \"isDebugEnabled\": true,\n    \"overlayLocation\": \"bottomMiddle\"\n \
-        \ },\n  \"ledSettings\": {\n    \"isEnabled\": false,\n    \"welcomeLed\"\
-        : true,\n    \"floodLed\": true\n  },\n  \"lcdMessage\": {\n    \"type\":\
-        \ \"IMAGE\",\n    \"resetAt\": 9581.22758603789,\n    \"text\": \"string\"\
-        \n  },\n  \"micVolume\": 2.786059232521687,\n  \"activePatrolSlot\": 0,\n\
-        \  \"videoMode\": \"default\",\n  \"hdrType\": \"off\",\n  \"featureFlags\"\
-        : {\n    \"supportFullHdSnapshot\": false,\n    \"hasHdr\": true,\n    \"\
-        smartDetectTypes\": [\n      \"person\",\n      \"package\"\n    ],\n    \"\
-        smartDetectAudioTypes\": [\n      \"alrmCmonx\",\n      \"alrmBurglar\"\n\
-        \    ],\n    \"videoModes\": [\n      \"homekit\",\n      \"highFps\"\n  \
-        \  ],\n    \"hasMic\": false,\n    \"hasLedStatus\": true,\n    \"hasSpeaker\"\
-        : false\n  },\n  \"smartDetectSettings\": {\n    \"objectTypes\": [\n    \
-        \  \"person\",\n      \"face\"\n    ],\n    \"audioTypes\": [\n      \"alrmBark\"\
-        ,\n      \"alrmGlassBreak\"\n    ]\n  }\n}"
+        ,\n  \"isMicEnabled\": false,\n  \"osdSettings\": {\n    \"isNameEnabled\"\
+        : true,\n    \"isDateEnabled\": true,\n    \"isLogoEnabled\": true,\n    \"\
+        isDebugEnabled\": false,\n    \"overlayLocation\": \"topMiddle\"\n  },\n \
+        \ \"ledSettings\": {\n    \"isEnabled\": false,\n    \"welcomeLed\": true,\n\
+        \    \"floodLed\": true\n  },\n  \"lcdMessage\": {\n    \"type\": \"DO_NOT_DISTURB\"\
+        ,\n    \"resetAt\": 7936.672744211437,\n    \"text\": \"string\"\n  },\n \
+        \ \"micVolume\": 38.09894015332378,\n  \"activePatrolSlot\": 0,\n  \"videoMode\"\
+        : \"lprReflex\",\n  \"hdrType\": \"off\",\n  \"featureFlags\": {\n    \"supportFullHdSnapshot\"\
+        : true,\n    \"hasHdr\": true,\n    \"smartDetectTypes\": [\n      \"animal\"\
+        ,\n      \"face\"\n    ],\n    \"smartDetectAudioTypes\": [\n      \"alrmCmonx\"\
+        ,\n      \"alrmBark\"\n    ],\n    \"videoModes\": [\n      \"slowShutter\"\
+        ,\n      \"lprNoneReflex\"\n    ],\n    \"hasMic\": true,\n    \"hasLedStatus\"\
+        : true,\n    \"hasSpeaker\": false\n  },\n  \"smartDetectSettings\": {\n \
+        \   \"objectTypes\": [\n      \"licensePlate\",\n      \"package\"\n    ],\n\
+        \    \"audioTypes\": [\n      \"alrmSmoke\",\n      \"alrmGlassBreak\"\n \
+        \   ]\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 7c4bc6ce-c445-4143-b6b4-392cf7278468
+    - id: aa6d5a58-cdaf-4264-826b-b67f6951b5c1
       name: Error response
       originalRequest:
         url:
@@ -2967,13 +2970,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 11eaffc9-f748-42e1-90c7-4cecd6c3236e
+  - id: b8ba7fbc-d0d7-4056-85ee-643bf1ee0d41
     name: Create talkback session for camera
     request:
       name: Create talkback session for camera
@@ -3006,7 +3009,7 @@ item:
       method: POST
       auth: null
     response:
-    - id: b692a085-5d77-4ab1-930d-6b1e0c5c77df
+    - id: c64a69de-91e8-4f85-a846-515e5c04dc74
       name: Success response
       originalRequest:
         url:
@@ -3042,7 +3045,7 @@ item:
         \  \"samplingRate\": 24000,\n  \"bitsPerSample\": 16\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: f74aa68f-a5d0-449e-8d0e-f95a68831ad9
+    - id: df103793-1a21-444d-9114-272dbf1415d1
       name: Error response
       originalRequest:
         url:
@@ -3075,20 +3078,20 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: b654e368-742f-4451-9525-10011b6b5b3e
+- id: ba1973da-13a0-4655-ab82-e6dc4a5a2f95
   name: Sensor information & management
   description:
     content: ''
     type: text/plain
   item:
-  - id: 251e24a2-87c8-4736-9c30-f815dfe75559
+  - id: 8d471f9b-5863-4090-9908-9de4ce8168f2
     name: Get sensor details
     request:
       name: Get sensor details
@@ -3119,7 +3122,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 237061eb-e241-4ffd-a736-11a5a74e4ffc
+    - id: 659d4a1f-dee0-42d0-9654-dfebce714380
       name: Success response
       originalRequest:
         url:
@@ -3153,28 +3156,28 @@ item:
       body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
         ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
         ,\n  \"mountType\": \"garage\",\n  \"batteryStatus\": {\n    \"percentage\"\
-        : 2885.827467817137,\n    \"isLow\": false\n  },\n  \"stats\": {\n    \"light\"\
-        : {\n      \"value\": 1560.9698614335698,\n      \"status\": \"high\"\n  \
-        \  },\n    \"humidity\": {\n      \"value\": 3670.317112660024,\n      \"\
-        status\": \"high\"\n    },\n    \"temperature\": {\n      \"value\": 4245.324947476723,\n\
+        : 6548.424457087203,\n    \"isLow\": true\n  },\n  \"stats\": {\n    \"light\"\
+        : {\n      \"value\": 5410.6306307998875,\n      \"status\": \"high\"\n  \
+        \  },\n    \"humidity\": {\n      \"value\": 6799.497951911304,\n      \"\
+        status\": \"high\"\n    },\n    \"temperature\": {\n      \"value\": 7674.562488591096,\n\
         \      \"status\": \"high\"\n    }\n  },\n  \"lightSettings\": {\n    \"isEnabled\"\
-        : false,\n    \"margin\": 3635.1942910568314,\n    \"lowThreshold\": 238489.68771529346,\n\
-        \    \"highThreshold\": 7822.984202351737\n  },\n  \"humiditySettings\": {\n\
-        \    \"isEnabled\": true,\n    \"margin\": 5034.8238809583745,\n    \"lowThreshold\"\
-        : 68.78556740995236,\n    \"highThreshold\": 4125.961291948248\n  },\n  \"\
-        temperatureSettings\": {\n    \"isEnabled\": true,\n    \"margin\": 6998.209109286108,\n\
-        \    \"lowThreshold\": -1.0022150383516504,\n    \"highThreshold\": 9564.265300557812\n\
-        \  },\n  \"isOpened\": true,\n  \"openStatusChangedAt\": 7313.021450046047,\n\
-        \  \"isMotionDetected\": true,\n  \"motionDetectedAt\": 3878.5568640226907,\n\
-        \  \"motionSettings\": {\n    \"isEnabled\": true,\n    \"sensitivity\": 12.55163115771687\n\
-        \  },\n  \"alarmTriggeredAt\": 8154.922182147808,\n  \"alarmSettings\": {\n\
-        \    \"isEnabled\": false\n  },\n  \"leakDetectedAt\": 5579.780453919631,\n\
-        \  \"externalLeakDetectedAt\": 414.9485241939055,\n  \"leakSettings\": {\n\
-        \    \"isInternalEnabled\": false,\n    \"isExternalEnabled\": true\n  },\n\
-        \  \"tamperingDetectedAt\": 79.61253002734203\n}"
+        : true,\n    \"margin\": 8141.112678234435,\n    \"lowThreshold\": 440661.6530442048,\n\
+        \    \"highThreshold\": 3919.227244578396\n  },\n  \"humiditySettings\": {\n\
+        \    \"isEnabled\": true,\n    \"margin\": 191.4400691654172,\n    \"lowThreshold\"\
+        : 60.71157335534408,\n    \"highThreshold\": 6733.772854789394\n  },\n  \"\
+        temperatureSettings\": {\n    \"isEnabled\": true,\n    \"margin\": 3827.2693789714995,\n\
+        \    \"lowThreshold\": -19.76900741287819,\n    \"highThreshold\": 6007.098873451689\n\
+        \  },\n  \"isOpened\": true,\n  \"openStatusChangedAt\": 3592.8752476706527,\n\
+        \  \"isMotionDetected\": true,\n  \"motionDetectedAt\": 4929.606779678651,\n\
+        \  \"motionSettings\": {\n    \"isEnabled\": false,\n    \"sensitivity\":\
+        \ 88.11182087471687\n  },\n  \"alarmTriggeredAt\": 5922.3510157610435,\n \
+        \ \"alarmSettings\": {\n    \"isEnabled\": true\n  },\n  \"leakDetectedAt\"\
+        : 2820.338453499408,\n  \"externalLeakDetectedAt\": 8463.295795999838,\n \
+        \ \"leakSettings\": {\n    \"isInternalEnabled\": true,\n    \"isExternalEnabled\"\
+        : true\n  },\n  \"tamperingDetectedAt\": 6337.814410920028\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: f9b01543-6f0b-47b3-98eb-f80fee8a8237
+    - id: 843b666e-fea9-4256-81a9-04740b24cb83
       name: Error response
       originalRequest:
         url:
@@ -3206,13 +3209,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 302231b5-d939-4faf-8f32-a9f55d541230
+  - id: 16630669-cccd-4f1c-b92e-af4e88e2df05
     name: Patch sensor settings
     request:
       name: Patch sensor settings
@@ -3260,7 +3263,7 @@ item:
           raw:
             language: json
     response:
-    - id: 85b27c50-f387-4bb3-895d-9483b2989814
+    - id: fa1f0eab-9050-42f8-a715-777f5d0794bd
       name: Success response
       originalRequest:
         url:
@@ -3288,14 +3291,14 @@ item:
         body:
           mode: raw
           raw: "{\n  \"name\": \"string\",\n  \"lightSettings\": {\n    \"isEnabled\"\
-            : true,\n    \"margin\": 846.431824426872,\n    \"lowThreshold\": 220762.65164966718,\n\
-            \    \"highThreshold\": 3663.0649900563703\n  },\n  \"humiditySettings\"\
-            : {\n    \"isEnabled\": false,\n    \"margin\": 7295.626668067543,\n \
-            \   \"lowThreshold\": 94.51388672788184,\n    \"highThreshold\": 6023.651138400265\n\
+            : false,\n    \"margin\": 1518.5617903826853,\n    \"lowThreshold\": 256742.4648807554,\n\
+            \    \"highThreshold\": 4355.379881331327\n  },\n  \"humiditySettings\"\
+            : {\n    \"isEnabled\": false,\n    \"margin\": 6104.0087390447015,\n\
+            \    \"lowThreshold\": 76.80391185114203,\n    \"highThreshold\": 3480.781319514007\n\
             \  },\n  \"temperatureSettings\": {\n    \"isEnabled\": false,\n    \"\
-            margin\": 8495.488615056622,\n    \"lowThreshold\": -19.98115084252607,\n\
-            \    \"highThreshold\": 721.5363692368015\n  },\n  \"motionSettings\"\
-            : {\n    \"isEnabled\": true,\n    \"sensitivity\": 45.10463085875609\n\
+            margin\": 5684.96469255508,\n    \"lowThreshold\": 102.4663405740767,\n\
+            \    \"highThreshold\": 2565.2158751463826\n  },\n  \"motionSettings\"\
+            : {\n    \"isEnabled\": false,\n    \"sensitivity\": 58.95065140648932\n\
             \  },\n  \"alarmSettings\": {\n    \"isEnabled\": false\n  }\n}"
           options:
             raw:
@@ -3308,28 +3311,28 @@ item:
       body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
         ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
         ,\n  \"mountType\": \"garage\",\n  \"batteryStatus\": {\n    \"percentage\"\
-        : 2885.827467817137,\n    \"isLow\": false\n  },\n  \"stats\": {\n    \"light\"\
-        : {\n      \"value\": 1560.9698614335698,\n      \"status\": \"high\"\n  \
-        \  },\n    \"humidity\": {\n      \"value\": 3670.317112660024,\n      \"\
-        status\": \"high\"\n    },\n    \"temperature\": {\n      \"value\": 4245.324947476723,\n\
+        : 6548.424457087203,\n    \"isLow\": true\n  },\n  \"stats\": {\n    \"light\"\
+        : {\n      \"value\": 5410.6306307998875,\n      \"status\": \"high\"\n  \
+        \  },\n    \"humidity\": {\n      \"value\": 6799.497951911304,\n      \"\
+        status\": \"high\"\n    },\n    \"temperature\": {\n      \"value\": 7674.562488591096,\n\
         \      \"status\": \"high\"\n    }\n  },\n  \"lightSettings\": {\n    \"isEnabled\"\
-        : false,\n    \"margin\": 3635.1942910568314,\n    \"lowThreshold\": 238489.68771529346,\n\
-        \    \"highThreshold\": 7822.984202351737\n  },\n  \"humiditySettings\": {\n\
-        \    \"isEnabled\": true,\n    \"margin\": 5034.8238809583745,\n    \"lowThreshold\"\
-        : 68.78556740995236,\n    \"highThreshold\": 4125.961291948248\n  },\n  \"\
-        temperatureSettings\": {\n    \"isEnabled\": true,\n    \"margin\": 6998.209109286108,\n\
-        \    \"lowThreshold\": -1.0022150383516504,\n    \"highThreshold\": 9564.265300557812\n\
-        \  },\n  \"isOpened\": true,\n  \"openStatusChangedAt\": 7313.021450046047,\n\
-        \  \"isMotionDetected\": true,\n  \"motionDetectedAt\": 3878.5568640226907,\n\
-        \  \"motionSettings\": {\n    \"isEnabled\": true,\n    \"sensitivity\": 12.55163115771687\n\
-        \  },\n  \"alarmTriggeredAt\": 8154.922182147808,\n  \"alarmSettings\": {\n\
-        \    \"isEnabled\": false\n  },\n  \"leakDetectedAt\": 5579.780453919631,\n\
-        \  \"externalLeakDetectedAt\": 414.9485241939055,\n  \"leakSettings\": {\n\
-        \    \"isInternalEnabled\": false,\n    \"isExternalEnabled\": true\n  },\n\
-        \  \"tamperingDetectedAt\": 79.61253002734203\n}"
+        : true,\n    \"margin\": 8141.112678234435,\n    \"lowThreshold\": 440661.6530442048,\n\
+        \    \"highThreshold\": 3919.227244578396\n  },\n  \"humiditySettings\": {\n\
+        \    \"isEnabled\": true,\n    \"margin\": 191.4400691654172,\n    \"lowThreshold\"\
+        : 60.71157335534408,\n    \"highThreshold\": 6733.772854789394\n  },\n  \"\
+        temperatureSettings\": {\n    \"isEnabled\": true,\n    \"margin\": 3827.2693789714995,\n\
+        \    \"lowThreshold\": -19.76900741287819,\n    \"highThreshold\": 6007.098873451689\n\
+        \  },\n  \"isOpened\": true,\n  \"openStatusChangedAt\": 3592.8752476706527,\n\
+        \  \"isMotionDetected\": true,\n  \"motionDetectedAt\": 4929.606779678651,\n\
+        \  \"motionSettings\": {\n    \"isEnabled\": false,\n    \"sensitivity\":\
+        \ 88.11182087471687\n  },\n  \"alarmTriggeredAt\": 5922.3510157610435,\n \
+        \ \"alarmSettings\": {\n    \"isEnabled\": true\n  },\n  \"leakDetectedAt\"\
+        : 2820.338453499408,\n  \"externalLeakDetectedAt\": 8463.295795999838,\n \
+        \ \"leakSettings\": {\n    \"isInternalEnabled\": true,\n    \"isExternalEnabled\"\
+        : true\n  },\n  \"tamperingDetectedAt\": 6337.814410920028\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: b074d161-df1e-4229-97dd-386ffa97e170
+    - id: b48c729a-5bb4-4ad5-866c-dccd3f93432f
       name: Error response
       originalRequest:
         url:
@@ -3357,14 +3360,14 @@ item:
         body:
           mode: raw
           raw: "{\n  \"name\": \"string\",\n  \"lightSettings\": {\n    \"isEnabled\"\
-            : true,\n    \"margin\": 846.431824426872,\n    \"lowThreshold\": 220762.65164966718,\n\
-            \    \"highThreshold\": 3663.0649900563703\n  },\n  \"humiditySettings\"\
-            : {\n    \"isEnabled\": false,\n    \"margin\": 7295.626668067543,\n \
-            \   \"lowThreshold\": 94.51388672788184,\n    \"highThreshold\": 6023.651138400265\n\
+            : false,\n    \"margin\": 1518.5617903826853,\n    \"lowThreshold\": 256742.4648807554,\n\
+            \    \"highThreshold\": 4355.379881331327\n  },\n  \"humiditySettings\"\
+            : {\n    \"isEnabled\": false,\n    \"margin\": 6104.0087390447015,\n\
+            \    \"lowThreshold\": 76.80391185114203,\n    \"highThreshold\": 3480.781319514007\n\
             \  },\n  \"temperatureSettings\": {\n    \"isEnabled\": false,\n    \"\
-            margin\": 8495.488615056622,\n    \"lowThreshold\": -19.98115084252607,\n\
-            \    \"highThreshold\": 721.5363692368015\n  },\n  \"motionSettings\"\
-            : {\n    \"isEnabled\": true,\n    \"sensitivity\": 45.10463085875609\n\
+            margin\": 5684.96469255508,\n    \"lowThreshold\": 102.4663405740767,\n\
+            \    \"highThreshold\": 2565.2158751463826\n  },\n  \"motionSettings\"\
+            : {\n    \"isEnabled\": false,\n    \"sensitivity\": 58.95065140648932\n\
             \  },\n  \"alarmSettings\": {\n    \"isEnabled\": false\n  }\n}"
           options:
             raw:
@@ -3375,13 +3378,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 9971278e-d659-465c-b031-b7dd2bea574c
+  - id: 3fe974fe-13aa-4724-af39-6c858ea9eeb0
     name: Get all sensors
     request:
       name: Get all sensors
@@ -3406,7 +3409,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 416a0238-4332-41db-b232-e795ab7e6b39
+    - id: 8b5c1473-70e5-461b-9713-a2a975518312
       name: Success response
       originalRequest:
         url:
@@ -3434,54 +3437,54 @@ item:
       body: "[\n  {\n    \"id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\":\
         \ \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n\
         \    \"mac\": \"string\",\n    \"mountType\": \"garage\",\n    \"batteryStatus\"\
-        : {\n      \"percentage\": 8697.58769018278,\n      \"isLow\": false\n   \
-        \ },\n    \"stats\": {\n      \"light\": {\n        \"value\": 7763.48348807224,\n\
+        : {\n      \"percentage\": 7961.9692373922,\n      \"isLow\": true\n    },\n\
+        \    \"stats\": {\n      \"light\": {\n        \"value\": 6538.0765465886825,\n\
         \        \"status\": \"high\"\n      },\n      \"humidity\": {\n        \"\
-        value\": 4751.808419325516,\n        \"status\": \"high\"\n      },\n    \
-        \  \"temperature\": {\n        \"value\": 820.65322464143,\n        \"status\"\
-        : \"high\"\n      }\n    },\n    \"lightSettings\": {\n      \"isEnabled\"\
-        : false,\n      \"margin\": 3459.8466296551724,\n      \"lowThreshold\": 220985.33489721952,\n\
-        \      \"highThreshold\": 9851.958802394001\n    },\n    \"humiditySettings\"\
-        : {\n      \"isEnabled\": true,\n      \"margin\": 7594.22413557461,\n   \
-        \   \"lowThreshold\": 55.960785546317425,\n      \"highThreshold\": 6405.540750071376\n\
-        \    },\n    \"temperatureSettings\": {\n      \"isEnabled\": false,\n   \
-        \   \"margin\": 3810.021176462208,\n      \"lowThreshold\": 39.40550676260956,\n\
-        \      \"highThreshold\": 9687.430111408006\n    },\n    \"isOpened\": false,\n\
-        \    \"openStatusChangedAt\": 4314.4078827297135,\n    \"isMotionDetected\"\
-        : true,\n    \"motionDetectedAt\": 7663.469028801986,\n    \"motionSettings\"\
-        : {\n      \"isEnabled\": false,\n      \"sensitivity\": 82.03186442322188\n\
-        \    },\n    \"alarmTriggeredAt\": 376.9477396925347,\n    \"alarmSettings\"\
-        : {\n      \"isEnabled\": true\n    },\n    \"leakDetectedAt\": 7477.833895630195,\n\
-        \    \"externalLeakDetectedAt\": 8348.108835366407,\n    \"leakSettings\"\
-        : {\n      \"isInternalEnabled\": true,\n      \"isExternalEnabled\": false\n\
-        \    },\n    \"tamperingDetectedAt\": 955.7562216946169\n  },\n  {\n    \"\
+        value\": 3886.102541148313,\n        \"status\": \"high\"\n      },\n    \
+        \  \"temperature\": {\n        \"value\": 5470.1564447945875,\n        \"\
+        status\": \"high\"\n      }\n    },\n    \"lightSettings\": {\n      \"isEnabled\"\
+        : true,\n      \"margin\": 7572.653222016262,\n      \"lowThreshold\": 143804.2846162506,\n\
+        \      \"highThreshold\": 6737.897828940342\n    },\n    \"humiditySettings\"\
+        : {\n      \"isEnabled\": false,\n      \"margin\": 8883.840032183009,\n \
+        \     \"lowThreshold\": 25.345898028879024,\n      \"highThreshold\": 536.0632427092349\n\
+        \    },\n    \"temperatureSettings\": {\n      \"isEnabled\": true,\n    \
+        \  \"margin\": 3945.694605969149,\n      \"lowThreshold\": 34.50896353016087,\n\
+        \      \"highThreshold\": 2269.1178762293853\n    },\n    \"isOpened\": true,\n\
+        \    \"openStatusChangedAt\": 1109.6690219382444,\n    \"isMotionDetected\"\
+        : false,\n    \"motionDetectedAt\": 6711.839932192846,\n    \"motionSettings\"\
+        : {\n      \"isEnabled\": true,\n      \"sensitivity\": 11.118757171243299\n\
+        \    },\n    \"alarmTriggeredAt\": 1963.080911084293,\n    \"alarmSettings\"\
+        : {\n      \"isEnabled\": false\n    },\n    \"leakDetectedAt\": 903.4967549670903,\n\
+        \    \"externalLeakDetectedAt\": 3729.8312171583857,\n    \"leakSettings\"\
+        : {\n      \"isInternalEnabled\": false,\n      \"isExternalEnabled\": true\n\
+        \    },\n    \"tamperingDetectedAt\": 9963.360268940352\n  },\n  {\n    \"\
         id\": \"66d025b301ebc903e80003ea\",\n    \"modelKey\": \"string\",\n    \"\
         state\": \"CONNECTED\",\n    \"name\": \"string\",\n    \"mac\": \"string\"\
         ,\n    \"mountType\": \"garage\",\n    \"batteryStatus\": {\n      \"percentage\"\
-        : 3903.5301768790796,\n      \"isLow\": true\n    },\n    \"stats\": {\n \
-        \     \"light\": {\n        \"value\": 1728.0989680315884,\n        \"status\"\
-        : \"high\"\n      },\n      \"humidity\": {\n        \"value\": 7446.620911454093,\n\
+        : 1557.3657990627444,\n      \"isLow\": false\n    },\n    \"stats\": {\n\
+        \      \"light\": {\n        \"value\": 6382.684198609283,\n        \"status\"\
+        : \"high\"\n      },\n      \"humidity\": {\n        \"value\": 3912.571596974981,\n\
         \        \"status\": \"high\"\n      },\n      \"temperature\": {\n      \
-        \  \"value\": 1857.8864638862647,\n        \"status\": \"high\"\n      }\n\
+        \  \"value\": 1417.0123931873868,\n        \"status\": \"high\"\n      }\n\
         \    },\n    \"lightSettings\": {\n      \"isEnabled\": false,\n      \"margin\"\
-        : 528.2274605480519,\n      \"lowThreshold\": 138190.87588576545,\n      \"\
-        highThreshold\": 2475.941257251819\n    },\n    \"humiditySettings\": {\n\
-        \      \"isEnabled\": true,\n      \"margin\": 615.9220258559017,\n      \"\
-        lowThreshold\": 56.06523257121752,\n      \"highThreshold\": 78.21028220427407\n\
+        : 7781.350875336761,\n      \"lowThreshold\": 232567.40464743672,\n      \"\
+        highThreshold\": 674.981640355844\n    },\n    \"humiditySettings\": {\n \
+        \     \"isEnabled\": true,\n      \"margin\": 7195.210775946972,\n      \"\
+        lowThreshold\": 58.13959195321711,\n      \"highThreshold\": 9002.093199089632\n\
         \    },\n    \"temperatureSettings\": {\n      \"isEnabled\": true,\n    \
-        \  \"margin\": 4207.01511579576,\n      \"lowThreshold\": 8.08588765546839,\n\
-        \      \"highThreshold\": 4646.913265951677\n    },\n    \"isOpened\": false,\n\
-        \    \"openStatusChangedAt\": 8365.012476111051,\n    \"isMotionDetected\"\
-        : false,\n    \"motionDetectedAt\": 8523.449530342616,\n    \"motionSettings\"\
-        : {\n      \"isEnabled\": false,\n      \"sensitivity\": 33.54984854853351\n\
-        \    },\n    \"alarmTriggeredAt\": 2105.2419634853536,\n    \"alarmSettings\"\
-        : {\n      \"isEnabled\": true\n    },\n    \"leakDetectedAt\": 9649.784817317515,\n\
-        \    \"externalLeakDetectedAt\": 4901.69338376741,\n    \"leakSettings\":\
-        \ {\n      \"isInternalEnabled\": true,\n      \"isExternalEnabled\": true\n\
-        \    },\n    \"tamperingDetectedAt\": 7011.977828599396\n  }\n]"
+        \  \"margin\": 7830.743625229571,\n      \"lowThreshold\": -30.868844095190603,\n\
+        \      \"highThreshold\": 3310.3795968534578\n    },\n    \"isOpened\": true,\n\
+        \    \"openStatusChangedAt\": 4354.898798792978,\n    \"isMotionDetected\"\
+        : false,\n    \"motionDetectedAt\": 8089.0367281762865,\n    \"motionSettings\"\
+        : {\n      \"isEnabled\": true,\n      \"sensitivity\": 3.000481175023506\n\
+        \    },\n    \"alarmTriggeredAt\": 9917.034321779016,\n    \"alarmSettings\"\
+        : {\n      \"isEnabled\": true\n    },\n    \"leakDetectedAt\": 1111.9997105946977,\n\
+        \    \"externalLeakDetectedAt\": 4744.535682484075,\n    \"leakSettings\"\
+        : {\n      \"isInternalEnabled\": true,\n      \"isExternalEnabled\": true\n\
+        \    },\n    \"tamperingDetectedAt\": 6142.202575529181\n  }\n]"
       cookie: []
       _postman_previewlanguage: json
-    - id: 8d95d151-a719-44c9-aa38-90350704e551
+    - id: fdca4866-1d0f-416f-acfe-1d2868006c10
       name: Error response
       originalRequest:
         url:
@@ -3507,20 +3510,20 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 972b0fdf-3e69-47b3-ac17-b4010956de8b
+- id: 5a6ed0ae-a489-4ee3-86bb-fad531a59290
   name: NVR information & management
   description:
     content: ''
     type: text/plain
   item:
-  - id: 53c6d1f0-ec22-4ca0-bc7c-2e4b5de6afc3
+  - id: f260dea9-5e99-4596-9156-ba01ab81eb1c
     name: Get NVR details
     request:
       name: Get NVR details
@@ -3545,7 +3548,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: b99b26db-a6ea-42a9-86dc-fdd0a362a624
+    - id: 17ca5037-db4d-4ae4-b9ff-d58297244e57
       name: Success response
       originalRequest:
         url:
@@ -3572,14 +3575,14 @@ item:
         value: application/json
       body: "{\n  \"id\": \"66d025b301ebc903e80003ea\",\n  \"modelKey\": \"string\"\
         ,\n  \"name\": \"string\",\n  \"doorbellSettings\": {\n    \"defaultMessageText\"\
-        : \"string\",\n    \"defaultMessageResetTimeoutMs\": 7459.6067827000525,\n\
-        \    \"customMessages\": [\n      \"string\",\n      \"string\"\n    ],\n\
-        \    \"customImages\": [\n      {\n        \"preview\": \"string\",\n    \
-        \    \"sprite\": \"string\"\n      },\n      {\n        \"preview\": \"string\"\
+        : \"string\",\n    \"defaultMessageResetTimeoutMs\": 518.490426238436,\n \
+        \   \"customMessages\": [\n      \"string\",\n      \"string\"\n    ],\n \
+        \   \"customImages\": [\n      {\n        \"preview\": \"string\",\n     \
+        \   \"sprite\": \"string\"\n      },\n      {\n        \"preview\": \"string\"\
         ,\n        \"sprite\": \"string\"\n      }\n    ]\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 4bf8599d-93c0-4039-b32a-973e0117bca9
+    - id: 76241ed0-86ea-4866-93f2-60d3752bf296
       name: Error response
       originalRequest:
         url:
@@ -3605,20 +3608,20 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: 6b78d762-f090-4f60-9bd9-a5efa02303b0
+- id: dfb8c9b6-fed4-48f9-8f82-83d58f1db7f9
   name: Device asset file management
   description:
     content: ''
     type: text/plain
   item:
-  - id: 37329d2c-2038-43b5-99a4-8fcd90661856
+  - id: 506c4aea-f879-4a02-855b-aa192f7ff8e2
     name: Upload device asset file
     request:
       name: Upload device asset file
@@ -3686,7 +3689,7 @@ item:
           type: text
           description: undefined
     response:
-    - id: 2df729a0-1df7-4d02-91eb-b42b9f9b3ab5
+    - id: f29bd817-e407-4c2b-8b20-7192d3a2cbfa
       name: Processed and persisted device asset
       originalRequest:
         url:
@@ -3771,7 +3774,7 @@ item:
         \ \"string\",\n  \"originalName\": \"string\"\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: acad3aa3-4d21-453c-b11c-189cb753388e
+    - id: 5dbb8957-f198-4579-a1da-804016fe8762
       name: Error response
       originalRequest:
         url:
@@ -3853,13 +3856,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 649ea9e5-6f0a-41da-9f80-1ba98c9a6561
+  - id: 8f25e0d2-fe57-42bd-b5ba-ffcfe97df263
     name: Get device asset files
     request:
       name: Get device asset files
@@ -3890,7 +3893,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: 507d31b0-7fb8-473e-b44f-b865a167d4d9
+    - id: c7b5704d-925e-44af-82b0-6a840efb0791
       name: Device asset list
       originalRequest:
         url:
@@ -3927,7 +3930,7 @@ item:
         string\",\n    \"originalName\": \"string\"\n  }\n]"
       cookie: []
       _postman_previewlanguage: json
-    - id: 9f94e7b2-706b-431c-9bbd-4ac317a133aa
+    - id: 88564a6f-daac-4c25-9a4d-718cf39fb434
       name: Error response
       originalRequest:
         url:
@@ -3959,20 +3962,20 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
   event: []
-- id: eeaa9f92-bf5c-46f2-849b-016c6b9ee2d5
+- id: 0e4e6113-e7f3-4e27-b454-060592d17c29
   name: Chime information & management
   description:
     content: ''
     type: text/plain
   item:
-  - id: 5df57454-2a5c-4d78-8cd2-6fd8a3017306
+  - id: a71e6cd9-04af-427b-9978-850cf880a07d
     name: Get chime details
     request:
       name: Get chime details
@@ -4003,7 +4006,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: e58cfdc9-caa0-4730-967e-f984a10f035c
+    - id: a3ec8cf2-a421-4c03-a1a5-c0e086131314
       name: Success response
       originalRequest:
         url:
@@ -4038,13 +4041,13 @@ item:
         ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
         ,\n  \"cameraIds\": [\n    \"66d025b301ebc903e80003ea\",\n    \"66d025b301ebc903e80003ea\"\
         \n  ],\n  \"ringSettings\": [\n    {\n      \"cameraId\": \"string\",\n  \
-        \    \"repeatTimes\": 4.543614126878772,\n      \"ringtoneId\": \"string\"\
-        ,\n      \"volume\": 93.48195705148082\n    },\n    {\n      \"cameraId\"\
-        : \"string\",\n      \"repeatTimes\": 4.468023932690575,\n      \"ringtoneId\"\
-        : \"string\",\n      \"volume\": 36.41802578721052\n    }\n  ]\n}"
+        \    \"repeatTimes\": 1.4790845664160073,\n      \"ringtoneId\": \"string\"\
+        ,\n      \"volume\": 62.35038690515516\n    },\n    {\n      \"cameraId\"\
+        : \"string\",\n      \"repeatTimes\": 1.424773010257789,\n      \"ringtoneId\"\
+        : \"string\",\n      \"volume\": 7.296383865826817\n    }\n  ]\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: dba4dc0a-71e7-4b4c-adf6-9b5f0595de7a
+    - id: 9c329b4c-101f-4d8e-ab53-1ae2a2775b7a
       name: Error response
       originalRequest:
         url:
@@ -4076,13 +4079,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: dfcd3639-aca4-49b6-b053-4127d58ce1a5
+  - id: e6e4c2cb-a3f5-4272-871c-2cd8977f39c7
     name: Patch chime settings
     request:
       name: Patch chime settings
@@ -4127,7 +4130,7 @@ item:
           raw:
             language: json
     response:
-    - id: e3d3608f-66e2-4339-a32e-ddb9182f5d97
+    - id: 90a46858-1673-485c-b7ce-335fcba77b36
       name: Success response
       originalRequest:
         url:
@@ -4156,11 +4159,11 @@ item:
           mode: raw
           raw: "{\n  \"name\": \"<string>\",\n  \"cameraIds\": [\n    \"66d025b301ebc903e80003ea\"\
             ,\n    \"66d025b301ebc903e80003ea\"\n  ],\n  \"ringSettings\": [\n   \
-            \ {\n      \"cameraId\": \"string\",\n      \"repeatTimes\": 4.359482648982762,\n\
-            \      \"ringtoneId\": \"string\",\n      \"volume\": 18.132290872370028\n\
+            \ {\n      \"cameraId\": \"string\",\n      \"repeatTimes\": 9.363805746334418,\n\
+            \      \"ringtoneId\": \"string\",\n      \"volume\": 1.1813347351636305\n\
             \    },\n    {\n      \"cameraId\": \"string\",\n      \"repeatTimes\"\
-            : 9.816655842084229,\n      \"ringtoneId\": \"string\",\n      \"volume\"\
-            : 82.08452513322959\n    }\n  ]\n}"
+            : 8.336537959382529,\n      \"ringtoneId\": \"string\",\n      \"volume\"\
+            : 50.05078407718477\n    }\n  ]\n}"
           options:
             raw:
               language: json
@@ -4173,13 +4176,13 @@ item:
         ,\n  \"state\": \"CONNECTED\",\n  \"name\": \"string\",\n  \"mac\": \"string\"\
         ,\n  \"cameraIds\": [\n    \"66d025b301ebc903e80003ea\",\n    \"66d025b301ebc903e80003ea\"\
         \n  ],\n  \"ringSettings\": [\n    {\n      \"cameraId\": \"string\",\n  \
-        \    \"repeatTimes\": 4.543614126878772,\n      \"ringtoneId\": \"string\"\
-        ,\n      \"volume\": 93.48195705148082\n    },\n    {\n      \"cameraId\"\
-        : \"string\",\n      \"repeatTimes\": 4.468023932690575,\n      \"ringtoneId\"\
-        : \"string\",\n      \"volume\": 36.41802578721052\n    }\n  ]\n}"
+        \    \"repeatTimes\": 1.4790845664160073,\n      \"ringtoneId\": \"string\"\
+        ,\n      \"volume\": 62.35038690515516\n    },\n    {\n      \"cameraId\"\
+        : \"string\",\n      \"repeatTimes\": 1.424773010257789,\n      \"ringtoneId\"\
+        : \"string\",\n      \"volume\": 7.296383865826817\n    }\n  ]\n}"
       cookie: []
       _postman_previewlanguage: json
-    - id: 0a75ab58-d2fb-4bf3-ad68-791393dec460
+    - id: 234adc46-78cf-41a6-b6f0-0b34d92ee43a
       name: Error response
       originalRequest:
         url:
@@ -4208,11 +4211,11 @@ item:
           mode: raw
           raw: "{\n  \"name\": \"<string>\",\n  \"cameraIds\": [\n    \"66d025b301ebc903e80003ea\"\
             ,\n    \"66d025b301ebc903e80003ea\"\n  ],\n  \"ringSettings\": [\n   \
-            \ {\n      \"cameraId\": \"string\",\n      \"repeatTimes\": 4.359482648982762,\n\
-            \      \"ringtoneId\": \"string\",\n      \"volume\": 18.132290872370028\n\
+            \ {\n      \"cameraId\": \"string\",\n      \"repeatTimes\": 9.363805746334418,\n\
+            \      \"ringtoneId\": \"string\",\n      \"volume\": 1.1813347351636305\n\
             \    },\n    {\n      \"cameraId\": \"string\",\n      \"repeatTimes\"\
-            : 9.816655842084229,\n      \"ringtoneId\": \"string\",\n      \"volume\"\
-            : 82.08452513322959\n    }\n  ]\n}"
+            : 8.336537959382529,\n      \"ringtoneId\": \"string\",\n      \"volume\"\
+            : 50.05078407718477\n    }\n  ]\n}"
           options:
             raw:
               language: json
@@ -4222,13 +4225,13 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
     protocolProfileBehavior:
       disableBodyPruning: true
-  - id: 1a92afe3-5ac4-456e-a2b4-d48e93124de9
+  - id: 248aadb6-951d-4c08-b6eb-34f1bde55036
     name: Get all chimes
     request:
       name: Get all chimes
@@ -4253,7 +4256,7 @@ item:
       method: GET
       auth: null
     response:
-    - id: bf136b9c-2789-4447-858f-63cdbc44aa11
+    - id: aac0bb82-4765-49b4-8c16-514ea2c5022e
       name: Success response
       originalRequest:
         url:
@@ -4282,22 +4285,22 @@ item:
         \ \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\": \"string\",\n\
         \    \"mac\": \"string\",\n    \"cameraIds\": [\n      \"66d025b301ebc903e80003ea\"\
         ,\n      \"66d025b301ebc903e80003ea\"\n    ],\n    \"ringSettings\": [\n \
-        \     {\n        \"cameraId\": \"string\",\n        \"repeatTimes\": 5.589405918029031,\n\
-        \        \"ringtoneId\": \"string\",\n        \"volume\": 81.65702700528594\n\
+        \     {\n        \"cameraId\": \"string\",\n        \"repeatTimes\": 4.9362680303606945,\n\
+        \        \"ringtoneId\": \"string\",\n        \"volume\": 52.728923110943526\n\
         \      },\n      {\n        \"cameraId\": \"string\",\n        \"repeatTimes\"\
-        : 6.243852816768253,\n        \"ringtoneId\": \"string\",\n        \"volume\"\
-        : 40.614615929937536\n      }\n    ]\n  },\n  {\n    \"id\": \"66d025b301ebc903e80003ea\"\
+        : 4.8765529545161606,\n        \"ringtoneId\": \"string\",\n        \"volume\"\
+        : 24.993711568409516\n      }\n    ]\n  },\n  {\n    \"id\": \"66d025b301ebc903e80003ea\"\
         ,\n    \"modelKey\": \"string\",\n    \"state\": \"CONNECTED\",\n    \"name\"\
         : \"string\",\n    \"mac\": \"string\",\n    \"cameraIds\": [\n      \"66d025b301ebc903e80003ea\"\
         ,\n      \"66d025b301ebc903e80003ea\"\n    ],\n    \"ringSettings\": [\n \
-        \     {\n        \"cameraId\": \"string\",\n        \"repeatTimes\": 9.802894991934599,\n\
-        \        \"ringtoneId\": \"string\",\n        \"volume\": 69.67202309221263\n\
+        \     {\n        \"cameraId\": \"string\",\n        \"repeatTimes\": 7.326020625941058,\n\
+        \        \"ringtoneId\": \"string\",\n        \"volume\": 18.637408414675395\n\
         \      },\n      {\n        \"cameraId\": \"string\",\n        \"repeatTimes\"\
-        : 5.535970946200083,\n        \"ringtoneId\": \"string\",\n        \"volume\"\
-        : 79.89007921783929\n      }\n    ]\n  }\n]"
+        : 8.85693720306473,\n        \"ringtoneId\": \"string\",\n        \"volume\"\
+        : 55.07645346631648\n      }\n    ]\n  }\n]"
       cookie: []
       _postman_previewlanguage: json
-    - id: b8b8744e-0a9b-4236-8596-1133e6af9ac0
+    - id: 2f866bc5-d808-4160-868e-c9fae9951b2e
       name: Error response
       originalRequest:
         url:
@@ -4323,7 +4326,7 @@ item:
       - key: Content-Type
         value: application/json
       body: "{\n  \"error\": \"Unexpected API error occurred\",\n  \"name\": \"API_ERROR\"\
-        ,\n  \"cause\": {\n    \"key_0\": {}\n  }\n}"
+        ,\n  \"cause\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}"
       cookie: []
       _postman_previewlanguage: json
     event: []
@@ -4342,7 +4345,7 @@ variable:
   value: https://api.ui.com/v1/connector/consoles/{{consoleId}}/proxy/protect/integration
   key: baseUrl
 info:
-  _postman_id: dde9b654-f875-4185-9c6a-c4c972e838d4
+  _postman_id: d1a192f7-1868-4e01-9e03-8b25c532bcbb
   name: UniFi Protect API
   schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
   description:

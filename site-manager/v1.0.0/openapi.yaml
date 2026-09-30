@@ -23,7 +23,8 @@ paths:
         otherwise it is terminated and a timeout error is returned<br/>- Response
         body size: the upstream response body is limited to 10 MB; larger responses
         are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
-        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/>-
+        InnerSpace API: [https://developer.ui.com/innerspace](https://developer.ui.com/innerspace)<br/><br/>**Response**:
         On success, the upstream API response is passed through directly. On error,
         a standardized error schema is returned.'
       operationId: ConnectorDelete
@@ -286,7 +287,8 @@ paths:
         otherwise it is terminated and a timeout error is returned<br/>- Response
         body size: the upstream response body is limited to 10 MB; larger responses
         are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
-        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Examples**:
+        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/>-
+        InnerSpace API: [https://developer.ui.com/innerspace](https://developer.ui.com/innerspace)<br/><br/>**Examples**:
         <br/>- Network: `GET /v1/connector/consoles/{id}/network/integration/v1/sites`
         retrieves network sites<br/>- Protect: `GET /v1/connector/consoles/{id}/protect/integration/v1/meta/info`
         retrieves protect application info<br/><br/>**Response**: On success, the
@@ -562,7 +564,8 @@ paths:
         otherwise it is terminated and a timeout error is returned<br/>- Response
         body size: the upstream response body is limited to 10 MB; larger responses
         are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
-        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/>-
+        InnerSpace API: [https://developer.ui.com/innerspace](https://developer.ui.com/innerspace)<br/><br/>**Response**:
         On success, the upstream API response is passed through directly. On error,
         a standardized error schema is returned.'
       operationId: ConnectorPatch
@@ -838,7 +841,8 @@ paths:
         otherwise it is terminated and a timeout error is returned<br/>- Response
         body size: the upstream response body is limited to 10 MB; larger responses
         are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
-        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/>-
+        InnerSpace API: [https://developer.ui.com/innerspace](https://developer.ui.com/innerspace)<br/><br/>**Response**:
         On success, the upstream API response is passed through directly. On error,
         a standardized error schema is returned.'
       operationId: ConnectorPost
@@ -1109,7 +1113,8 @@ paths:
         otherwise it is terminated and a timeout error is returned<br/>- Response
         body size: the upstream response body is limited to 10 MB; larger responses
         are not supported<br/><br/>**API Documentation**: <br/>- Network API: [https://developer.ui.com/network](https://developer.ui.com/network)<br/>-
-        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/><br/>**Response**:
+        Protect API: [https://developer.ui.com/protect](https://developer.ui.com/protect)<br/>-
+        InnerSpace API: [https://developer.ui.com/innerspace](https://developer.ui.com/innerspace)<br/><br/>**Response**:
         On success, the upstream API response is passed through directly. On error,
         a standardized error schema is returned.'
       operationId: ConnectorPut
@@ -3115,8 +3120,8 @@ paths:
       x-position: 6
   /v1/sd-wan-configs:
     get:
-      description: Retrieves a list of all hub-and-spoke SD-WAN configurations associated
-        with the UI account making the API call.
+      description: Retrieves a list of all SD-WAN configurations associated with the
+        UI account making the API call.
       operationId: listSDWanConfigs
       responses:
         '200':
