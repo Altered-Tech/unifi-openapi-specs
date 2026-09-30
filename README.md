@@ -59,7 +59,7 @@ These URLs work directly with tools like [Swagger UI](https://swagger.io/tools/s
 
 Specs are fetched directly from [developer.ui.com](https://developer.ui.com) using the official OpenAPI and Postman download endpoints. The fetcher:
 
-1. Follows redirects from `/{service}` and parses the page to discover all available versions
+1. Queries `/api/services/{service}/versions` to discover all available versions
 2. Downloads `/{service}/{version}/openapi.json` and `/{service}/{version}/postman-collection.json` for each version
 3. Sanitizes OpenAPI component schema names (converts spaces to PascalCase to comply with the OpenAPI spec)
 4. Adds `oneOf` to discriminator union schemas for compatibility with strict code generators (e.g. swift-openapi-generator)
