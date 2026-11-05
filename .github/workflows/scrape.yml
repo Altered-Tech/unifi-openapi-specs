@@ -43,6 +43,9 @@ jobs:
             python api-scraper.py --check-new --validate
           fi
 
+      - name: Update README versions
+        run: python update-readme.py
+
       - name: Check for new files
         id: check_changes
         run: |
