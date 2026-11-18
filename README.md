@@ -17,7 +17,7 @@ Each version includes an OpenAPI spec (YAML) and a Postman collection (YAML).
 |---|---|---|
 | Site Manager | [v1.0.0](site-manager/v1.0.0/openapi.yaml) | v1.0.0 |
 | Network | [v11.0.97](network/v11.0.97/openapi.yaml) | v11.0.97, v10.6.109, v10.6.106, v10.6.102, v10.5.67, v10.4.57, v10.3.58, v10.1.84, v10.0.162, v9.5.21, v9.4.19, v9.4.17, v9.3.45, v9.3.43, v9.2.87, v9.2.86, v9.1.120 |
-| Protect | [v7.4.99](protect/v7.4.99/openapi.yaml) | v7.4.99, v7.4.96, v7.3.74, v7.3.70, v7.2.105, v7.1.87, v7.1.83, v7.1.77, v7.1.76, v7.1.75, v7.1.74, v7.1.73, v7.1.69, v7.0.107, v7.0.104, v7.0.94, v6.2.88, v6.2.87, v6.2.83, v6.2.72, v6.1.79, v6.1.78, v6.1.75, v6.1.68, v6.1.65, v6.0.53, v6.0.47, v5.3.48 |
+| Protect | [v7.4.102](protect/v7.4.102/openapi.yaml) | v7.4.102, v7.4.99, v7.4.96, v7.3.74, v7.3.70, v7.2.105, v7.1.87, v7.1.83, v7.1.77, v7.1.76, v7.1.75, v7.1.74, v7.1.73, v7.1.69, v7.0.107, v7.0.104, v7.0.94, v6.2.88, v6.2.87, v6.2.83, v6.2.72, v6.1.79, v6.1.78, v6.1.75, v6.1.68, v6.1.65, v6.0.53, v6.0.47, v5.3.48 |
 | Mobility | [v1.0.0](mobility/v1.0.0/openapi.yaml) | v1.0.0 |
 <!-- versions:end -->
 
@@ -54,10 +54,10 @@ https://raw.githubusercontent.com/Altered-Tech/unifi-openapi-specs/main/network/
 https://raw.githubusercontent.com/Altered-Tech/unifi-openapi-specs/main/network/v11.0.97/postman-collection.yaml
 
 # Latest Protect OpenAPI spec
-https://raw.githubusercontent.com/Altered-Tech/unifi-openapi-specs/main/protect/v7.4.99/openapi.yaml
+https://raw.githubusercontent.com/Altered-Tech/unifi-openapi-specs/main/protect/v7.4.102/openapi.yaml
 
 # Latest Protect Postman collection
-https://raw.githubusercontent.com/Altered-Tech/unifi-openapi-specs/main/protect/v7.4.99/postman-collection.yaml
+https://raw.githubusercontent.com/Altered-Tech/unifi-openapi-specs/main/protect/v7.4.102/postman-collection.yaml
 
 # Latest Mobility OpenAPI spec
 https://raw.githubusercontent.com/Altered-Tech/unifi-openapi-specs/main/mobility/v1.0.0/openapi.yaml
